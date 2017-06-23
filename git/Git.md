@@ -24,3 +24,11 @@ Git中从远程的分支获取最新的版本到本地：
 	```git log -p master..origin/master```
 3. 进行合并  
 	```git merge origin/master```
+
+#### 分支操作
+
+* 新建分支 feature/qunar  git checkout dev/branch 
+
+* 查看当前分支 git branch
+
+* 切换分支 git checkout dev/branch
