@@ -3,11 +3,8 @@
 git init 初始化本地仓库  
 
 git add -A . 	来一次添加所有改变的文件  
-
 git add -A 		表示添加所有内容  
-
 git add . 		表示添加新文件和编辑过的文件不包括删除的文件  
-
 git add -u 表示添加编辑或者删除的文件，不包括新添加的文件  
 
 git status 查看状态  
