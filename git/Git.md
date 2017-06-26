@@ -39,3 +39,12 @@ Git中从远程的分支获取最新的版本到本地：
 * 查看当前分支 git branch
 
 * 切换分支 git checkout dev/branch
+
+#### 问题1:
+
+* 如何解决failed to push some refs to git
+
+#### 对策1:
+* git pull --rebase origin master //进行代码合并
+
+* git push -u origin master  //即可完成代码上传
