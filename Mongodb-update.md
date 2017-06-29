@@ -34,7 +34,7 @@
 * 在Nodejs中操作，可以使用$push在找到logs数组后依次添加日志信息
 
 ```javascript
-let condition = {"orderNo":"o111111","passengers.passengerIds":"123456789"}
+let condition = {"orderNo":"o111111","userInfo.cardNo":"123456789"}
 
 let update = {
 	$push: {
@@ -47,11 +47,11 @@ db.collections.findOneAndUpdate(condition, update, { returnOriginal: false })
 * 也可以使用$set 对某个字段进行更新
 
 ```javascript
-let condition = {"orderNo":"o111111","passengers.passengerIds":"123456789"}
+let condition = {"orderNo":"o111111","userInfo.cardNo":"123456789"}
 
 let update = {
 	$set: {"passengers.$.status": "已更新"}
 }
 
-DB.orderColl.updateOne({condition},update)
+DB.orderColl.updateOne(condition,update)
 ```
