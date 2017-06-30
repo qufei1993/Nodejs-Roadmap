@@ -2,6 +2,7 @@
 
 #### MongoDB 对集合中 某个数组对象下的字段进行更新
 
+
 > 例如：使用update对集合中的orderNo为o111111字段下的userInfo数组对象下的cardNo等于123456789这个对象中的logs字段和status字段(在更新的时候没有status字段将会创建) 进行日志更新
 
 ```javascript
@@ -55,3 +56,27 @@ let update = {
 
 DB.orderColl.updateOne(condition,update)
 ```
+#### 注意：
+
+需要注意的点是位置运算符$只能在查询中使用一次，官方对于这个问题提出了一个方案[Mongodb](https://jira.mongodb.org/browse/SERVER-831) `https://jira.mongodb.org/browse/SERVER-831` 如果能在为未来发布这将是非常有用的。如果，目前你需要在嵌套层次很深的情况下想对数组的内容进行修改可以采用forEach()方法操作，像下面这样：
+
+```javascript
+db.post
+  .find({"answers.comments.name": "jeff"})
+  .forEach(function(post) {
+    if (post.answers) {
+      post.answers.forEach(function(answer) {
+        if (answer.comments) {
+          answer.comments.forEach(function(comment) {
+            if (comment.name === "jeff") {
+              comment.name = "joe";
+            }
+          });
+        }
+      });
+
+      db.post.save(post);
+    }
+  });
+  ```
+
