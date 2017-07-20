@@ -1,5 +1,7 @@
-### git
-#### 初次发布
+# git
+
+### 初次发布
+
 git init 初始化本地仓库  
 
 git add -A . 	来一次添加所有改变的文件  
@@ -31,24 +33,6 @@ Git中从远程的分支获取最新的版本到本地：
 	```git merge origin/master```
 	
 	
-
-#### 分支操作
-
-* 新建分支 feature/qunar  git checkout dev/branch 
-
-* 查看当前分支 git branch
-
-* 切换分支 git checkout dev/branch
-
-#### 问题1:
-
-* 如何解决failed to push some refs to git
-
-#### 对策1:
-* git pull --rebase origin master //进行代码合并
-
-* git push -u origin master  //即可完成代码上传
-
 ### 拉取dev分支到本地
 
 首先自己要与origin master建立连接：```git remote add origin git@github.com:XXXX/nothing2.git```  
@@ -56,8 +40,9 @@ Git中从远程的分支获取最新的版本到本地：
 然后我们才能切换到其中某个子分支：```git checkout -b dev origin/dev```  
 
 可能会报这种错误:
-```fatal: Cannot update paths and switch to branch 'dev' at the same time.
-   Did you intend to checkout 'origin/dev' which can not be resolved as commit?
+```
+fatal: Cannot update paths and switch to branch 'dev' at the same time.
+Did you intend to checkout 'origin/dev' which can not be resolved as commit?
  ```
 原因是你本地并没有dev这个分支，这时你可以用 ```git branch -a``` 命令来查看本地是否具有dev分支
 
@@ -66,3 +51,21 @@ Git中从远程的分支获取最新的版本到本地：
 然后使用：```git checkout -b dev origin/dev``` 在本地创建分支dev并切换到该分支
 
 最后使用：```git pull origin dev``` 就可以把某个分支上的内容都拉取到本地了
+
+
+### 分支操作
+
+* 新建分支 feature/qunar  git checkout dev/branch 
+
+* 查看当前分支 git branch
+
+* 切换分支 git checkout dev/branch
+
+### 问题1:
+
+* 如何解决failed to push some refs to git
+
+#### 对策1:
+* git pull --rebase origin master //进行代码合并
+
+* git push -u origin master  //即可完成代码上传
