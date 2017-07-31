@@ -1,0 +1,75 @@
+extends ../adminFrame
+block containerss
+	h2.address
+		i.fa.fa-home 
+		a(href="/admin") 首页 
+		span / 
+		a 视频管理
+	form(action="/admin/movie/insert",method="post",style="padding:20px;")
+		input(type="hidden",name="movie[_id]",value="#{movie._id}")
+		each cate in categorys
+			if movie._id != 'undefined' && cate._id.toString()==movie.category.toString()
+				input(type="hidden",name="movie[oldCateId]",value="#{cate._id}")
+		table.table.table-bordered.insertCont
+			tr
+				td: label 豆瓣ID:
+				td
+					input#douban.form-control.col-2(type="text")
+					i.fa.fa-exclamation-circle.yellow
+					span.attention 输入电影ID为您自动填写电影信息
+			tr
+				td: label(for="inputCategory") 栏目选择:
+				td
+					select#inputCategory.form-control.col-2(name="movie[category]")
+						each cate in categorys
+							if movie._id != 'undefined'
+								option(value="#{cate._id}",selected=cate._id.toString()==movie.category.toString())= cate.name
+							else
+								option(value="#{cate._id}")= cate.name
+			tr
+				td(width="15%"): label(for="inputTitle") 
+					i.require *
+					span 电影名字:
+				td(width="85%")
+					input#inputTitle.form-control.col-6(type="text",placeholder="请输入电影名字",name="movie[title]",value="#{movie.title}")
+					i.fa.fa-exclamation-circle.yellow
+					span.attention 标题必须填写
+			tr
+				td: label(for="inputDoctor") 电影导演:
+				td: input#inputDoctor.form-control.col-4(type="text",name="movie[doctor]",value="#{movie.doctor}")
+			tr
+				td: label(for="inputCountry") 国家:
+				td: input#inputCountry.form-control.col-4(type="text",name="movie[country]",value="#{movie.country}")
+			tr
+				td: label(for="inputLanguage") 语言:
+				td: input#inputLanguage.form-control.col-4(type="text",name="movie[language]",value="#{movie.language}")
+			tr
+				td: label(for="inputPoster") 海报地址:
+				td
+					input#inputPoster.form-control.col-6(type="text",name="movie[poster]",value="#{movie.poster}")
+					input#inputUpload.form-control.col-1(type="file",name="inputUpload")
+					//-label.btn.btn-primary#browse 浏览
+			tr#poster(style="display:none;")
+				td
+				td: img#posterImg(src="",width="20%",height="150px;")
+			if movie.poster != ''
+				tr#updatePoster
+					td
+					if movie.poster.indexOf('https:') > -1
+						td: img#preview(src="#{movie.poster}",width="20%",height="150px;")
+					else 
+						td: img#preview(src="#{movie.poster}",width="30%",height="160px;")
+			tr
+				td: label(for="inputYear") 上映年份:
+				td: input#inputYear.form-control.col-3(type="text",name="movie[year]",value="#{movie.year}")
+			tr
+				td: label(for="inputFlash") 视频地址:
+				//td: input#inputFlash.form-control.col-6(type="text",maxlength="500",name="movie[flash]",value="#{movie.flash}")
+				td: textarea#inputFlash.form-control(name="movie[flash]",rows="3") #{movie.flash}
+			tr
+				td: label(for="inputSummary") 简介:
+				td: textarea#inputSummary.form-control(name="movie[summary]",rows="3") #{movie.summary}
+			tr
+				td
+				td: button.btn.btn-primary(type="submit") 提交
+	script(src='/js/admin.js')

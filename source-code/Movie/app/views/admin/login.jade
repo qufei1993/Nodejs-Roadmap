@@ -1,0 +1,38 @@
+extends ../layout/admin
+block content
+	.admin-head
+		.container.clearfix
+			.logo.col-4
+				img(src="https://img3.doubanio.com/f/sns/19886d443852bee48de2ed91f4a3bdfdaf8c809c/pics/nav/logo_db.png")
+				span 欢迎登录
+			.right-nav.col-8
+				a(target="blank",href="/") 返回首页
+				a(href="#") 帮助中心
+	.admin-cont.clearfix
+		.adv1.col-7
+			.advimg
+				img(src="/image/11.png" )
+		.admin-login.col-5
+			//h3 用户登录
+			div#login
+			p.sign-icon.signtit#signtit 用户登录1
+			form(autocomplete="off",method="post",action="/admin/login/")
+				.form-group.clearfix
+					label.col-2: i.fa.fa-user-circle-o
+					input.col-10.form-control(type="text",name="user[username]",value="",placeholder="手机号 / 邮箱")
+				.form-group.clearfix
+					label.col-2: i.fa.fa-key
+					input.col-10.form-control(type="password",name="user[password]",value="",placeholder="请输入密码")
+				p#msg.message #{msg}
+				.submit.clearfix
+					input.btn.btn-primary.col-12(type="submit",name="loginSubmit",value="立即登录")
+				.reister.clearfix
+					a.btn.btn-blackish-border.col-12(href="/admin/register") 注册账号
+			p.signWith#signWith Sign in with
+			div.sign-icon#sign-icon
+				i.fa.fa-facebook
+				i.fa.fa-qq
+				i.fa.fa-weibo
+	.admin-footer
+		span.copyright 版权所有 © 曲振飞 2016-2020 侵权必究     网站备案号：豫ICP备14022198号-1
+	script(src="/js/admin.js")

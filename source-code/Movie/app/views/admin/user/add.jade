@@ -1,0 +1,27 @@
+extends ../adminFrame
+block containerss
+	h2.address
+		i.fa.fa-home 
+		a(href="/admin") 首页 
+		span / 
+		a 用户管理
+	form(action="/admin/user/add",method="post",style="padding:30px;")
+		input(type="hidden",name="user[_id]",value="#{user._id}")
+		table.table.table-bordered.insertCont
+			tr
+				td(width="15%"): label(for="inputTitle") 
+					i.require *
+					span 用户名:
+				td(width="85%")
+					input#inputTitle.form-control.col-6(type="text",placeholder="",name="user[username]",value="#{user.username}")
+					i.fa.fa-exclamation-circle.yellow
+					span.attention 用户名必须填写
+			tr
+				td: label(for="inputDoctor") 密码:
+				td: input#inputDoctor.form-control.col-4(type="text",name="user[password]",value="#{user.password}")
+			tr
+				td: label(for="inputDoctor") 角色:
+				td: input#inputDoctor.form-control.col-4(type="text",name="user[role]",value="#{user.role}")
+			tr
+				td
+				td: button.btn.btn-primary(type="submit") 提交

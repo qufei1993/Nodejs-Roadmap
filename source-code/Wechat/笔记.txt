@@ -1,0 +1,50 @@
+koa是基于ES6规范的开发框架
+
+https://tunnel.mobi/index.html
+
+通过localtunel实现端口映射
+npm install -g localtunnel
+lt --port 3100
+会随机分配一个域名
+
+开启一个服务器 可以使python apache nigx
+python -m SimpleHTTPServer 3100
+./ngrok -config ngrok.cfg -subdomain qufei-wechat 1234
+./ngrok http 1234
+配置微信公众号
+url开发者用来接收微信消息和事件接口的url
+token用来生成一个签名
+
+如何在一台vpn上搭建一个自己的映射代理通道
+
+access_token 微信公众号开发的全局唯一票据,注意两点:
+1.access_token它每2个小时自动失效，需要重新获取
+2.只要更新了access_token,之前那个就不能用了.
+3.票据的获取每天上限为2000次
+
+微信对我们推送数据的方式是以post方式 并且不是以json格式来推送的 而是xml
+
+raw-body模块
+通过这个raw-body模块，可以把这个this上的request对象，其实也就是http模块中的request对象，去拼装他的数据，最终可以拿到一个buffer的xml数据。
+
+
+开始
+ node --harmony app
+
+
+模块安装
+npm install koa
+npm install sha1
+npm install bluebird --save
+npm install request
+npm install fs
+npm install raw-body
+npm install xml2js
+
+目录结构
+wechat 
+	g.js		对请求类型判断，做一些逻辑的分离
+	wechat.js   用来处理access_token 和 微信交互的过程
+	util.js 	格式化数据
+	tmp.js 		模板文件
+

@@ -1,0 +1,36 @@
+extends ../layout/admin
+block content
+	.admin-head
+		.container.clearfix
+			.logo.col-4
+				img(src="https://img3.doubanio.com/f/sns/19886d443852bee48de2ed91f4a3bdfdaf8c809c/pics/nav/logo_db.png")
+				span 欢迎登录
+			.right-nav.col-8
+				a(target="blank",href="/") 返回首页
+				a(href="#") 帮助中心
+	.admin-cont.clearfix
+		.adv1.col-7
+			.advimg
+				img(src="/image/11.png" )
+		.admin-login.col-5
+			div#login
+			p.sign-icon.signtit#signtit 用户注册
+			form(autocomplete="off",method="post",action="/admin/register")#form
+				.form-group.clearfix
+					label.col-2: i.fa.fa-user-circle-o
+					input.col-10.form-control#username(type="text",name="username",value="",placeholder="手机号 / 邮箱")
+				form-group.clearfix#code
+						label.col-2: i.fa(style="font-family:黑体;font-weight: 600;") 验
+						input.col-6.form-control#reisterCode(type="text",name="code",value="",placeholder="验证码")
+						button#sendCode.col-4.form-control.code(type="button") 发送验证码
+				.form-group.clearfix
+					label.col-2: i.fa.fa-key
+					input.col-10.form-control#password(type="password",name="password",value="",placeholder="请输入密码")
+				p#msg.message #{msg}
+				.submit.clearfix
+					input.btn.btn-primary.col-12(type="button",name="doSubmit",value="立即注册")
+				.reister.clearfix
+					a.btn.btn-blackish-border.col-12#btn01(href="/admin/login") 已有账号 马上登录
+	.admin-footer
+		span.copyright 版权所有 © 曲振飞 2016-2020 侵权必究     网站备案号：豫ICP备14022198号-1
+	script(src="/js/admin.js")

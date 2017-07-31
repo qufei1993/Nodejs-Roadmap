@@ -1,0 +1,103 @@
+npm install express jade moment mongoose
+moment 用来格式化日期
+
+通过bower工具安装bootstrap
+npm install bower -g  全局安装
+bower install bootstrap  bootstrap本身依赖于jquery因此在安装bootstrap时 已经安装了jquery
+通过.bowerrc 可以改变bower的安装目录
+	{
+		"directory":"public/libs"
+	}
+
+app.js
+app.use(express.static(path.join(__dirname,'bower_components'))); //静态资源引用
+
+npm install underscore 用于更新字段
+
+生成项目配置文件 方便移植
+bower init 配置前端资源 git bash不支持 需在cmd中运行
+npm init 配置后端资源
+
+
+grunt
+http://developer.51cto.com/art/201506/479127.htm
+
+mongodb 数据库索引属性
+unique 指定唯一索引
+
+Schema生成Model，Model创造Entity，Model和Entity都可对数据库操作造成影响，但Model比Entity更具操作性。
+Entity和Model插入数据库的区别
+Entity，使用save方法
+Model，使用create方法
+    //使用Entity来增加一条数据
+    var krouky = new Model({name:'krouky'});
+    krouky.save(callback);
+    //使用Model来增加一条数据
+    var MDragon = {name:'MDragon'};
+    Model.create(MDragon,callback);
+
+nodejs 接收数据3中方式：
+1. params方式
+app.post('admin/list/:userid');
+var _userid = req.params.userid;
+2.query地址栏传递
+/admin/list/123?userid=456
+var _userid = req.query.userid;
+3.通过ajax的data传数据 body获取
+{_userid:123456}
+req.body._userid;
+
+mongoose数据库
+	populate实现关联查询
+
+加盐
+在系统原有字段基础上加入其它成分，增加其复杂度，就是在加密时掺杂一些其它数据进来
+bcrypt 专门用于密码存储 计算的算法
+1.bcrypt.genSalt(,)接收两个参数 
+第一个参数是计算强度，计算密码所需要的资源和时间,这个计算强度越大攻击者所要破解的难度越大
+第二个是一个回调函数，在这个回调函数里能拿到这个随机生成的盐
+2.bcrypt.hash(,,)接收三个参数
+第一个参数是明文密码
+第二个参数是bcrypt.genSalt所生成的随机盐
+第三个参数是回调方法，在这个回调方法里,就能拿到通过bcrypt.hash将加盐后的这个密码,通过hash算法后的新的hash值
+
+connect-mongo和express-session官方文档
+https://github.com/jdesboeufs/connect-mongo
+https://github.com/expressjs/session
+
+调用豆瓣API 自动获取数据
+
+更新
+db.demo.update({"_id" : ObjectId("5003be465af21ff428dafbe7")},{$pull:{"title":"t3"}})
+
+上传文件
+在form表单增加属性enctype="multipart/form-data" 目的是在提交表单时能够将里面的数据分割从而达到支持多种数据混合上传的目的
+
+grunt
+grunt-cli是grunt的命令行接口,会把grunt命令植入到你的系统路径里,这样就允许你从任意目录运行它
+grunt-contrib-watch监听文件增删改，重新执行任务  
+grunt-nodemon实时监听app.js  
+grunt-concurrent监控慢任务SASS LESS 等
+
+
+安装插件
+npm install express jade moment mongoose
+npm install bower -g 使用bower安装包 管理前端资源
+bower install bootstrap 
+npm install body-parser 对表单提交的数据进行格式化
+npm install underscore 用于更新字段
+npm install bcryptjs 数据库password 加密
+npm install node-alidayu 阿里大于验证
+npm install cookie-parser session存储依赖的cookie
+npm install express-session --save  session存储
+npm install connect-mongo --save  使会话持久化
+npm install morgan --save 		express.logger 中间件已经独立
+npm install --save connect-multiparty //用来处理表单数据 multipart/form-data
+npm install grunt -g  //通过grunt可以自动重启服务
+npm install grunt-cli -g
+npm install grunt-contrib-watch --save-dev
+npm install grunt-nodemon --save-dev
+npm install grunt-concurrent --save-dev
+npm install grunt-mocha-test --save 
+npm install grunt-contrib-less --save
+
