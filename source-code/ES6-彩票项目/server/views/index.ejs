@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>ES6实战</title>
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/layout.css">
+    <link rel="stylesheet" href="/css/lottery.css">
+    <style media="screen">
+        #countdown em {
+            font-weight: bold;
+            color: #c70000;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="doc3" class="syy">
+        <div id="bd" class="kpc-bd">
+            <div class="mod-cz-hd">
+                <div class="hd clearfix">
+                    <div class="cz-logo cz-syylogo">
+                        <a href="#"></a>
+                    </div>
+                    <h1 class="cz-name">11选5 <span> 第<em id="curr_issue">**</em>期</span></h1>
+                    <ul class="cz-params cz-params-kp">
+                        <li>购彩剩余时间:</li>
+                        <li id="countdown"></li>
+                        <li>
+                            销售：9:00～22:00（78期） 10分钟开奖　返奖<b>59%</b>
+                        </li>
+                    </ul>
+                    <span class="label label-important bg-ccc state_el">暂停销售</span>
+                </div>
+                <div class="bd">
+                    <div class="nav-cz-main clearfix">
+                        <ul class="main">
+                            <li class="active"><a href="javascript:void(0)">选号投注</a></li>
+                            <li><a href="javascript:void(0)">遗漏数据</a></li>
+                            <li><a href="javascript:void(0)">单式上传</a></li>
+                        </ul>
+                        <div class="helper-nav">
+                            <a href="javascript:;">购彩小助手<i class="ico ico-arrow02"></i></a>
+                        </div>
+                        <ul class="quirk">
+                            <li><a href="javascript:void(0)" target="_blank">走势图表</a></li>
+                            <li class="divider">|</li>
+                            <li><a href="javascript:void(0)" target="_blank">杀号定胆</a></li>
+                            <li class="divider">|</li>
+                            <li><a href="javascript:void(0)" target="_blank" id="sd_plays">玩法介绍</a></li>
+                            <li class="divider">|</li>
+                            <li><a href="javascript:void(0)" target="_blank" id="sd_zhongjiang">胆拖奖金对照</a></li>
+                            <li class="divider">|</li>
+                            <li><a href="javascript:void(0)" target="_blank">倍投计算器</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- 导航 -->
+            <div class="mod-cz-bd">
+                <div class="nav-cz-sub" style="position:relative;">
+                    <ul class="clearfix" id="plays">
+                        <li desc="R2"><a href="#">任二</a></li>
+                        <li desc="R3"><a href="#">任三</a></li>
+                        <li desc="R4"><a href="#">任四</a></li>
+                        <li desc="R5" class="active"><a href="#">任五</a></li>
+                        <li desc="R6"><a href="#">任六</a></li>
+                        <li desc="R7"><a href="#">任七</a></li>
+                        <li desc="R8"><a href="#">任八</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 主体部分 -->
+            <div class="grid-1 clearfix">
+                <!-- 左侧 -->
+                <div class="article">
+                    <div class="plays_box">
+                        <div class="plays">
+                            <div class="mod-select-info ssytips">
+                                <p id="zx_sm" class="plays-memo"><i class="ico ico-info-s"></i><b>玩法提示：</b><span>从01～11中任选5个或多个号码，所选号码与开奖号码相同，即中奖<em class="red">540</em>元</span></p>
+                            </div>
+                            <div class="mod-select-bolls code_box">
+                                <div class="hd">
+                                    <h3 class="clearfix">
+                                      <span class="t1" id="play_tips">
+                                        <em>选号区</em> 至少选5个
+                                      </span>
+                                      <span class="t2"><em>操作区</em> 快捷选号</span>
+                                    </h3>
+                                </div>
+                                <div class="bd">
+                                    <div class="tools-boll-list">
+                                        <div class="boll-item boll-item-col3 sd_zx_r5">
+                                            <div class="k">
+                                                <span class="k1">号码<span class="caret"></span></span>
+                                                <span class="k2">遗漏</span>
+                                            </div>
+                                            <div class="v">
+                                                <div class="boll-list" unselectable="on" onselectstart="return false;">
+                                                    <ul class="clearfix">
+                                                        <li><em class="btn-boll">01</em><span>0</span></li>
+                                                        <li><em class="btn-boll">02</em><span>0</span></li>
+                                                        <li><em class="btn-boll">03</em><span class="red">5</span></li>
+                                                        <li><em class="btn-boll">04</em><span>1</span></li>
+                                                        <li><em class="btn-boll">05</em><span>1</span></li>
+                                                        <li><em class="btn-boll">06</em><span>2</span></li>
+                                                        <li><em class="btn-boll">07</em><span>0</span></li>
+                                                        <li><em class="btn-boll">08</em><span>3</span></li>
+                                                        <li><em class="btn-boll">09</em><span class="">0</span></li>
+                                                        <li><em class="btn-boll">10</em><span>1</span></li>
+                                                        <li><em class="btn-boll">11</em><span>0</span></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="t">
+                                                <div class="tool-list">
+                                                    <ul class="clearfix dxjo">
+                                                        <li><a href="#" class="btn btn-middle">全</a></li>
+                                                        <li><a href="#" class="btn btn-middle">大</a></li>
+                                                        <li><a href="#" class="btn btn-middle">小</a></li>
+                                                        <li><a href="#" class="btn btn-middle">奇</a></li>
+                                                        <li><a href="#" class="btn btn-middle">偶</a></li>
+                                                        <li><a href="#" class="lnk">清除</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ft">
+                                        <p class="sel_info">您选了 <b>0</b> 注，共 <b>0</b> 元 <em></em></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mod-select-result">
+                        <div class="hd confirm_sel_code_list" style="margin-left: 200px;text-align: left;">
+                            <button type="button" class="btn" id="confirm_sel_code"><span class="btn-large btn-slt-ok"><i class="l"><i class="r">确认选号</i></i></span></button>
+                            <a href="javascript:;" class="lnk lnk-calcel">清空选号</a>
+                        </div>
+                        <div class="bd clearfix">
+                            <div class="result">
+                                <div class="content">
+                                    <ul class="clearfix codelist"></ul>
+                                </div>
+                            </div>
+                            <div class="qkmethod">
+                                <ul plays="Z1|直选">
+                                    <li><a class="btn-middle" count="1" href="#">机选1注</a></li>
+                                    <li><a class="btn-middle" count="5" href="#">机选5注</a></li>
+                                    <li><a class="btn-middle" count="10" href="#">机选10注</a></li>
+                                    <li><a class="btn-middle" count="0" href="#">清空列表</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mod-select-result" id="result">
+                        <div class="ft">
+                            <div class="total">
+                                您选了 <b class="em" id="count">0</b> 注， 倍投 <input class="text" id="mul" type="text" value="1"> 倍，共 <b class="em" id="money" style="display: inline-block;">0</b> 元
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mod-submit">
+                        <button type="button" id="post_data" class="btn btn-sd"><span class="btn-large2 btn-large2-primary">立即投注</span></button>
+                    </div>
+                </div>
+
+                <!-- 右侧 -->
+                <div class="aside">
+                    <div class="mod-aside mod-aside-xssckj">
+                        <div class="hd clearfix">
+                            <h3> 11选5 第 <em class="red" id="open_issue">022478</em> 期 开奖</h3>
+                            <div class="ball-num clearfix">
+                                <ul id="open_code_list">
+                                    <li class="ico-ball3">09</li>
+                                    <li class="ico-ball3">02</li>
+                                    <li class="ico-ball3">01</li>
+                                    <li class="ico-ball3">07</li>
+                                    <li class="ico-ball3">11</li>
+                                </ul>
+                            </div>
+                            <p class="kj-date">今天已售78期，还剩0期</p>
+                        </div>
+                        <div class="bd">
+                            <div class="kpkjcode">
+                                <table width="100%">
+                                    <thead>
+                                        <tr style="line-height: 24px;">
+                                            <th>期号</th>
+                                            <th>开奖号码</th>
+                                            <th>
+                                                <span>大小比</span>
+                                                <span>奇偶比</span>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr issue="022478">
+                                            <td class="issgray">022478</td>
+                                            <td><em class="red syycode">09 02 </em><em class="red">01</em><em class="gray666"> 07 11</em></td>
+                                            <td><span class="gray666">3:2</span><span class="gray666">4:1</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="ft text-right muted" style="margin-top: 6px;"><a href="javascript:void(0)" target="_blank" class="lnk">查询历史开奖</a> | <a href="javascript:void(0)" target="_blank" class="lnk">查看走势图表</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/js/index.js" charset="utf-8"></script>
+</body>
+
+</html>
