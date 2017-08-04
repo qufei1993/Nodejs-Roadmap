@@ -1,6 +1,6 @@
-## 聚合函数 aggregate
+# 聚合函数 aggregate
 
-##### 操作符介绍：
+### 操作符介绍：
 
 * $project：包含、排除、重命名和显示字段
 
@@ -17,7 +17,7 @@
 * $unwind：分割嵌入数组到自己顶层文件
 
 
-##### match 使用正则进行模糊匹配
+### match 使用正则进行模糊匹配
 
 db.collection.aggregate({"$match":{"name": /hello/i}}) Nodejs 两种写法:
 
@@ -25,7 +25,7 @@ db.collection.aggregate({"$match":{"name": /hello/i}}) Nodejs 两种写法:
 
 * collection.name = {$regex: 'hello'}
 
-##### MongoDB高级查询
+### MongoDB高级查询
 
 * $gt 大于 >  ``` {"age": {$gt: 1}}  ```  返回年龄大于1的所有文档
 
