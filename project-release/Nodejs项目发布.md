@@ -38,9 +38,9 @@
 
   将ssh key加入这个代理中 ``` ssh-add ~/.ssh/id_rsa ```
 
-  在.ssh目录 创建一个授权文件 ``` vim authorized_keys ```,将本地电脑生成的公钥放入这个授权文件里
+  在服务器的 .ssh目录 创建一个授权文件 ``` vim authorized_keys ```,将本地电脑生成的公钥放入这个授权文件里 现在服务器已经持有了某台电脑的上的公钥，此时这台电脑就可不需输入密码来登录这台服务器
 
-  修改授权文件权限 ``` chmod 600 authorized_keys ``` 
+  修改授权文件权限 ``` chmod 600 authorized_keys ```
 
   重启ssh服务 ``` sudo service ssh restart ```
 ## 创建用户
@@ -71,4 +71,4 @@
 
 
 
-df -h 查看硬盘使用情况
+补充：df -h 查看硬盘使用情况
