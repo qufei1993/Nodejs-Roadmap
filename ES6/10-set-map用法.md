@@ -1,4 +1,7 @@
 ### set map数据结构
+
+> 在整个的数据开发过程中，涉及到数据结构，能使用map不适用数组，尤其是复杂的数据结构，如果对数据结构要求存储的数据有唯一性考虑使用set
+
 * set  
 集合中的数据是唯一的
 ```javascript
@@ -28,6 +31,10 @@
   let arr=[1,2,3,1,'2'];
   let list2=new Set(arr);
   console.log('unique',list2); //unique Set {1, 2, 3, "2"}
+  
+  //以数组的形式输出
+  console.log([...list2]);   // (4) [1, 2, 3, "2"]
+
 }
 ```
 四个方法add delete clear has  
@@ -221,4 +228,3 @@ map,set,object对比
   //map-set-obj-empty Object {} Map {} Set {}
 }
 ```
-总结：在整个的数据开发过程中，涉及到数据结构，能使用map不适用数组，尤其是复杂的数据结构，如果对数据结构要求存储的数据有唯一性考虑使用setgu
