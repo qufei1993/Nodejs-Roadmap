@@ -1,16 +1,40 @@
 # 项目发布
 
-# 目录
+## 目录
+
+* [创建用户](#创建用户)
 
 * [登录远程服务器](#登录远程服务器)
 
   * [三种登录方法](#方法1)
 
-  * [创建用户](#创建用户)
 
-# 登录远程服务器
+  ## 创建用户
 
-## 三种登录方法
+  创建用户名 ``` adduser demo_manager ``` 之后会提示设置密码 和一些信息
+
+  创建好用户之后我们可以来修改用户权限 ``` gpasswd -a demo_manager sudo ```
+
+  成功之后会出现一个添加user的提示 ``` Adding user demo_manager to group sudo  ```
+
+  执行命令``` sudo visudo ``` 打开该文件编辑
+
+  找到 ``` root ALL=(ALL:ALL) ALL ``` 在这段代码下面添加 这个刚创建的user
+  ```bash
+    demo_manager ALL=(ALL:ALL) ALL
+
+    #demo_manager  指我们新增的这个用户 以上这些规则对这个用户生效
+    #第一个ALL 这些规则对所有用户生效
+    #第二个ALL demo_manager可以任意用户来执行命令
+    #第三个ALL demo_manager 可以以任何的组来执行命令
+    #第四个ALL 这个适用于所有命令
+  ```
+
+  最后ssh restart 重启一下
+
+## 登录远程服务器
+
+### 三种登录方法
 
 #### 方法1
 
@@ -43,28 +67,6 @@
   修改授权文件权限 ``` chmod 600 authorized_keys ```
 
   重启ssh服务 ``` sudo service ssh restart ```
-## 创建用户
-
-创建用户名 ``` adduser demo_manager ``` 之后会提示设置密码 和一些信息
-
-创建好用户之后我们可以来修改用户权限 ``` gpasswd -a demo_manager sudo ```
-
-成功之后会出现一个添加user的提示 ``` Adding user demo_manager to group sudo  ```
-
-执行命令``` sudo visudo ``` 打开该文件编辑
-
-找到 ``` root ALL=(ALL:ALL) ALL ``` 在这段代码下面添加 这个刚创建的user
-```bash
-  demo_manager ALL=(ALL:ALL) ALL
-
-  #demo_manager  指我们新增的这个用户 以上这些规则对这个用户生效
-  #第一个ALL 这些规则对所有用户生效
-  #第二个ALL demo_manager可以任意用户来执行命令
-  #第三个ALL demo_manager 可以以任何的组来执行命令
-  #第四个ALL 这个适用于所有命令
-```
-
-最后ssh restart 重启一下
 
 
 
