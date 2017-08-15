@@ -10,6 +10,12 @@
 
 * [增强服务器安全等级](#增强服务器安全等级)
 
+  * [修改端口号](#修改端口号)
+
+  * [设定iptables规则](#设定iptables规则)
+
+  * [设置fail2ban](#设置fail2ban)
+
 
 ## 创建用户
 
@@ -48,7 +54,7 @@
 
  ``` subl .zshrc ```  
 
- 在这个配置文件里面可以通过软链接加入命令``` alias ssh_demo="ssh root@ip地址" ```
+ 在这个配置文件里面可以通过软链接加入命令 ``` alias ssh_demo="ssh root@ip地址" ```
 
  通过 ``` source .zshrc ``` 重新载入这个用户变量
 
@@ -103,20 +109,26 @@ PasswordAuthentication no
 
 修改配置文件 ``` sudo vim /etc/iptables.up.rules ```
 
-```
+```bash
 *filter
 
--A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT #允许所有简历起来的链接
+#允许所有简历起来的链接
+-A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 
--A OUTPUT -j ACCEPT #允许所有出去的流量, 此处也可以设置一些特定的流量规则
+#允许所有出去的流量, 此处也可以设置一些特定的流量规则
+-A OUTPUT -j ACCEPT
 
--A INPUT -p tcp --dport 443 -j ACCEPT # 允许https协议下的请求链接
+# 允许https协议下的请求链接
+-A INPUT -p tcp --dport 443 -j ACCEPT
 
--A INPUT -p tcp --dport 80 -j ACCEPT # 所有的网站访问一台服务器都是从80端口进去的，因此让80端口的流量可以进出
+# 所有的网站访问一台服务器都是从80端口进去的，因此让80端口的流量可以进出
+-A INPUT -p tcp --dport 80 -j ACCEPT
 
--A INPUT -p tcp -m state --sate NEW --dport 39999 -j ACCEPT # 通过这条设定 我们登录服务器就只能通过这个端口，如果是别的防火墙就会拦截
+# 通过这条设定 我们登录服务器就只能通过这个端口，如果是别的防火墙就会拦截
+-A INPUT -p tcp -m state --sate NEW --dport 39999 -j ACCEPT
 
--A INPUT -p icmp -m icmp --icmp-type 8 -j ACCEPT # 允许外网来ping这台服务器
+# 允许外网来ping这台服务器
+-A INPUT -p icmp -m icmp --icmp-type 8 -j ACCEPT
 
 # 记录下被拒绝的这些请求
 -A INPUT -m limit --limit 5/min -j LOG --log-prefix "iptables denied:" --log-level 7
