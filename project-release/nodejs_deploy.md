@@ -192,7 +192,7 @@ Fail2Ban可以看做是个防御型的动作库，通过监控系统的日志文
 
 安装相关的模块 ``` sudo apt-get install vim openssl build-essential libssl-dev wget curl git ```
 
-可以使用[nvm](https://github.com/creationix/nvm)``` [https://github.com/creationix/nvm](https://github.com/creationix/nvm) ```这个工具来安装nodejs 方便后面的升级与管理
+可以使用[nvm](https://github.com/creationix/nvm)``` https://github.com/creationix/nvm ```这个工具来安装nodejs 方便后面的升级与管理
 
 在控制台执行命令 ``` wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash ```
 
