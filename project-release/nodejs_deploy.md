@@ -194,13 +194,13 @@ Fail2Ban可以看做是个防御型的动作库，通过监控系统的日志文
 
 可以使用[nvm](https://github.com/creationix/nvm)``` https://github.com/creationix/nvm ```这个工具来安装nodejs 方便后面的升级与管理
 
-在控制台执行命令 ``` wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash ```
+在控制台执行命令,安装nvm ``` wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash ```
 
 安装nodejs版本为v6.9.5 ``` nvm install v6.9.5 ```
 
 把这个版本指定下 ``` nvm use v6.9.5 ```
 
-执行该命令让设定系统的默认版本为 v6.9.5 ``` nvm alias default v6.9.5 ```
+设定系统的默认版本为 v6.9.5 ``` nvm alias default v6.9.5 ```
 
 查看node版本 ``` node -v ```
 
