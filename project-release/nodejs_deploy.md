@@ -16,6 +16,8 @@
 
   * [设置fail2ban](#设置fail2ban)
 
+* [Nodejs生产环境部署](#Nodejs生产环境部署)
+
 
 ## 创建用户
 
@@ -84,23 +86,23 @@
  修改配置文件 ``` vim /etc/ssh/sshd_config ``` 执行此命令会提示输入密码
 
 ```bash
-# 修改port端口号 范围为1 到 65536, 0 1024之间的可能会被系统所占用，因此最好采用1024之外的  
+  # 修改port端口号 范围为1 到 65536, 0 1024之间的可能会被系统所占用，因此最好采用1024之外的  
 
-Port 39999 # 此时将会禁用22端口
+  Port 39999 # 此时将会禁用22端口
 
-UseDNS no # 此处确保为 no
+  UseDNS no # 此处确保为 no
 
-# 加入我们为这个服务创建的用户
-AllowUsrs demo_manager
+  # 加入我们为这个服务创建的用户
+  AllowUsrs demo_manager
 
-# 出去安全层面考虑 可以关闭root密码登录
-PermitRootLogin no
+  # 出去安全层面考虑 可以关闭root密码登录
+  PermitRootLogin no
 
-# 已经配好了秘钥登录的 可以将下面是是否允许密码登录(授权) 给关掉
-PasswordAuthentication no
+  # 已经配好了秘钥登录的 可以将下面是是否允许密码登录(授权) 给关掉
+  PasswordAuthentication no
 
-# 是否允许空密码
-# PermitEmptyPasswords no
+  # 是否允许空密码
+  # PermitEmptyPasswords no
 ```
 
 ### 设定iptables规则
@@ -110,39 +112,39 @@ PasswordAuthentication no
 修改配置文件 ``` sudo vim /etc/iptables.up.rules ```
 
 ```bash
-*filter
+  *filter
 
-#允许所有简历起来的链接
--A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+  #允许所有简历起来的链接
+  -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 
-#允许所有出去的流量, 此处也可以设置一些特定的流量规则
--A OUTPUT -j ACCEPT
+  #允许所有出去的流量, 此处也可以设置一些特定的流量规则
+  -A OUTPUT -j ACCEPT
 
-# 允许https协议下的请求链接
--A INPUT -p tcp --dport 443 -j ACCEPT
+  # 允许https协议下的请求链接
+  -A INPUT -p tcp --dport 443 -j ACCEPT
 
-# 所有的网站访问一台服务器都是从80端口进去的，因此让80端口的流量可以进出
--A INPUT -p tcp --dport 80 -j ACCEPT
+  # 所有的网站访问一台服务器都是从80端口进去的，因此让80端口的流量可以进出
+  -A INPUT -p tcp --dport 80 -j ACCEPT
 
-# 通过这条设定 我们登录服务器就只能通过这个端口，如果是别的防火墙就会拦截
--A INPUT -p tcp -m state --sate NEW --dport 39999 -j ACCEPT
+  # 通过这条设定 我们登录服务器就只能通过这个端口，如果是别的防火墙就会拦截
+  -A INPUT -p tcp -m state --sate NEW --dport 39999 -j ACCEPT
 
-# 允许外网来ping这台服务器
--A INPUT -p icmp -m icmp --icmp-type 8 -j ACCEPT
+  # 允许外网来ping这台服务器
+  -A INPUT -p icmp -m icmp --icmp-type 8 -j ACCEPT
 
-# 记录下被拒绝的这些请求
--A INPUT -m limit --limit 5/min -j LOG --log-prefix "iptables denied:" --log-level 7
+  # 记录下被拒绝的这些请求
+  -A INPUT -m limit --limit 5/min -j LOG --log-prefix "iptables denied:" --log-level 7
 
-# 对一些恶意的请求做一些拦截 ,下面的例子意思是 如果一个ip在60内对80端口 发出了150次请求 我们就认为他是恶意请求
--A INPUT -p tcp --dport 80 -i eth0 -m state --state NEW -m recent --set
--A INPUT -p tcp --dport 80 -i eth0 -m state --state NEW -m recent --update --seconds 60 --hitcount 150 -j DROP
+  # 对一些恶意的请求做一些拦截 ,下面的例子意思是 如果一个ip在60内对80端口 发出了150次请求 我们就认为他是恶意请求
+  -A INPUT -p tcp --dport 80 -i eth0 -m state --state NEW -m recent --set
+  -A INPUT -p tcp --dport 80 -i eth0 -m state --state NEW -m recent --update --seconds 60 --hitcount 150 -j DROP
 
 
-# reject all other inbound 拒绝所有其他的进入到这台服务器的流量
--A INPUT -j REJECT
--A FORWARD -j REJECT
+  # reject all other inbound 拒绝所有其他的进入到这台服务器的流量
+  -A INPUT -j REJECT
+  -A FORWARD -j REJECT
 
-COMMIT
+  COMMIT
 
 ```
 
@@ -169,14 +171,14 @@ Fail2Ban可以看做是个防御型的动作库，通过监控系统的日志文
 
 ```bash
 
-#bantime 可以设置的稍微大点
-bantime = 3600
+  #bantime 可以设置的稍微大点
+  bantime = 3600
 
-# destemail 可以设置为我们自己的邮箱
-destemail = 2105324852@qq.com
+  # destemail 可以设置为我们自己的邮箱
+  destemail = 2105324852@qq.com
 
-# 定义下action
-action = %(action_mw)s
+  # 定义下action
+  action = %(action_mw)s
 
 ```
 
@@ -185,5 +187,35 @@ action = %(action_mw)s
 停掉fail2ban服务 ``` sudo service fail2ban stop ```
 
 开启fail2ban服务 ``` sudo service fail2ban start ```
+
+## Nodejs生产环境部署
+
+安装相关的模块 ``` sudo apt-get install vim openssl build-essential libssl-dev wget curl git ```
+
+可以使用[nvm](#https://github.com/creationix/nvm)``` https://github.com/creationix/nvm ```这个工具来安装nodejs 方便后面的升级与管理
+
+在控制台执行命令 ``` wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash ```
+
+安装nodejs版本为v6.9.5 ``` nvm install v6.9.5 ```
+
+把这个版本指定下 ``` nvm use v6.9.5 ```
+
+执行该命令让设定系统的默认版本为 v6.9.5 ``` nvm alias default v6.9.5 ```
+
+查看node版本 ``` node -v ```
+
+配置npm源为国内的淘宝源 ``` npm --registry=https://registry.npm.taobao.org install -g npm ```
+
+增加一个系统的文件监控树 ``` echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p  ```
+
+为了保障更快更稳定的速度，此处采用cnpm来替代npm ``` npm --registry=https://registry.npm.taobao.org install -g cnpm ```
+
+查看cnpm版本 ``` cnpm -v ```
+
+在网络不是太慢或者连不上的情况下 还是推荐使用 npm，如果有些模块如果实在拿不到我们可以通过cnpm sync 同步到npm 上 例如koa ``` cnpm sync koa ```
+
+安装一些常用的工具包 ``` npm i pm2 webpack gulp grunt-cli -g ```
+
+到此nodejs的环境已安装好，如果想要通过不带端口号的ip或者域名直接来访问到服务器的80端口node服务， 下一步则需要配置Nginx反向代理，来实现。
 
 补充：df -h 查看硬盘使用情况
