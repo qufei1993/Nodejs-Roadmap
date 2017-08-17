@@ -16,9 +16,9 @@
 
   * [设置fail2ban](#设置fail2ban)
 
-* [Nodejs生产环境部署](#Nodejs生产环境部署)
+* [Nodejs生产环境部署](#nodejs生产环境部署)
 
-* [Nginx映射](#映射)
+* [Nginx映射](#nginx映射)
 
 
 ## 创建用户
@@ -190,7 +190,7 @@ Fail2Ban可以看做是个防御型的动作库，通过监控系统的日志文
 
 开启fail2ban服务 ``` sudo service fail2ban start ```
 
-## Nodejs生产环境部署
+## nodejs生产环境部署
 
 安装相关的模块 ``` sudo apt-get install vim openssl build-essential libssl-dev wget curl git ```
 
@@ -220,7 +220,7 @@ Fail2Ban可以看做是个防御型的动作库，通过监控系统的日志文
 
 到此nodejs的环境已安装好，如果想要通过不带端口号的ip或者域名直接来访问到服务器的80端口node服务， 下一步则需要配置Nginx反向代理，来实现。
 
-## 映射
+## nginx映射
 
 新购买的服务器一般都会预装apache如果用户可以删除, 此处给出关于删除apache的命令。
 
