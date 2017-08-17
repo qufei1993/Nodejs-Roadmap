@@ -18,6 +18,8 @@
 
 * [Nodejs生产环境部署](#Nodejs生产环境部署)
 
+* [Nginx映射](#Nginx映射)
+
 
 ## 创建用户
 
@@ -217,5 +219,68 @@ Fail2Ban可以看做是个防御型的动作库，通过监控系统的日志文
 安装一些常用的工具包 ``` npm i pm2 webpack gulp grunt-cli -g ```
 
 到此nodejs的环境已安装好，如果想要通过不带端口号的ip或者域名直接来访问到服务器的80端口node服务， 下一步则需要配置Nginx反向代理，来实现。
+
+## Nginx映射
+
+新购买的服务器一般都会预装apache如果用户可以删除, 此处给出关于删除apache的命令。
+
+```bash
+  sudo service apache2 stop
+
+  sudo service apache stop
+
+  #删除apache2
+  update-rc.d -f apache2 remove
+
+  #移出apache2
+  sudo apt-get remove apache2
+```
+
+安装nginx ``` sudo apt-get install nginx ```
+
+查看版本 ``` nginx -v ```
+
+进入 ``` etc/nginx/conf.d ``` 创建配置文件 ``` sudo vim yuming-com-8081.conf ```
+
+```bash
+upstream yuming {
+  server 127.0.0.1:8081;
+}
+
+server {
+  listen 80;
+
+  # 当通过这个ip地址来访问，服务器的server_name会匹配到这个地址，向这个地址发起请求的所有流量 都转发到上面的 upstream yuming 里面去
+  server_name 服务器IP地址;
+
+  location / {
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forward $proxy_add_x_forwarded_for;
+
+    proxy_set_header Host $http_host;
+    proxy_set_header X-Nginx-Proxy true;
+
+    //配置指令实现代理 把域名代理到集群（这个应用的名字上面）
+    proxy_pass http://yuming;
+    proxy_redirect off; //关闭
+  }
+}
+```
+
+进入 ``` etc/nginx/ ``` 找到 ``` vim nginx.conf ``` 这个配置文件查看以下两个配置是否打开
+
+```bash
+# 加载conf.d下面的所有.conf文件
+include /etc/nginx/conf.d/*.conf;
+
+# 加载sites-enabled下面的所有文件
+include /etc/nginx/sites-enabled/*
+```
+
+查看上面写的配置文件是否正确 ``` sudo nginx -t  ```
+
+重启nginx ```bash sudo nginx -s reload ```
+
+在浏览器中会显示我们的nginx服务器版本信息 如果不想显示 进入 ``` etc/nginx/nginx.conf ``` 将 ``` server_tokens off ``` 注释打开
 
 补充：df -h 查看硬盘使用情况
