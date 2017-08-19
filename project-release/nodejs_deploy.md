@@ -20,6 +20,9 @@
 
 * [Nginx映射](#nginx映射)
 
+* [Mongodb](#mongodb)
+
+  * [mongodb安装](#mongodb安装)
 
 ## 创建用户
 
@@ -282,5 +285,64 @@ include /etc/nginx/sites-enabled/*
 重启nginx ```bash sudo nginx -s reload ```
 
 在浏览器中会显示我们的nginx服务器版本信息 如果不想显示 进入 ``` etc/nginx/nginx.conf ``` 将 ``` server_tokens off ``` 注释打开
+
+## mongodb
+
+### mongodb安装
+打开[mongodb](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/)官网，可以根据自己的系统环境安装，此处介绍ubuntu安装步骤
+
+导入key ``` sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14518585931BC711F9BA15703C6
+ ```
+
+为mongodb的配置文件创建一个列表 ``` sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14518585931BC711F9BA15703C6
+ ```
+
+更新本地包 ``` sudo apt-get update ```
+
+安装mongodb ``` sudo apt-get install -y mongodb-org ```
+
+因为mongodb的源在国外，可能会很慢，可以按下ctrl+c中断操作来修改源，进入目录 ``` cd /etc/apt/sources.list.d ``` 编辑文件 ``` sudo vim mongodb-org-3.4.list ```
+
+```bash
+# 将现有的源 http://repo.mongodb.org 改为 阿里云的 http://mirrors.aliyun.com/mongodb
+
+```
+
+修改完成之后更新下源 ``` sudo apt-get update```
+
+在重新安装,这时会从阿里云镜像来安装，将会快很多 ``` sudo apt-get install -y mongodb-org ```
+
+开启服务 ``` sudo service mongodb start ```
+
+重启服务 ``` sudo service mongodb restart ```
+
+如果设置了防火墙 打开配置文件加入27017mongodb这个端口号 ``` sudo vim /etc/iptables.up.rules```
+
+```bash
+-A INPUT -s 127.0.0.1 -p tcp --destination-port 27017 -m state --state NEW,ESTABLISHED -j ACCEPT
+
+-A OUTPUT -d 127.0.0.1 -p tcp --source-port 27017 -m state --state ESTABLISHED -j ACCEPT
+```
+
+重新载入 ``` sudo iptables-restore < /etc/iptables.up.rules ```
+
+通过mongo连接实例 看是否成功 ``` mongo ```
+
+目前安装已经成功，mongodb的默认端口跑在27017端口，出于最基本的考虑，改掉这个端口号，编辑此文件 ``` sudo vim /etc/mongod```
+
+```bash
+
+#找到port 修改为29999
+net:
+ port: 29999
+```
+
+注意：修改mongodb默认端口号之后 还要更新下防火墙中设置的端口号
+
+重启mongodb  ``` sudo service mongodb restart ````
+
+通过mongo链接 mongo --port 29999
+
+
 
 补充：df -h 查看硬盘使用情况
