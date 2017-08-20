@@ -293,9 +293,7 @@ include /etc/nginx/sites-enabled/*
 
 导入key ``` sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14518585931BC711F9BA15703C6```
 
-为mongodb的配置文件创建一个列表  
-``` sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14518585931BC711F9BA15703C6
-```
+为mongodb的配置文件创建一个列表 ``` sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14518585931BC711F9BA15703C6 ```
 
 更新本地包 ``` sudo apt-get update ```
 
