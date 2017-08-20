@@ -291,10 +291,10 @@ include /etc/nginx/sites-enabled/*
 ### mongodb安装
 打开[mongodb](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/)官网，可以根据自己的系统环境安装，此处介绍ubuntu安装步骤
 
-导入key ``` sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14518585931BC711F9BA15703C6
-```
+导入key ``` sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14518585931BC711F9BA15703C6```
 
-为mongodb的配置文件创建一个列表 ``` sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14518585931BC711F9BA15703C6
+为mongodb的配置文件创建一个列表  
+``` sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14518585931BC711F9BA15703C6
 ```
 
 更新本地包 ``` sudo apt-get update ```
