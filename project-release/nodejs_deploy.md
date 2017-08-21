@@ -338,8 +338,9 @@ net:
 注意：修改mongodb默认端口号之后 还要更新下防火墙中设置的端口号
 
 重启mongodb  ``` sudo service mongodb restart ````
-
 通过mongo链接 mongo --port 29999
+
+### 演示如何向线上的数据库导入初识数据
 
 
 
