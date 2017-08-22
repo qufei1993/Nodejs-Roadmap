@@ -10,6 +10,7 @@
 
 * [使用cheerio解析](#使用cheerio解析)
 
+* [案例](#案例-爬取某网站课程标题信息)
 
 ## 抓取目标数据
 
@@ -100,8 +101,6 @@ let $ = cheerio.load(html);
 
 ```javascript
 
-const cheerio = require('cheerio');
-let $ = cheerio.load(html);
 let lis = $('.header-bg .container .nav-ul li'); //拿到每一个li
 
 ```
@@ -110,9 +109,6 @@ let lis = $('.header-bg .container .nav-ul li'); //拿到每一个li
 
 ```javascript
 
-const cheerio = require('cheerio');
-let $ = cheerio.load(html);
-let lis = $('.header-bg .container .nav-ul li');
 let data = [];
 
 lis.each(function(item){
@@ -124,4 +120,66 @@ lis.each(function(item){
 
 //打印爬取的数据
 console.log(data); // [ '首页', '前端开发', '后端开发', '环境搭建' ]
+```
+
+## 案例-爬取某网站课程标题信息
+
+分析dom节点，可以看到源代码中，我们要抓取的数据都是包含在一个个标签里面，要分析其DOM结构，遵循其中的规律
+
+![](img/chapter.png)
+
+下面给出实例，可以将以下实例拷出本地直接运行。
+
+```javascript
+  var http = require('http'); //加载http模块
+  var cheerio = require('cheerio'); //加载cheerio模块，在服务器端解析代码
+  var url = 'http://www.imooc.com/learn/348';
+  function filterChapter(html){
+      var $ = cheerio.load(html);
+      var chapters = $('.chapter'); //拿到每一章
+      var courseData = [];
+      chapters.each(function(item){ //对每一章进行遍历
+          var chapter = $(this); //获取每一张对象
+          var chapterTitle = chapter.find('strong').text();  //章节标题
+          var videos = chapter.find('.video').children('li');
+
+          var chapterData = {  //存储每一张的信息
+              chapterTitle:chapterTitle,
+              videos:[]
+          }
+          videos.each(function(item){
+              var video = $(this).find('.J-media-item'); //先获取这个a标签
+              var videoTitle = video.text();   //视频标题
+              var id = video.attr('href').split('video/')[1]; //id
+              chapterData.videos.push({
+                  title:videoTitle,
+                  id:id
+              });
+          }); //遍历这个标题数组
+          courseData.push(chapterData); //将每一章的信息 push进去
+      });
+      return courseData;
+  }
+  function printCourseInfo(courseData){
+      courseData.forEach(function(item){
+          var chapterTitle = item.chapterTitle;
+          console.log(chapterTitle + '\n');
+          item.videos.forEach(function(video){
+              console.log('  【'+video.id+'】  '+ video.title + '\n');
+          });
+      });
+  }
+  http.get(url,function(res){
+      var html = "";
+      //下面这个data事件不断的被触发，这个html数据片段就会不断的累加
+      res.on('data',function(data){
+          html += data;
+      });
+      res.on('end',function(){ //在end事件里面，我们会把数据给打印出来
+          var courseData = filterChapter(html);  //将html的内容过滤
+          printCourseInfo(courseData);
+      });
+  }).on('error',function(){ //注册一个
+      console.log('获取课程数据出错！');
+  });
 ```
