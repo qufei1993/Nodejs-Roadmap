@@ -45,7 +45,7 @@
     #第四个ALL 这个适用于所有命令
   ```
 
-  最后ssh restart 重启一下
+  最后 ``` service ssh restart ``` 重启一下
 
 ## 登录远程服务器
 
@@ -59,7 +59,9 @@
 
  在mac下面如果安装了zsh 会有.zshrc这样一个配置文件
 
- ``` subl .zshrc ```  
+ ```bash
+ subl .zshrc
+```
 
  在这个配置文件里面可以通过软链接加入命令 ``` alias ssh_demo="ssh root@ip地址" ```
 
@@ -71,8 +73,15 @@
 
   如果有多台服务器，每次都需要输入密码 这样还是有些繁琐的 适合通过私钥认证的方式来 实现无密码登录
 
-  配置秘钥命令: ``` ssh-keygen -t rsa -b 4096 -C "demo_manager@qq.com" ```
+  首先确定本地有没有生成过秘钥，如果之前生成过就不要在生成，这样会覆盖你之前的电脑上的秘钥，也许会影响到你的其他程序
 
+  进入 .ssh 目录执行以下配置秘钥命令:
+   ```bash
+
+   ssh-keygen -t rsa -b 4096 -C "demo_manager@qq.com"
+
+   ```
+  将会生成 id_rsa  id_rsa.pub 两个文件， ``` cat id_rsa ``` 查看内容
   开启ssh代理 ``` eval "$(ssh-agent -s)" ```
 
   将ssh key加入这个代理中 ``` ssh-add ~/.ssh/id_rsa ```
