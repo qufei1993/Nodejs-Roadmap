@@ -57,13 +57,12 @@
 
 #### 方法2
 
- 在mac下面如果安装了zsh 会有.zshrc这样一个配置文件
+ 在mac下面如果安装了zsh 会有.zshrc这样一个配置文件 ``` subl .zshrc ```
 
- ```bash
- subl .zshrc
+ 在这个配置文件里面可以通过软链接加入命令
+```bash
+  alias ssh_demo="ssh root@ip地址"
 ```
-
- 在这个配置文件里面可以通过软链接加入命令 ``` alias ssh_demo="ssh root@ip地址" ```
 
  通过 ``` source .zshrc ``` 重新载入这个用户变量
 
