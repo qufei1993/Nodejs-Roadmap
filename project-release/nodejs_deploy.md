@@ -109,7 +109,7 @@
   UseDNS no # 此处确保为 no
 
   # 加入我们为这个服务创建的用户
-  AllowUsrs demo_manager
+  AllowUsers demo_manager
 
   # 出去安全层面考虑 可以关闭root密码登录
   PermitRootLogin no
@@ -130,7 +130,7 @@
 ```bash
   *filter
 
-  #允许所有简历起来的链接
+  #允许所有建立起来的链接
   -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 
   #允许所有出去的流量, 此处也可以设置一些特定的流量规则
@@ -143,7 +143,7 @@
   -A INPUT -p tcp --dport 80 -j ACCEPT
 
   # 通过这条设定 我们登录服务器就只能通过这个端口，如果是别的防火墙就会拦截
-  -A INPUT -p tcp -m state --sate NEW --dport 39999 -j ACCEPT
+  -A INPUT -p tcp -m state --state NEW --dport 39999 -j ACCEPT
 
   # 允许外网来ping这台服务器
   -A INPUT -p icmp -m icmp --icmp-type 8 -j ACCEPT
@@ -232,6 +232,23 @@ Fail2Ban可以看做是个防御型的动作库，通过监控系统的日志文
 
 安装一些常用的工具包 ``` npm i pm2 webpack gulp grunt-cli -g ```
 
+到此有关nodejs的环境已安装完毕，下面给个例子来测试，上面的安装是否成功。
+
+新建一个app.js ``` vim app.js ```
+
+```bash
+ const http = require('http');
+
+ http.createServer( (req, res) => {
+   res.writeHead(200, {'Content-Type': 'text/plain'});
+   res.end('Hello World!');
+ }).listen(8081);
+
+ //注意：如果设置了防火墙，需要在防火墙强的规则里面添加8081这个端口-A INPUT -p tcp --dport 8081 -j ACCEPT
+
+ console.log('Server Runing at http://120.26.89.1:8081');
+```
+
 到此nodejs的环境已安装好，如果想要通过不带端口号的ip或者域名直接来访问到服务器的80端口node服务， 下一步则需要配置Nginx反向代理，来实现。
 
 ## nginx映射
@@ -293,7 +310,7 @@ include /etc/nginx/sites-enabled/*
 
 查看上面写的配置文件是否正确 ``` sudo nginx -t  ```
 
-重启nginx ```bash sudo nginx -s reload ```
+重启nginx ``` sudo nginx -s reload ```
 
 在浏览器中会显示我们的nginx服务器版本信息 如果不想显示 进入 ``` etc/nginx/nginx.conf ``` 将 ``` server_tokens off ``` 注释打开
 
@@ -304,7 +321,7 @@ include /etc/nginx/sites-enabled/*
 
 导入key ``` sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14518585931BC711F9BA15703C6```
 
-为mongodb的配置文件创建一个列表 ``` sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14518585931BC711F9BA15703C6 ```
+为mongodb的配置文件创建一个列表 ``` echo "deb [ arch=amd64 ] http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.4.list ```
 
 更新本地包 ``` sudo apt-get update ```
 
@@ -321,9 +338,9 @@ include /etc/nginx/sites-enabled/*
 
 在重新安装,这时会从阿里云镜像来安装，将会快很多 ``` sudo apt-get install -y mongodb-org ```
 
-开启服务 ``` sudo service mongodb start ```
+开启服务 ``` sudo service mongod start ```
 
-重启服务 ``` sudo service mongodb restart ```
+重启服务 ``` sudo service mongod restart ```
 
 如果设置了防火墙 打开配置文件加入27017mongodb这个端口号 ``` sudo vim /etc/iptables.up.rules```
 
@@ -337,7 +354,7 @@ include /etc/nginx/sites-enabled/*
 
 通过mongo连接实例 看是否成功 ``` mongo ```
 
-目前安装已经成功，mongodb的默认端口跑在27017端口，出于最基本的考虑，改掉这个端口号，编辑此文件 ``` sudo vim /etc/mongod```
+目前安装已经成功，但是全世界的人都知道mongodb的默认端口跑在27017端口，出于最基本的考虑，改掉这个端口号，编辑此文件 ``` sudo vim /etc/mongod.conf```
 
 ```bash
 
