@@ -24,6 +24,8 @@
 
   * [mongodb安装](#mongodb安装)
 
+* [项目发布](#项目发布)
+
 ## 创建用户
 
   创建用户名 ``` adduser demo_manager ``` 之后会提示设置密码 和一些信息
@@ -369,6 +371,101 @@ net:
 通过mongo链接 mongo --port 29999
 
 ### 演示如何向线上的数据库导入初识数据
+
+
+## 项目发布
+
+ > 使用git仓库才托管代码，可以选择github或者码云等等都可以
+
+ 注册一个账号进入码云，创建一个项目，与本地的项目进行一个关联
+
+ 进入本地电脑的.ssh 目录 找到id_rsa.pub文件，拷贝内容，进入码云个人中心里面找到ssh公钥，粘贴在本地电脑拷贝的id_rsa内容。
+
+ 进入本地的项目文件夹，如果是一个干净的项目，执行以下命令：
+
+ ```bash
+
+ git init
+
+ git add .
+
+ git remote add origin 远程仓库地址
+
+ git push
+
+```
+
+到此已经实现了本地项目与第三方仓库的关联，下面来实现服务器与第三方仓库的关联：
+
+同样需要做的是，在服务上如果生成过.ssh 将 id_rsa.pub 公钥放到码云的后台
+
+现在建立project文件夹 ``` mkdir project ```
+
+进入project 目录 ，取远程仓库代码到服务器
+
+```
+git clone 远程仓库地址
+
+```
+
+通过上面这些操作实现了本地代码推送到私有仓库，服务器也可下载私有仓库的内容，下面开始用pm2管理工具，来管理我们的代码同步更新，服务重启，可参考pm2的文档里面很详细的讲解了从部署到每个参数的设置  [pm2](http://pm2.keymetrics.io/)
+
+ 下面简单的使用pm2 部署代码到服务器之上
+
+ 首先建立一个 ecosystem.json 文件
+
+```javascript
+  "apps" : [{
+    "name"      : "WebsiteAPI", //站点名称
+    "script"    : "app.js", //启动脚本，就是入口文件
+    "env": { //启动时候需要传入的变量
+      "COMMON_VARIABLE": "true"
+    },
+    //生产环境的变量
+    "env_production" : {
+      "NODE_ENV": "production"
+    }
+  }],
+  //设置部署
+  "deploy" : {
+    "production" : {
+      // 服务器上我们用户发布部署的user
+      "user" : "root",
+      // 服务器，如果有多台主机可以数组形式来写
+      "host" : ["212.83.163.1", "212.83.163.2", "212.83.163.3"],
+      // 端口
+      "port" : 22
+      // 分支
+      "ref"  : "origin/master",
+      // 仓库地址
+      "repo" : "git@github.com:repo.git",
+      // 项目部署到服务器哪个目录下面的地址
+      "path" : "/var/www/website",
+      // key校验给取消掉
+      "ssh_options": "StrictHostKeyChecking=no",
+      // 设置环境
+      "env"  : {
+        "NODE_ENV": "production"
+      }
+    }
+```
+
+在发布前需要在服务器创建website文件，且给予可写的权限
+
+```bash
+ mkdir /var/www/website
+
+ sudo chmod 777 website
+```
+
+让pm2连上我们的服务器，从服务器里面来创建我们发布项目所需要的文件夹
+
+```javascript
+
+ pm2 deploy ecosystem.json production setup
+
+```
+
 
 
 
