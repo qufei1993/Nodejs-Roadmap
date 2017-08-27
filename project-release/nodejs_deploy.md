@@ -297,6 +297,11 @@ server {
     proxy_pass http://yuming;
     proxy_redirect off; //关闭
   }
+
+  # 如果有css 图片 等 需要设置下
+  location ~* ^.+\.(jpg|jpeg|gif|png|ico|css|js|pdf|txt){
+    root /www/boyi_api/pro/current/public;
+  }
 }
 ```
 
@@ -416,14 +421,14 @@ git clone 远程仓库地址
 
 ```javascript
   "apps" : [{
-    "name"      : "WebsiteAPI", //站点名称
+    "name"      : "Website", //站点名称
     "script"    : "app.js", //启动脚本，就是入口文件
     "env": { //启动时候需要传入的变量
       "COMMON_VARIABLE": "true"
     },
     //生产环境的变量
     "env_production" : {
-      "NODE_ENV": "production"
+      "NODE_ENV": "pro"
     }
   }],
   //设置部署
@@ -434,7 +439,7 @@ git clone 远程仓库地址
       // 服务器，如果有多台主机可以数组形式来写
       "host" : ["212.83.163.1", "212.83.163.2", "212.83.163.3"],
       // 端口
-      "port" : 22
+      "port" : 22,
       // 分支
       "ref"  : "origin/master",
       // 仓库地址
@@ -445,7 +450,7 @@ git clone 远程仓库地址
       "ssh_options": "StrictHostKeyChecking=no",
       // 设置环境
       "env"  : {
-        "NODE_ENV": "production"
+        "NODE_ENV": "pro"
       }
     }
 ```
@@ -462,11 +467,42 @@ git clone 远程仓库地址
 
 ```javascript
 
- pm2 deploy ecosystem.json production setup
+ pm2 deploy ecosystem.json pro setup
 
 ```
 
+之后每次修改后将不需要setup ``` pm2 deploy ecosystem.json pro ``` 执行此命令后，通常会遇到一个错误，像下面这样
 
+```
+$ pm2 deploy ecosystem.json pro
+--> Deploying to pro environment
+--> on host 116.62.222.30
+  ○ deploying origin/master
+  ○ executing pre-deploy-local
+  ○ hook pre-deploy
+  ○ fetching updates
+Fetching origin
+  ○ resetting HEAD to origin/master
+HEAD is now at 4092462 modify ecosystem.json
+  ○ executing post-deploy `pm2 startOrRestart ecosystem.json --env pro`
+bash: pm2: command not found
 
+  post-deploy hook failed
+
+Deploy failed
+```
+
+会发现在服务器上无法找到pm2命令，但是确实已经安装了呢，原因在于pm2在服务器上使用的是一个非交互式的ssh链接方式，回到服务器的用户根目录下编辑文件.bashrc ``` vim ~/.bashrc ```
+
+```bash
+# 找到以下命令加以注释，不让其提前返回
+
+# [ -z "$PS1" ] && return
+
+```
+
+执行命令 重新加载 ``` source ~/.bashrc ```
+
+下面在使用命令 ``` pm2 deploy ecosystem.json pro ``` 就可以发布啦
 
 补充：df -h 查看硬盘使用情况
