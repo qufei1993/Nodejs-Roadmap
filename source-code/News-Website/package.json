@@ -1,0 +1,34 @@
+{
+  "name": "",
+  "version": "1.0.0",
+  "description": "react城市攒3选择器",
+  "main": "index.js",
+  "dependencies": {
+    "fetch": "^1.1.0",
+    "moment": "^2.18.1",
+    "react-city": "^1.0.0"
+  },
+  "devDependencies": {
+    "antd": "^2.10.0",
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-plugin-react-html-attrs": "^2.0.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "css-loader": "^0.25.0",
+    "prop-types": "^15.5.8",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "react-responsive": "^1.2.10",
+    "react-router": "^2.8.1",
+    "style-loader": "^0.13.2",
+    "webpack": "^2.5.0",
+    "webpack-dev-server": "^2.4.5"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server --hot --content-base ./public/"
+  },
+  "author": "",
+  "license": "ISC"
+}
