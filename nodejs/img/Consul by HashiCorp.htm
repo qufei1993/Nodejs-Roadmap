@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<!-- saved from url=(0053)http://consul.boluome.com/ui/#/dc1/kv/dev/huoche/edit -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=0.7, user-scalable=no">
+  <title>Consul by HashiCorp</title>
+  <link rel="stylesheet" href="./Consul by HashiCorp_files/bootstrap.min.css">
+  <link rel="stylesheet" href="./Consul by HashiCorp_files/base.css">
+  <link rel="icon" type="image/png" href="http://consul.boluome.com/ui/static/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="http://consul.boluome.com/ui/static/favicon-16x16.png" sizes="16x16">
+
+  <script type="text/javascript">
+    // Change this value to your consul host if you are not running
+    // the UI on the same host as a consul instance.
+    // e.g. "http://myserver.com:8500"
+    var consulHost = ''
+  </script>
+
+</head>
+<body style="">
+
+  <noscript>
+    &lt;center&gt;
+      &lt;h2&gt;JavaScript Required&lt;/h2&gt;
+      &lt;p&gt;Please enable JavaScript in your web browser to use Consul UI.&lt;/p&gt;
+    &lt;/center&gt;
+  </noscript>
+
+  <div class="wrapper">
+    <div class="container">
+      <div class="col-md-12">
+        <div id="app" class="ember-application">
+        <div id="ember367" class="ember-view">
+    <script id="metamorph-1-start" type="text/x-placeholder"></script><div id="ember430" class="ember-view dropdowns">
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12 topbar" data-bindattr-1="1">
+
+        <div class="col-md-1 col-sm-2 col-xs-8 col-sm-offset-0 col-xs-offset-1">
+          <a href="http://consul.boluome.com/ui/#"><div class="top-brand"></div></a>
+        </div>
+        <div class="col-md-2 col-sm-3 col-xs-8 col-sm-offset-0 col-xs-offset-1">
+          <a id="ember455" class="ember-view btn btn-default col-xs-12" href="http://consul.boluome.com/ui/#/dc1/services">Services</a>
+        </div>
+
+        <div class="col-md-2 col-sm-3 col-xs-8 col-sm-offset-0 col-xs-offset-1">
+          <a id="ember484" class="ember-view btn btn-default col-xs-12" href="http://consul.boluome.com/ui/#/dc1/nodes">Nodes</a>
+        </div>
+
+        <div class="col-md-2 col-sm-3 col-xs-8 col-sm-offset-0 col-xs-offset-1">
+          <a id="ember505" class="ember-view btn btn-default col-xs-12 active" href="http://consul.boluome.com/ui/#/dc1/kv">Key/Value</a>
+        </div>
+
+        <div class="col-md-2 col-sm-2 col-xs-8 col-md-offset-0 col-sm-offset-2 col-xs-offset-1">
+          <a id="ember507" class="ember-view btn btn-default col-xs-12" href="http://consul.boluome.com/ui/#/dc1/acls">ACL</a>
+        </div>
+
+        <div class="col-md-2 col-sm-2 col-xs-6 col-md-offset-0 col-sm-offset-4 col-xs-offset-1">
+          <a class="col-xs-12 btn btn-success" data-bindattr-2="2" data-ember-action="3"> <span class="elip-overflow"><script id="metamorph-3-start" type="text/x-placeholder"></script>dc1<script id="metamorph-3-end" type="text/x-placeholder"></script> <span class="caret"></span></span> </a>
+
+          <script id="metamorph-4-start" type="text/x-placeholder"></script><script id="metamorph-4-end" type="text/x-placeholder"></script>
+
+        </div>
+
+        <div class="col-md-1 col-sm-2 col-xs-2 col-md-offset-0 col-sm-offset-0 col-xs-offset-0">
+          <a id="ember531" class="ember-view btn btn-default col-xs-6 icon" href="http://consul.boluome.com/ui/#/settings">
+          <svg xmlns="http://www.w3.org/2000/svg" data-icon="cog" viewBox="0 0 32 40">
+            <path d="M14 0l-1.313 4c-1 .3-1.975.688-2.875 1.188l-3.72-1.875-2.78 2.78 1.875 3.72c-.5.9-.888 1.875-1.188 2.875L0 14v4l4 1.314c.3 1 .687 1.975 1.187 2.875l-1.78 3.718 2.78 2.78 3.72-1.874c.9.5 1.905.887 2.905 1.188l1.28 4h4l1.314-4c1-.3 2.006-.688 2.906-1.188L26 28.594l2.813-2.78-1.906-3.72c.5-.9.887-1.905 1.188-2.905L32 18v-4l-4-1.312c-.3-1-.687-1.975-1.187-2.875l1.78-3.72-2.78-2.78-3.72 1.875c-.9-.5-1.905-.888-2.905-1.188L18 0h-4zm2 9c3.9 0 7 3.1 7 7s-3.1 7-7 7-7-3.1-7-7 3.1-7 7-7z"></path>
+          </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <script id="metamorph-5-start" type="text/x-placeholder"></script><script id="metamorph-1300-start" type="text/x-placeholder"></script>
+    <div class="row">
+      <div class="col-md-6 col-lg-5 padded-right-middle">
+        <h4 class="breadcrumbs"><a href="http://consul.boluome.com/ui/" data-ember-action="727"><script id="metamorph-1301-start" type="text/x-placeholder"></script>dev/<script id="metamorph-1301-end" type="text/x-placeholder"></script></a> <a href="http://consul.boluome.com/ui/" data-ember-action="728">+</a></h4>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 col-lg-5 padded-right-middle">
+          <script id="metamorph-1335-start" type="text/x-placeholder"></script><script id="metamorph-1843-start" type="text/x-placeholder"></script>
+            <div id="ember4513" class="ember-view list-group-item list-condensed-link">
+              <div class="bg-light-gray list-bar-horizontal" data-bindattr-1007="1007"></div>
+              <div class="name">
+                <script id="metamorph-1876-start" type="text/x-placeholder"></script>baoxian<script id="metamorph-1876-end" type="text/x-placeholder"></script>
+              </div>
+            </div>
+          <script id="metamorph-1843-end" type="text/x-placeholder"></script><script id="metamorph-1844-start" type="text/x-placeholder"></script>
+            <div id="ember4515" class="ember-view list-group-item list-condensed-link">
+              <div class="bg-light-gray list-bar-horizontal" data-bindattr-1008="1008"></div>
+              <div class="name">
+                <script id="metamorph-1877-start" type="text/x-placeholder"></script>baoyang<script id="metamorph-1877-end" type="text/x-placeholder"></script>
+              </div>
+            </div>
+          <script id="metamorph-1844-end" type="text/x-placeholder"></script><script id="metamorph-1845-start" type="text/x-placeholder"></script>
+            <div id="ember4517" class="ember-view list-group-item list-condensed-link">
+              <div class="bg-light-gray list-bar-horizontal" data-bindattr-1009="1009"></div>
+              <div class="name">
+                <script id="metamorph-1878-start" type="text/x-placeholder"></script>chegu<script id="metamorph-1878-end" type="text/x-placeholder"></script>
+              </div>
+            </div>
+          <script id="metamorph-1845-end" type="text/x-placeholder"></script><script id="metamorph-1846-start" type="text/x-placeholder"></script>
+            <div id="ember4519" class="ember-view list-group-item list-condensed-link">
+              <div class="bg-light-gray list-bar-horizontal" data-bindattr-1010="1010"></div>
+              <div class="name">
+                <script id="metamorph-1879-start" type="text/x-placeholder"></script>coffee<script id="metamorph-1879-end" type="text/x-placeholder"></script>
+              </div>
+            </div>
+          <script id="metamorph-1846-end" type="text/x-placeholder"></script><script id="metamorph-1847-start" type="text/x-placeholder"></script>
+            <div id="ember4521" class="ember-view list-group-item list-condensed-link">
+              <div class="bg-light-gray list-bar-horizontal" data-bindattr-1011="1011"></div>
+              <div class="name">
+                <script id="metamorph-1880-start" type="text/x-placeholder"></script>daijia<script id="metamorph-1880-end" type="text/x-placeholder"></script>
+              </div>
+            </div>
+          <script id="metamorph-1847-end" type="text/x-placeholder"></script><script id="metamorph-1848-start" type="text/x-placeholder"></script>
+            <div id="ember4523" class="ember-view list-group-item list-condensed-link">
+              <div class="bg-light-gray list-bar-horizontal" data-bindattr-1012="1012"></div>
+              <div class="name">
+                <script id="metamorph-1881-start" type="text/x-placeholder"></script>dengjifuwu<script id="metamorph-1881-end" type="text/x-placeholder"></script>
+              </div>
+            </div>
+          <script id="metamorph-1848-end" type="text/x-placeholder"></script><script id="metamorph-1849-start" type="text/x-placeholder"></script>
+            <div id="ember4525" class="ember-view list-group-item list-condensed-link">
+              <div class="bg-light-gray list-bar-horizontal" data-bindattr-1013="1013"></div>
+              <div class="name">
+                <script id="metamorph-1882-start" type="text/x-placeholder"></script>dianying<script id="metamorph-1882-end" type="text/x-placeholder"></script>
+              </div>
+            </div>
+          <script id="metamorph-1849-end" type="text/x-placeholder"></script><script id="metamorph-1850-start" type="text/x-placeholder"></script>
+            <div id="ember4527" class="ember-view list-group-item list-condensed-link">
+              <div class="bg-light-gray list-bar-horizontal" data-bindattr-1014="1014"></div>
+              <div class="name">
+                <script id="metamorph-1883-start" type="text/x-placeholder"></script>fapiao<script id="metamorph-1883-end" type="text/x-placeholder"></script>
+              </div>
+            </div>
+          <script id="metamorph-1850-end" type="text/x-placeholder"></script><script id="metamorph-1851-start" type="text/x-placeholder"></script>
+            <div id="ember4529" class="ember-view list-group-item list-condensed-link">
+              <div class="bg-light-gray list-bar-horizontal" data-bindattr-1015="1015"></div>
+              <div class="name">
+                <script id="metamorph-1884-start" type="text/x-placeholder"></script>global<script id="metamorph-1884-end" type="text/x-placeholder"></script>
+              </div>
+            </div>
+          <script id="metamorph-1851-end" type="text/x-placeholder"></script><script id="metamorph-1852-start" type="text/x-placeholder"></script>
+            <div id="ember4531" class="ember-view list-group-item list-condensed-link">
+              <div class="bg-light-gray list-bar-horizontal" data-bindattr-1016="1016"></div>
+              <div class="name">
+                <script id="metamorph-1885-start" type="text/x-placeholder"></script>huafei<script id="metamorph-1885-end" type="text/x-placeholder"></script>
+              </div>
+            </div>
+          <script id="metamorph-1852-end" type="text/x-placeholder"></script><script id="metamorph-1853-start" type="text/x-placeholder"></script>
+            <div id="ember4533" class="ember-view list-group-item list-condensed-link active">
+              <div class="bg-light-gray list-bar-horizontal" data-bindattr-1017="1017"></div>
+              <div class="name">
+                <script id="metamorph-1886-start" type="text/x-placeholder"></script>huoche<script id="metamorph-1886-end" type="text/x-placeholder"></script>
+              </div>
+            </div>
+          <script id="metamorph-1853-end" type="text/x-placeholder"></script><script id="metamorph-1854-start" type="text/x-placeholder"></script>
+            <div id="ember4535" class="ember-view list-group-item list-condensed-link">
+              <div class="bg-light-gray list-bar-horizontal" data-bindattr-1018="1018"></div>
+              <div class="name">
+                <script id="metamorph-1887-start" type="text/x-placeholder"></script>jiadianqingxi<script id="metamorph-1887-end" type="text/x-placeholder"></script>
+              </div>
+            </div>
+          <script id="metamorph-1854-end" type="text/x-placeholder"></script><script id="metamorph-1855-start" type="text/x-placeholder"></script>
+            <div id="ember4537" class="ember-view list-group-item list-condensed-link">
+              <div class="bg-light-gray list-bar-horizontal" data-bindattr-1019="1019"></div>
+              <div class="name">
+                <script id="metamorph-1888-start" type="text/x-placeholder"></script>jiadianweixiu<script id="metamorph-1888-end" type="text/x-placeholder"></script>
+              </div>
+            </div>
+          <script id="metamorph-1855-end" type="text/x-placeholder"></script><script id="metamorph-1856-start" type="text/x-placeholder"></script>
+            <div id="ember4539" class="ember-view list-group-item list-condensed-link">
+              <div class="bg-light-gray list-bar-horizontal" data-bindattr-1020="1020"></div>
+              <div class="name">
+                <script id="metamorph-1889-start" type="text/x-placeholder"></script>jiayouka<script id="metamorph-1889-end" type="text/x-placeholder"></script>
+              </div>
+            </div>
+          <script id="metamorph-1856-end" type="text/x-placeholder"></script><script id="metamorph-1857-start" type="text/x-placeholder"></script>
+            <div id="ember4541" class="ember-view list-group-item list-condensed-link">
+              <div class="bg-light-gray list-bar-horizontal" data-bindattr-1021="1021"></div>
+              <div class="name">
+                <script id="metamorph-1890-start" type="text/x-placeholder"></script>jipiao_qunar<script id="metamorph-1890-end" type="text/x-placeholder"></script>
+              </div>
+            </div>
+          <script id="metamorph-1857-end" type="text/x-placeholder"></script><script id="metamorph-1858-start" type="text/x-placeholder"></script>
+            <div id="ember4543" class="ember-view list-group-item list-condensed-link">
+              <div class="bg-light-gray list-bar-horizontal" data-bindattr-1022="1022"></div>
+              <div class="name">
+                <script id="metamorph-1891-start" type="text/x-placeholder"></script>jiudian<script id="metamorph-1891-end" type="text/x-placeholder"></script>
+              </div>
+            </div>
+          <script id="metamorph-1858-end" type="text/x-placeholder"></script><script id="metamorph-1859-start" type="text/x-placeholder"></script>
+            <div id="ember4545" class="ember-view list-group-item list-condensed-link">
+              <div class="bg-light-gray list-bar-horizontal" data-bindattr-1023="1023"></div>
+              <div class="name">
+                <script id="metamorph-1892-start" type="text/x-placeholder"></script>liuliang<script id="metamorph-1892-end" type="text/x-placeholder"></script>
+              </div>
+            </div>
+          <script id="metamorph-1859-end" type="text/x-placeholder"></script><script id="metamorph-1860-start" type="text/x-placeholder"></script>
+            <div id="ember4547" class="ember-view list-group-item list-condensed-link">
+              <div class="bg-light-gray list-bar-horizontal" data-bindattr-1024="1024"></div>
+              <div class="name">
+                <script id="metamorph-1893-start" type="text/x-placeholder"></script>menpiao<script id="metamorph-1893-end" type="text/x-placeholder"></script>
+              </div>
+            </div>
+          <script id="metamorph-1860-end" type="text/x-placeholder"></script><script id="metamorph-1861-start" type="text/x-placeholder"></script>
+            <div id="ember4549" class="ember-view list-group-item list-condensed-link">
+              <div class="bg-light-gray list-bar-horizontal" data-bindattr-1025="1025"></div>
+              <div class="name">
+                <script id="metamorph-1894-start" type="text/x-placeholder"></script>order<script id="metamorph-1894-end" type="text/x-placeholder"></script>
+              </div>
+            </div>
+          <script id="metamorph-1861-end" type="text/x-placeholder"></script><script id="metamorph-1862-start" type="text/x-placeholder"></script>
+            <div id="ember4551" class="ember-view list-group-item list-condensed-link">
+              <div class="bg-light-gray list-bar-horizontal" data-bindattr-1026="1026"></div>
+              <div class="name">
+                <script id="metamorph-1895-start" type="text/x-placeholder"></script>paotui<script id="metamorph-1895-end" type="text/x-placeholder"></script>
+              </div>
+            </div>
+          <script id="metamorph-1862-end" type="text/x-placeholder"></script><script id="metamorph-1863-start" type="text/x-placeholder"></script>
+            <div id="ember4553" class="ember-view list-group-item list-condensed-link">
+              <div class="bg-light-gray list-bar-horizontal" data-bindattr-1027="1027"></div>
+              <div class="name">
+                <script id="metamorph-1896-start" type="text/x-placeholder"></script>pay<script id="metamorph-1896-end" type="text/x-placeholder"></script>
+              </div>
+            </div>
+          <script id="metamorph-1863-end" type="text/x-placeholder"></script><script id="metamorph-1864-start" type="text/x-placeholder"></script>
+            <div id="ember4555" class="ember-view list-group-item list-condensed-link">
+              <div class="bg-light-gray list-bar-horizontal" data-bindattr-1028="1028"></div>
+              <div class="name">
+                <script id="metamorph-1897-start" type="text/x-placeholder"></script>piaowu<script id="metamorph-1897-end" type="text/x-placeholder"></script>
+              </div>
+            </div>
+          <script id="metamorph-1864-end" type="text/x-placeholder"></script><script id="metamorph-1865-start" type="text/x-placeholder"></script>
+            <div id="ember4557" class="ember-view list-group-item list-condensed-link">
+              <div class="bg-light-gray list-bar-horizontal" data-bindattr-1029="1029"></div>
+              <div class="name">
+                <script id="metamorph-1898-start" type="text/x-placeholder"></script>promotion<script id="metamorph-1898-end" type="text/x-placeholder"></script>
+              </div>
+            </div>
+          <script id="metamorph-1865-end" type="text/x-placeholder"></script><script id="metamorph-1866-start" type="text/x-placeholder"></script>
+            <div id="ember4559" class="ember-view list-group-item list-condensed-link">
+              <div class="bg-light-gray list-bar-horizontal" data-bindattr-1030="1030"></div>
+              <div class="name">
+                <script id="metamorph-1899-start" type="text/x-placeholder"></script>refund<script id="metamorph-1899-end" type="text/x-placeholder"></script>
+              </div>
+            </div>
+          <script id="metamorph-1866-end" type="text/x-placeholder"></script><script id="metamorph-1867-start" type="text/x-placeholder"></script>
+            <div id="ember4561" class="ember-view list-group-item list-condensed-link">
+              <div class="bg-light-gray list-bar-horizontal" data-bindattr-1031="1031"></div>
+              <div class="name">
+                <script id="metamorph-1900-start" type="text/x-placeholder"></script>rmq_rest<script id="metamorph-1900-end" type="text/x-placeholder"></script>
+              </div>
+            </div>
+          <script id="metamorph-1867-end" type="text/x-placeholder"></script><script id="metamorph-1868-start" type="text/x-placeholder"></script>
+            <div id="ember4563" class="ember-view list-group-item list-condensed-link">
+              <div class="bg-light-gray list-bar-horizontal" data-bindattr-1032="1032"></div>
+              <div class="name">
+                <script id="metamorph-1901-start" type="text/x-placeholder"></script>session<script id="metamorph-1901-end" type="text/x-placeholder"></script>
+              </div>
+            </div>
+          <script id="metamorph-1868-end" type="text/x-placeholder"></script><script id="metamorph-1869-start" type="text/x-placeholder"></script>
+            <div id="ember4565" class="ember-view list-group-item list-condensed-link">
+              <div class="bg-light-gray list-bar-horizontal" data-bindattr-1033="1033"></div>
+              <div class="name">
+                <script id="metamorph-1902-start" type="text/x-placeholder"></script>shengxian<script id="metamorph-1902-end" type="text/x-placeholder"></script>
+              </div>
+            </div>
+          <script id="metamorph-1869-end" type="text/x-placeholder"></script><script id="metamorph-1870-start" type="text/x-placeholder"></script>
+            <div id="ember4567" class="ember-view list-group-item list-condensed-link">
+              <div class="bg-light-gray list-bar-horizontal" data-bindattr-1034="1034"></div>
+              <div class="name">
+                <script id="metamorph-1903-start" type="text/x-placeholder"></script>user<script id="metamorph-1903-end" type="text/x-placeholder"></script>
+              </div>
+            </div>
+          <script id="metamorph-1870-end" type="text/x-placeholder"></script><script id="metamorph-1871-start" type="text/x-placeholder"></script>
+            <div id="ember4569" class="ember-view list-group-item list-condensed-link">
+              <div class="bg-light-gray list-bar-horizontal" data-bindattr-1035="1035"></div>
+              <div class="name">
+                <script id="metamorph-1904-start" type="text/x-placeholder"></script>waimai<script id="metamorph-1904-end" type="text/x-placeholder"></script>
+              </div>
+            </div>
+          <script id="metamorph-1871-end" type="text/x-placeholder"></script><script id="metamorph-1872-start" type="text/x-placeholder"></script>
+            <div id="ember4571" class="ember-view list-group-item list-condensed-link">
+              <div class="bg-light-gray list-bar-horizontal" data-bindattr-1036="1036"></div>
+              <div class="name">
+                <script id="metamorph-1905-start" type="text/x-placeholder"></script>weizhang<script id="metamorph-1905-end" type="text/x-placeholder"></script>
+              </div>
+            </div>
+          <script id="metamorph-1872-end" type="text/x-placeholder"></script><script id="metamorph-1873-start" type="text/x-placeholder"></script>
+            <div id="ember4573" class="ember-view list-group-item list-condensed-link">
+              <div class="bg-light-gray list-bar-horizontal" data-bindattr-1037="1037"></div>
+              <div class="name">
+                <script id="metamorph-1906-start" type="text/x-placeholder"></script>xianhua<script id="metamorph-1906-end" type="text/x-placeholder"></script>
+              </div>
+            </div>
+          <script id="metamorph-1873-end" type="text/x-placeholder"></script><script id="metamorph-1874-start" type="text/x-placeholder"></script>
+            <div id="ember4575" class="ember-view list-group-item list-condensed-link">
+              <div class="bg-light-gray list-bar-horizontal" data-bindattr-1038="1038"></div>
+              <div class="name">
+                <script id="metamorph-1907-start" type="text/x-placeholder"></script>xihu<script id="metamorph-1907-end" type="text/x-placeholder"></script>
+              </div>
+            </div>
+          <script id="metamorph-1874-end" type="text/x-placeholder"></script><script id="metamorph-1875-start" type="text/x-placeholder"></script>
+            <div id="ember4577" class="ember-view list-group-item list-condensed-link">
+              <div class="bg-light-gray list-bar-horizontal" data-bindattr-1039="1039"></div>
+              <div class="name">
+                <script id="metamorph-1908-start" type="text/x-placeholder"></script>yongche<script id="metamorph-1908-end" type="text/x-placeholder"></script>
+              </div>
+            </div>
+          <script id="metamorph-1875-end" type="text/x-placeholder"></script><script id="metamorph-1335-end" type="text/x-placeholder"></script>
+      </div>
+
+      <div class="border-left hidden-xs hidden-sm">
+      </div>
+
+      <div class="visible-xs visible-sm">
+        <hr>
+      </div>
+
+      <div class="col-md-6 col-lg-7 border-left sticky-scroll">
+        <div class="padded-border">
+
+          <div class="panel">
+            <div class="panel-bar bg-green" data-bindattr-762="762"></div>
+            <div class="panel-heading">
+              <h4 class="panel-title" data-bindattr-763="763">
+                <script id="metamorph-1369-start" type="text/x-placeholder"></script>dev/huoche<script id="metamorph-1369-end" type="text/x-placeholder"></script>
+                <script id="metamorph-1370-start" type="text/x-placeholder"></script><script id="metamorph-1370-end" type="text/x-placeholder"></script>
+              </h4>
+            </div>
+
+            <div class="panel-body panel-form">
+              <div class="form-group">
+                <script id="metamorph-1371-start" type="text/x-placeholder"></script><script id="metamorph-1371-end" type="text/x-placeholder"></script>
+              </div>
+              <form class="form">
+                <div class="form-group success" data-bindattr-764="764">
+                  <textarea id="ember3464" class="ember-view ember-text-area form-control"></textarea>
+                </div>
+                <button data-ember-action="765" data-bindattr-766="766" class="btn btn-success" data-bindattr-767="767" data-bindattr-768="768">Update</button>
+                <button data-ember-action="769" data-bindattr-770="770" class="btn btn-default" data-bindattr-771="771">Cancel</button>
+                <label class="form-checkbox"><input id="ember3465" class="ember-view ember-checkbox" type="checkbox">Validate JSON</label>
+                <button data-ember-action="772" data-bindattr-773="773" class="btn pull-right btn-danger" data-bindattr-774="774" data-bindattr-775="775">Delete key</button>
+              </form>
+            </div>
+          </div>
+
+          <script id="metamorph-1372-start" type="text/x-placeholder"></script><script id="metamorph-1372-end" type="text/x-placeholder"></script>
+
+        </div>
+      </div>
+
+    </div>
+  <script id="metamorph-1300-end" type="text/x-placeholder"></script><script id="metamorph-5-end" type="text/x-placeholder"></script>
+  </div><script id="metamorph-1-end" type="text/x-placeholder"></script>
+  </div></div>
+      </div>
+    </div>
+
+    <div class="push"></div>
+  </div>
+
+    <div class="footer">
+        <div class="container">
+          <div class="col-md-12">
+          </div>
+        </div>
+    </div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <script>
+  // Enable query params, must be loaded before ember is
+  EmberENV = {FEATURES: {'query-params-new': true}};
+  </script>
+
+
+<script src="./Consul by HashiCorp_files/application.min.js"></script>
+
+</body></html>
