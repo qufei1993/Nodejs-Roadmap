@@ -43,6 +43,8 @@ db.collection.aggregate({"$match":{"name": /hello/i}}) Nodejs 两种写法:
 
 * $ne 不等于 ``` {age: {$ne: [10, 11]}} ```
 
+* $nin 在数组中不包含 ``` {age: {$nin: [10, 11]}} ```
+
 * $in 包含 ``` {age: {$in: [10, 11]}} ```
 
 * $size 数组元素个数 ``` {age:{$size:4}} ``` age数组元素个数为4的数据结果集。
