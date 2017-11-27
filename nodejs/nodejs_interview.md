@@ -1,66 +1,86 @@
-﻿1、简单介绍下NodeJs？
+## 简单介绍下NodeJs？
+
 NodeJS是一个基于V8引擎的Javascript运行环境，使用事件驱动模型而不是复杂的多线程，在服务器环境中，处理二进制数据通常是必不可少的，但javascript对此支持不足，因此V8.Node增加了Buffer类，方便并且高效地处理二进制数据。
-2.NodeJS四个特点：
+
+## NodeJS四个特点：
 	1.单线程
 	2.非组塞式IO
 	3.V8
 	4.事件驱动
-3.单线程与多线程
+
+## 单线程与多线程
 	单线程：多个请求占用一个线程
 	多线程：一个请求占用多个线程
 	Nginx：单线程
 	Apache：多线程
-4.npm包安装在哪里
+
+## npm包安装在哪里
 	node_modules
-5.Nodejs中间件有哪些
-	logger: 用户请求日志中间件 express.logger 中间件已经独立 使用morgan var logger = require('morgan'); 
+
+## Nodejs中间件有哪些
+	logger: 用户请求日志中间件 express.logger 中间件已经独立 使用morgan var logger = require('morgan');
 	body-parser：请求内容解析中间件，将表单提交的数据格式化。
 	urlencoded: application/x-www-form-urlencode请求解析中间件
 	cookieParser: cookie解析中间件
 	cookieSession: 基于cookies的会话中间件
 	session: 会话管理中间件
-6.require的理解
-7.Express框架与Koa框架的区别
-	Koa是一个基于ES6规范的开发框架。
-	最明显的差别就是handel处理方法，一个是普通的回调函数，一个是利用生成器函数作为相应器
-	Express 的优点是线性逻辑：路由和中间件完美融合，通过中间件形式把业务逻辑细分，简化，一个请求进来经过一系列中间件处理后再响应给用户，再复杂的业务也是线性了，清晰明了。
-	KOA借助 promise 和 generator 的能力，丢掉了 callback，完美解决异步组合问题和异步异常捕获问题。
 
-8.NodeJS是单线程还是多线程
-	Nodejs同Nginx服务器一样都是单线程，但是Node.js在底层访问I/O还是多线程
+## require的理解
+
+## Express框架与Koa框架的区别
+	Koa是一个基于ES6规范的开发框架。  
+	最明显的差别就是handel处理方法，一个是普通的回调函数，一个是利用生成器函数作为相应器  
+	Express 的优点是线性逻辑：路由和中间件完美融合，通过中间件形式把业务逻辑细分，简化，一个请求进来经过一系列中间件处理后再响应给用户，再复杂的业务也是线性了，清晰明了。
+	KOA借助 promise 和 generator 的能力，丢掉了 callback，完美解决异步组合问题和异步异常捕获问题。   
+
+## NodeJS是单线程还是多线程
+	Nodejs同Nginx服务器一样都是单线程，但是Node.js在底层访问I/O还是多线程  
 	我们都知道 Node.js 是以单线程的模式运行的，但它使用的是事件驱动来处理并发，这样有助于我们在多核 cpu 的系统上创建多个子进程，从	而提高性能。
+
+## 进程
+	是计算机中的程序关于某数据集合上的一次运行活动, 是系统进行资源分配和调度的基本单位。
+
+## 多进程
+  启动多个进程, 多个进程可以一块执行多个任务
 
 数据库篇：
 1.mongodb如何关联查询：通过populate实现关联查询。
-	通过ObjectId在模式中定义主键，
-	var Schema = mongoose.Schema;
-	var ObjectId = Schema.Types.ObjectId;
-	from:{type:ObjectId,ref:'user'}, //ref指向要关联的信息
+```javascript
+//通过ObjectId在模式中定义主键，
+var Schema = mongoose.Schema;
+var ObjectId = Schema.Types.ObjectId;
+from:{type:ObjectId,ref:'user'}, //ref指向要关联的信息
+```
 
-JS篇
-1.js的基本类型和复杂类型？
-	基本类型变量存的是值，复杂类型变量存的是内存地址。
-	js中有5种基本数据类型：Undefined、Null、Boolean、Number和String
-	复杂类型Object
+## JS篇
 
-2.js判断数组类型的方法
-	2.1 instanceof	console.log(a instanceof Array)
-	2.2 constructor console.log(a.constructor == Array);
-	2.3 
+#### 1.js的基本类型和复杂类型？
+	基本类型变量存的是值，复杂类型变量存的是内存地址。  
+	js中有5种基本数据类型：Undefined、Null、Boolean、Number和String  
+	复杂类型Object  
+
+#### 2.js判断数组类型的方法
+	2.1 ```javascript instanceof	console.log(a instanceof Array)```  
+	2.2 ```javascript constructor console.log(a.constructor == Array);```  
+	2.3
+	```javascript
 		function isArray(o) {
     			return Object.prototype.toString.call(o) === ‘[object Array]‘;
 		}
-3.理解js回调地狱
-	回调函数式是闭包的
-	有很多层级的回调函数，看起来很凌乱 成为“回调地狱”。
+	```
+#### 3.理解js回调地狱
+	回调函数式是闭包的  
+	有很多层级的回调函数，看起来很凌乱 成为“回调地狱”。  
 
-4.js获取函数参数的个数
+#### 4.js获取函数参数的个数
 	形参个数arguments.callee.length   arguments.callee就是取得函数的名字
 	实参个数： arguments.length
-	
-5.js继承
-	通过原型链实现
-	例：
+
+#### 5.js继承
+
+* 通过原型链实现, 示例：
+
+```javascript
 	function Box(){ //被继承的函数叫作超类型(父类 或 基类)
 		this.name="lee";
 	}
@@ -72,6 +92,7 @@ JS篇
 			return this.name+this.age+"运行中。。。";
 		};
 	}
+
 	//通过原型链继承。超类型实例化的对象实例，赋值给子类型的原型属性。
 	//new Box()会将Box构造里的信息和原型里的信息都交给Desk
 	//Desk的原型得到的是Box的构造+原型里的信息
@@ -87,9 +108,12 @@ JS篇
 	alert(table instanceof Table);
 	alert(table instanceof Desk);
 	alert(table instanceof Box);
+```
 
-	2、对象继承
-	例：
+* 对象继承, 示例：
+
+```javascript
+
 	function Box(name,age){
 		this.name=name;
 		this.age=age;
@@ -102,11 +126,12 @@ JS篇
 	desk.family.push('ww');
 	alert(desk.family);	//zs ls ww
 	var desk2=new Desk('lee',20);
-	alert(desk2.family);//zs ls 
+	alert(desk2.family);//zs ls
+```
 
+* 组合继承=原型链模式+构造函数模式, 示例：
 
-	3、组合继承=原型链模式+构造函数模式
-	例：
+```javascript
 	function Box(name,age){
 		this.name=name;
 		this.age=age;
@@ -122,10 +147,12 @@ JS篇
 	Desk.prototype=new Box();//原型链继承
 	var desk=new Desk('lee',20);
 	alert(desk.run());
+```
 
-	
 
-js的回调实例：
+## js的回调实例：
+
+```javascript
 	var async=function(callback){
 	    //read data
 	    setTimeout(function(){
@@ -136,3 +163,4 @@ js的回调实例：
 	async(function(data){
 	    alert(data);
 	});
+```

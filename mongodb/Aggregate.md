@@ -19,7 +19,9 @@
 
 ### match 使用正则进行模糊匹配
 
-db.collection.aggregate({"$match":{"name": /hello/i}}) Nodejs 两种写法:
+db.collection.aggregate({"$match":{"name": /hello/i}})
+
+Nodejs 两种写法:
 
 * collection.name = new RegExp('hello', 'i')
 
