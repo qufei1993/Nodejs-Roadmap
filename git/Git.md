@@ -61,6 +61,10 @@ Did you intend to checkout 'origin/dev' which can not be resolved as commit?
 
 * 切换分支 git checkout dev/branch
 
+* 删除本地分支 git branch -d dev
+
+* 同步删除远程分支 git push origin :dev
+
 ### 问题1:
 
 * 如何解决failed to push some refs to git
