@@ -10,3 +10,5 @@
   * [nodejs-websocket](https://github.com/sitegui/nodejs-websocket)
 
   * [socket.io 地址https://socket.io/blog/](https://socket.io/blog/)
+
+* [supervisor 全局启动监听项目变化](https://github.com/petruisfan/node-supervisor)

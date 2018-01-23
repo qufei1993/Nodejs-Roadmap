@@ -72,6 +72,26 @@ modules.exports = {
 
 * .eslintrc
   eslint用于代码审查 参考文档 http://eslint.cn/docs/user-guide/configuring#configuration-file-formats
+  eslint可以结合pre-commit插件使用 目的是在package.json 的scripts之前对一些指定的命令提前运行, 相当于一个勾子, 例如：
+
+```javascript
+//npm install --save-dev pre-commit
+
+//package.json 文件
+"scripts": {
+  "dev": "node app",
+  "lint": "eslint .",
+  "fix": "eslint --fix ."
+},
+"pre-commit": [
+  "fix",
+  "lint"
+],
+
+//执行git commit -m 'test' 提交代码时 会先执行pre-commit中的代码
+```
+
+
 
 * .eslintignore
   用于忽略某些文件
