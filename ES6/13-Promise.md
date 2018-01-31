@@ -1,4 +1,7 @@
 ### Promise
+
+Promise/A+规范参考[http://www.ituring.com.cn/article/66566](http://www.ituring.com.cn/article/66566)
+
 ```javascript
 //回调函数方式书写，如果异步请求多了，将会很难维护，程序看着很乱
 {

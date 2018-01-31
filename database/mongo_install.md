@@ -84,8 +84,6 @@ Server has startup warnings:
 
 ### 显示所有数据库
 
-``` > show dbs ```
-
 ```r
 > show dbs
 admin   0.000GB
@@ -240,3 +238,5 @@ WriteResult({ "nRemoved" : 1 })
 db.demo_admin.drop()
 true
 ```
+
+Github地址 [https://github.com/Q-Angelo/Summarize/blob/master/database/mongo_install.md](https://github.com/Q-Angelo/Summarize/blob/master/database/mongo_install.md)
