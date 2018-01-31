@@ -64,4 +64,5 @@ for (let i = 0; i < 5; i++) {
 推荐几篇关于javascript运行机制的文章
 
 [初探javascript事件环EventLoop](https://zhuanlan.zhihu.com/p/33127885)
+
 [javascript的运行机制](https://www.jianshu.com/p/1ec915675ba7)
