@@ -43,6 +43,18 @@ var dbRef = user.address
 
 //如果dbRef是对象使用以下方式查找
 db[dbRef.$ref].findOne({"_id":(dbRef.$id)})
+```
 
+### 插入
 
+插入时注意 $ref要放在$id之前，否则会报错
+
+```javascript
+    relatedFields: [
+        {
+            $ref: 'user', //指向的集合
+            $id: ObjectId("5a72af0e937e6425bf4201e4"), //mongo生成的_id
+            $db: 'demo', //数据库名 可选默认当前数据库，如果为其他数据库的必传
+        }
+    ]
 ```

@@ -52,7 +52,12 @@ for (let i = 0; i < 5; i++) {
 }
 
 /**
- * 因此会先输出 0 1 2 3 4 最后输出 
+ * 输出结果:
+ * 0
+ * 1
+ * 2
+ * 3
+ * 4
  * setTimeout:  0
  * setTimeout:  1
  * setTimeout:  2
