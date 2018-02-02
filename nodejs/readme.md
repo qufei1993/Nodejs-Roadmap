@@ -1,5 +1,7 @@
 # NodeJS
 
+## 目录
+
 * [JavaScript基础问题](https://github.com/Q-Angelo/Summarize/blob/master/nodejs/base.md)
 
 * [对象引用与理解module.exports与exports的关系](https://github.com/Q-Angelo/Summarize/blob/master/nodejs/object_reference.md)
@@ -15,6 +17,8 @@
 * [代码性能优化](https://github.com/Q-Angelo/Summarize/blob/master/nodejs/performance_optimization.md)
 
 * [爬虫](https://github.com/Q-Angelo/Summarize/blob/master/nodejs/creeper.md)
+
+* [C++编写NodeJs插件](https://github.com/Q-Angelo/Summarize/blob/master/nodejs/c_addons.md)
 
 ## cpu密集 VS I/O密集
 

@@ -1,4 +1,4 @@
-# C与语言混写NodeJs
+# C++编写NodeJs插件
 
 全局安装 node-gyp 编译c文件
 
