@@ -16,9 +16,9 @@
 
 macrotask queue 宏任务队列
 
-```
+```javascript
 setImmediate  
-setTimeout   
+setTimeout //有一个最小延迟4ms
 setInterval  
 ```
 microtask queue 微任务队列
@@ -57,6 +57,9 @@ setTimeout会进入一个任务队列，继续执行下面的代码，等到同�
 [知乎讨论](https://www.zhihu.com/question/266410249/answer/307932313)
 
 ```javascript
+
+//如果是var声明会输出5个5，解决这个问题，在代码块中使用闭包或者let或const声明都可以
+
 for (let i = 0; i < 5; i++) {
     console.log(i);
 
@@ -80,8 +83,105 @@ for (let i = 0; i < 5; i++) {
  */
 ```
 
+### setImmediate与setTimeout
+
+```javascript
+setImmediate(
+    function(){ console.log(1); }
+,0);
+setTimeout(
+    function(){ console.log(2); }
+,0);
+
+// 浏览器环境运行结果
+// 1
+// 2
+
+// Nodejs环境运行结果
+// 2
+// 1
+
+```
+
+```javascript
+setImmediate(function A() {
+    console.log(1);
+    setImmediate(function B(){console.log(2);});
+});
+
+setTimeout(function timeout() {
+    console.log('TIMEOUT FIRED');
+}, 0);
+
+// 浏览器环境运行结果
+// 1
+// 2
+// TIMEOUT FIRED
+
+// Nodejs环境运行结果两种情况
+// 1
+// TIMEOUT FIRED
+// 2
+
+// TIMEOUT FIRED
+// 1
+// 2
+```
+
+### process.nextTick与setTimeout递归调用区别
+
+问题出自 [ElemeFE](https://github.com/ElemeFE/node-interview/blob/master/sections/zh-cn/process.md#processnexttick)
+
+> process.nextTick属于微任务，是在当前执行栈的尾部，EventLoop之前触发，下面两个都是递归调用，test1中process.nextTick，是在当前执行栈调用，是一次性执行完，相当于 while(true){}，主线程陷入了死循环，阻断IO操作。
+
+> test2方法中，setTimeout属于宏任务，在任务队列中，同样也是递归不是一次性的执行而是在多次Loop，不会阻断IO操作，另外注意setTimeout有一个最小的时间4ms。
+
+```javascript
+function test1() {
+    process.nextTick(() => test());
+}
+
+function test2() {
+    setTimeout(() => test(), 0);
+}
+```
+
+process.nextTick将会阻塞IO，setImmediate不会输出
+
+```javascript
+{
+    function test() {
+        return process.nextTick(() => test());
+    }
+
+    test();
+
+    setImmediate(() => {
+        console.log('setImmediate');
+    })
+}
+```
+
+下面使用setTimeout不会造成IO阻塞，会输出 setImmediate
+
+```javascript
+function test() { 
+    setTimeout(() => test(), 0);
+}
+
+test()
+
+setImmediate(() => {
+    console.log('setImmediate');
+})
+
+// setImmediate
+```
+
 ### 相关资料
 
 [初探javascript事件环EventLoop](https://zhuanlan.zhihu.com/p/33127885)
 
 [javascript的运行机制](https://www.jianshu.com/p/1ec915675ba7)
+
+[JavaScript 运行机制详解：再谈Event Loop](http://www.ruanyifeng.com/blog/2014/10/event-loop.html)
