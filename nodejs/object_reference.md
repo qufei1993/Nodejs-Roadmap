@@ -85,4 +85,27 @@ console.log(JSON.stringify(b));
 //{"name":"zhangsan","school":{"university":"shanghai","highSchool":"jiangsu"},"hobby":["篮球","足球","🏃"],"classmates":[{"name":"lisi","age":25},{"name":"wangwu","age":21}],"age":24}
 ```
 
+### exports与module.exports的区别
 
+exports相当于module.exports 的快捷方式如下所示:
+
+```javascript
+const exports = modules.exports;
+```
+
+但是要注意不能改变exports的指向，我们可以通过 ``` exports.test = 'a' ``` 这样来导出一个对象, 但是不能向下面示例直接赋值，这样会改变exports的指向
+
+```javascript
+//错误的写法 将会得到undefined
+exports = {
+  'a': 1,
+  'b': 2
+}
+
+//正确的写法
+modules.exports = {
+  'a': 1,
+  'b': 2
+}
+
+```
