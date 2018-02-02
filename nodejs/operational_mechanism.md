@@ -29,7 +29,7 @@ Promise
 MutaionObserver  
 ```
 
-例1： 
+### 例1： 
 
 该程序会陷入一个死循环，setTimeout属于异步操作，只有当js空闲才会执行，但死循环是不会空闲的，因此setTimeout也将永远不会执行
 
@@ -48,7 +48,7 @@ while (t){
 console.log('end');
 ```
 
-例2: 
+### 例2: 
 
 > javascript是单线程，只有同步代码执行完毕后，才会去执行异步代码，下面的例子中每次for循环javascript都会挂起这个异步操作，
 setTimeout会进入一个任务队列，继续执行下面的代码，等到同步代码执行完毕后，系统开始读取挂起来的异步操作(异步的任务队列),
@@ -83,52 +83,7 @@ for (let i = 0; i < 5; i++) {
  */
 ```
 
-### setImmediate与setTimeout
-
-```javascript
-setImmediate(
-    function(){ console.log(1); }
-,0);
-setTimeout(
-    function(){ console.log(2); }
-,0);
-
-// 浏览器环境运行结果
-// 1
-// 2
-
-// Nodejs环境运行结果
-// 2
-// 1
-
-```
-
-```javascript
-setImmediate(function A() {
-    console.log(1);
-    setImmediate(function B(){console.log(2);});
-});
-
-setTimeout(function timeout() {
-    console.log('TIMEOUT FIRED');
-}, 0);
-
-// 浏览器环境运行结果
-// 1
-// 2
-// TIMEOUT FIRED
-
-// Nodejs环境运行结果两种情况
-// 1
-// TIMEOUT FIRED
-// 2
-
-// TIMEOUT FIRED
-// 1
-// 2
-```
-
-### process.nextTick与setTimeout递归调用区别
+### 例3process.nextTick与setTimeout递归调用区别
 
 问题出自 [ElemeFE](https://github.com/ElemeFE/node-interview/blob/master/sections/zh-cn/process.md#processnexttick)
 
@@ -176,6 +131,51 @@ setImmediate(() => {
 })
 
 // setImmediate
+```
+
+### 例4 setImmediate与setTimeout
+
+```javascript
+setImmediate(
+    function(){ console.log(1); }
+,0);
+setTimeout(
+    function(){ console.log(2); }
+,0);
+
+// 浏览器环境运行结果
+// 1
+// 2
+
+// Nodejs环境运行结果
+// 2
+// 1
+
+```
+
+```javascript
+setImmediate(function A() {
+    console.log(1);
+    setImmediate(function B(){console.log(2);});
+});
+
+setTimeout(function timeout() {
+    console.log('TIMEOUT FIRED');
+}, 0);
+
+// 浏览器环境运行结果
+// 1
+// 2
+// TIMEOUT FIRED
+
+// Nodejs环境运行结果两种情况
+// 1
+// TIMEOUT FIRED
+// 2
+
+// TIMEOUT FIRED
+// 1
+// 2
 ```
 
 ### 相关资料
