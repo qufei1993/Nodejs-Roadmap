@@ -2,7 +2,7 @@
 
 * [JavaScript基础问题](https://github.com/Q-Angelo/Summarize/blob/master/nodejs/base.md)
 
-* [对象之间引用关系与理解module.exports 与 exports的关系](https://github.com/Q-Angelo/Summarize/blob/master/nodejs/object_reference.md)
+* [对象引用与理解module.exports与exports的关系](https://github.com/Q-Angelo/Summarize/blob/master/nodejs/object_reference.md)
 
 * [JavaScript运行机制](https://github.com/Q-Angelo/Summarize/blob/master/nodejs/operational_mechanism.md)
 
