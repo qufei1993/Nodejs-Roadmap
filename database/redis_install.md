@@ -1,3 +1,7 @@
+# redis安装
+
+# Mac系统安装redis
+
 ### 下载 
 
 ```r
@@ -20,10 +24,22 @@ make
 
 安装好后，在当前目录下有个src目录，控制台输入redis-server，启动redis
 
-```r
+```javascript
 src/redis-server
+
+//指定端口号启动
+src/redis-server --port 6380
 ```
 
 看到以下界面，启动成功
 
 ![图片](img/redis_start.png)
+
+### 打开redis客户端
+
+```javascript
+src/redis-cli -p 6380
+
+//指定服务器地址和端口
+src/redis-cli -h localhost -p 6380
+```
