@@ -69,11 +69,11 @@ Did you intend to checkout 'origin/dev' which can not be resolved as commit?
 
 * 如何解决failed to push some refs to git
 
-#### 对策1:
+### 对策1:
 * git pull --rebase origin master //进行代码合并
 
 * git push -u origin master  //即可完成代码上传
 
-代码合并工具
+### 代码合并工具
 
 [Beyond Compare](http://www.scootersoftware.com/download.php)
