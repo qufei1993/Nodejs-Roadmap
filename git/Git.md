@@ -73,3 +73,7 @@ Did you intend to checkout 'origin/dev' which can not be resolved as commit?
 * git pull --rebase origin master //进行代码合并
 
 * git push -u origin master  //即可完成代码上传
+
+代码合并工具
+
+[Beyond Compare](http://www.scootersoftware.com/download.php)
