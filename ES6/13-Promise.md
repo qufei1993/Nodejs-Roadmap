@@ -1,9 +1,10 @@
-### Promise
+# Promise
 
 Promise/A+规范参考[http://www.ituring.com.cn/article/66566](http://www.ituring.com.cn/article/66566)
 
+### 回调函数方式书写，如果异步请求多了，将会很难维护，程序看着很乱
+
 ```javascript
-//回调函数方式书写，如果异步请求多了，将会很难维护，程序看着很乱
 {
   let ajax = function(callback){
     console.log('执行');
@@ -15,10 +16,15 @@ Promise/A+规范参考[http://www.ituring.com.cn/article/66566](http://www.ituri
     console.log('执行 ajax方法');
   })
 }
-//使用Promise方式来写
-// resove执行下一步操作
-// reject中断当前操作
-// then就是promise返回的对象，执行下一个,如果有两个函数，第一个表示resolve,第二个表示reject
+```
+
+### 使用Promise方式来写
+
+* resove执行下一步操作
+* reject中断当前操作
+* then就是promise返回的对象，执行下一个,如果有两个函数，第一个表示resolved(已成功),第二个表示rejected(已失败)
+
+```javascript
 {
   let ajax = function(){
     console.log('promise','执行');
@@ -32,7 +38,11 @@ Promise/A+规范参考[http://www.ituring.com.cn/article/66566](http://www.ituri
     console.log('promise','执行ajax方法');
   });
 }
-//执行两个promise的效果
+```
+
+### 执行两个promise的效果
+
+```javascript
 {
   let ajax = function(){
     console.log('promise','执行');
@@ -55,8 +65,10 @@ Promise/A+规范参考[http://www.ituring.com.cn/article/66566](http://www.ituri
     })
 }
 ```
+
+### 实现串行操作，执行a b c d 如果中间出了错误使用catch来捕获
+
 ```javascript
-//实现串行操作，执行a b c d 如果中间出了错误使用catch来捕获
 {
   let ajax = function(num){
     console.log('执行4');
@@ -85,6 +97,9 @@ Promise/A+规范参考[http://www.ituring.com.cn/article/66566](http://www.ituri
   // catch err
 }
 ```
+
+### Promise.all
+
 Promise.all是将多个Promise实例当成一个Promise实例  
 all下面就是一个数组，数组传进来多个Promise实例，当多个Promise实例状态发生改变的时候，这个新的Promise实例才会发生变化
 ```javascript
@@ -115,6 +130,9 @@ all下面就是一个数组，数组传进来多个Promise实例，当多个Prom
   ]).then(showImgs)
 }
 ```
+
+### Promise.race
+
 Promise.race只要其中一个实例率先发生改变，Promise.race实例也将发生改变，其他的将不在响应
 ```javascript
 {
@@ -144,4 +162,82 @@ Promise.race只要其中一个实例率先发生改变，Promise.race实例也�
   ]).then(showImgs)
 }
 
+```
+
+### Promise种 .then第二个参数与catch捕获错误的区别?
+
+* .then第二参数捕获错误
+
+.then第二个回调参数捕获错误具有就近的原则，不会影响后续then的进行。
+
+```javascript
+{
+  const ajax = function(){
+    console.log('promise开始执行');
+    return new Promise(function(resolve,reject){
+      setTimeout(function(){
+		    reject(`There's a mistake`);
+      },1000);
+    });
+  }
+
+  ajax()
+    .then(function(){
+      console.log('then1');
+
+      return Promise.resolve();
+    })
+    .then(function(){
+      console.log('then2');
+
+      return Promise.reject(`There's a then mistake`);
+    }, err => {
+	    console.log('then1里面捕获的err: ', err);
+	  })
+	  .catch(err => {
+      console.log('catch里面捕获的err: ', err);
+    })
+
+  // 输出
+  // promise开始执行
+  // then1里面捕获的err:  There's a mistake
+  // then2
+  // catch里面捕获的err:  There's a then mistake
+}
+```
+
+* catch捕获错误
+
+Promise抛错具有冒泡机制，能够不断传递，可以使用catch统一处理，下面代码中不会输出then1 then2会跳过，直接执行catch处理错误
+
+```javascript
+{
+  const ajax = function(){
+    console.log('promise开始执行');
+    return new Promise(function(resolve,reject){
+      setTimeout(function(){
+		    reject(`There's a mistake`);
+      },1000);
+    });
+  }
+
+  ajax()
+    .then(function(){
+      console.log('then1');
+
+      return Promise.resolve();
+    })
+    .then(function(){
+      console.log('then2');
+
+      return Promise.reject(`There's a then mistake`);
+    })
+	  .catch(err => {
+      console.log('catch里面捕获的err: ', err);
+    })
+
+  // 输出
+  // promise开始执行
+  // catch里面捕获的err:  There's a then mistake
+}
 ```
