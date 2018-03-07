@@ -74,7 +74,7 @@ function sum(num){
 console.log(sum(3));
 ```
 
-###### call和apply的使用与区别?
+#### call和apply的使用与区别?
 
 call的使用示例
 
