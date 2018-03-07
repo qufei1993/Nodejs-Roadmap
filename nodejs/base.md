@@ -3,9 +3,30 @@
 ### 变量与作用域
 
 * JavaScript七种内置类型: number、string、boolean、undefined、null、object、symbol(ES6新增加)
+* 基本类型指保存在栈内存中的数据，引用类型([对象引用](https://github.com/Q-Angelo/Summarize/blob/master/nodejs/object_reference.md))指保存在堆内存中的对象,传递的是引用的地址。
 * 变量没有类型, 变量持有的值有类型
 * 已在作用域中声明但还没有赋值的变量是undefined，还没有在作用域中声明过的变量是undeclared，对于undeclared这种情况typeof处理的时候返回的是undefined
 * typeof null === 'object' //true 正确的返回值应该是null，但是这个bug由来已久。 undefined == null //true
+
+### 类型检测
+
+* typeof 基本类型用typeof来检测
+
+* instanceof 用来检测是否为数组、对象、正则
+
+```js
+{
+    let box = [1,2,3];
+    console.log(box instanceof Array); //true
+
+    let box1={};
+    console.log(box1 instanceof Object); //true
+
+    let box2=/g/;
+    console.log(box2 instanceof RegExp); //true
+}
+```
+
 
 
 ### 定时器
@@ -77,3 +98,37 @@ apply使用情况
 ```
 
 总结两种情况区别: call传递参数是按照数组传递，apply是一个一个传递
+
+* javascript没有引用传递，都是按值传递的
+
+js代码示例:  
+
+如果按引用传递，那么函数里面的num会变成类似全局变量，最后输出60
+
+```js
+{
+    function box(num){ //按值传递
+        num+=10;
+        return num;
+    }
+    var num=50;
+
+    console.log(box(num));  //60
+    console.log(num);	  //50
+}
+```
+
+php代码示例: 
+
+php中的引用传递，会改变外部的num值，最后num也会输出60。
+
+```js
+function box(&$num){ 
+    //加上&符号将num变成全局变量
+    $num+=10;
+    return $num;
+}
+$num = 50;
+echo box($num);	//60
+echo $num;	//60
+```
