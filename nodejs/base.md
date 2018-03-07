@@ -1,5 +1,10 @@
 # JavaScript基础问题
 
+* [变量与作用域](#变量与作用域)
+* [类型检测](#类型检测)
+* [定时器](#定时器)
+* [函数](#函数)
+
 ### 变量与作用域
 
 * JavaScript七种内置类型: number、string、boolean、undefined、null、object、symbol(ES6新增加)
