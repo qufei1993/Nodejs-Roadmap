@@ -10,7 +10,7 @@
 
 ### 定时器
 
-* setTimeout(callback, 100) //setTimeout只接受一个函数或者变量做为参数不接受闭包，因为闭包会自执行
+* setTimeout(callback, 100) //setTimeout只接受一个函数或者变量做为参数不接受闭包，因为闭包会自执行，有一个最小延迟4ms
 
 ### 函数
 
@@ -21,3 +21,59 @@
     a.push('test');
     console.log(a); //['test']
 ```
+
+* arguments.callee递归调用实现一个阶乘函数
+
+下面程序最终输出结果为6，实现了一个3 * 2 * 1的阶乘函数，不明白之处，参考知乎有关讨论 [知乎讨论](https://www.zhihu.com/question/268265380/answer/335099064)
+
+```javascript
+    function sum(num){
+        if(num <= 1){
+
+            //获取参数长度
+            console.log('arguments.length: ', arguments.length);
+
+            return 1;
+        }else{
+            return num * arguments.callee(num-1);
+        }
+    }
+
+    console.log(sum(3));
+```
+
+* call和apply的使用与区别?
+
+call的使用示例
+
+```javascript
+    function box(num1,num2){
+        return num1+num2;
+    }
+
+    function sum(num1,num2){
+        //this 表示全局作用域，浏览器环境下window，node环境global，[]表示传递的参数
+        return box.apply(this,[num1,num2]);
+
+        //或者下面写法arguments可以当数组传递
+        //return box.apply(this,arguments);
+    }
+
+    console.log(sum(10,10)); //输出结果: 20
+```
+
+apply使用情况
+
+```javascript
+    function box(num1,num2){
+        return num1+num2;
+    }
+
+    function sum2(num1,num2){
+        return box.call(this,num1,num2);
+    }
+
+    console.log(sum(10,10)); //输出结果: 20
+```
+
+总结两种情况区别: call传递参数是按照数组传递，apply是一个一个传递
