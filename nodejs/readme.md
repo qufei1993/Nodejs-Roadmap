@@ -7,8 +7,8 @@
   - [类型检测](/nodejs/base.md#类型检测)
   - [定时器](/nodejs/base.md#定时器)
   - [函数](/nodejs/base.md#函数)
-      - `[函数]` push()数组添加新值后的返回值 [>>](/nodejs/base.md#函数#push()数组添加新值后的返回值)
-      - `[函数]` arguments.callee递归调用实现一个阶乘函数 [>>](/nodejs/base.md#函数#arguments.callee递归调用实现一个阶乘函数)
+      - `[函数]` push()数组添加新值后的返回值
+      - `[函数]` arguments.callee递归调用实现一个阶乘函数
       - `[函数]` call和apply的使用与区别?
       - `[函数]` javascript没有引用传递都是按值传递的
   - [匿名函数与闭包](/nodejs/base.md#匿名函数与闭包)
