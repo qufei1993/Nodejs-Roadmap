@@ -7,8 +7,8 @@
   - [类型检测](/nodejs/base.md#类型检测)
   - [定时器](/nodejs/base.md#定时器)
   - [函数](/nodejs/base.md#函数)
-      - `[函数]` push()数组添加新值后的返回值
-      - `[函数]` arguments.callee递归调用实现一个阶乘函数
+      - `[函数]` push()数组添加新值后的返回值 [>>](/nodejs/base.md#函数#push()数组添加新值后的返回值)
+      - `[函数]` arguments.callee递归调用实现一个阶乘函数 [>>](/nodejs/base.md#函数#arguments.callee递归调用实现一个阶乘函数)
       - `[函数]` call和apply的使用与区别?
       - `[函数]` javascript没有引用传递都是按值传递的
   - [匿名函数与闭包](/nodejs/base.md#匿名函数与闭包)
@@ -16,21 +16,21 @@
       - `[匿名函数与闭包]` 函数里放一个匿名函数将会产生闭包
       - `[匿名函数与闭包]` 闭包中使用this对象将会导致的一些问题
 
-* [对象引用与理解module.exports与exports的关系](https://github.com/Q-Angelo/Summarize/blob/master/nodejs/object_reference.md)
+* [对象引用与理解module.exports与exports的关系](/nodejs/object_reference.md)
 
-* [JavaScript运行机制](https://github.com/Q-Angelo/Summarize/blob/master/nodejs/operational_mechanism.md)
+* [JavaScript运行机制](/nodejs/operational_mechanism.md)
 
-* [常用插件](https://github.com/Q-Angelo/Summarize/blob/master/nodejs/plugins.md)
+* [常用插件](/nodejs/plugins.md)
 
-* [经纬度计算](https://github.com/Q-Angelo/Summarize/blob/master/nodejs/distance.md)
+* [经纬度计算](/nodejs/distance.md)
 
-* [跨域](https://github.com/Q-Angelo/Summarize/blob/master/nodejs/cors.md)
+* [跨域](/nodejs/cors.md)
 
-* [代码性能优化](https://github.com/Q-Angelo/Summarize/blob/master/nodejs/performance_optimization.md)
+* [代码性能优化](/nodejs/performance_optimization.md)
 
-* [爬虫](https://github.com/Q-Angelo/Summarize/blob/master/nodejs/creeper.md)
+* [爬虫](/nodejs/creeper.md)
 
-* [C++编写NodeJs插件](https://github.com/Q-Angelo/Summarize/blob/master/nodejs/c_addons.md)
+* [C++编写NodeJs插件](/nodejs/c_addons.md)
 
 ## cpu密集 VS I/O密集
 
