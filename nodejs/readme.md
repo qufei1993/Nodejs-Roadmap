@@ -2,16 +2,16 @@
 
 ## 目录
 
-* [JavaScript基础问题](https://github.com/Q-Angelo/Summarize/blob/master/nodejs/base.md)
-  - [变量与作用域](https://github.com/Q-Angelo/Summarize/blob/master/nodejs/base.md#变量与作用域)
-  - [类型检测](#类型检测)
-  - [定时器](#定时器)
-  - [函数](#函数)
+* [JavaScript基础问题](/base.md)
+  - [变量与作用域](/base.md#变量与作用域)
+  - [类型检测](/base.md#类型检测)
+  - [定时器](/base.md#定时器)
+  - [函数](/base.md#函数)
       - `[函数]` push()数组添加新值后的返回值
       - `[函数]` arguments.callee递归调用实现一个阶乘函数
       - `[函数]` call和apply的使用与区别?
       - `[函数]` javascript没有引用传递都是按值传递的
-  - [匿名函数与闭包](#匿名函数与闭包)
+  - [匿名函数与闭包](/base.md#匿名函数与闭包)
       - `[匿名函数与闭包]` 匿名函数的自我执行
       - `[匿名函数与闭包]` 函数里放一个匿名函数将会产生闭包
       - `[匿名函数与闭包]` 闭包中使用this对象将会导致的一些问题
