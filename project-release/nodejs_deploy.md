@@ -6,7 +6,7 @@
 
 * [登录远程服务器](#登录远程服务器)
 
-  * [三种登录方法](#方法1)
+  * [三种登录方法](#三种登录方法)
 
 * [增强服务器安全等级](#增强服务器安全等级)
 
@@ -24,7 +24,19 @@
 
   * [mongodb安装](#mongodb安装)
 
+  * [防火墙中加入mongodb端口号](#防火墙中加入mongodb端口号)
+
+  * [更改MongoDB默认端口号](#更改MongoDB默认端口号)
+
+  * [开启MongoDB服务](#开启MongoDB服务)
+
 * [项目发布](#项目发布)
+
+  * [选择代码托管仓库](#选择代码托管仓库)
+
+  * [实现服务器与第三方仓库的关联](#实现服务器与第三方仓库的关联)
+
+  * [PM2部署代码到服务器](#PM2部署代码到服务器)
 
 ## 创建用户
 
@@ -51,13 +63,13 @@
 
 ## 登录远程服务器
 
-### 三种登录方法
+#### 三种登录方法
 
-#### 方法1
+* 方法1
 
   ssh root@ip地址
 
-#### 方法2
+* 方法2
 
  在mac下面如果安装了zsh 会有.zshrc这样一个配置文件 ``` subl .zshrc ```
 
@@ -70,7 +82,7 @@
 
  最后控制台输入 ``` ssh_demo ``` 将会自动调用上面配置好的这个命令
 
-#### 方法3
+* 方法3
 
   如果有多台服务器，每次都需要输入密码 这样还是有些繁琐的 适合通过私钥认证的方式来 实现无密码登录
 
@@ -98,7 +110,8 @@
 
 ## 增强服务器安全等级
 
-### 修改端口号
+#### 修改端口号
+
  服务器默认端口是22， 出于基本的安全考虑也是需要来修改这个端口号的  
 
  修改配置文件 ``` vim /etc/ssh/sshd_config ``` 执行此命令会提示输入密码
@@ -123,7 +136,7 @@
   # PermitEmptyPasswords no
 ```
 
-### 设定iptables规则
+#### 设定iptables规则
 
 清空掉所有的iptables 规则 ``` sudo iptables -F ```
 
@@ -323,7 +336,8 @@ include /etc/nginx/sites-enabled/*
 
 ## mongodb
 
-### mongodb安装
+#### mongodb安装
+
 打开[mongodb](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/)官网，可以根据自己的系统环境安装，此处介绍ubuntu安装步骤
 
 导入key ``` sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14518585931BC711F9BA15703C6```
@@ -349,6 +363,8 @@ include /etc/nginx/sites-enabled/*
 
 重启服务 ``` sudo service mongod restart ```
 
+#### 防火墙中加入mongodb端口号
+
 如果设置了防火墙 打开配置文件加入27017mongodb这个端口号 ``` sudo vim /etc/iptables.up.rules```
 
 ```bash
@@ -361,6 +377,8 @@ include /etc/nginx/sites-enabled/*
 
 通过mongo连接实例 看是否成功 ``` mongo ```
 
+#### 更改MongoDB默认端口号
+
 目前安装已经成功，但是全世界的人都知道mongodb的默认端口跑在27017端口，出于最基本的考虑，改掉这个端口号，编辑此文件 ``` sudo vim /etc/mongod.conf```
 
 ```bash
@@ -372,13 +390,17 @@ net:
 
 注意：修改mongodb默认端口号之后 还要更新下防火墙中设置的端口号
 
+#### 开启MongoDB服务
+
 重启mongodb  ``` sudo service mongodb restart ````
 通过mongo链接 mongo --port 29999
 
-### 演示如何向线上的数据库导入初识数据
-
+#### 演示如何向线上的数据库导入初识数据
+//todo:
 
 ## 项目发布
+
+#### 选择代码托管仓库
 
  > 使用git仓库托管代码，可以选择github或者码云等等都可以
 
@@ -400,7 +422,9 @@ net:
 
 ```
 
-到此已经实现了本地项目与第三方仓库的关联，下面来实现服务器与第三方仓库的关联：
+到此已经实现了本地项目与第三方仓库的关联。
+
+#### 实现服务器与第三方仓库的关联
 
 同样需要做的是，在服务上如果生成过.ssh 将 id_rsa.pub 公钥放到码云的后台
 
@@ -413,11 +437,14 @@ git clone 远程仓库地址
 
 ```
 
+#### PM2部署代码到服务器
+
+
 通过上面这些操作实现了本地代码推送到私有仓库，服务器也可下载私有仓库的内容，下面开始用pm2管理工具，来管理我们的代码同步更新，服务重启，可参考pm2的文档里面很详细的讲解了从部署到每个参数的设置  [pm2](http://pm2.keymetrics.io/)
 
- 下面简单介绍使用 pm2 部署代码到服务器之上
+下面简单介绍使用 pm2 部署代码到服务器之上
 
- 首先建立一个 ecosystem.json 文件
+首先建立一个 ecosystem.json 文件
 
 ```javascript
   "apps" : [{
@@ -503,6 +530,6 @@ Deploy failed
 
 执行命令 重新加载 ``` source ~/.bashrc ```
 
-下面在使用命令 ``` pm2 deploy ecosystem.json pro ``` 就可以发布啦
+下面在使用命令 ``` pm2 deploy ecosystem.json pro ``` 就可以发布啦，到此一个简单的项目发布就已经完成了，有问题可以提issues.
 
 补充：df -h 查看硬盘使用情况
