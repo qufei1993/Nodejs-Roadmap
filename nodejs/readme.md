@@ -28,10 +28,10 @@
   - [exports与module.exports的区别?](/nodejs/object_reference.md#exports与module.exports的区别)
 
 * [JavaScript运行机制](/nodejs/operational_mechanism.md)
-  - [js工作机制，微任务与宏任务术语](/nodejs/operational_mechanism.md#js工作机制)
-  - `javascript是单线程，只有同步代码执行完毕后，才会去执行异步代码，详情看示例`[more](/nodejs/operational_mechanism.md#例2)
-  - [process.nextTick与setTimeout递归调用区别?](/nodejs/operational_mechanism.md#process.nextTick与setTimeout递归调用区别)
-  - [setImmediate与setTimeout分别在浏览器与Nodejs环境下的区别?](/nodejs/operational_mechanism.md#setImmediate与setTimeout)
+  - `js工作机制，微任务与宏任务术语`[`[more]`](/nodejs/operational_mechanism.md#js工作机制)
+  - `javascript是单线程，只有同步代码执行完毕后，才会去执行异步代码，详情看示例`[`[more]`](/nodejs/operational_mechanism.md#例2)
+  - `process.nextTick与setTimeout递归调用区别?`[`[more]`](/nodejs/operational_mechanism.md#process.nextTick与setTimeout递归调用区别)
+  - `setImmediate与setTimeout分别在浏览器与Nodejs环境下的区别?`[`[more]`](/nodejs/operational_mechanism.md#setImmediate与setTimeout)
 
 * [常用插件](/nodejs/plugins.md)
 
