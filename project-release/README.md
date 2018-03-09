@@ -16,14 +16,14 @@
     - `nodejs生产环境部署`[`[more]`](/project-release/nodejs_deploy.md#nodejs生产环境部署)
     - `Nginx映射配置`[`[more]`](/project-release/nodejs_deploy.md#Nginx映射)
     - `MongoDB`[`[more]`](/project-release/nodejs_deploy.md#mongodb)
-        - `[mongodb安装]` mongodb安装
-        - `[防火墙中加入mongodb端口号]` 防火墙中加入mongodb端口号
-        - `[更改MongoDB默认端口号]` 更改MongoDB默认端口号
-        - `[开启MongoDB服务]` 开启MongoDB服务
+        - `[MongoDB]` mongodb安装
+        - `[MongoDB]` 防火墙中加入mongodb端口号
+        - `[MongoDB]` 更改MongoDB默认端口号
+        - `[MongoDB]` 开启MongoDB服务
     - `项目发布`[`[more]`](/project-release/nodejs_deploy.md#项目发布)
-        - `[选择代码托管仓库]` 选择代码托管仓库
-        - `[实现服务器与第三方仓库的关联]` 实现服务器与第三方仓库的关联
-        - `[PM2部署代码到服务器]` PM2部署代码到服务器
+        - `[项目发布]` 选择代码托管仓库
+        - `[项目发布]` 实现服务器与第三方仓库的关联
+        - `[项目发布]` PM2部署代码到服务器
 
 * [forever发布Nodejs项目](/project-release/forever_deploy_nodejs.md)
 
