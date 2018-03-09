@@ -4,7 +4,7 @@ npm 发布自己模块
 
 * [nnpm注册登录](#npm注册登录)
 
-* [npm module 发布](#npmmodule发布)
+* [npm module 发布](#npm-module-发布)
 
 * [可能遇到的问题](#可能遇到的问题)
 
@@ -51,7 +51,7 @@ npm登录
 npm login
 ```
 
-### npm module 发布
+### npm-module-发布
 
 进入项目根目录，输入命令。
 
