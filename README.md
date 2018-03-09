@@ -15,26 +15,35 @@
       - `[匿名函数与闭包]` 匿名函数的自我执行
       - `[匿名函数与闭包]` 函数里放一个匿名函数将会产生闭包
       - `[匿名函数与闭包]` 闭包中使用this对象将会导致的一些问题
+  - [正则](/nodejs/base.md#正则)
+    - [`[正则]` 模式修饰符的可选参数](#模式修饰符的可选参数)
+    - [`[正则]` 两个测试方法test、exec](#两个测试方法)
+    - [`[正则]` 4个正则表达式方法](#4个正则表达式方法)
+    - [`[正则]` 匹配模式](#匹配模式)
+    - [`[正则]` 常用正则表达式](#常用正则表达式)
 
-* [对象引用与理解module.exports与exports的关系](https://github.com/Q-Angelo/Summarize/blob/master/nodejs/object_reference.md)
+* [对象引用与理解module.exports与exports的关系](/nodejs/object_reference.md)
+  - [引用类型比较](/nodejs/object_reference.md#引用类型比较)
+  - [数组对象深度拷贝](/nodejs/object_reference.md#数组对象深度拷贝)
+  - [exports与module.exports的区别?](/nodejs/object_reference.md#exports与module.exports的区别)
 
-* [JavaScript运行机制](https://github.com/Q-Angelo/Summarize/blob/master/nodejs/operational_mechanism.md)
+* [JavaScript运行机制](/nodejs/operational_mechanism.md)
 
-* [常用插件](https://github.com/Q-Angelo/Summarize/blob/master/nodejs/plugins.md)
+* [常用插件](/nodejs/plugins.md)
 
-* [经纬度计算](https://github.com/Q-Angelo/Summarize/blob/master/nodejs/distance.md)
+* [经纬度计算](/nodejs/distance.md)
 
-* [跨域](https://github.com/Q-Angelo/Summarize/blob/master/nodejs/cors.md)
+* [跨域](/nodejs/cors.md)
 
-* [代码性能优化](https://github.com/Q-Angelo/Summarize/blob/master/nodejs/performance_optimization.md)
+* [代码性能优化](/nodejs/performance_optimization.md)
 
-* [爬虫](https://github.com/Q-Angelo/Summarize/blob/master/nodejs/creeper.md)
+* [爬虫](/nodejs/creeper.md)
 
-* [C++编写NodeJs插件](https://github.com/Q-Angelo/Summarize/blob/master/nodejs/c_addons.md)
+* [C++编写NodeJs插件](/nodejs/c_addons.md)
 
 ## 数据库操作
 
-* [聚合函数 aggregate](https://github.com/Q-Angelo/Summarize/blob/master/database/mongo_Aggregate.md)
+* [聚合函数 aggregate](/database/mongo_Aggregate.md)
 
 * [MongoDB数据引用](https://github.com/Q-Angelo/Summarize/blob/master/database/mongo_dbref.md)
 
