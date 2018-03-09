@@ -40,6 +40,9 @@
 * [跨域](/nodejs/cors.md)
 
 * [性能优化](/nodejs/performance_optimization.md)
+  - `map比forEach功能强大, 但是map会创建一个新的数组, 将会占用内存.`[`[more]`](/nodejs/performance_optimization.md#map与forEach)
+  - `高并发应对之道.`[`[more]`](/nodejs/performance_optimization.md#高并发应对之道)
+  - `require特性与优化`[`[more]`](/nodejs/performance_optimization.md#require特性与优化)
 
 * [爬虫](/nodejs/creeper.md)
 
