@@ -16,18 +16,22 @@
       - `[匿名函数与闭包]` 函数里放一个匿名函数将会产生闭包
       - `[匿名函数与闭包]` 闭包中使用this对象将会导致的一些问题
   - [正则](/nodejs/base.md#正则)
-    - [`[正则]` 模式修饰符的可选参数](#模式修饰符的可选参数)
-    - [`[正则]` 两个测试方法test、exec](#两个测试方法)
-    - [`[正则]` 4个正则表达式方法](#4个正则表达式方法)
-    - [`[正则]` 匹配模式](#匹配模式)
-    - [`[正则]` 常用正则表达式](#常用正则表达式)
+    - `[正则]` 模式修饰符的可选参数
+    - `[正则]` 两个测试方法test、exec
+    - `[正则]` 4个正则表达式方法
+    - `[正则]` 匹配模式
+    - `[正则]` 常用正则表达式
 
 * [对象引用与理解module.exports与exports的关系](/nodejs/object_reference.md)
-  - [引用类型比较](/nodejs/object_reference.md#引用类型比较)
-  - [数组对象深度拷贝](/nodejs/object_reference.md#数组对象深度拷贝)
-  - [exports与module.exports的区别?](/nodejs/object_reference.md#exports与module.exports的区别)
+  - `引用类型比较`[`[more]`](/nodejs/object_reference.md#引用类型比较)
+  - `数组对象深度拷贝`[`[more]`](/nodejs/object_reference.md#数组对象深度拷贝)
+  - `exports与module.exports的区别?`[`[more]`](/nodejs/object_reference.md#exports与module.exports的区别)
 
 * [JavaScript运行机制](/nodejs/operational_mechanism.md)
+  - `js工作机制，微任务与宏任务术语`[`[more]`](/nodejs/operational_mechanism.md#js工作机制)
+  - `javascript是单线程，只有同步代码执行完毕后，才会去执行异步代码，详情看示例`[`[more]`](/nodejs/operational_mechanism.md#例2)
+  - `process.nextTick与setTimeout递归调用区别?`[`[more]`](/nodejs/operational_mechanism.md#process.nextTick与setTimeout递归调用区别)
+  - `setImmediate与setTimeout分别在浏览器与Nodejs环境下的区别?`[`[more]`](/nodejs/operational_mechanism.md#setImmediate与setTimeout)
 
 * [常用插件](/nodejs/plugins.md)
 
@@ -35,9 +39,15 @@
 
 * [跨域](/nodejs/cors.md)
 
-* [代码性能优化](/nodejs/performance_optimization.md)
+* [性能优化](/nodejs/performance_optimization.md)
+  - `map比forEach功能强大, 但是map会创建一个新的数组, 将会占用内存.`[`[more]`](/nodejs/performance_optimization.md#map与forEach)
+  - `高并发应对之道.`[`[more]`](/nodejs/performance_optimization.md#高并发应对之道)
+  - `require特性与优化`[`[more]`](/nodejs/performance_optimization.md#require特性与优化)
 
 * [爬虫](/nodejs/creeper.md)
+  - `抓取目标数据，采用http模块、chromeless中间件`[`[more]`](/nodejs/creeper.md#抓取目标数据)
+  - `使用cheerio解析`[`[more]`](/nodejs/creeper.md#使用cheerio解析)
+  - `案例-爬取某网站课程标题信息`[`[more]`](/nodejs/creeper.md#案例-爬取某网站课程标题信息)
 
 * [C++编写NodeJs插件](/nodejs/c_addons.md)
 
