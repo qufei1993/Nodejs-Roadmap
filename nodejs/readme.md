@@ -45,6 +45,9 @@
   - `require特性与优化`[`[more]`](/nodejs/performance_optimization.md#require特性与优化)
 
 * [爬虫](/nodejs/creeper.md)
+  - `抓取目标数据，采用http模块、chromeless中间件`[`[more]`](/nodejs/creeper.md#抓取目标数据)
+  - `使用cheerio解析`[`[more]`](/nodejs/creeper.md#使用cheerio解析)
+  - `案例-爬取某网站课程标题信息`[`[more]`](/nodejs/creeper.md#案例-爬取某网站课程标题信息)
 
 * [C++编写NodeJs插件](/nodejs/c_addons.md)
 
