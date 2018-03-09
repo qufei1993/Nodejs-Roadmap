@@ -39,7 +39,7 @@
 
 * [跨域](/nodejs/cors.md)
 
-* [代码性能优化](/nodejs/performance_optimization.md)
+* [性能优化](/nodejs/performance_optimization.md)
 
 * [爬虫](/nodejs/creeper.md)
 
@@ -50,22 +50,10 @@
 一个程序大部分时间用来做运算逻辑判断称为CPU密集 
 一个程序大部分时间用来做存储设备，网络设施的一些读取操作称作为I/O密集
 
-## 高并发应对之道
-
-* 增加机器数
-* 增加每台机器的CPU数 —— 多核
-
-NodeJS性能好主要是好在单个的CPU(一个CPU只开一个进程，一个进程只开一个线程), 在单台机器的时候，在处理Web请求的时候和之前的java和apache是相同的,
-
 ## 常用场景
 
 Web Server、本地代码构建、使用工具开发
 
-## require特性
-
-* module被加载的时候执行，加载后缓存
-
-* 一旦出现某个模块被循环加载, 就只输出已经执行的部分, 还未执行的部分不会输出
 
 ## Nodejs调试工具
 
