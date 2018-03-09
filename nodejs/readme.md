@@ -23,9 +23,9 @@
     - [`[正则]` 常用正则表达式](#常用正则表达式)
 
 * [对象引用与理解module.exports与exports的关系](/nodejs/object_reference.md)
-  - [引用类型比较](/nodejs/object_reference.md#引用类型比较)
-  - [数组对象深度拷贝](/nodejs/object_reference.md#数组对象深度拷贝)
-  - [exports与module.exports的区别?](/nodejs/object_reference.md#exports与module.exports的区别)
+  - `引用类型比较`[`[more]`](/nodejs/object_reference.md#引用类型比较)
+  - `数组对象深度拷贝`[`[more]`](/nodejs/object_reference.md#数组对象深度拷贝)
+  - `exports与module.exports的区别?`[`[more]`](/nodejs/object_reference.md#exports与module.exports的区别)
 
 * [JavaScript运行机制](/nodejs/operational_mechanism.md)
   - `js工作机制，微任务与宏任务术语`[`[more]`](/nodejs/operational_mechanism.md#js工作机制)
