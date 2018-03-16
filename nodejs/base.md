@@ -4,9 +4,10 @@
 - [类型检测](#类型检测)
 - [定时器](#定时器)
 - [数组](#数组)
-     - [`[数组]` Set数组去重](#set数组去重)
-     - [`[数组]` reduce数组对象去重](#reduce数组对象去重)
-     - [`[数组]` lodash uniqBy数组去重](#参考lodash)
+     - [`[数组去重]` Set数组去重](#set数组去重)
+     - [`[数组去重]` reduce数组对象去重](#reduce数组对象去重)
+     - [`[数组去重]` lodash uniqBy数组去重](#参考lodash)
+     - [`[数组降维]` 数组降维三种方法](#数组降维)
 - [函数](#函数)
     - [`[函数]` push()数组添加新值后的返回值](#push()数组添加新值后的返回值)
     - [`[函数]` arguments.callee递归调用实现一个阶乘函数](#arguments.callee递归调用实现一个阶乘函数)
@@ -103,6 +104,116 @@ console.log(uniqueArr); // uniqueArr.length == 2
 _.uniqBy([{ 'x': 1 }, { 'x': 2 }, { 'x': 1 }], 'x');
 
 // => [{ 'x': 1 }, { 'x': 2 }]
+```
+
+#### 数组降维
+
+###### 方法一 将数组字符串化
+
+> 利用数组与字符串的隐式转换，使用+符号链接一个对象，javascript会默认调用toString方法转为字符串，再使用字符串分割成字符串数组，最后转成数值形数组
+
+```js
+let arr = [[222, 333, 444], [55, 66, 77], 11, ]
+arr += '';
+arr = arr.split(',');
+arr = arr.map(item => Number(item));
+
+console.log(arr);
+//[222, 333, 444, 55, 66, 77, 11]
+
+```
+
+###### concat进行转换
+
+> concat() 方法用于连接两个或多个数组。该方法不会改变现有的数组，而仅仅会返回被连接数组的一个副本。
+
+```js
+function reduceDimension(arr){
+    let newArr = [];
+    for(let key in arr){
+        newArr = newArr.concat(arr[key]);
+    }
+
+	return newArr;
+}
+
+console.log(reduceDimension([[123], 4, [7, 8],[9, 111]]));
+// [123, 4, 7, 8, 9, 111]
+```
+
+###### 方法二 利用apply和concat转换
+
+```js
+{
+    function reduceDimension(arr) {
+        return Array.prototype.concat.apply([], arr);
+    }
+
+    console.log(reduceDimension([[123], 4, [7, 8],[9, [111]]]));
+    // [123, 4, 7, 8, 9, Array(1)]
+}
+
+{
+    function arrayConcat(arr, point){
+        return Array.prototype.concat.apply(point || [], arr);
+    }
+
+    function reduceDimension(arr) {
+        let arrays = arrayConcat(arr);
+        let newArray = [];
+
+        for(let key in arrays){
+            if(arrays[key] instanceof Array){
+                newArray = arrayConcat(arrays[key], newArray);
+            }else{
+                newArray.push(arrays[key]);
+            }
+        }
+
+        return newArray;
+    }
+
+    let arr = [[12], 4, [333, [4444, 5555]], [9, [111, 222]]];
+
+    for(let i = 0; i < 100000; i++){
+        arr.push(i*1);
+    }
+
+    let start = new Date().getTime();
+    console.log('reduceDimension: ', reduceDimension(arr));
+    console.log('耗时: ', new Date().getTime() - start);
+}
+
+```
+###### 方法三 推荐使用
+
+```js
+{
+    function reduceDimension(arr){
+        let ret = [];
+        
+        let toArr = function(arr){
+            arr.forEach(function(item){
+                item instanceof Array ? toArr(item) : ret.push(item);
+            });
+        }
+
+        toArr(arr);
+
+        return ret;
+    }
+
+    let arr = [[12], 4, [333, [4444, 5555]], [9, [111, 222]]];
+
+    for(let i = 0; i < 100000; i++){
+        arr.push(i);
+    }
+
+    let start = new Date().getTime();
+
+    console.log('reduceDimension: ', reduceDimension(arr));
+    console.log('耗时: ', new Date().getTime() - start);
+}
 ```
 
 ## 函数
