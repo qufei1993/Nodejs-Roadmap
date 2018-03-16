@@ -6,7 +6,7 @@
   - [变量与作用域](/nodejs/base.md#变量与作用域)
   - [类型检测](/nodejs/base.md#类型检测)
   - [定时器](/nodejs/base.md#定时器)
-  - [数组](#数组)
+  - [数组](/nodejs/base.md#数组)
      - `[数组去重]` Set数组去重
      - `[数组去重]` reduce数组对象去重
      - `[数组去重]` lodash uniqBy数组去重
