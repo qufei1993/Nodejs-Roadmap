@@ -3,6 +3,10 @@
 - [变量与作用域](#变量与作用域)
 - [类型检测](#类型检测)
 - [定时器](#定时器)
+- [数组](#数组)
+     - [`[数组]` Set数组去重](#Set数组去重)
+     - [`[数组]` reduce数组对象去重](#reduce数组对象去重)
+     - [`[数组]` lodash uniqBy数组去重](#参考lodash)
 - [函数](#函数)
     - [`[函数]` push()数组添加新值后的返回值](#push()数组添加新值后的返回值)
     - [`[函数]` arguments.callee递归调用实现一个阶乘函数](#arguments.callee递归调用实现一个阶乘函数)
@@ -26,6 +30,7 @@
 * 变量没有类型, 变量持有的值有类型
 * 已在作用域中声明但还没有赋值的变量是undefined，还没有在作用域中声明过的变量是undeclared，对于undeclared这种情况typeof处理的时候返回的是undefined
 * typeof null === 'object' //true 正确的返回值应该是null，但是这个bug由来已久。 undefined == null //true
+* indexOf为ECMAScript5新方法，IE8及以下不支持
 
 ## 类型检测
 
@@ -47,6 +52,58 @@ console.log(box2 instanceof RegExp); //true
 ## 定时器
 
 * setTimeout(callback, 100) //setTimeout只接受一个函数或者变量做为参数不接受闭包，因为闭包会自执行，有一个最小延迟4ms
+
+## 数组
+
+#### 数组与数组对象去重
+
+###### Set数组去重
+
+```js
+{
+    let arr = [1, 22, 33, 44, 22, 44];
+
+    console.log([...new Set(arr)]); //[1, 22, 33, 44]
+}
+
+```
+
+###### reduce数组对象去重
+
+> reduce对数组中的每一个元素依次执行回调函数，不含数组中未赋值、被删除的元素，回调函数接收四个参数
+
+* callback （执行数组中每个值的函数，包含四个参数）
+    * previousValue （上一次调用回调返回的值，或者是提供的初始值（initialValue））
+    * currentValue （数组中当前被处理的元素）
+    * index （当前元素在数组中的索引）
+    * array （调用 reduce 的数组）
+* initialValue （可选，作为第一次调用 callback 的第一个参数。）
+
+示例
+
+```js
+let hash = {};
+
+function unique(arr, initialValue){
+    return arr.reduce(function(previousValue, currentValue, index, array){
+        hash[currentValue.name] ? '' : hash[currentValue.name] = true && previousValue.push(currentValue);
+
+        return previousValue
+    }, initialValue);
+}
+
+const uniqueArr = unique([{name: 'zs', age: 15}, {name: 'lisi'}, {name: 'zs'}], []);
+
+console.log(uniqueArr); // uniqueArr.length == 2
+```
+
+###### [参考lodash](https://lodash.com/docs/4.17.5#uniqBy)
+
+```js
+_.uniqBy([{ 'x': 1 }, { 'x': 2 }, { 'x': 1 }], 'x');
+
+// => [{ 'x': 1 }, { 'x': 2 }]
+```
 
 ## 函数
 
