@@ -13,6 +13,7 @@
     - [`[函数]` arguments.callee递归调用实现一个阶乘函数](#arguments.callee递归调用实现一个阶乘函数)
     - [`[函数]` call和apply的使用与区别?](#call和apply的使用与区别?)
     - [`[函数]` javascript没有引用传递都是按值传递的](#javascript没有引用传递都是按值传递的)
+    - [`[函数]` 函数声明与函数表达式](#函数声明与函数表达式)
 - [匿名函数与闭包](#匿名函数与闭包)
     - [`[匿名函数与闭包]` 匿名函数的自我执行](#匿名函数的自我执行)
     - [`[匿名函数与闭包]` 函数里放一个匿名函数将会产生闭包](#函数里放一个匿名函数将会产生闭包)
@@ -314,6 +315,38 @@ function box(&$num){
 $num = 50;
 echo box($num);	//60
 echo $num;	//60
+```
+
+#### 函数声明与函数表达式
+
+> 对于函数声明解释器会首先读取，并使其在执行任何代码之前可用；对于函数表达式，则必须等到解释器执行到它所在的代码行，才会被真正解析，例如下面例子:
+
+```js
+console.log(test1(1, 2)); // 3
+console.log(test2(1, 2)); // test2 is not defined
+
+//函数声明
+function test1(a, b){
+    return a + b;
+}
+
+//函数表达式
+const test2 = function f(a, b){
+    return a + b;
+}
+```
+###### 使用函数表达式实现一个界乘函数
+
+```js
+const factorial = (function f(num){
+    if(num <= 1){
+        return 1;
+    }else{
+        return num * f(num -1);
+    }
+});
+
+console.log(factorial(3)); // 6
 ```
 
 ## 匿名函数与闭包
