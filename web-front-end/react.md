@@ -1,6 +1,6 @@
 ## React生命周期
 
-* 构造函数创建组建时调用一次
+* 构造函数创建组建件时调用一次
 
 ```js
 constructor(props, context)
@@ -22,12 +22,19 @@ constructor(props, context)
 
 * componentWillUnmount()，组建被卸载时候调用，在componentDidMount()里面注册的事件需要在这里删除
 
-
 ## ref是什么?
 
 ```js
 // todo:
 ```
+
+## React服务端渲染
+
+* 新建server-entry.js将需要服务端渲染内容给import出去
+
+* 对server-entry.js文件内容进行webpack打包成nodejs输出对象
+
+
 
 #### 参考:
 [React组件生命周期小结](https://www.jianshu.com/p/4784216b8194)
