@@ -100,7 +100,7 @@
 * [Nodejs链接mongodb](https://github.com/Q-Angelo/Summarize/blob/master/database/mongo_nodejs_link.md)
 
 ## ES6语法扩展
-* [let const声明变量](/ES6/1-let%20const.md) [解构赋值](/ES6/2-%E7%BB%93%E6%9E%84%E8%B5%8B%E5%80%BC.md)
+* `[let const声明变量]`(/ES6/1-let%20const.md) `[解构赋值]`(/ES6/2-%E7%BB%93%E6%9E%84%E8%B5%8B%E5%80%BC.md)
 
 * [正则扩展](/ES6/3-%E6%AD%A3%E5%88%99%E6%89%A9%E5%B1%95.md) [字符串扩展](/ES6/4-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%89%A9%E5%B1%95.md)
 
