@@ -15,4 +15,6 @@
 
 * [log4js 日志记录工具](https://github.com/log4js-node/log4js-node)
 
-* [express-validator](https://github.com/ctavan/express-validator)
+* [express-validator express框架校验](https://github.com/ctavan/express-validator)
+
+* [memory-fs 将文件写入内存](https://github.com/webpack/memory-fs)
