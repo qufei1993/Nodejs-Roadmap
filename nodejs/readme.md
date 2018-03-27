@@ -56,7 +56,7 @@
 
 * [C++编写NodeJs插件](/nodejs/c_addons.md)
 
-* [Javascript排序][Javascript排序](#Javascript排序)
+* [Javascript排序](/nodejs/sort.md)
 
 ## cpu密集 VS I/O密集
 
