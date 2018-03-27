@@ -56,6 +56,8 @@
 
 * [C++编写NodeJs插件](/nodejs/c_addons.md)
 
+* [Javascript排序][Javascript排序](#Javascript排序)
+
 ## cpu密集 VS I/O密集
 
 一个程序大部分时间用来做运算逻辑判断称为CPU密集 
