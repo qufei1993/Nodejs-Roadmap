@@ -87,7 +87,7 @@
 
 * [React 项目发布](/project-release/react_deploy.md)
 
-## 数据库操作 <h4>[>>]</h4>(/database)
+## 数据库操作 [...](/database)
 
 * [聚合函数 aggregate](/database/mongo_Aggregate.md)
 
