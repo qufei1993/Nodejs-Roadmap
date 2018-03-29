@@ -227,6 +227,8 @@ Fail2Ban可以看做是个防御型的动作库，通过监控系统的日志文
 
 在控制台执行命令,安装nvm ``` wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash ```
 
+nvm安装成功，控制台 nvm 找不到命令，解决办法 [`[issue]`](https://github.com/Q-Angelo/summarize/issues/1)
+
 安装nodejs版本为v6.9.5 ``` nvm install v6.9.5 ```
 
 把这个版本指定下 ``` nvm use v6.9.5 ```
