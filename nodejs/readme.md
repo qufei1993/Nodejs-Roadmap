@@ -4,14 +4,15 @@
 
 * [JavaScript基础问题](/nodejs/base.md)
   - [常见问题](/nodejs/base.md#常见问题)
-  - [变量与作用域](/nodejs/base.md#变量与作用域)
+  - [作用域](/nodejs/base.md#作用域)
+      - `[作用域]` eval()、with欺骗词法作用域
   - [类型检测](/nodejs/base.md#类型检测)
   - [定时器](/nodejs/base.md#定时器)
   - [数组](/nodejs/base.md#数组)
-     - `[数组去重]` Set数组去重
-     - `[数组去重]` reduce数组对象去重
-     - `[数组去重]` lodash uniqBy数组去重
-     - `[数组降维]` 数组降维三种方法
+      - `[数组去重]` Set数组去重
+      - `[数组去重]` reduce数组对象去重
+      - `[数组去重]` lodash uniqBy数组去重
+      - `[数组降维]` 数组降维三种方法
   - [函数](/nodejs/base.md#函数)
       - `[函数]` push()数组添加新值后的返回值
       - `[函数]` arguments.callee递归调用实现一个阶乘函数
