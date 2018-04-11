@@ -9,7 +9,6 @@
       - `[作用域]` eval()、with欺骗词法作用域
   - [类型检测](/nodejs/base.md#类型检测)
       - `[类型检测]` typeof、instanceof类型检测
-  - [定时器](/nodejs/base.md#定时器)
   - [数组](/nodejs/base.md#数组)
       - `[数组去重]` Set数组去重
       - `[数组去重]` reduce数组对象去重
