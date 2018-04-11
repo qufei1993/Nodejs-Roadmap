@@ -1,5 +1,6 @@
 # JavaScript基础问题
 
+- [常见问题](#常见问题)
 - [变量与作用域](#变量与作用域)
 - [类型检测](#类型检测)
 - [定时器](#定时器)
@@ -25,7 +26,7 @@
     - [`[正则]` 匹配模式](#匹配模式)
     - [`[正则]` 常用正则表达式](#常用正则表达式)
 
-## 变量与作用域
+## 常见问题
 
 * JavaScript七种内置类型: number、string、boolean、undefined、null、object、symbol(ES6新增加)
 * 基本类型指保存在栈内存中的数据，引用类型([对象引用](https://github.com/Q-Angelo/Summarize/blob/master/nodejs/object_reference.md))指保存在堆内存中的对象,传递的是引用的地址。
@@ -33,6 +34,10 @@
 * 已在作用域中声明但还没有赋值的变量是undefined，还没有在作用域中声明过的变量是undeclared，对于undeclared这种情况typeof处理的时候返回的是undefined
 * typeof null === 'object' //true 正确的返回值应该是null，但是这个bug由来已久。 undefined == null //true
 * indexOf为ECMAScript5新方法，IE8及以下不支持
+
+## 变量与作用域
+
+
 
 ## 类型检测
 
