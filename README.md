@@ -6,7 +6,7 @@
 * 16年第二版，采用PHP+MySql+Laravel框架前端blade做为模版引擎，发布于腾讯云服务器，可惜部分内容没有做好备份，当时设计的前端页面[个人博客](https://q-angelo.github.io/qublog/)
 * 17年初第三版，采用github仓库进行管理
 
-## NodeJS
+## NodeJS专栏
 
 * [JavaScript基础问题](/nodejs/base.md)
     - [常见问题](/nodejs/base.md#常见问题)
@@ -65,7 +65,7 @@
 
 * [C++编写NodeJs插件](/nodejs/c_addons.md)
 
-## 项目发布
+## 项目发布专栏
 
 * [npm发布自己模块](/project-release/npm_deploy.md)
     - `npm安装模块速度很慢的情况下可以将npm源设置为国内的淘宝源，npm发布需切换回npm源`[`[more]`](/project-release/npm_deploy.md#npm源设置)
@@ -96,7 +96,17 @@
 
 * [React 项目发布](/project-release/react_deploy.md)
 
-## 数据库操作
+## 项目经验
+
+* [React仿大众点评WebApp开发](https://github.com/Q-Angelo/React-Dianping)
+* [基于NodeJs的Web静态资源服务器](https://github.com/Q-Angelo/wsrs)
+* [ES6+Gulp 构建彩票项目](https://github.com/Q-Angelo/Gulp-Init-ES6)
+* [Nodejs+Express+MongoDB+Jade 仿豆瓣电影网](https://github.com/Q-Angelo/Movies)
+* [bootstrap响应式布局开发南钢街道“党群E服务”云平台前端页面](https://q-angelo.github.io/partyMember/)
+* [div+css+javascript开发个人博客静态页面](https://q-angelo.github.io/qublog/)
+* [div+css仿天猫首页](https://q-angelo.github.io/tm/)
+
+## 数据库专栏
 
 * [聚合函数 aggregate](/database/mongo_Aggregate.md)
 
@@ -115,15 +125,6 @@
     - `ref是什么?`[`[more]`](/web-front-end/react_base.md#ref是什么?)
 
 * [前端项目工程架构(React+Mobx+Webpack+NodeJs+Eslint)](https://github.com/Q-Angelo/web_front_end_frame)
-
-## 项目经验
-
-* [React仿大众点评WebApp开发](https://github.com/Q-Angelo/React-Dianping)
-* [基于NodeJs的Web静态资源服务器](https://github.com/Q-Angelo/wsrs)
-* [ES6+Gulp 构建彩票项目](https://github.com/Q-Angelo/Gulp-Init-ES6)
-* [Nodejs+Express+MongoDB+Jade 仿豆瓣电影网](https://github.com/Q-Angelo/Movies)
-* [bootstrap响应式布局开发南钢街道“党群E服务”云平台前端页面](https://q-angelo.github.io/partyMember/)
-* [div+css+javascript开发个人博客静态页面](https://q-angelo.github.io/qublog/)
 
 ## 服务器
 
