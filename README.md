@@ -116,6 +116,15 @@
 
 * [前端项目工程架构(React+Mobx+Webpack+NodeJs+Eslint)](https://github.com/Q-Angelo/web_front_end_frame)
 
+## 项目经验
+
+* [React仿大众点评WebApp开发](https://github.com/Q-Angelo/React-Dianping)
+* [基于NodeJs的Web静态资源服务器](https://github.com/Q-Angelo/wsrs)
+* [ES6+Gulp 构建彩票项目](https://github.com/Q-Angelo/Gulp-Init-ES6)
+* [Nodejs+Express+MongoDB+Jade 仿豆瓣电影网](https://github.com/Q-Angelo/Movies)
+* [bootstrap响应式布局开发南钢街道“党群E服务”云平台前端页面](https://q-angelo.github.io/partyMember/)
+* [div+css+javascript开发个人博客静态页面](https://q-angelo.github.io/qublog/)
+
 ## 服务器
 
 * [sudo 出现unable to resolve host 解决方法](/doc/linux_unable_to_host.md)
