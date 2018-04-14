@@ -6,7 +6,7 @@
 * 16年第二版，采用PHP+MySql+Laravel框架前端blade做为模版引擎，发布于腾讯云服务器，可惜部分内容没有做好备份，当时设计的前端页面[个人博客](https://q-angelo.github.io/qublog/)
 * 17年初第三版，采用github仓库进行管理
 
-## NodeJS专栏
+## NodeJS
 
 * [JavaScript基础问题](/nodejs/base.md)
     - [常见问题](/nodejs/base.md#常见问题)
@@ -65,7 +65,7 @@
 
 * [C++编写NodeJs插件](/nodejs/c_addons.md)
 
-## 项目发布专栏
+## 项目发布
 
 * [npm发布自己模块](/project-release/npm_deploy.md)
     - `npm安装模块速度很慢的情况下可以将npm源设置为国内的淘宝源，npm发布需切换回npm源`[`[more]`](/project-release/npm_deploy.md#npm源设置)
@@ -106,7 +106,7 @@
 * [div+css+javascript开发个人博客静态页面](https://q-angelo.github.io/qublog/)
 * [div+css仿天猫首页](https://q-angelo.github.io/tm/)
 
-## 数据库专栏
+## 数据库
 
 * [聚合函数 aggregate](/database/mongo_Aggregate.md)
 
