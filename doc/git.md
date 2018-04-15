@@ -86,6 +86,18 @@ Did you intend to checkout 'origin/dev' which can not be resolved as commit?
 
 ``` git branch --set-upstream master origin/master  ```
 
+### 问题3:
+
+git pull 获取最新代码报以下错误
+
+``` fatal: refusing to merge unrelated histories ```
+
+### 对策3: 
+
+git pull之后加上可选参数 --allow-unrelated-histories 强制合并
+
+``` git pull origin master --allow-unrelated-histories ```
+
 ### 代码合并工具
 
 [Beyond Compare](http://www.scootersoftware.com/download.php)
