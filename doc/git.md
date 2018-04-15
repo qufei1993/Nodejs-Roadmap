@@ -74,6 +74,18 @@ Did you intend to checkout 'origin/dev' which can not be resolved as commit?
 
 * git push -u origin master  //即可完成代码上传
 
+### 问题2:
+
+``` If you wish to set tracking information for this branch you can do so with:
+
+	git branch --set-upstream-to=origin/<branch> master ```
+
+### 对策2:
+
+指定当前当前工作目录工作分支，跟远程仓库分支之间的联系
+
+``` git branch --set-upstream master origin/master  ```
+
 ### 代码合并工具
 
 [Beyond Compare](http://www.scootersoftware.com/download.php)
