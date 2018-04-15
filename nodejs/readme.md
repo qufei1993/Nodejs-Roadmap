@@ -29,6 +29,9 @@
     - `[正则]` 4个正则表达式方法
     - `[正则]` 匹配模式
     - `[正则]` 常用正则表达式
+  - [错误](/nodejs/base.md#错误)
+    - `[错误]` ReferenceError错误
+    - `[错误]` TypeError错误
 
 * [对象引用与理解module.exports与exports的关系](/nodejs/object_reference.md)
   - `引用类型比较`[`[more]`](/nodejs/object_reference.md#引用类型比较)
