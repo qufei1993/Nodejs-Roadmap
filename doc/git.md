@@ -76,9 +76,9 @@ Did you intend to checkout 'origin/dev' which can not be resolved as commit?
 
 ### 问题2:
 
-``` If you wish to set tracking information for this branch you can do so with:
+``` If you wish to set tracking information for this branch you can do so with: ```
 
-	git branch --set-upstream-to=origin/<branch> master ```
+```	git branch --set-upstream-to=origin/<branch> master ```
 
 ### 对策2:
 
