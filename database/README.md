@@ -10,4 +10,4 @@
 
 * [Nodejs链接mongodb](/database/mongo_nodejs_link.md)
 
-* [redis安装](/database/mongo_nodejs_link.md)
+* [redis安装](/database/redis_install.md)
