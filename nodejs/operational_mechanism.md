@@ -20,13 +20,15 @@ macrotask queue 宏任务队列
 setImmediate  
 setTimeout //有一个最小延迟4ms
 setInterval  
+I/O  
 ```
 microtask queue 微任务队列
 
 ```
 process.nextTick  
-Promise  
-MutaionObserver  
+Promise（new Promise是同步任务，被放到主线程里，then里的函数是异步任务，会被放入任务队列）  
+MutaionObserver（H5新特性）  
+Object.observe (已废弃)  
 ```
 
 ### 例1： 
