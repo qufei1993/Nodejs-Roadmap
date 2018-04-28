@@ -229,6 +229,10 @@ Fail2Ban可以看做是个防御型的动作库，通过监控系统的日志文
 
 nvm安装成功，控制台 nvm 找不到命令，解决办法 [`[issue]`](https://github.com/Q-Angelo/summarize/issues/1)
 
+查看所有node版本 ``` nvm ls-remote ```
+
+查看本地node版本 ``` nvm ls-remote ```
+
 安装nodejs版本为v6.9.5 ``` nvm install v6.9.5 ```
 
 把这个版本指定下 ``` nvm use v6.9.5 ```
