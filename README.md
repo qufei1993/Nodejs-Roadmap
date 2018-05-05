@@ -59,13 +59,29 @@
   - `map比forEach功能强大, 但是map会创建一个新的数组, 将会占用内存.`[`[more]`](/nodejs/performance_optimization.md#map与forEach)
   - `高并发应对之道.`[`[more]`](/nodejs/performance_optimization.md#高并发应对之道)
   - `require特性与优化`[`[more]`](/nodejs/performance_optimization.md#require特性与优化)
-  
+
 * [爬虫](/nodejs/creeper.md)
   - `抓取目标数据，采用http模块、chromeless中间件`[`[more]`](/nodejs/creeper.md#抓取目标数据)
   - `使用cheerio解析`[`[more]`](/nodejs/creeper.md#使用cheerio解析)
   - `案例-爬取某网站课程标题信息`[`[more]`](/nodejs/creeper.md#案例-爬取某网站课程标题信息)
 
 * [C++编写NodeJs插件](/nodejs/c_addons.md)
+
+## ES6
+[`[ES6语法扩展一: let、const声明变量]`](/ES6/1-let%20const.md)
+[`[ES6语法扩展二: 数组、对象解构赋值]`](/ES6/2-解构赋值.md) 
+[`[ES6语法扩展三: 正则扩展]`](/ES6/3-%E6%AD%A3%E5%88%99%E6%89%A9%E5%B1%95.md)
+[`[ES6语法扩展四: 字符串扩展]`](/ES6/4-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%89%A9%E5%B1%95.md) 
+[`[ES6语法扩展五: 数值扩展]`](/ES6/5-%E6%95%B0%E5%80%BC%E6%89%A9%E5%B1%95.md) 
+[`[ES6语法扩展六: 数组扩展]`](/ES6/6-%E6%95%B0%E7%BB%84%E6%89%A9%E5%B1%95.md)  
+[`[ES6语法扩展七: 函数扩展]`](/ES6/7-%E5%87%BD%E6%95%B0%E6%89%A9%E5%B1%95.md) 
+[`[ES6语法扩展八: 对象扩展]`](/ES6/8-%E5%AF%B9%E8%B1%A1%E6%89%A9%E5%B1%95.md) 
+[`[ES6语法扩展九: Symbol用法]`](/ES6/9-Symbol%E7%94%A8%E6%B3%95.md) 
+[`[ES6语法扩展十: set-map用法]`](/ES6/10-set-map%E7%94%A8%E6%B3%95.md) 
+[`[ES6语法扩展十一: Promise]`](/ES6/13-Promise.md) 
+[`[ES6语法扩展十二: Symbol.iterator]`](/ES6/14-Iterator.md) 
+[`[ES6语法扩展十三: Generator]`](/ES6/15-Generator.md) 
+[`[ES6语法扩展十四: Decorators]`](/ES6/16-Decorators.md)
 
 ## 项目发布
 
@@ -132,10 +148,3 @@
 
 * `[版本控制]`[git常用操作](/doc/git.md)
 * `[SEO优化]`[SEO网站优化title设置与快速排名](/doc/seo.md)
-
-## ES6语法扩展
-[`[let const声明变量]`](/ES6/1-let%20const.md) [`[解构赋值]`](/ES6/2-解构赋值.md) [`[正则扩展]`](/ES6/3-%E6%AD%A3%E5%88%99%E6%89%A9%E5%B1%95.md) [`[字符串扩展]`](/ES6/4-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%89%A9%E5%B1%95.md) [`[数值扩展]`](/ES6/5-%E6%95%B0%E5%80%BC%E6%89%A9%E5%B1%95.md) [`[数组扩展]`](/ES6/6-%E6%95%B0%E7%BB%84%E6%89%A9%E5%B1%95.md)  
-
-[`[函数扩展]`](/ES6/7-%E5%87%BD%E6%95%B0%E6%89%A9%E5%B1%95.md) [`[对象扩展]`](/ES6/8-%E5%AF%B9%E8%B1%A1%E6%89%A9%E5%B1%95.md) [`[Symbol用法]`](/ES6/9-Symbol%E7%94%A8%E6%B3%95.md) [`[set-map用法]`](/ES6/10-set-map%E7%94%A8%E6%B3%95.md) 
-
-[`[Promise]`](/ES6/13-Promise.md) [`[Symbol.iterator]`](/ES6/14-Iterator.md) [`[Generator]`](/ES6/15-Generator.md) [`[Decorators]`](/ES6/16-Decorators.md)
