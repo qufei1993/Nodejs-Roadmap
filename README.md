@@ -6,10 +6,9 @@
 * 16年第二版，采用PHP+MySql+Laravel框架前端blade做为模版引擎，发布于腾讯云服务器，可惜部分内容没有做好备份，当时设计的前端页面[个人博客](https://q-angelo.github.io/qublog/)
 * 17年初第三版，采用github仓库进行管理
 
-## NodeJS
+## JavaScript 
 
-* [JavaScript基础问题](/nodejs/base.md)
-    - [常见问题](/nodejs/base.md#常见问题)
+  - [常见问题](/nodejs/base.md#常见问题)
   - [定时器](/nodejs/base.md#定时器)
   - [作用域](/nodejs/base.md#作用域)
       - `[作用域]` eval()、with欺骗词法作用域
@@ -40,6 +39,8 @@
       - `[错误]` ReferenceError错误
       - `[错误]` TypeError错误
 
+## NodeJS
+
 * [对象引用与理解module.exports与exports的关系](/nodejs/object_reference.md)
   - `引用类型比较`[`[more]`](/nodejs/object_reference.md#引用类型比较)
   - `数组对象深度拷贝`[`[more]`](/nodejs/object_reference.md#数组对象深度拷贝)
@@ -51,17 +52,14 @@
   - `process.nextTick与setTimeout递归调用区别?`[`[more]`](/nodejs/operational_mechanism.md#process.nextTick与setTimeout递归调用区别)
   - `setImmediate与setTimeout分别在浏览器与Nodejs环境下的区别?`[`[more]`](/nodejs/operational_mechanism.md#setImmediate与setTimeout)
 
-* [常用插件](/nodejs/plugins.md)
-
+* [NodeJs项目开发常用插件](/nodejs/plugins.md)
 * [经纬度计算](/nodejs/distance.md)
-
 * [跨域](/nodejs/cors.md)
-
 * [性能优化](/nodejs/performance_optimization.md)
   - `map比forEach功能强大, 但是map会创建一个新的数组, 将会占用内存.`[`[more]`](/nodejs/performance_optimization.md#map与forEach)
   - `高并发应对之道.`[`[more]`](/nodejs/performance_optimization.md#高并发应对之道)
   - `require特性与优化`[`[more]`](/nodejs/performance_optimization.md#require特性与优化)
-
+  
 * [爬虫](/nodejs/creeper.md)
   - `抓取目标数据，采用http模块、chromeless中间件`[`[more]`](/nodejs/creeper.md#抓取目标数据)
   - `使用cheerio解析`[`[more]`](/nodejs/creeper.md#使用cheerio解析)
