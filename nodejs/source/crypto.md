@@ -38,7 +38,7 @@
 
 #### 数据加密
 
-crypto.createCipher('算法', pwd); 创建 cipher加密对象
+crypto.createCipher('算法', pwd); 创建 cipher加密对象  
 crypto.createCipheriv(algorithm, key, iv) 
 
 ```js
@@ -76,7 +76,7 @@ cipher('hello world ！！！') // 81c66a1d39d302205c55f0afac95c06bc985155d4ddb7
 
 #### 数据解密
 
-crypto.createDecipher('算法', pwd); 创建 cipher解密对象
+crypto.createDecipher('算法', pwd); 创建 cipher解密对象  
 crypto.createDecipheriv(algorithm, key, iv)
 
 ```js
