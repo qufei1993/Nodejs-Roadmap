@@ -28,3 +28,29 @@
 	console.log(foo.count); // 0
 }
 ```
+
+#### 指向函数的作用域
+
+> 对this的第二种误解就是this指向函数的作用域，
+
+以下这段代码，在foo中试图调用bar函数，是否成功调用，取决于环境。
+
+* window，在chrome console环境里是没有问题的，全局声明的函数放在了window下，foo函数里面的this代指的是window对象，在全局环境中并没有声明变量a，因此在bar函数中的this.a自然没有定义，输出undefined。
+
+* nodejs，在node环境下，声明的function 不会放在global全局对象下，因此在foo函数里调用this.bar函数会报 ``` TypeError: this.bar is not a function ``` 错误，调用bar函数，要省去前面的this。
+
+```js
+{
+	function foo(){
+		var a = 2;
+		this.bar();
+	}
+
+	function bar(){
+		console.log(this.a);
+	}
+
+	foo();
+}
+```
+
