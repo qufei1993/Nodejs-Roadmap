@@ -2,7 +2,13 @@
 
 ## 目录
 
-* [创建用户](#创建用户)
+* [用户新建查找删除](#用户新建查找删除)
+
+  * [创建用户](#创建用户)
+
+  * [用户查找](#用户查找)
+
+  * [用户删除](#用户删除)
 
 * [登录远程服务器](#登录远程服务器)
 
@@ -11,9 +17,7 @@
 * [增强服务器安全等级](#增强服务器安全等级)
 
   * [修改端口号](#修改端口号)
-
   * [设定iptables规则](#设定iptables规则)
-
   * [设置fail2ban](#设置fail2ban)
 
 * [Nodejs生产环境部署](#nodejs生产环境部署)
@@ -23,11 +27,8 @@
 * [Mongodb](#mongodb)
 
   * [mongodb安装](#mongodb安装)
-
   * [防火墙中加入mongodb端口号](#防火墙中加入mongodb端口号)
-
   * [更改MongoDB默认端口号](#更改MongoDB默认端口号)
-
   * [开启MongoDB服务](#开启MongoDB服务)
 
 * [项目发布](#项目发布)
@@ -38,7 +39,9 @@
 
   * [PM2部署代码到服务器](#PM2部署代码到服务器)
 
-## 创建用户
+## 用户新建查找删除
+
+#### 创建用户
 
   创建用户名 ``` adduser demo_manager ``` 之后会提示设置密码 和一些信息
 
@@ -60,6 +63,40 @@
   ```
 
   最后 ``` service ssh restart ``` 重启一下
+
+#### 用户查找
+
+查看用户
+
+``` cat /etc/passwd ```
+
+查看用户组
+
+``` cat /etc/group ```
+
+查看当前活跃的用户列表
+
+``` w ```
+
+查看指定用户
+
+``` cat /etc/passwd|grep root ```
+
+查看当前服务用户
+
+``` whoami ```
+
+#### 用户删除
+
+> userdel 是一个底层用于删除用户的工具。在 Debian 上，我们通常会使用 deluser 命令。userdel 会查询系统账户文件，例如 /etc/password 和 /etc/group。那么它会删除所有和用户名相关的条目。在我们删除它之前，用户名必须存在。
+
+删除用户
+
+``` userdel testuser ```
+
+完全删除用户家目录
+
+``` userdel -r testuser ```
 
 ## 登录远程服务器
 
@@ -197,6 +234,15 @@ iptables-restore /etc/iptables.up.rules
 Fail2Ban可以看做是个防御型的动作库，通过监控系统的日志文件，根据检测到的任何可疑的行为，可以触发不同的环境动作
 
 安装 ``` sudo apt-get install fail2ban ```
+
+安装过程中出现以下错误，执行 ``` sudo apt-get update ``` 更新下源即可
+
+```
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+E: Unable to locate package fail2ban
+```
 
 进入配置文件 ``` sudo vim /etc/fail2ban/jail.conf ```
 
