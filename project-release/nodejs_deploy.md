@@ -26,10 +26,11 @@
   * [更改MongoDB默认端口号](#更改MongoDB默认端口号)
   * [开启MongoDB服务](#开启MongoDB服务)
 
-* [项目发布](#项目发布)
+* [代码发布](#代码发布)
   * [选择代码托管仓库](#选择代码托管仓库)
   * [实现服务器与第三方仓库的关联](#实现服务器与第三方仓库的关联)
   * [PM2部署代码到服务器](#PM2部署代码到服务器)
+  * [pm2发布遇到的一些问题](#pm2发布遇到的一些问题)
 
 ## 用户新建查找删除
 
@@ -446,7 +447,7 @@ net:
 #### 演示如何向线上的数据库导入初识数据
 //todo:
 
-## 项目发布
+## 代码发布
 
 #### 选择代码托管仓库
 
@@ -546,7 +547,13 @@ git clone 远程仓库地址
 
 ```
 
-之后每次修改后将不需要setup ``` pm2 deploy ecosystem.json pro ``` 执行此命令后，通常会遇到一个错误，像下面这样
+之后每次修改后将不需要setup 使用命令 ``` pm2 deploy ecosystem.json pro ``` 就可以发布啦，到此一个简单的项目发布就已经完成了，有问题可以提issues.
+
+
+
+#### pm2发布遇到的一些问题
+
+* bash: pm2: command not found
 
 ```
 $ pm2 deploy ecosystem.json pro
@@ -578,6 +585,20 @@ Deploy failed
 
 执行命令 重新加载 ``` source ~/.bashrc ```
 
-下面在使用命令 ``` pm2 deploy ecosystem.json pro ``` 就可以发布啦，到此一个简单的项目发布就已经完成了，有问题可以提issues.
+
+* bash: npm: command not found
+
+和上面问题一样编辑.bashrc文件
+
+```bash
+# 注释掉下面四行
+# If not running interactively, don't do anything
+# case $- in
+#    *i*) ;;
+#      *) return;;
+# esac
+```
+
+执行命令 重新加载 ``` source ~/.bashrc ```
 
 补充：df -h 查看硬盘使用情况
