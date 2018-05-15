@@ -137,6 +137,8 @@
 
   重启ssh服务 ``` sudo service ssh restart ```
 
+  采用了密钥登录，如果本地链接还需要输入密码，可参考这个解决方案 [`[issue]`](https://github.com/Q-Angelo/summarize/issues/2)
+
 ## 增强服务器安全等级
 
 #### 修改端口号
@@ -164,6 +166,8 @@
   # 是否允许空密码
   # PermitEmptyPasswords no
 ```
+
+重启ssh服务，使端口生效 ``` sudo service ssh restart ``` 
 
 #### 设定iptables规则
 
