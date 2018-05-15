@@ -101,16 +101,16 @@
 
 * 方法2
 
- 在mac下面如果安装了zsh 会有.zshrc这样一个配置文件 ``` subl .zshrc ```
+  在mac下面如果安装了zsh 会有.zshrc这样一个配置文件 ``` subl .zshrc ```
 
- 在这个配置文件里面可以通过软链接加入命令
-```bash
-  alias ssh_demo="ssh root@ip地址"
-```
+  在这个配置文件里面可以通过软链接加入命令
+  ```bash
+    alias ssh_demo="ssh root@ip地址"
+  ```
 
- 通过 ``` source .zshrc ``` 重新载入这个用户变量
+  通过 ``` source .zshrc ``` 重新载入这个用户变量
 
- 最后控制台输入 ``` ssh_demo ``` 将会自动调用上面配置好的这个命令
+  最后控制台输入 ``` ssh_demo ``` 将会自动调用上面配置好的这个命令
 
 * 方法3
 
