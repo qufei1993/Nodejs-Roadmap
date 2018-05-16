@@ -441,7 +441,7 @@ net:
 
 #### 开启MongoDB服务
 
-重启mongodb  ``` sudo service mongodb restart ````
+重启mongodb  ``` sudo service mongod restart ````
 通过mongo链接 mongo --port 29999
 
 #### 演示如何向线上的数据库导入初识数据
