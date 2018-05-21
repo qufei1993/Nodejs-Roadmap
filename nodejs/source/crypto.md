@@ -100,3 +100,49 @@ function decipher(encrypted){
 
 decipher('81c66a1d39d302205c55f0afac95c06bc985155d4ddb751c'); // hello world ！！！
 ```
+
+## md5加密
+
+#### md5作用于特点
+
+* 作用
+
+> 是让大容量信息在数字签名软件签署私人秘钥前被"压缩"成一种保密格式，也就是把一个任意长度的字节串变换成一定长度的十六进制数字串（32个字符）
+一致性验证
+
+* 特点
+    * 不可逆
+    * 输入两个不同的明文不会得到相同的输出值
+    * 根据输出值，不能得到原始的明文，即过程不可逆
+
+#### 实现md5的3个方法介绍
+
+* crypto.createHash(algorithm)
+
+创建并返回一个hash对象，它是一个指定算法的加密hash，用于生成hash摘要。
+
+参数algorithm可选择系统上安装的OpenSSL版本所支持的算法。例如：'sha1', 'md5', 'sha256', 'sha512'等。在近期发行的版本中，openssl list-message-digest-algorithms会显示这些可用的摘要算法。
+
+* hash.update(data)
+
+更新hash的内容为指定的data。当使用流数据时可能会多次调用该方法。
+
+* hash.digest(encoding='binary')
+
+计算所有传入数据的hash摘要。参数encoding（编码方式）可以为'hex', 'binary' 或者'base64'。
+
+#### 实例
+
+```js
+const crypto = require('crypto');
+const md5 = str => {
+    return crypto.createHash('md5').update(str, 'utf8').digest('hex')
+};
+
+// 默认输出长度为32位小写字母
+// 25f9e794323b453885f5181f1b624d0b
+console.log(md5('123456789')); 
+
+// 以下转换为32位大写字母
+console.log(md5('123456789').toUpperCase()); 
+```
