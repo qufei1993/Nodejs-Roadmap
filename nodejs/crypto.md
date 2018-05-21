@@ -144,5 +144,6 @@ const md5 = str => {
 console.log(md5('123456789')); 
 
 // 以下转换为32位大写字母
+// 25F9E794323B453885F5181F1B624D0B
 console.log(md5('123456789').toUpperCase()); 
 ```
