@@ -103,7 +103,7 @@ decipher('81c66a1d39d302205c55f0afac95c06bc985155d4ddb751c'); // hello world ！
 
 ## md5加密
 
-#### md5作用于特点
+#### md5作用与特点
 
 * 作用
 
