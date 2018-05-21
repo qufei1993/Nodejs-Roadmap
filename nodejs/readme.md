@@ -65,6 +65,8 @@
 
 * [Javascript排序](/nodejs/sort.md)
 
+* [crypto模块实现md5、Cipher等多种加密方式](/nodejs/crypto.md)
+
 ## cpu密集 VS I/O密集
 
 一个程序大部分时间用来做运算逻辑判断称为CPU密集 

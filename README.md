@@ -67,6 +67,8 @@
 
 * [C++编写NodeJs插件](/nodejs/c_addons.md)
 
+* [crypto模块实现md5、Cipher等多种加密方式](/nodejs/crypto.md)
+
 ## ES6
 * [`[ES6语法扩展系列一]` let、const声明变量](/ES6/1-let%20const.md)
 * [`[ES6语法扩展系列二]` 数组、对象解构赋值](/ES6/2-解构赋值.md) 
