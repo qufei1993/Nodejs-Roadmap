@@ -1,4 +1,4 @@
-# crypto
+# crypto模块实现md5、Cipher等多种加密方式
 
 > crypto加密模块是C／C++实现这些算法后，暴露为javascript接口的模块，包含对 OpenSSL 的哈希、HMAC、加密、解密、签名、以及验证功能的一整套封装。
 
