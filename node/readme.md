@@ -1,0 +1,87 @@
+# NodeJS
+
+## 目录
+
+* [对象引用与理解module.exports与exports的关系](/node/object_reference.md)
+  - `引用类型比较`[`[more]`](/node/object_reference.md#引用类型比较)
+  - `数组对象深度拷贝`[`[more]`](/node/object_reference.md#数组对象深度拷贝)
+  - `exports与module.exports的区别?`[`[more]`](/node/object_reference.md#exports与module.exports的区别)
+
+* [JavaScript运行机制](/node/operational_mechanism.md)
+  - `js工作机制，微任务与宏任务术语`[`[more]`](/node/operational_mechanism.md#js工作机制)
+  - `javascript是单线程，只有同步代码执行完毕后，才会去执行异步代码，详情看示例`[`[more]`](/node/operational_mechanism.md#例2)
+  - `process.nextTick与setTimeout递归调用区别?`[`[more]`](/node/operational_mechanism.md#process.nextTick与setTimeout递归调用区别)
+  - `setImmediate与setTimeout分别在浏览器与node环境下的区别?`[`[more]`](/node/operational_mechanism.md#setImmediate与setTimeout)
+
+* [常用插件](/node/plugins.md)
+
+* [经纬度计算](/node/distance.md)
+
+* [跨域](/node/cors.md)
+
+* [性能优化](/node/performance_optimization.md)
+  - `map比forEach功能强大, 但是map会创建一个新的数组, 将会占用内存.`[`[more]`](/node/performance_optimization.md#map与forEach)
+  - `高并发应对之道.`[`[more]`](/node/performance_optimization.md#高并发应对之道)
+  - `require特性与优化`[`[more]`](/node/performance_optimization.md#require特性与优化)
+
+* [爬虫](/node/creeper.md)
+  - `抓取目标数据，采用http模块、chromeless中间件`[`[more]`](/node/creeper.md#抓取目标数据)
+  - `使用cheerio解析`[`[more]`](/node/creeper.md#使用cheerio解析)
+  - `案例-爬取某网站课程标题信息`[`[more]`](/node/creeper.md#案例-爬取某网站课程标题信息)
+
+* [C++编写node插件](/node/c_addons.md)
+
+* [Javascript排序](/node/sort.md)
+
+* [crypto模块实现md5、Cipher等多种加密方式](/node/crypto.md)
+
+## cpu密集 VS I/O密集
+
+一个程序大部分时间用来做运算逻辑判断称为CPU密集 
+一个程序大部分时间用来做存储设备，网络设施的一些读取操作称作为I/O密集
+
+## 常用场景
+
+Web Server、本地代码构建、使用工具开发
+
+
+## Nodejs调试工具
+
+* Inspector NodeJS自带的调试
+
+* VS Code
+
+## 项目初始化
+
+* .gitignore
+  参考文档 https://git-scm.com/docs/gitignore
+
+* .npmignore
+  在npm里一些文件在发布时不是必须的我们也可以忽略掉 参考文档 https://docs.npmjs.com/misc/developers
+
+* .editorconfig
+  团队开发中同一个项目多个人维护可能大家的编辑器不一样，没有统一的约定，例如有的人习惯两个空格、有的人习惯tab、有的人习惯四个空格，为了项目的风格能够统一可以采用editorConfig保持持续的代码风格 参考文档 http://editorconfig.org/
+
+* .eslintrc
+  eslint用于代码审查 参考文档 http://eslint.cn/docs/user-guide/configuring#configuration-file-formats
+  eslint可以结合pre-commit插件使用 目的是在package.json 的scripts之前对一些指定的命令提前运行, 相当于一个勾子, 例如：
+
+```javascript
+//npm install --save-dev pre-commit
+
+//package.json 文件
+"scripts": {
+  "dev": "node app",
+  "lint": "eslint .",
+  "fix": "eslint --fix ."
+},
+"pre-commit": [
+  "fix",
+  "lint"
+],
+
+//执行git commit -m 'test' 提交代码时 会先执行pre-commit中的代码
+```
+
+* .eslintignore
+  用于忽略某些文件

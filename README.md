@@ -8,66 +8,66 @@
 
 ## JavaScript 
 
-  - [常见问题](/nodejs/base.md#常见问题)
-  - [定时器](/nodejs/base.md#定时器)
-  - [作用域](/nodejs/base.md#作用域)
+  - [常见问题](/javascript/base.md#常见问题)
+  - [定时器](/javascript/base.md#定时器)
+  - [作用域](/javascript/base.md#作用域)
       - `[作用域]` eval()、with欺骗词法作用域
-  - [类型检测](/nodejs/base.md#类型检测)
+  - [类型检测](/javascript/base.md#类型检测)
       - `[类型检测]` typeof、instanceof类型检测
-  - [数组](/nodejs/base.md#数组)
+  - [数组](/javascript/base.md#数组)
       - `[数组去重]` Set数组去重
       - `[数组去重]` reduce数组对象去重
       - `[数组去重]` lodash uniqBy去重
       - `[数组降维]` 数组降维三种方法
-  - [函数](/nodejs/base.md#函数)
+  - [函数](/javascript/base.md#函数)
       - `[函数]` push()数组添加新值后的返回值
       - `[函数]` arguments.callee递归调用实现一个阶乘函数
       - `[函数]` call和apply的使用与区别?
       - `[函数]` javascript没有引用传递都是按值传递的
-  - [匿名函数与闭包](/nodejs/base.md#匿名函数与闭包)
+  - [匿名函数与闭包](/javascript/base.md#匿名函数与闭包)
       - `[匿名函数与闭包]` 匿名函数的自我执行
       - `[匿名函数与闭包]` 函数里放一个匿名函数将会产生闭包
       - `[匿名函数与闭包]` 闭包中使用this对象将会导致的一些问题
       - `[匿名函数与闭包]` 一个例子看懂循环和闭包之间的关系
-  - [正则](/nodejs/base.md#正则)
+  - [正则](/javascript/base.md#正则)
       - `[正则]` 模式修饰符的可选参数
       - `[正则]` 两个测试方法test、exec
       - `[正则]` 4个正则表达式方法
       - `[正则]` 匹配模式
       - `[正则]` 常用正则表达式
-  - [错误](/nodejs/base.md#错误)
+  - [错误](/javascript/base.md#错误)
       - `[错误]` ReferenceError错误
       - `[错误]` TypeError错误
 
-## NodeJS
+## Node
 
-* [对象引用与理解module.exports与exports的关系](/nodejs/object_reference.md)
-  - `引用类型比较`[`[more]`](/nodejs/object_reference.md#引用类型比较)
-  - `数组对象深度拷贝`[`[more]`](/nodejs/object_reference.md#数组对象深度拷贝)
-  - `exports与module.exports的区别?`[`[more]`](/nodejs/object_reference.md#exports与module.exports的区别)
+* [对象引用与理解module.exports与exports的关系](/node/object_reference.md)
+  - `引用类型比较`[`[more]`](/node/object_reference.md#引用类型比较)
+  - `数组对象深度拷贝`[`[more]`](/node/object_reference.md#数组对象深度拷贝)
+  - `exports与module.exports的区别?`[`[more]`](/node/object_reference.md#exports与module.exports的区别)
 
-* [JavaScript运行机制](/nodejs/operational_mechanism.md)
-  - `js工作机制，微任务与宏任务术语`[`[more]`](/nodejs/operational_mechanism.md#js工作机制)
-  - `javascript是单线程，只有同步代码执行完毕后，才会去执行异步代码，详情看示例`[`[more]`](/nodejs/operational_mechanism.md#例2)
-  - `process.nextTick与setTimeout递归调用区别?`[`[more]`](/nodejs/operational_mechanism.md#process.nextTick与setTimeout递归调用区别)
-  - `setImmediate与setTimeout分别在浏览器与Nodejs环境下的区别?`[`[more]`](/nodejs/operational_mechanism.md#setImmediate与setTimeout)
+* [JavaScript运行机制](/node/operational_mechanism.md)
+  - `js工作机制，微任务与宏任务术语`[`[more]`](/node/operational_mechanism.md#js工作机制)
+  - `javascript是单线程，只有同步代码执行完毕后，才会去执行异步代码，详情看示例`[`[more]`](/node/operational_mechanism.md#例2)
+  - `process.nextTick与setTimeout递归调用区别?`[`[more]`](/node/operational_mechanism.md#process.nextTick与setTimeout递归调用区别)
+  - `setImmediate与setTimeout分别在浏览器与node环境下的区别?`[`[more]`](/node/operational_mechanism.md#setImmediate与setTimeout)
 
-* [NodeJs项目开发常用插件](/nodejs/plugins.md)
-* [经纬度计算](/nodejs/distance.md)
-* [跨域](/nodejs/cors.md)
-* [性能优化](/nodejs/performance_optimization.md)
-  - `map比forEach功能强大, 但是map会创建一个新的数组, 将会占用内存.`[`[more]`](/nodejs/performance_optimization.md#map与forEach)
-  - `高并发应对之道.`[`[more]`](/nodejs/performance_optimization.md#高并发应对之道)
-  - `require特性与优化`[`[more]`](/nodejs/performance_optimization.md#require特性与优化)
+* [node项目开发常用插件](/node/plugins.md)
+* [经纬度计算](/node/distance.md)
+* [跨域](/node/cors.md)
+* [性能优化](/node/performance_optimization.md)
+  - `map比forEach功能强大, 但是map会创建一个新的数组, 将会占用内存.`[`[more]`](/node/performance_optimization.md#map与forEach)
+  - `高并发应对之道.`[`[more]`](/node/performance_optimization.md#高并发应对之道)
+  - `require特性与优化`[`[more]`](/node/performance_optimization.md#require特性与优化)
 
-* [爬虫](/nodejs/creeper.md)
-  - `抓取目标数据，采用http模块、chromeless中间件`[`[more]`](/nodejs/creeper.md#抓取目标数据)
-  - `使用cheerio解析`[`[more]`](/nodejs/creeper.md#使用cheerio解析)
-  - `案例-爬取某网站课程标题信息`[`[more]`](/nodejs/creeper.md#案例-爬取某网站课程标题信息)
+* [爬虫](/node/creeper.md)
+  - `抓取目标数据，采用http模块、chromeless中间件`[`[more]`](/node/creeper.md#抓取目标数据)
+  - `使用cheerio解析`[`[more]`](/node/creeper.md#使用cheerio解析)
+  - `案例-爬取某网站课程标题信息`[`[more]`](/node/creeper.md#案例-爬取某网站课程标题信息)
 
-* [C++编写NodeJs插件](/nodejs/c_addons.md)
+* [C++编写node插件](/node/c_addons.md)
 
-* [crypto模块实现md5、Cipher等多种加密方式](/nodejs/crypto.md)
+* [crypto模块实现md5、Cipher等多种加密方式](/node/crypto.md)
 
 ## ES6
 * [`[ES6语法扩展系列一]` let、const声明变量](/ES6/1-let%20const.md)
@@ -87,34 +87,34 @@
 
 ## 项目发布
 
-* [npm发布自己模块](/project-release/npm_deploy.md)
-    - `npm安装模块速度很慢的情况下可以将npm源设置为国内的淘宝源，npm发布需切换回npm源`[`[more]`](/project-release/npm_deploy.md#npm源设置)
-    - `npm注册登录`[`[more]`](/project-release/npm_deploy.md#npm注册登录)
-    - `npm module 发布`[`[more]`](/project-release/npm_deploy.md#npm-module-发布)
-    - `在发布过程中可能遇到的问题汇总`[`[more]`](/project-release/npm_deploy.md#可能遇到的问题)
+* [npm发布自己模块](/release/npm_deploy.md)
+    - `npm安装模块速度很慢的情况下可以将npm源设置为国内的淘宝源，npm发布需切换回npm源`[`[more]`](/release/npm_deploy.md#npm源设置)
+    - `npm注册登录`[`[more]`](/release/npm_deploy.md#npm注册登录)
+    - `npm module 发布`[`[more]`](/release/npm_deploy.md#npm-module-发布)
+    - `在发布过程中可能遇到的问题汇总`[`[more]`](/release/npm_deploy.md#可能遇到的问题)
 
-* [NodeJs线上服务器部署与发布](/project-release/nodejs_deploy.md)
-    - `创建用户与修改用户权限`[`[more]`](/project-release/nodejs_deploy.md#创建用户)
-    - `三种可选方法登录远程服务器`[`[more]`](/project-release/nodejs_deploy.md#登录远程服务器)
-    - `增强服务器安全等级`[`[more]`](/project-release/nodejs_deploy.md#增强服务器安全等级)
+* [NodeJs线上服务器部署与发布](/release/nodejs_deploy.md)
+    - `创建用户与修改用户权限`[`[more]`](/release/nodejs_deploy.md#创建用户)
+    - `三种可选方法登录远程服务器`[`[more]`](/release/nodejs_deploy.md#登录远程服务器)
+    - `增强服务器安全等级`[`[more]`](/release/nodejs_deploy.md#增强服务器安全等级)
         - `[增强服务器安全等级]` 出于基本的安全考虑修改端口号
         - `[增强服务器安全等级]` 设定iptables规则
         - `[增强服务器安全等级]` 设置fail2ban
-    - `nodejs生产环境部署`[`[more]`](/project-release/nodejs_deploy.md#nodejs生产环境部署)
-    - `Nginx映射配置`[`[more]`](/project-release/nodejs_deploy.md#Nginx映射)
-    - `MongoDB`[`[more]`](/project-release/nodejs_deploy.md#mongodb)
+    - `nodejs生产环境部署`[`[more]`](/release/nodejs_deploy.md#nodejs生产环境部署)
+    - `Nginx映射配置`[`[more]`](/release/nodejs_deploy.md#Nginx映射)
+    - `MongoDB`[`[more]`](/release/nodejs_deploy.md#mongodb)
         - `[MongoDB]` mongodb安装
         - `[MongoDB]` 防火墙中加入mongodb端口号
         - `[MongoDB]` 更改MongoDB默认端口号
         - `[MongoDB]` 开启MongoDB服务
-    - `项目发布`[`[more]`](/project-release/nodejs_deploy.md#项目发布)
+    - `项目发布`[`[more]`](/release/nodejs_deploy.md#项目发布)
         - `[项目发布]` 选择代码托管仓库
         - `[项目发布]` 实现服务器与第三方仓库的关联
         - `[项目发布]` PM2部署代码到服务器
 
-* [forever发布Nodejs项目](/project-release/forever_deploy_nodejs.md)
+* [forever发布Nodejs项目](/release/forever_deploy_nodejs.md)
 
-* [React 项目发布](/project-release/react_deploy.md)
+* [React 项目发布](/release/react_deploy.md)
 
 ## 项目经验
 

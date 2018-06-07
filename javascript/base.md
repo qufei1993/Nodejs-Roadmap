@@ -6,8 +6,8 @@
     - [`[作用域]` eval()、with欺骗词法作用域](#欺骗词法作用域)
 - [类型检测](#类型检测)
     - [`[类型检测]` typeof、instanceof类型检测](#类型检测)
-- [关于this](#关于this)
-    - [`[关于this]` 错误认识](#对于this的错误认识)
+- [关于this](/this.md#关于this)
+    - [`[关于this]` 错误认识](/this.md#对于this的错误认识)
 - [数组](#数组)
     - [`[数组去重]` Set数组去重](#set数组去重)
     - [`[数组去重]` reduce数组对象去重](#reduce数组对象去重)
@@ -37,7 +37,7 @@
 ## 常见问题
 
 * JavaScript七种内置类型: number、string、boolean、undefined、null、object、symbol(ES6新增加)
-* 基本类型指保存在栈内存中的数据，引用类型([对象引用](https://github.com/Q-Angelo/Summarize/blob/master/nodejs/object_reference.md))指保存在堆内存中的对象,传递的是引用的地址。
+* 基本类型指保存在栈内存中的数据，引用类型([对象引用](https://github.com/Q-Angelo/Summarize/blob/master/node/object_reference.md))指保存在堆内存中的对象,传递的是引用的地址。
 * 变量没有类型, 变量持有的值有类型
 * 已在作用域中声明但还没有赋值的变量是undefined，还没有在作用域中声明过的变量是undeclared，对于undeclared这种情况typeof处理的时候返回的是undefined
 * typeof null === 'object' //true 正确的返回值应该是null，但是这个bug由来已久。 undefined == null //true
