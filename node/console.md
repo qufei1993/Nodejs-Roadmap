@@ -3,13 +3,21 @@
 ## 目录
 
 * [console是同步的还是异步的?](#console是同步的还是异步的?)
+
 * [实现一个console.log](#实现一个console.log)
+
     * [实现步骤](#实现步骤)
+
     * [创建logger.js文件](#创建logger.js文件)
+
 * [使用说明](#使用说明)
+
     * [基础例子log、info、error、warn、clear](#基础例子)
+
     * [trace打印错误堆栈](#trace打印错误堆栈)
+
     * [dir显示一个对象的所有属性和方法](#dir显示一个对象的所有属性和方法)
+    
     * [time和timeEnd计算程序执行消耗时间](#time和timeEnd计算程序执行消耗时间)
 
 ## console是同步的还是异步的?
