@@ -41,6 +41,14 @@
 
 ## Node
 
+* [console模块解读之实现一个console.log](/node/console.md)
+  - `console是同步的还是异步的?`[`[more]`](/node/console.md#console是同步的还是异步的?)
+  - `实现一个console.log`[`[more]`](/node/console.md#实现一个console.log)
+  - `使用说明 基础例子log、info、error、warn、clear`[`[more]`](/node/console.md#使用说明)
+  - `使用说明 trace打印错误堆栈`[`[more]`](/node/console.md#trace打印错误堆栈)
+  - `使用说明 dir显示一个对象的所有属性和方法`[`[more]`](/node/console.md#dir显示一个对象的所有属性和方法)
+  - `使用说明 time和timeEnd计算程序执行消耗时间`[`[more]`](/node/console.md#time和timeEnd计算程序执行消耗时间)
+  
 * [对象引用与理解module.exports与exports的关系](/node/object_reference.md)
   - `引用类型比较`[`[more]`](/node/object_reference.md#引用类型比较)
   - `数组对象深度拷贝`[`[more]`](/node/object_reference.md#数组对象深度拷贝)

@@ -1,6 +1,13 @@
 # NodeJS
 
 ## 目录
+* [console模块解读之实现一个console.log](/node/console.md)
+  - `console是同步的还是异步的?`[`[more]`](/node/console.md#console是同步的还是异步的?)
+  - `实现一个console.log`[`[more]`](/node/console.md#实现一个console.log)
+  - `使用说明 基础例子log、info、error、warn、clear`[`[more]`](/node/console.md#使用说明)
+  - `使用说明 trace打印错误堆栈`[`[more]`](/node/console.md#trace打印错误堆栈)
+  - `使用说明 dir显示一个对象的所有属性和方法`[`[more]`](/node/console.md#dir显示一个对象的所有属性和方法)
+  - `使用说明 time和timeEnd计算程序执行消耗时间`[`[more]`](/node/console.md#time和timeEnd计算程序执行消耗时间)
 
 * [对象引用与理解module.exports与exports的关系](/node/object_reference.md)
   - `引用类型比较`[`[more]`](/node/object_reference.md#引用类型比较)
@@ -13,26 +20,20 @@
   - `process.nextTick与setTimeout递归调用区别?`[`[more]`](/node/operational_mechanism.md#process.nextTick与setTimeout递归调用区别)
   - `setImmediate与setTimeout分别在浏览器与node环境下的区别?`[`[more]`](/node/operational_mechanism.md#setImmediate与setTimeout)
 
-* [常用插件](/node/plugins.md)
-
-* [经纬度计算](/node/distance.md)
-
-* [跨域](/node/cors.md)
-
 * [性能优化](/node/performance_optimization.md)
   - `map比forEach功能强大, 但是map会创建一个新的数组, 将会占用内存.`[`[more]`](/node/performance_optimization.md#map与forEach)
   - `高并发应对之道.`[`[more]`](/node/performance_optimization.md#高并发应对之道)
   - `require特性与优化`[`[more]`](/node/performance_optimization.md#require特性与优化)
-
 * [爬虫](/node/creeper.md)
   - `抓取目标数据，采用http模块、chromeless中间件`[`[more]`](/node/creeper.md#抓取目标数据)
   - `使用cheerio解析`[`[more]`](/node/creeper.md#使用cheerio解析)
   - `案例-爬取某网站课程标题信息`[`[more]`](/node/creeper.md#案例-爬取某网站课程标题信息)
 
+* [常用插件](/node/plugins.md)
+* [经纬度计算](/node/distance.md)
+* [跨域](/node/cors.md)
 * [C++编写node插件](/node/c_addons.md)
-
 * [Javascript排序](/node/sort.md)
-
 * [crypto模块实现md5、Cipher等多种加密方式](/node/crypto.md)
 
 ## cpu密集 VS I/O密集
