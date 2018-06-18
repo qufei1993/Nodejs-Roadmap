@@ -195,7 +195,7 @@ logger.warn('hello world') // 等同于logger.error
 logger.clear() // 清除控制台信息
 ```
 
-将调试信息打印到本地指定文件
+将调试信息打印到本地指定文件，这里要注意版本问题，以下代码示例在nodev10.x以下版本可以，具体原因参考 [TypeError: Console expects a writable stream instance](https://github.com/nodejs/node/issues/21366)
 
 ```js
 const fs = require('fs');
