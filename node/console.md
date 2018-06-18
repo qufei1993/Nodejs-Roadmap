@@ -17,7 +17,7 @@
     * [trace打印错误堆栈](#trace打印错误堆栈)
 
     * [dir显示一个对象的所有属性和方法](#dir显示一个对象的所有属性和方法)
-    
+
     * [time和timeEnd计算程序执行消耗时间](#time和timeEnd计算程序执行消耗时间)
 
 ## console是同步的还是异步的?
@@ -203,7 +203,7 @@ const output = fs.createWriteStream('./stdout.txt');
 const errorOutput = fs.createWriteStream('./stderr.txt');
 const { Logger } = require('./logger');
 
-const logger = Logger({ stdout: output, stderr: errorOutput });
+const logger = Logger(output, errorOutput);
 
 logger.info('hello world!'); // 内容输出到stdout.txt文件
 logger.error('错误日志记录'); // 内容输出到stderr.txt文件
