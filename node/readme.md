@@ -1,7 +1,5 @@
 # NodeJS
 
-## 目录
-
 * [`[系统模块系列一]` console模块解读](/node/console.md)
   - `console是同步的还是异步的?`[`[more]`](/node/console.md#console是同步的还是异步的?)
   - `实现一个console.log`[`[more]`](/node/console.md#实现一个console.log)
