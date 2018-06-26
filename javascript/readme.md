@@ -1,6 +1,6 @@
 # JavaScript
 
-- [常见问题](/javascript/base.md#常见问题)
+  - [常见问题](/javascript/base.md#常见问题)
   - [定时器](/javascript/base.md#定时器)
   - [作用域](/javascript/base.md#作用域)
       - `[作用域]` eval()、with欺骗词法作用域
