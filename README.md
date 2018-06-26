@@ -14,6 +14,8 @@
       - `[作用域]` eval()、with欺骗词法作用域
   - [类型检测](/javascript/base.md#类型检测)
       - `[类型检测]` typeof、instanceof类型检测
+  - [关于this](/this.md#关于this)
+      - [`[关于this]` 错误认识](/this.md#对于this的错误认识)
   - [数组](/javascript/base.md#数组)
       - `[数组去重]` Set数组去重
       - `[数组去重]` reduce数组对象去重
