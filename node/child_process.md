@@ -81,6 +81,7 @@ child_process.spawn(command[, args][, options])
     * gid <number> 设置该进程的组标识
     * shell <boolean> 设置为true，不同的shell可以在comman命令中设置为字符安，例如，'ls -lh' 默认为false
 
+
 ```js
 const spawn = require('child_process').spawn;
 const child = spawn('ls', ['-l'], { 
@@ -148,8 +149,9 @@ child_process.exec(command[, options][, callback])
 
 请求参数
 
-command <String> 运行的命令，参数使用空格分隔
-options <Object>
+* command <String> 运行的命令，参数使用空格分隔
+
+* options <Object>
     * cwd <string> 子进程的当前工作目录
     * env <Object> 环境变量键值对
     * encoding <string> 默认为 'utf8'
@@ -160,10 +162,11 @@ options <Object>
     * uid <number> 设置进程的用户标识
     * gid <number> 设置进程的组标识
     * windowsHide <boolean> 隐藏子进程的控制台窗口，常用于 Windows 系统。默认为 false
-callback <Function> 回调函数
+* callback <Function> 回调函数
     * error <Error> 错误信息 成功时error是null，当失败时，返回一个Error实例
     * stdout <string> | <Buffer>
     * stderr <string> | <Buffer>
+
 
 ```js
 const exec = require('child_process').exec;
@@ -243,7 +246,9 @@ child_process.fork(modulePath[, args][, options])
     * gid <number> 设置该进程的组标识
 * 返回 <ChildProcess>
 
+
 创建parent_process.js
+
 
 ```js
 const fork = require('child_process').fork;
