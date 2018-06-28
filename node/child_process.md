@@ -67,7 +67,7 @@ child_process.spawn(command[, args][, options])
 
 * ```comman <String>``` 运行的命令 例如 lh
 
-* ```args <Array>``` 命令参数，默认为一个空数组 
+* ```args <Array>``` 命令参数，默认为一个空数组
 
 * ```options <Object>```
     * ```cwd <string>``` 子进程的当前工作目录
@@ -78,13 +78,13 @@ child_process.spawn(command[, args][, options])
     * ```uid <number>```设置该进程用户标识
     * ```gid <number>``` 设置该进程的组标识
     * ```shell <boolean>``` 设置为true，不同的shell可以在comman命令中设置为字符安，例如，'ls -lh' 默认为false
-    
+
 
 请求示例
 
 ```js
 const spawn = require('child_process').spawn;
-const child = spawn('ls', ['-l'], { 
+const child = spawn('ls', ['-l'], {
     cwd: '/usr', // 指定子进程的工作目录，默认当前目录
 })
 
@@ -97,7 +97,7 @@ console.log(process.pid, child.pid); // 主进程id3243 子进程3244
 
 ```js
 const spawn = require('child_process').spawn;
-const child = spawn('ls', ['-l'], { 
+const child = spawn('ls', ['-l'], {
     cwd: '/usr', // 指定子进程的工作目录，默认当前目录
 })
 
@@ -116,7 +116,7 @@ child.stdout.pipe(process.stdout);
 
 ```js
 const spawn = require('child_process').spawn;
-const child = spawn('ls', ['-l'], { 
+const child = spawn('ls', ['-l'], {
     cwd: '/usr', // 指定子进程的工作目录，默认当前目录
     stdio: 'inherit'
 })
@@ -126,7 +126,7 @@ const child = spawn('ls', ['-l'], {
 
 ```js
 const spawn = require('child_process').spawn;
-const child = spawn('ls', ['-l'], { 
+const child = spawn('ls', ['-l'], {
     cwd: '/usr', // 指定子进程的工作目录，默认当前目录
 })
 
@@ -149,23 +149,23 @@ child_process.exec(command[, options][, callback])
 
 请求参数
 
-* command <String> 运行的命令，参数使用空格分隔
+* ```command <String>``` 运行的命令，参数使用空格分隔
 
-* options <Object>
-    * cwd <string> 子进程的当前工作目录
-    * env <Object> 环境变量键值对
-    * encoding <string> 默认为 'utf8'
-    * shell <string> 执行命令的 shell。在 UNIX 上默认为 '/bin/sh'，在 Windows 上默认为 process.env.ComSpec
-    * timeout <number> 默认为 0
-    * maxBuffer <number> stdout 或 stderr 允许的最大字节数。默认为 200*1024。如果超过限制，则子进程会被终止
-    * killSignal <string> | <integer> 默认为 'SIGTERM'，如果 timeout 大于 0，当子进程运行超过 timeout 毫秒时，父进程就会发送由 killSignal 属性标识的信号
-    * uid <number> 设置进程的用户标识
-    * gid <number> 设置进程的组标识
-    * windowsHide <boolean> 隐藏子进程的控制台窗口，常用于 Windows 系统。默认为 false
-* callback <Function> 回调函数
-    * error <Error> 错误信息 成功时error是null，当失败时，返回一个Error实例
-    * stdout <string> | <Buffer>
-    * stderr <string> | <Buffer>
+* ```options <Object>```
+    * ```cwd <string>``` 子进程的当前工作目录
+    * ```env <Object>``` 环境变量键值对
+    * ```encoding <string>``` 默认为 'utf8'
+    * ```shell <string>``` 执行命令的 shell。在 UNIX 上默认为 '/bin/sh'，在 Windows 上默认为 process.env.ComSpec
+    * ```timeout <number>``` 默认为 0
+    * ```maxBuffer <number>``` stdout 或 stderr 允许的最大字节数。默认为 200*1024。如果超过限制，则子进程会被终止
+    * ```killSignal <string>``` | <integer> 默认为 'SIGTERM'，如果 timeout 大于 0，当子进程运行超过 timeout 毫秒时，父进程就会发送由 killSignal 属性标识的信号
+    * ```uid <number>``` 设置进程的用户标识
+    * ```gid <number>``` 设置进程的组标识
+    * ```windowsHide <boolean>``` 隐藏子进程的控制台窗口，常用于 Windows 系统。默认为 false
+* ```callback <Function>``` 回调函数
+    * ```error <Error>``` 错误信息 成功时error是null，当失败时，返回一个Error实例
+    * ```stdout <string> | <Buffer>```
+    * ```stderr <string> | <Buffer>```
 
 
 ```js
@@ -188,7 +188,7 @@ exec(`cat ${__dirname}/test.txt`, {
      * {
      *  error: null,
      *  stdout: 'test数据test数据test数据test数据test数据test数据test数据test数据test数据test数据test数据test数据',
-     *  stderr: '' 
+     *  stderr: ''
      * }
      */
 })
@@ -232,19 +232,19 @@ child_process.fork(modulePath[, args][, options])
 
 请求参数
 
-* modulePath <String> 要在子进程中运行的模块
-* args <Array> 字符串参数列表
-* options <Object>
-    * cwd <string> 子进程的当前工作目录
-    * env <Object> 环境变量键值对
-    * execPath <string> 用来创建子进程的执行路径
-    * execArgv <Array> 要传给执行路径的字符串参数列表。默认为 process.execArgv
-    * silent <boolean> 如果为 true，则子进程中的 stdin、 stdout 和 stderr 会被导流到父进程中，否则它们会继承自父进程，默认false
-    * stdio <Array> | <string> 详见 child_process.spawn() 的 stdio。 当提供了该选项，则它会覆盖 silent。 如果使用了数组变量，则该数组必须包含一个值为 'ipc' 的子项，否则会抛出错误。 例如 [0, 1, 2, 'ipc']
-    * windowsVerbatimArguments <boolean> 决定在Windows系统下是否使用转义参数。 在Linux平台下会自动忽略。默认值: fals
-    * uid <number> 设置该进程的用户标识
-    * gid <number> 设置该进程的组标识
-* 返回 <ChildProcess>
+* ```modulePath <String>``` 要在子进程中运行的模块
+* ```args <Array>``` 字符串参数列表
+* ```options <Object>```
+    * ```cwd <string>``` 子进程的当前工作目录
+    * ```env <Object>``` 环境变量键值对
+    * ```execPath <string>``` 用来创建子进程的执行路径
+    * ```execArgv <Array>``` 要传给执行路径的字符串参数列表。默认为 process.execArgv
+    * ```silent <boolean>``` 如果为 true，则子进程中的 stdin、 stdout 和 stderr 会被导流到父进程中，否则它们会继承自父进程，默认false
+    * ```stdio <Array> | <string>``` 详见 child_process.spawn() 的 stdio。 当提供了该选项，则它会覆盖 silent。 如果使用了数组变量，则该数组必须包含一个值为 'ipc' 的子项，否则会抛出错误。 例如 [0, 1, 2, 'ipc']
+    * ```windowsVerbatimArguments <boolean>``` 决定在Windows系统下是否使用转义参数。 在Linux平台下会自动忽略。默认值: fals
+    * ```uid <number>``` 设置该进程的用户标识
+    * ```gid <number>``` 设置该进程的组标识
+* 返回 ```<ChildProcess>```
 
 
 创建parent_process.js
