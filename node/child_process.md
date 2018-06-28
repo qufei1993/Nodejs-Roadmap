@@ -65,20 +65,21 @@ child_process.spawn(command[, args][, options])
 
 请求参数
 
-* comman <String> 运行的命令 例如 lh
+* ```comman <String>``` 运行的命令 例如 lh
 
-* args <Array> 命令参数，默认为一个空数组 
+* ```args <Array>``` 命令参数，默认为一个空数组 
 
-* options <Object>
-    * cwd <string> 子进程的当前工作目录
-    * env <string> 环境变量键值对
-    * argv0 <string> 显式地设置要发给子进程的 argv[0] 的值。 如果未指定，则设为 command
-    * stdio <array> | <string> 子进程的 stdio 配置
-    * detached <boolean> 将子进程独立于父进程运行
-    * uid <number> 设置该进程用户标识
-    * gid <number> 设置该进程的组标识
-    * shell <boolean> 设置为true，不同的shell可以在comman命令中设置为字符安，例如，'ls -lh' 默认为false
+* ```options <Object>```
+    * ```cwd <string>``` 子进程的当前工作目录
+    * ```env <string>``` 环境变量键值对
+    * ```argv0 <string>``` 显式地设置要发给子进程的 argv[0] 的值。 如果未指定，则设为 command
+    * ```stdio <array> | <string>``` 子进程的 stdio 配置
+    * ```detached <boolean>``` 将子进程独立于父进程运行
+    * ```uid <number>```设置该进程用户标识
+    * ```gid <number>``` 设置该进程的组标识
+    * ```shell <boolean>``` 设置为true，不同的shell可以在comman命令中设置为字符安，例如，'ls -lh' 默认为false
 
+<hr>
 请求示例
 
 ```js
