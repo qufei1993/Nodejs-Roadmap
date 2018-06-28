@@ -2,8 +2,6 @@
 
 > Node是一个单线程多进程的语言，主要是通过I／O操作来进行异步任务处理，I／O越密集Node的优势越能体现，但是CPU密集的任务就会对程序造成阻塞，影响后续程序执行在Node中我们可以采用child_process模块充分利用CPU资源，完成一些耗时耗资源的操作。
 
-
-
 先看一段例子,运行下面程序，浏览器执行 http://127.0.0.1:3000/compute 大约每次需要15657.310ms，也就意味下次用户请求需要等待15657.310ms，文末将会采用child_process实现多个进程来处理。
 
 ```js
@@ -139,7 +137,7 @@ child.stdout.on('data', data => {
 
 缓存子进程的输出，将子进程的输出以回调函数的形式一次性返回，如果子进程返回的数据过大超过maxBuffer默认值将会导致程序崩溃，也可以设置maxBuffer允许的最大字节数，不建议这样做，exec适合于小量的数据，数据量过大可以采用[spawn](#spawn)
 
-###### 注意: 不要把未经检查的用户输入传入到该函数。 任何包括 shell 元字符的输入都可被用于触发任何命令的执行
+```注意: ``` 不要把未经检查的用户输入传入到该函数。 任何包括 shell 元字符的输入都可被用于触发任何命令的执行
 
 请求格式
 
@@ -248,7 +246,6 @@ child_process.fork(modulePath[, args][, options])
 
 
 创建parent_process.js
-
 
 ```js
 const fork = require('child_process').fork;
