@@ -79,6 +79,7 @@ child_process.spawn(command[, args][, options])
     * gid <number> 设置该进程的组标识
     * shell <boolean> 设置为true，不同的shell可以在comman命令中设置为字符安，例如，'ls -lh' 默认为false
 
+请求示例
 
 ```js
 const spawn = require('child_process').spawn;
