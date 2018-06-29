@@ -52,6 +52,9 @@
   - `使用说明 time和timeEnd计算程序执行消耗时间`[`[more]`](/node/console.md#time和timeEnd计算程序执行消耗时间)
 
 * [`[系统模块系列二]` 子进程child_process](/node/child_process.md)
+  - `创建异步进程的四种方法 spawn、fork、exec、execFile`[`[more]`](/node/child_process.md#创建进程)
+  - `采用child_process.spawn编写一个守护进程`[`more`](/node/child_process.md#采用child_process.spawn编写一个守护进程)
+  - `fork创建子进程解决cpu计算密集程序阻塞`[`more`](/node/child_process.md#fork创建子进程解决cpu计算密集程序阻塞)
 
 * [对象引用与理解module.exports与exports的关系](/node/object_reference.md)
   - `引用类型比较`[`[more]`](/node/object_reference.md#引用类型比较)

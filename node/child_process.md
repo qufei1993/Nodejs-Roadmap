@@ -343,7 +343,9 @@ function start(){
 start();
 ```
 
-#### fork创建子进程解决cpu计算密集程序阻塞问题
+#### fork创建子进程解决cpu计算密集程序阻塞
+
+本文在开始提出的例子，当cpu计算密度大的情况程序会造成阻塞导致后续请求需要等待，下面采用child_process.fork方法，在进行cpmpute计算时创建子进程，子进程计算完成通过send方法将结果发送给主进程，主进程通过message监听到信息后处理并退出。
 
 新建 fork_app.js
 
