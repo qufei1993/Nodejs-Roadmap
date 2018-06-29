@@ -280,7 +280,7 @@ setTimeout(function() {
 
 #### 采用child_process.spawn编写一个守护进程
 
-下面 spawn_child.js 文件里面a只是声明了并没有赋值，此时调用a相当于undefined.a，这样会报TypeError错误，如果没有做try catch错误捕获，当前进程将会挂掉，下面采用child_process.spawn开启一个子进程，当子进程挂掉之后，主进程监听到进行重启。
+下面 spawn_child.js 文件里面a只是声明了并没有赋值，此时调用name相当于undefined.name，这样会报TypeError错误，如果没有做try catch错误捕获，当前进程将会挂掉，下面采用child_process.spawn开启一个子进程，当子进程挂掉之后，主进程监听到进行重启。
 
 新建 spawn_child.js
 
@@ -343,4 +343,77 @@ function start(){
 start();
 ```
 
-#### 
+#### fork创建子进程解决cpu计算密集程序阻塞问题
+
+新建 fork_app.js
+
+```js
+const http = require('http');
+const [url, port] = ['127.0.0.1', 3000];
+const fork = require('child_process').fork;
+
+const server = http.createServer((req, res) => {
+    console.log(req.url);
+
+    if(req.url == '/compute'){
+        const compute = fork('./fork_compute.js');
+
+        compute.send('开启一个新的子进程');
+
+        /**
+         * 当一个子进程使用 process.send() 发送消息时会触发 'message' 事件
+         */
+        compute.on('message', sum => {
+            res.end(`Sum is ${sum}`);
+
+            compute.kill();
+        });
+
+        /**
+         * 子进程监听到一些错误消息退出
+         */
+        compute.on('close', (code, signal) => {
+            console.log(`收到close事件，子进程收到信号 ${signal} 而终止，退出码 ${code}`);
+
+            compute.kill();
+        })
+    }else{
+        res.end(`ok`);
+    }
+});
+
+server.listen(port, url, () => {
+    console.log(`server started at http://${url}:${port}`);
+});
+```
+
+新建 fork_compute.js
+
+```js
+const computation = () => {
+    let sum = 0;
+
+    console.info('计算开始');
+    console.time('计算耗时');
+
+    for (let i = 0; i < 1e10; i++) {
+        sum += i
+    };
+
+    console.info('计算结束');
+    console.timeEnd('计算耗时');
+
+    return sum;
+};
+
+process.on('message', msg => {
+    console.log(msg, 'process.pid', process.pid); // 子进程id
+
+    const sum = computation();
+
+    /**
+     * 如果Node.js进程是通过进程间通信产生的，那么，process.send()方法可以用来给父进程发送消息
+     */
+    process.send(sum);
+})
+```
