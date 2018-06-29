@@ -78,7 +78,7 @@ child_process.spawn(command[, args][, options])
     * ```uid <number>```设置该进程用户标识
     * ```gid <number>``` 设置该进程的组标识
     * ```shell <boolean>``` 设置为true，不同的shell可以在comman命令中设置为字符安，例如，'ls -lh' 默认为false
-
+* 返回: ```<ChildProcess>```
 
 请求示例
 
@@ -275,3 +275,72 @@ setTimeout(function() {
     process.send({key: `child value `})
 }, 2000)
 ```
+
+## 实例
+
+#### 采用child_process.spawn编写一个守护进程
+
+下面 spawn_child.js 文件里面a只是声明了并没有赋值，此时调用a相当于undefined.a，这样会报TypeError错误，如果没有做try catch错误捕获，当前进程将会挂掉，下面采用child_process.spawn开启一个子进程，当子进程挂掉之后，主进程监听到进行重启。
+
+新建 spawn_child.js
+
+```js
+const http = require('http');
+const [url, port] = ['127.0.0.1', 3000];
+
+const server = http.createServer((req, res) => {
+    let a;
+
+    res.end(a.name); // TypeError: Cannot read property 'name' of undefined
+});
+
+server.listen(port, url, () => {
+    console.log(`server started at http://${url}:${port}`);
+});
+```
+
+新建 spawn_app.js 
+
+```js
+const spawn = require('child_process').spawn;
+
+function start(){
+    let child = spawn('node', ['./spawn_child.js'], {
+        cwd: __dirname,
+        detached: true,
+        stdio: 'inherit'
+    })
+
+    console.log(process.pid, child.pid);
+
+    /**
+     * @param { Number } code 子进程退出码
+     * @param { String } signal 子进程被终止时的信号
+     */
+    child.on('close', (code, signal) => {
+        console.log(`收到close事件，子进程收到信号 ${signal} 而终止，退出码 ${code}`);
+
+        child.kill();
+        child = start();
+    });
+
+    /**
+     * 出现以下情况触发error事件
+     * 1. 进程无法被衍生
+     * 2. 进程无法被杀死
+     * 3. 向子进程发送信息失败
+     */
+    child.on('error', (code, signal) => {
+        console.log(`收到error事件，子进程收到信号 ${signal} 而终止，退出码 ${code}`);
+
+        child.kill();
+        child = start();
+    });
+
+    return child;
+}
+
+start();
+```
+
+#### 
