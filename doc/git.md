@@ -32,7 +32,10 @@ Git中从远程的分支获取最新的版本到本地：
 
 	```git merge origin/master```
 	
-	
+修改远程仓库地址
+
+git remote rm origin
+git remote add origin [url]
 ### 拉取dev分支到本地
 
 首先自己要与origin master建立连接：```git remote add origin git@github.com:XXXX/nothing2.git```  
