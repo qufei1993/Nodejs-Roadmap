@@ -1,5 +1,9 @@
 # 关于this
 
+* 错误认识
+
+* this绑定规则
+
 ## 错误认识
 
 #### 指向自身
@@ -54,3 +58,48 @@
 }
 ```
 
+## this绑定规则
+
+#### 默认绑定
+
+当函数调用属于独立调用（不带函数引用的调用），无法调用其他的绑定规则，我们给它一个称呼“默认绑定”，在非严格模式下绑定到全局对象，在使用了严格模式(use strict)下绑定到undefined。
+
+严格模式下调用
+
+```js
+'use strict'
+
+function demo(){
+	console.log(this.a); // TypeError: Cannot read property 'a' of undefined
+}
+
+const a = 1;
+
+demo();
+```
+
+非严格模式下，在浏览器window全局对象下会将a绑定到window.a
+
+```js
+function demo(){
+	console.log(this.a); // 1
+}
+
+let a = 1;
+
+demo();
+```
+
+非严格模式下，在node环境中，不会将a绑定到global，因此下面输出undefined
+
+```js
+function demo(){
+	console.log(this.a); // undefined
+}
+
+let a = 1;
+
+demo();
+```
+
+注意：项目代码中，要么使用严格模式要么使用非严格模式，不要混合使用，也许会给你造成一些意外的bug。
