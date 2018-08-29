@@ -1,6 +1,6 @@
 
 
-node项目启动进程守护
+* node项目启动进程守护
   * [pm2 带有负载均衡管理的node应用进程管理工具](https://github.com/Unitech/pm2)
   * [supervisor 全局启动监听项目变化](https://github.com/petruisfan/node-supervisor)
 
