@@ -32,13 +32,14 @@
   - `抓取目标数据，采用http模块、chromeless中间件`[`[more]`](/node/creeper.md#抓取目标数据)
   - `使用cheerio解析`[`[more]`](/node/creeper.md#使用cheerio解析)
   - `案例-爬取某网站课程标题信息`[`[more]`](/node/creeper.md#案例-爬取某网站课程标题信息)
+* [crypto模块实现md5、Cipher等多种加密方式](/node/crypto.md)
+  - `对称密钥加解密Cipher实例介绍` [`[more]`](/node/creeper.md#cipher)
+  - `不可逆向解密的md5加密` [`[more]`](/node/creeper.md#md5加密)
 
 * [常用插件](/node/plugins.md)
 * [经纬度计算](/node/distance.md)
-* [跨域](/node/cors.md)
 * [C++编写node插件](/node/c_addons.md)
 * [Javascript排序](/node/sort.md)
-* [crypto模块实现md5、Cipher等多种加密方式](/node/crypto.md)
 
 ## cpu密集 VS I/O密集
 
