@@ -8,6 +8,10 @@
       - `[类型检测]` typeof、instanceof类型检测
   - [关于this](/javascript/this.md#关于this)
       - [`[关于this]` 错误认识](/javascript/this.md#对于this的错误认识)
+      - [`[关于this]` this四条绑定规则](/javascript/this.md#this绑定规则)
+      - [`[关于this]` 绑定规则优先级](/javascript/this.md#优先级)
+      - [`[关于this]` 箭头函数](/javascript/this.md#箭头函数)
+      - [`[关于this]` 项目中使用this的一些场景及需要注意的问题](/javascript/this.md#this在项目中使用问题总结)
   - [数组](/javascript/base.md#数组)
       - `[数组去重]` Set数组去重
       - `[数组去重]` reduce数组对象去重
