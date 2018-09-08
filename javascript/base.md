@@ -317,7 +317,7 @@ console.log(sum(3));
 
 #### call和apply的使用与区别?
 
-call的使用示例
+apply使用情况
 
 ```javascript
 function box(num1,num2){
@@ -334,8 +334,7 @@ function sum(num1,num2){
 
 console.log(sum(10,10)); //输出结果: 20
 ```
-
-apply使用情况
+call的使用示例
 
 ```javascript
 function box(num1,num2){
