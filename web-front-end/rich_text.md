@@ -107,13 +107,13 @@ class Wysiwyg extends Component {
                                     wrapperClassName="home-wrapper"
                                     editorClassName="home-editor"
                                     onEditorStateChange={this.onEditorStateChange}
-                                    toolbar={{
+                                    /* toolbar={{
                                         history: { inDropdown: true },
                                         inline: { inDropdown: false },
                                         list: { inDropdown: true },
                                         textAlign: { inDropdown: true },
                                         image: { uploadCallback: this.imageUploadCallBack },
-                                    }}
+                                    }} */
                                     onContentStateChange={this.onEditorChange}
                                     placeholder="请输入正文~~尝试@哦，有惊喜"
                                     spellCheck
