@@ -9,7 +9,7 @@
 ### draftToMarkdown
 转换成Markdown
 
-```javascript
+```jsx
 /**
  * Created by hao.cheng on 2017/4/26.
  */
