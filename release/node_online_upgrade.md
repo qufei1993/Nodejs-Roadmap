@@ -48,11 +48,11 @@ $ npm -v
 
 安装完node之后重启所有服务，发现并没有应用到最新的node版本，因为最初项目使用pm2部署的，因此还仍需进行第二步操作更新pm2。
 
-## 更新pm2
+## 更新pm2
 
-注意：在更新之前，先执行pm2 save对当前的服务进行保存
+注意：在更新之前，先执行pm2 save对当前的服务进行保存
 
-刚开始没注意将pm2升级到了最新版本3.2.X，然后项目只要重启，执行此重启命令 ``` pm2 startOrGracefulReload ecosystem.json ``` 就报类似以下错误端口被占用
+刚开始没注意将pm2升级到了最新版本3.2.X，然后项目只要重启，执行此重启命令 ``` pm2 startOrGracefulReload ecosystem.json ``` 就报类似以下错误端口被占用
 
 ```s
 Error: listen EADDRINUSE :::8888
@@ -71,7 +71,7 @@ Error: listen EADDRINUSE :::8888
     at Object.<anonymous> (/root/.nvm/versions/node/v8.11.1/lib/node_modules/pm2/lib/ProcessContainerFork.js:48:21)
 ```
 
-经排查原因在于pm2 3.2.X版本对于集群模式做了修改，原来 ``` "exec_mode": "cluster" ```，修改为 ``` "exec_mode": "cluster_mode" ```
+经排查原因在于pm2 3.2.X版本对于集群模式做了修改，原来 ``` "exec_mode": "cluster" ```，修改为 ``` "exec_mode": "cluster_mode" ```
 
 后来还是将pm2更新为了当前的稳定版本2.9.1
 
@@ -85,4 +85,4 @@ Error: listen EADDRINUSE :::8888
 pm2 update
 ```
 
-至此，升级版本所需要的都已经ok啦。
+至此，升级版本所需要的都已经ok啦，在升级为指定版本之前一定要先了解，不要盲目去做升级。
