@@ -148,13 +148,13 @@
 * [React 项目发布](/release/react_deploy.md)
 
 # 项目经验
-    * React仿大众点评WebApp开发
-    * 基于NodeJs的Web静态资源服务器
-    * ES6+Gulp 构建彩票项目
-    * Nodejs+Express+MongoDB+Jade 仿豆瓣电影网
-    * bootstrap响应式布局开发南钢街道“党群E服务”云平台前端页面
-    * div+css+javascript开发个人博客静态页面
-    * div+css仿天猫首页
+* React仿大众点评WebApp开发
+* 基于NodeJs的Web静态资源服务器
+* ES6+Gulp 构建彩票项目
+* Nodejs+Express+MongoDB+Jade 仿豆瓣电影网
+* bootstrap响应式布局开发南钢街道“党群E服务”云平台前端页面
+* div+css+javascript开发个人博客静态页面
+* div+css仿天猫首页
 
 # 数据库操作
 
