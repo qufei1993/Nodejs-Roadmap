@@ -25,6 +25,6 @@
         - `[项目发布]` 实现服务器与第三方仓库的关联
         - `[项目发布]` PM2部署代码到服务器
 
+* [记一次生产环境Node版本升级经历](/release/node_online_upgrade.md)
 * [forever发布Nodejs项目](/release/forever_deploy_nodejs.md)
-
 * [React 项目发布](/release/react_deploy.md)
