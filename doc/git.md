@@ -12,7 +12,7 @@ Git
 * ``` git push -u origin master ``` 推送到远程仓库看
 * ``` git pull ``` 拉取远程仓库代码到本地
 * ```git branch -av``` 查看每个分支的最新提交记录
-* ```git branch -vv``` 查看每个分支属于哪个远程仓库
+* ```git branch -vv``` 查看每个分支属于哪个远程仓库
 * ```git reset --hard a3f40baadd5fea57b1b40f23f9a54a644eebd52e``` 代码回归到某个提交记录
 
 ## 分支操作
@@ -29,7 +29,7 @@ Git
 * 方法1，先删后加:
 	* ``` git remote rm origin ``` 先删除
 	* ``` git remote add origin 仓库地址 ``` 链接到到远程git仓库
-* 方法2，修改命令:
+* 方法2，修改命令:
 	* ```git remote set-url origin 仓库地址```
 
 ## 远程分支获取最新的版本到本地
