@@ -11,9 +11,13 @@ Git
 * ``` git status ``` 查看状态  
 * ``` git push -u origin master ``` 推送到远程仓库看
 * ``` git pull ``` 拉取远程仓库代码到本地
+* ```git branch -av``` 查看每个分支的最新提交记录
+* ```git branch -vv``` 查看每个分支属于哪个远程仓库
+* ```git reset --hard a3f40baadd5fea57b1b40f23f9a54a644eebd52e``` 代码回归到某个提交记录
 
 ## 分支操作
 
+* 查看本地都有哪些分支 ``` git branch -a ```
 * 新建分支 ``` git branch dev```
 * 查看当前分支 ``` git branch ```
 * 切换分支 ``` git checkout dev ```
@@ -44,7 +48,7 @@ Git
 
 		```git merge origin/master```
 
-## 拉去远程仓库指定分支到本地
+## 拉取远程仓库指定分支到本地
 
 * 首先要与origin master建立连接：```git remote add origin git@github.com:XXXX/nothing2.git```  
 
@@ -127,7 +131,7 @@ pre-commit:
 
 #### Answer4: 
 
-* 打开项目中的```.git/hooks```文件夹，找到```pre-commit.sample```文件，将以下代码替换到文件中。
+* 打开项目中的```.git/hooks```文件夹，找到```pre-commit.sample```文件，将以下代码替换到文件中，或者，```npm install pre-commit --save```也可以，这个命令会自动执行以下操作。
 
 ```shell
 #!/bin/bash
