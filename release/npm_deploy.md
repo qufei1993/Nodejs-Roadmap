@@ -61,11 +61,7 @@ npm publish
 
 ### 可能遇到的问题
 
-###### 问题1
-
-```
-no_perms Private mode enable, only admin can publish this module: coorddistance
-```
+* ``` no_perms Private mode enable, only admin can publish this module: coorddistance ```
 
 这里注意的是因为国内网络问题，许多小伙伴把npm的镜像代理到淘宝或者别的地方了，这里要设置回原来的镜像。
 
@@ -73,3 +69,7 @@ no_perms Private mode enable, only admin can publish this module: coorddistance
 npm config set registry=http://registry.npmjs.org
 
 ```
+
+* ``` Unexpected end of input at 1:3637 npm ERR! egistry.npmjs.org/mkdirp/-/mkdirp-0.3.2.tgz"},"engines":{"node":"*"}```
+
+执行命令 ``` npm cache clean --force ```

@@ -7,7 +7,7 @@ homebrew安装jenv
 
 ``` brew install jenv ```
 
-## 查看java版本
+#### 查看java版本
 
 ``` jenv versions ``` 只列出了系统默认的java版本，其它的版本需要手动添加到jenv中
 
@@ -16,7 +16,7 @@ $ jenv versions
 * system (set by /Users/yourdirname/.jenv/version)
 ```
 
-## jenv中添加新的版本
+#### jenv中添加新的版本
 
 添加jdk1.8
 
@@ -27,7 +27,7 @@ oracle64-1.8.0.102 added
 1.8 added
 ```
 
-## 指定java版本号
+#### 指定java版本号
 
 jenv local <版本号>
 
@@ -42,7 +42,7 @@ $ jenv version
 1.8 (set by /Library/Java/JavaVirtualMachines/.java-version)
 ```
 
-## 查看当前版本在硬盘上的位置
+#### 查看当前版本在硬盘上的位置
 
 ```s
 $ jenv which java

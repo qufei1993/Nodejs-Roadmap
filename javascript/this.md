@@ -1,15 +1,18 @@
-# 关于this
+# 详解JavaScript中的this
 
+相信javascript中的this会使很多同学在工作学习中产生困惑，笔者也同样是，经过阅读各种资料及实际工作中的应用，做了以下梳理，主要内容包括长期以来大家对this的错误认识及this的绑定规则，箭头函数、实际工作场景中遇到的问题，希望对于有此困惑的你能有所帮助。
+
+> @曲振飞，NodeJs工程师，慕课网认证作者，热爱技术，喜欢分享的90后青年。Github:https://github.com/Q-Angelo/summarize
+
+## 快速导航
 * 错误认识
 	* [指向自身](#指向自身)
 	* [指向函数的作用域](#指向函数的作用域)
-
 * this绑定规则
 	* [默认绑定](#默认绑定)
 	* [隐式绑定](#隐式绑定)
 	* [显示绑定](#显示绑定)
 	* [new绑定](#new绑定)
-
 * [优先级](#优先级)
 * [箭头函数](#箭头函数)
 * [项目中使用this的一些场景及需要注意的问题](#this在项目中使用问题总结)
@@ -23,24 +26,22 @@
 下面示例，声明函数foo，执行foo.count=0时，的确向函数对象foo添加了一个属性count。但是函数foo内部代码this.count中的this并不是指向那个函数对象，for循环中的foo(i)掉用它的对象是window，等价于window.foo(i)，因此函数foo里面的this指向的是window。
 
 ```js
-{
-	function foo(num){
-		console.log("foo: " + num);
-		
-		//记录foo被调用次数
-		this.count++;
-	}
-
-	foo.count = 0;
-
-	for(let i=0; i<10; i++){
-		if(i > 5){
-			foo(i);
-		}
-	}
-
-	console.log(foo.count); // 0
+function foo(num){
+	console.log("foo: " + num);
+	
+	//记录foo被调用次数
+	this.count++;
 }
+
+foo.count = 0;
+
+for(let i=0; i<10; i++){
+	if(i > 5){
+		foo(i);
+	}
+}
+
+console.log(foo.count); // 0
 ```
 
 #### 指向函数的作用域
@@ -54,18 +55,16 @@
 * nodejs，在node环境下，声明的function 不会放在global全局对象下，因此在foo函数里调用this.bar函数会报 ``` TypeError: this.bar is not a function ``` 错误，调用bar函数，要省去前面的this。
 
 ```js
-{
-	function foo(){
-		var a = 2;
-		this.bar();
-	}
-
-	function bar(){
-		console.log(this.a);
-	}
-
-	foo();
+function foo(){
+	var a = 2;
+	this.bar();
 }
+
+function bar(){
+	console.log(this.a);
+}
+
+foo();
 ```
 
 ## this绑定规则
@@ -167,7 +166,7 @@ parent.child(); // zhangsan
 
 * ```显示绑定``` 需要引用一个对象时进行强制绑定调用，js有提供call()、apply()方法，ES5中也提供了内置的方法 ```Function.prototype.bind```。
 
-call、apply这两个函数的第一个参数都是设置this对象，关于两个个函数的区别可以查看 [`[函数]` call和apply的使用与区别?](/javascript/base.md#call和apply的使用与区别?)
+call、apply这两个函数的第一个参数都是设置this对象，关于两个个函数的区别可以查看 [`[函数]` call和apply的使用与区别?](https://github.com/Q-Angelo/summarize/blob/master/javascript/base.md#call%E5%92%8Capply%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%8C%BA%E5%88%AB)
 
 
 ```js
