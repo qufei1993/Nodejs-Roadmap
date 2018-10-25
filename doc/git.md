@@ -70,6 +70,7 @@ Did you intend to checkout 'origin/dev' which can not be resolved as commit?
 ## 工具类
 
 * [Beyond Compare (http://www.scootersoftware.com/download.php](http://www.scootersoftware.com/download.php) 代码合并
+* [官方Git文档地址 https://git-scm.com/book/zh/v2](https://git-scm.com/book/zh/v2)
 
 ## 常见问题
 
@@ -113,7 +114,7 @@ git pull之后加上可选参数 --allow-unrelated-histories 强制合并
 
 #### Question4
 
-使用钩子``` pre-commit ```，提交代码提示如下错误：
+使用钩子``` pre-commit ```，提交代码提示如下错误：
 
 ```shell
 $ git commit -m '.'
