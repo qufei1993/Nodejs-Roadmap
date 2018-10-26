@@ -36,7 +36,7 @@
   - `对称密钥加解密Cipher实例介绍` [`[more]`](/node/creeper.md#cipher)
   - `不可逆向解密的md5加密` [`[more]`](/node/creeper.md#md5加密)
 
-* [常用插件](/node/plugins.md)
+* [常用Web框架&中间件汇总](/node/plugins.md)
 * [经纬度计算](/node/distance.md)
 * [C++编写node插件](/node/c_addons.md)
 * [Javascript排序](/node/sort.md)

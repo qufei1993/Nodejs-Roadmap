@@ -1,4 +1,5 @@
 
+# 常用Web框架&中间件汇总
 
 * node项目启动进程守护
   * [pm2 带有负载均衡管理的node应用进程管理工具](https://github.com/Unitech/pm2)
@@ -29,4 +30,11 @@
   * [mocha NodeJS里最常用的测试框架](https://mochajs.org/)
   * [chai 一个断言库](http://www.chaijs.com/api/)
   * [istanbul Istanbul - a JS code coverage tool written in JS 测试覆盖率](https://github.com/gotwarlost/istanbul)
+
+* 定时任务
+  * [node-schedule ](https://github.com/node-schedule/node-schedule)
+
+* 服务注册
+  * [node-zookeeper](https://github.com/yfinkelstein/node-zookeeper)
+    > 一个分布式的、开源的协调服务，用在分布式应用程序中，node-zookeeper是ZooKeeper的一个Node.js客户端实现，这个模块是基于ZooKeeper原生提供的C API来实现的
   
