@@ -15,6 +15,7 @@
 * 日志记录收集
   * [Sentry--错误日志收集框架](https://sentry.io/welcome/)
   * [log4js 日志记录工具](https://github.com/log4js-node/log4js-node)
+  * [ELK--开源的日志分析系统](https://www.elastic.co/cn/products)
 
 * 校验
   * [express-validator express框架校验](https://github.com/ctavan/express-validator)
@@ -38,3 +39,7 @@
   * [node-zookeeper](https://github.com/yfinkelstein/node-zookeeper)
     > 一个分布式的、开源的协调服务，用在分布式应用程序中，node-zookeeper是ZooKeeper的一个Node.js客户端实现，这个模块是基于ZooKeeper原生提供的C API来实现的
   
+* 前端监控系统
+
+    * [前端性能监控系统,消息队列,高可用,集群等相关架构 zanePerfor](https://github.com/wangweianger/zanePerfor)
+    * [一个收费的全栈应用错误实时监控平台 Fundebug](https://docs.fundebug.com/)

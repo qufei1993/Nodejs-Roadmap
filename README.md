@@ -56,6 +56,17 @@
     - `[错误]` ReferenceError错误 [`[more]`](/javascript/base.md#ReferenceError错误)
     - `[错误]` TypeError错误 [`[more]`](/javascript/base.md#TypeError错误)
 
+* [ES6语法扩展](/javascript/es6.md)
+    * `[ES6语法扩展系列]` let、const声明变量
+    * `[ES6语法扩展系列]` 数组、对象解构赋值
+    * `[ES6语法扩展系列]` 正则、字符串、数值、数组、函数、对象扩展
+    * `[ES6语法扩展系列]` Symbol用法
+    * `[ES6语法扩展系列]` Set、Map用法
+    * `[ES6语法扩展系列]` Promise
+    * `[ES6语法扩展系列]` Symbol.iterator
+    * `[ES6语法扩展系列]` Generator 
+    * `[ES6语法扩展系列]` Decorators
+
 # NodeJS
 
 * [`[系统模块系列一]` console模块解读](/node/console.md)
@@ -98,23 +109,6 @@
 * [经纬度计算](/node/distance.md)
 * [C++编写node插件](/node/c_addons.md)
 * [Javascript排序](/node/sort.md)
-
-# ES6语法扩展
-
-* [`[ES6语法扩展系列一]` let、const声明变量](/ES6/1-let%20const.md)
-* [`[ES6语法扩展系列二]` 数组、对象解构赋值](/ES6/2-解构赋值.md) 
-* [`[ES6语法扩展系列三]` 正则扩展](/ES6/3-%E6%AD%A3%E5%88%99%E6%89%A9%E5%B1%95.md)
-* [`[ES6语法扩展系列四]` 字符串扩展](/ES6/4-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%89%A9%E5%B1%95.md) 
-* [`[ES6语法扩展系列五]` 数值扩展](/ES6/5-%E6%95%B0%E5%80%BC%E6%89%A9%E5%B1%95.md) 
-* [`[ES6语法扩展系列六]` 数组扩展](/ES6/6-%E6%95%B0%E7%BB%84%E6%89%A9%E5%B1%95.md)  
-* [`[ES6语法扩展系列七]` 函数扩展](/ES6/7-%E5%87%BD%E6%95%B0%E6%89%A9%E5%B1%95.md) 
-* [`[ES6语法扩展系列八]` 对象扩展](/ES6/8-%E5%AF%B9%E8%B1%A1%E6%89%A9%E5%B1%95.md) 
-* [`[ES6语法扩展系列九]` Symbol用法](/ES6/9-Symbol%E7%94%A8%E6%B3%95.md) 
-* [`[ES6语法扩展系列十]` set-map用法](/ES6/10-set-map%E7%94%A8%E6%B3%95.md) 
-* [`[ES6语法扩展系列十一]` Promise](/ES6/13-Promise.md) 
-* [`[ES6语法扩展系列十二]` Symbol.iterator](/ES6/14-Iterator.md) 
-* [`[ES6语法扩展系列十三]` Generator](/ES6/15-Generator.md) 
-* [`[ES6语法扩展系列十四]` Decorators](/ES6/16-Decorators.md)
 
 ### 项目发布
 

@@ -8,6 +8,8 @@
 - ### Redis
     * [redis安装](/database/redis_install.md)
 
+- ### Rabbitmq
+
 - ### MySQL
 
 - ### PostgreSQL
