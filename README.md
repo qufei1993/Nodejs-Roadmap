@@ -180,5 +180,5 @@
 # 干货分享
 
 * `[服务器]` [sudo 出现unable to resolve host 解决方法](/doc/linux_unable_to_host.md)
-* `[版本控制]` [git常用操作](/doc/git.md)
+* `[版本控制]` [Git常用命令及日常问题集锦](/doc/git.md)
 * `[SEO优化]` [SEO网站优化title设置与快速排名](/doc/seo.md)
