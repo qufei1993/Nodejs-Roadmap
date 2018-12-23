@@ -115,7 +115,7 @@ Jquery源码地址：https://cdn.bootcss.com/jquery/3.3.1/jquery.js
         return new jQuery.fn.init(selector);
     }
 
-    Jquery.fn = {
+    Jquery.fn = Jquery.prototype = {
         css: function() {
             alert('css');
         },
@@ -151,7 +151,7 @@ Jquery源码地址：https://cdn.bootcss.com/jquery/3.3.1/jquery.js
 1. 插件扩展在```$.fn```之上，并不是扩展在构造函数的原型
 2. 对外开放的只有```$```，构造函数并没有开放
 
-在Zepto中把原型方法放在$.fn上，在Jquery中把原型方法放在Jquery.fn之上，之所以这样做是为了后期插件扩展所需。
+在Zepto中把原型方法放在$.fn上，在Jquery中把原型方法放在Jquery.fn之上，之所以这样做是为了后期插件扩展所需。
 
 实例:
 
