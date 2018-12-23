@@ -52,6 +52,27 @@ var ObjectId = Schema.Types.ObjectId;
 from:{type:ObjectId,ref:'user'}, //ref指向要关联的信息
 ```
 
+## Require加载机制原理
+```todo:// ```
+
+## MongoDB优化
+```todo:// ```
+
+## MongoDB内部存储原理
+```todo:// ```
+
+## 域名DNS解析过程
+```todo:// ```
+
+## NodeJs多进程之间数据通信
+```todo:// ```
+
+## 可读流与可写流
+```todo:// ```
+
+## https协议加密算法
+```todo:// ```
+
 ## JS篇
 
 #### 1.js的基本类型和复杂类型？
