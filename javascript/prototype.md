@@ -152,6 +152,8 @@ alert(box1.name.addstring()); // lee，被添加了！
 
 ### 实例
 
+以下实例中通过Jquery或Zepto操作dom元素，例如css方法、text方法都是操作的原型上的的方法。
+
 ```html
 <!DOCTYPE html>
 <html lang="en">
