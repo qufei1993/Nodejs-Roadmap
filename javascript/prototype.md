@@ -1,5 +1,7 @@
 # 原型
 
+> 原型是javascript的核心概念也是较难理解的，本篇主要介绍原型的一些概念，且与构造函数属性、构造函数方法的区别，最后结合Jquery与Zepto在实际工作中的应用进行分析介绍，希望对您有帮助。
+
 ## 快速导航
 
 * [原型概念](#原型概念)
@@ -60,14 +62,19 @@ Box.prototype.run=function(){//原型方法
 var box1=new Box();
 var box2=new Box();
 alert(box1.run==box2.run);  // true
+```
+这个属性是一个对象，访问不到
+```js
+alert(box1.prototype);
+```
+这个属性是一个指针指向prototype原型对象
+```js
+ alert(box1._proto_);
+```
+构造属性可以获取构造函数本身，作用是被原型指针定位，然后得到构造函数本身，其实就是对象实例对应的原型对象的作用
 
-// alert(box1.prototype);	// 这个属性是一个对象，访问不到
-// alert(box1._proto_); // 这个属性是一个指针指向prototype原型对象
-
-//构造属性可以获取构造函数本身
-//作用是被原型指针定位，然后得到构造函数本身
-//其实就是对象实例对应的原型对象的作用
-alert(box1.constructor);	
+```js
+alert(box1.constructor);
 ```
 
 ## 原型字面量创建对象
@@ -78,8 +85,9 @@ alert(box1.constructor);
 
 ```js
 function Box(){}
-
-// 使用字面量的方式创建原型对象，这里{}就是对象(Object),new Object就相当于{}
+```
+使用字面量的方式创建原型对象，这里{}就是对象(Object),new Object就相当于{}
+```js
 Box.prototype={
     name:'lee',
     age:20,
@@ -116,7 +124,7 @@ alert(box1.constructor); //返回的是function Box(){}
 function Box(){}
 
 Box.prototype={
-    constructor:Box,//让他强制指向Box
+    constructor:Box,//让它强制指向Box
     name:'lee',
     age:20,
     run:function(){
