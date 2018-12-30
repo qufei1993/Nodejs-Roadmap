@@ -188,26 +188,44 @@ from:{type:ObjectId,ref:'user'}, //ref指向要关联的信息
 
 ## 异步
 
-* 什么是单线程，和异步之间的关系
+#### 什么是单线程，和异步之间的关系
+
 单线程，同一时间只能做一件事，是为了避免DOM渲染的冲突，解决方案就是异步处理，异步的实现方式是Event Loop。但是异步也有几点不好之处，一方面是可读性差代码并不是按照书写的方式执行，另一方面异步回调callback回调地狱的问题，同样伴随这异步的这些问题，又有了新的解决方案Promise、Async／Await。
 
-* 什么是event-loop
+#### 什么是event-loop
 
 事件轮询是JS实现异步的具体解决方案，同步代码直接执行，异步函数先放在异步队列中，待同步函数执行完毕，轮循执行异步队列的函数。
 
-* Jquery的Deferred解决方案
+#### Jquery的Deferred解决方案
+* Jquery的Deferred是最早提出解决异步的方式
 
-> Jquery1.5之后出现了Deferred，Promise也是从Deferred演变过来的，最后逐渐一套标准，独立出来了。
+* Jquery1.5之后出现了Deferred，Promise也是从Deferred演变过来的，最后逐渐一套标准，独立出来了。
 
-> 重点还是回归到问题本身，Deferred是Jquery1.5版本对Ajax的改变衍生出来的一个东西，其遵循对扩展开发修改封闭的一个原则，看下以下封装示例：
+*  重点还是回归到问题本身，Deferred是Jquery1.5版本对Ajax的改变衍生出来的一个东西，其遵循对扩展开发修改封闭的一个原则，看下以下封装示例：
 
-> Deferred与promise的区别
+* Deferred与promise的区别
+> Deferred这种对象有主动触发resolve、reject这种函数，也有done、fail、then这种被动监听函数，这些函数混在一块很容易被外部篡改，通过生成promise对象进行隔离，promise只有被动监听，没有主动修改。
 
-Deferred这种对象有主动触发resolve、reject这种函数，也有done、fail、then这种被动监听函数，这些函数混在一块很容易被外部篡改，通过生成promise对象进行隔离，promise只有被动监听，没有主动修改。
+#### Promise的基本使用和原理
 
-* Promise的基本使用和原理
-* 介绍以下async/await（和Promise的区别、联系）
-* 总结一下当前JS解决异步的方案
+	1. 如何异常捕获（Error、reject）通过catch捕获
+	2. 多个串联-链式执行的好处
+	3. Promise.all和Promise.race
+	4. Promise标准-状态变化（Pending —— Fulfilled/Rejected）
+	5. then函数，不明文指定返回实例，返回本身的promise实例，否则返回指定的promise实例
+
+#### 介绍一下async/await（和Promise的区别、联系）
+
+* await后面必须是一个promise实例，函数外层需要加上async修饰
+* 使用了Promise，并没有和Promise冲突，完全是同步的写法，没有了回调函数
+
+#### 总结一下当前JS解决异步的方案
+	Jquery的deferred、Promise、Async/Await
+
+#### 总结
+
+不论是Promise还是async/await在写法上解决了异步回调的问题，但是任何写法都不会改变JS单线程、异步的本质，除非js执行引擎发生变化。
 
 
-学习23种设计模式之前先学习5种设计原则
+* 5种设计原则
+* 23种设计模式
