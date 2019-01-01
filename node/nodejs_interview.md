@@ -203,6 +203,38 @@ from:{type:ObjectId,ref:'user'}, //ref指向要关联的信息
 
 *  重点还是回归到问题本身，Deferred是Jquery1.5版本对Ajax的改变衍生出来的一个东西，其遵循对扩展开发修改封闭的一个原则，看下以下封装示例：
 
+```html
+
+<script>
+	// 异步加载图片示例
+	function loadImage(src) {
+		var dtd = $.Deferred();
+		var img = document.createElement('img');
+
+		img.src = src;
+		img.onload = function() {
+			dtd.resolve(img);
+		}
+
+		img.onerror = function(err) {
+			dtd.reject(err);
+		}
+
+		return dtd.promise();// 返回promise对象，而不是直接返回deferred对象
+	}
+
+	loadImage('https://images.pexels.com/photos/457044/pexels-photo-457044.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500')
+		.then(function(result) {
+			document.body.appendChild(result);
+
+			console.log(result);
+		})
+		.catch(function(err) {
+			console.error(err);
+		})
+</script>
+```
+
 * Deferred与promise的区别
 > Deferred这种对象有主动触发resolve、reject这种函数，也有done、fail、then这种被动监听函数，这些函数混在一块很容易被外部篡改，通过生成promise对象进行隔离，promise只有被动监听，没有主动修改。
 
@@ -226,6 +258,23 @@ from:{type:ObjectId,ref:'user'}, //ref指向要关联的信息
 
 不论是Promise还是async/await在写法上解决了异步回调的问题，但是任何写法都不会改变JS单线程、异步的本质，除非js执行引擎发生变化。
 
+## 虚拟DOM
+
+#### virtualDom是什么？为什么会存在vdom?
+
+虚拟Dom是用JS来模拟DOM结构，为什么会使用vdom是因为在浏览器里对DOM的操作是非常耗性能的，因此，对DOM的对比操作放在JS层来做，是为了提高效率。
+
+#### virtualDom如何应用，核心API有哪些？
+
+#### diff算法
+
+在浏览器里Dom操作是昂贵的，因此尽量减少对Dom的操作，找出Dom更新的节点进行更新，其它部分不更新，那么找出Dom更新节点的过程就需要用到diff算法。
+
+在Linux里面使用diff可以比较两个文件的不同之处参见语法: ``` diff 文件1 文件2 ```，因此diff算法并不是React或Vue等提出的，在我们身边应用已久。
+
+diff实现，patch(container, vnode) path(vnode, newVnode)
+
+核心逻辑，createElement和updateChildren
 
 * 5种设计原则
 * 23种设计模式
