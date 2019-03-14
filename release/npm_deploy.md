@@ -73,3 +73,8 @@ npm config set registry=http://registry.npmjs.org
 * ``` Unexpected end of input at 1:3637 npm ERR! egistry.npmjs.org/mkdirp/-/mkdirp-0.3.2.tgz"},"engines":{"node":"*"}```
 
 执行命令 ``` npm cache clean --force ```
+
+
+* Node项目部署 私有包报错404 一般两种情况造成：
+  1. 检查服务器是否登录npm账号
+  2. 执行命令```npm config get registry``` 检查是否指向https，没有指向https执行命令 ```npm config set registry=https://registry.npmjs.org```
