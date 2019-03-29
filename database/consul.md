@@ -2,18 +2,18 @@
 
 ## 使用Consul解决了哪些问题：
 
-* 是否在为不同环境来维护不同项目配置而发愁
-* 是否有因为配置的更改，导致代码还要进行修改、发布，因为客流量大了还要规避开高峰期等到半夜来发布
+* 是否在为不同环境来维护不同项目配置而发愁
+* 是否有因为配置的更改，导致代码还要进行修改、发布，因为客流量大了还要规避开高峰期等到半夜来发布
 * 微服务架构下，应用的分解，业务系统与服务系统之间的调用管理
 
-以上只是列举的笔者曾经遇到的几点问题，当然问题还不止于这些，下面介绍的Consul可以有效解决这些问题，当然还有一些其它的优点，让我们一起期待下文的Consul的讲解。
+以上只是列举的笔者曾经遇到的几点问题，当然问题还不止于这些，下面介绍的Consul可以有效解决这些问题，当然还有一些其它的优点，让我们一起期待下文的Consul的讲解。
 
 ## Consul的四大核心特性:
 
 * 服务发现：可以方便的实现服务注册，通过DNS或者HTTP应用程序可以很容易的找到他所依赖的服务.
 * Key/Value存储：使用Key/Value进行数据存储。
 * 多数据中心：Consul支持开箱即用的多数据中心。这意味着用户不需要担心建立额外的抽象层让业务扩展到多个区域
-* 健康检查：可以对指定服务进行健康检查例如，Response Status是否为200，避免将流量转发到不健康的服务上。
+* 健康检查：可以对指定服务进行健康检查例如，Response Status是否为200，避免将流量转发到不健康的服务上。
 
 ## Consul架构
 
@@ -21,20 +21,20 @@
 
 ![](https://www.consul.io/assets/images/consul-arch-420ce04a.png)
 
-上图很好的展示了Consul对于多数据中心的支持，另外在两个数据中心之间只有Service层可以相互通信。
+上图很好的展示了Consul对于多数据中心的支持，另外在两个数据中心之间只有Service层可以相互通信。
 
-Consul是一个分布式高可用的系统，一个发现和配置服务的工具。客户端可以利用它提供的API注册和发现服务，及监控检测功能实现服务的高可用，深入的架构描述具体细节，可以参考官网[Consul Architecture](https://www.consul.io/docs/internals/architecture.html)，下面开始进入实战操作部分。
+Consul是一个分布式高可用的系统，一个发现和配置服务的工具。客户端可以利用它提供的API注册和发现服务，及监控检测功能实现服务的高可用，深入的架构描述具体细节，可以参考官网[Consul Architecture](https://www.consul.io/docs/internals/architecture.html)，下面开始进入实战操作部分。
 
 ## 安装
 
-本处主要以linux来讲解，其他操作平台见官网[Download Consul](https://www.consul.io/downloads.html)
+本处主要以linux来讲解，其他操作平台见官网[Download Consul](https://www.consul.io/downloads.html)
 
 下载 ``` wget https://releases.hashicorp.com/consul/1.4.0/consul_1.4.0_linux_amd64.zip ```
 
 解压 ```unzip consul_1.4.0_linux_amd64.zip``` 得到目录```consul```  
 复制 ```consul```到你的系统的任何一个地方，如果你想使用命令行直接访问，确保复制的目录在你的PATH里 ```cp consul /usr/local/bin/```
 
-验证consul是否安装成功，出现以下窗口则安装成功
+验证consul是否安装成功，出现以下窗口则安装成功
 
 ```
 [root@iZbp1isjfk2rw8fpnxx8wgZ ~]# consul
@@ -76,11 +76,11 @@ Available commands are:
 
 #### 启动命令简介：
 
-* ```-server```：定义agent运行在server模式，每个数据中心的Server建议在3～5个避免失败情况下数据的丢失
-* ```-client```：定义agent运行在client模式
+* ```-server```：定义agent运行在server模式，每个数据中心的Server建议在3～5个避免失败情况下数据的丢失
+* ```-client```：定义agent运行在client模式
 * ```bootstrap-expect```：server模式下，集群要求的最低数量，当低于这个数量，集群失效
 * ```-bootstrap-expect```：在一个datacenter中期望提供的server节点数目，当该值提供的时候，consul一直等到达到指定sever数目的时候才会引导整个集群
-* ```-bind```：节点的ip地址一般是```0.0.0.0```或云服务内网地址，用于被集群中的其他节点所访问
+* ```-bind```：节点的ip地址一般是```0.0.0.0```或云服务内网地址，用于被集群中的其他节点所访问
 * ```-node```：指定节点在集群中的唯一名称，默认为机器的hostname
 * ```-config-dir```：配置文件目录，里面所有以.json结尾的文件都会被加载
 * ```data-dir```：data存放的目录，consul数据同步机制
@@ -107,14 +107,14 @@ Available commands are:
 看下 consul agent 输出的几个重要信息：
 
 * Node name：代理的唯一名称，默认是机器的hostname，可以通过```-node```标志自定义，例如：```consul agent -dev -node myNode ```
-* Datacenter：数据中心，Consul支持多个数据中心，为了有效的工作，每个节点必须被配置且上报到数据中心，```-datacenter```标志用来设置数据中心，对于单一的DC配置，这个代理默认为```dc1```
-* Server：表示代理是以服务器还是客户端的模式来运行。
+* Datacenter：数据中心，Consul支持多个数据中心，为了有效的工作，每个节点必须被配置且上报到数据中心，```-datacenter```标志用来设置数据中心，对于单一的DC配置，这个代理默认为```dc1```
+* Server：表示代理是以服务器还是客户端的模式来运行。
 * Client Addr：用于代理的客户端接口地址。
 * Cluster Addr：用于集群中的Consul代理之间通信的地址和端口集，改地址必须可供其它节点访问。
 
 #### 查看集群成员(Members)
 
-打开一个新终端执行```consul members```，可以看到集群的成员。
+打开一个新终端执行```consul members```，可以看到集群的成员。
 
 ![](./img/consul_members_20190120001.png)
 
@@ -132,7 +132,7 @@ Available commands are:
 #### Stop Agent
 
 Agent两种停止方式：```gracefully```或```forcefully```
-```gracefully```方式停止，则是发送中断信号到Agent进程两种方法：```Ctrl+C```、```kill -INT consul_pid```
+```gracefully```方式停止，则是发送中断信号到Agent进程两种方法：```Ctrl+C```、```kill -INT consul_pid```
 
 ## 服务注册
 
@@ -140,7 +140,7 @@ Consul服务搭建好之后，通过```提供服务定义```或```HTTP API```注
 
 #### 提供服务定义方式服务注册
 
-创建目录```/etc/consul.d```(.d 后缀意思是这个路径包含了一组配置文件），Consul会载入该目录下的所有文件。
+创建目录```/etc/consul.d```(.d 后缀意思是这个路径包含了一组配置文件），Consul会载入该目录下的所有文件。
 
 例如我现在有个测试服务test01端口为3010
 
@@ -166,7 +166,7 @@ Consul服务搭建好之后，通过```提供服务定义```或```HTTP API```注
 }
 ```
 
-服务定义配置文件含义：
+服务定义配置文件含义：
 
 * name：服务名
 * tags：服务的tag，自定义，可以根据这个tag来区分同一个服务名的服务
@@ -179,7 +179,7 @@ Consul服务搭建好之后，通过```提供服务定义```或```HTTP API```注
     * interval：健康检查间隔时间，每隔10s，调用一次上面的URL
 
 
-重启Agent设置配置目录
+重启Agent设置配置目录
 
 ```
 consul agent -dev -config-dir /etc/consul.d
@@ -187,13 +187,13 @@ consul agent -dev -config-dir /etc/consul.d
 
 看以下运行结果：
 
-启动之后控制台输出了```Synced service "test01"```，意思是Agent从配置文件中载入了服务定义，且成功注册到服务目录，另外右边的服务test01也收到了健康检查接口调用
+启动之后控制台输出了```Synced service "test01"```，意思是Agent从配置文件中载入了服务定义，且成功注册到服务目录，另外右边的服务test01也收到了健康检查接口调用
 
 ![](./img/consul_20190120002.png)
 
 #### 采用HTTP API服务注册
 
-调用```/v1/agent/service/register```接口进行注册，请求Method为PUT方式
+调用```/v1/agent/service/register```接口进行注册，请求Method为PUT方式
 
 请求Body值为```服务定义```中的service值，看一下示例：
 
