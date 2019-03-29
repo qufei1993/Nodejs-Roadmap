@@ -43,3 +43,10 @@ src/redis-cli -p 6380
 //指定服务器地址和端口
 src/redis-cli -h localhost -p 6380
 ```
+
+### Redis常用配置
+
+* daemonize：是否是守护进程(no|yes)
+* port：Redis对外端口号
+* logfile：Redis系统日志
+* dir：常用工作目录

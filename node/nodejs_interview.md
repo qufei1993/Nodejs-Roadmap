@@ -1,77 +1,102 @@
-## 简单介绍下NodeJs？
+## NodeJs
 
 NodeJS是一个基于V8引擎的Javascript运行环境，使用事件驱动模型而不是复杂的多线程，在服务器环境中，处理二进制数据通常是必不可少的，但javascript对此支持不足，因此V8.Node增加了Buffer类，方便并且高效地处理二进制数据。
 
-## NodeJS四个特点：
-	1.单线程
-	2.非组塞式IO
-	3.V8
-	4.事件驱动
+## 前端
 
-## 单线程与多线程
-	单线程：多个请求占用一个线程
-	多线程：一个请求占用多个线程
-	Nginx：单线程
-	Apache：多线程
+* virtualDom是什么？为什么会存在vdom?
+* virtualDom如何应用，核心API有哪些？
+* diff算法
 
-## npm包安装在哪里
-	node_modules
+* 对MVVM的理解
+* VUE中如何实现响应式？
+* VUE中如何解析模板
+* VUE的整个实现流程
 
-## Nodejs中间件有哪些
-	logger: 用户请求日志中间件 express.logger 中间件已经独立 使用morgan var logger = require('morgan');
-	body-parser：请求内容解析中间件，将表单提交的数据格式化。
-	urlencoded: application/x-www-form-urlencode请求解析中间件
-	cookieParser: cookie解析中间件
-	cookieSession: 基于cookies的会话中间件
-	session: 会话管理中间件
+* 组件化的理解
 
-## require的理解
+<hr>
 
-## Express框架与Koa框架的区别
-	Koa是一个基于ES6规范的开发框架。  
-	最明显的差别就是handel处理方法，一个是普通的回调函数，一个是利用生成器函数作为相应器  
-	Express 的优点是线性逻辑：路由和中间件完美融合，通过中间件形式把业务逻辑细分，简化，一个请求进来经过一系列中间件处理后再响应给用户，再复杂的业务也是线性了，清晰明了。
-	KOA借助 promise 和 generator 的能力，丢掉了 callback，完美解决异步组合问题和异步异常捕获问题。   
+请求过滤器，
 
-## NodeJS是单线程还是多线程
-	Nodejs同Nginx服务器一样都是单线程，但是Node.js在底层访问I/O还是多线程  
-	我们都知道 Node.js 是以单线程的模式运行的，但它使用的是事件驱动来处理并发，这样有助于我们在多核 cpu 的系统上创建多个子进程，从	而提高性能。
+## 设计模式
 
-## 进程
-	是计算机中的程序关于某数据集合上的一次运行活动, 是系统进行资源分配和调度的基本单位。
+* 5种设计原则
+* 23种设计模式
 
-## 多进程
-  启动多个进程, 多个进程可以一块执行多个任务
+<hr>
 
-数据库篇：
-1.mongodb如何关联查询：通过populate实现关联查询。
-```javascript
-//通过ObjectId在模式中定义主键，
-var Schema = mongoose.Schema;
-var ObjectId = Schema.Types.ObjectId;
-from:{type:ObjectId,ref:'user'}, //ref指向要关联的信息
-```
+## JavaScript基础
 
-## Require加载机制原理
-```todo:// ```
+* 原型的实际应用（可以基于Jquery、Zepto进行讲解）
+* 原型的扩展
+* Jquery的Deferred了解程度
 
-## MongoDB优化
-```todo:// ```
+## NodeJs
 
-## MongoDB内部存储原理
-```todo:// ```
+* Express与Koa框架的区别？
+* 都用到哪些中间件
+* Require加载机制原理?
+* exports与module.exports的区别
+缓存，只加载一次（高级，会问到内部原理）
+* js回调地狱？及解决方案，期望答案promise，在介绍下promise的状态变化及原理(初级)
+* Promise 中 .then 的第二参数与 .catch 有什么区别?
+* Nodejs是单线程还是多线程及为什么是单线程？
+* 异步的具体实现是什么？
+* Event Loop的理解
+* Promise.then 与 setTimeout的执行顺序
+* process.nextTick与setTimeout递归调用区别
+* 事件优先级process.nextTick 与 Promise().then的执行顺序
+* 如何实现一个sleep？
 
-## 域名DNS解析过程
-```todo:// ```
+* 服务部署是通过什么方式？(是否自动化部署)
+* 负载均衡的情况线上日志怎么排查？
+* 有没有用过日志打印插件 （log4js、winston）
+* 实现console.log思路是什么？(根本还是process.stdout.write)（难）
+* 全链路日志追踪有没有实现思路（难）
+* 项目的配置信息是怎么做的？期望听到服务注册发现（zk、consul）
+* 加解密
+	对称加密、非对称、hash（不可逆加密）
+* 高并发调优经验？
 
-## NodeJs多进程之间数据通信
-```todo:// ```
+redis 时间
 
-## 可读流与可写流
-```todo:// ```
+## NodeJs进程相关问题
 
-## https协议加密算法
-```todo:// ```
+* js是单线程，如果利用好多核CPU的并发优势呢？（易）
+* 代码中有app.listen(port)，Cluster在fork()的时候为什么没有报端口冲突呢？（难）
+	> 总结来说端口只被master进程监听了一次，work进程中最后执行端口监听的方法被已被cluster模块主动hack掉了。 [cnode](https://cnodejs.org/topic/56e84480833b7c8a0492e20c)
+* Node.js 的 IPC通信，什么情况下需要 IPC, 以及使用 IPC 处理过什么业务场景等（难）
+> 在通过 child_process 建立子进程的时候, 是可以指定子进程的 env (环境变量) 的. 所以 Node.js 在启动子进程的时候, 主进程先建立 IPC 频道, 然后将 IPC 频道的 fd (文件描述符) 通过环境变量 (NODE_CHANNEL_FD) 的方式传递给子进程, 然后子进程通过 fd 连上 IPC 与父进程建立连接.
+
+<hr>
+
+## HTTP
+
+* http协议（跨域、缓存）
+* https是否了解？
+* https协议加密算法
+* http.Agent
+* socket hang up
+	hang up 有挂断的意思, socket hang up 也可以理解为 socket 被挂断. 在 Node.js 中当你要 response 一个请求的时候, 发现该这个 socket 已经被 "挂断", 就会报 socket hang up 错误.
+
+	典型的情况是用户使用浏览器, 请求的时间有点长, 然后用户简单的按了一下 F5 刷新页面. 这个操作会让浏览器取消之前的请求, 然后导致服务端 throw 了一个 socket hang up.
+
+* 可读流与可写流	
+* 域名DNS解析过程
+
+<hr>
+
+## 数据库
+
+* 做过哪些MongoDB的优化
+* MongoDB的关联查询是否了解？DBRef
+* MongoDB内部存储原理（难-百度）
+* 生产环境需要创建索引，该怎么创建？直接通过客户端创建会造成什么影响？
+
+## 其他
+
+* 都有哪些开发标准（按照公司开发标准走）
 
 ## JS篇
 
@@ -97,93 +122,19 @@ from:{type:ObjectId,ref:'user'}, //ref指向要关联的信息
 	形参个数arguments.callee.length   arguments.callee就是取得函数的名字
 	实参个数： arguments.length
 
-#### 5.js继承
+## Express框架与Koa框架的区别
+	Koa是一个基于ES6规范的开发框架。  
+	最明显的差别就是handel处理方法，一个是普通的回调函数，一个是利用生成器函数作为相应器  
+	Express 的优点是线性逻辑：路由和中间件完美融合，通过中间件形式把业务逻辑细分，简化，一个请求进来经过一系列中间件处理后再响应给用户，再复杂的业务也是线性了，清晰明了。
+	KOA借助 promise 和 generator 的能力，丢掉了 callback，完美解决异步组合问题和异步异常捕获问题。   
 
-* 通过原型链实现, 示例：
-
+## mongoose关联查询
+1.mongodb如何关联查询：通过populate实现关联查询。
 ```javascript
-	function Box(){ //被继承的函数叫作超类型(父类 或 基类)
-		this.name="lee";
-	}
-	function Desk(){//继承的函数叫作子类型(子类 或 派生类)
-		this.age=20;
-	}
-	function Table(){
-		this.run=function(){
-			return this.name+this.age+"运行中。。。";
-		};
-	}
-
-	//通过原型链继承。超类型实例化的对象实例，赋值给子类型的原型属性。
-	//new Box()会将Box构造里的信息和原型里的信息都交给Desk
-	//Desk的原型得到的是Box的构造+原型里的信息
-	//同样table会继承到上面两个信息
-	Desk.prototype=new Box();
-	Table.prototype=new Desk();
-	var table=new Table();
-	//alert(table.name);
-	//alert(table.age);
-	//alert(table.run());
-
-	//子类从属与自己和继承的超类型
-	alert(table instanceof Table);
-	alert(table instanceof Desk);
-	alert(table instanceof Box);
-```
-
-* 对象继承, 示例：
-
-```javascript
-
-	function Box(name,age){
-		this.name=name;
-		this.age=age;
-		this.family=['zs','ls'];
-	}
-	function Desk(name,age){//对象冒充,只能继承构造函数里的，无法继承原型里面的
-		Box.call(this,name,age);
-	}
-	var desk=new Desk('lee',20);
-	desk.family.push('ww');
-	alert(desk.family);	//zs ls ww
-	var desk2=new Desk('lee',20);
-	alert(desk2.family);//zs ls
-```
-
-* 组合继承=原型链模式+构造函数模式, 示例：
-
-```javascript
-	function Box(name,age){
-		this.name=name;
-		this.age=age;
-		this.family=['zs','ls'];
-	}
-	//构造函数里的方法，放在构造函数里，每次实例化，都会分配一个内存地址，浪费，所以做好放在原型里
-	Box.prototype.run=function(){
-		return this.name+this.age+"运行中。。。";
-	}
-	function Desk(name,age){//对象冒充,只能继承构造函数里的，无法继承原型里面的
-		Box.call(this,name,age);
-	}
-	Desk.prototype=new Box();//原型链继承
-	var desk=new Desk('lee',20);
-	alert(desk.run());
-```
-
-
-## js的回调实例：
-
-```javascript
-	var async=function(callback){
-	    //read data
-	    setTimeout(function(){
-	        callback('data');
-	    },3000);//3秒后回调
-	};
-	//使用
-	async(function(data){
-	    alert(data);
-	});
+//通过ObjectId在模式中定义主键，
+var Schema = mongoose.Schema;
+var ObjectId = Schema.Types.ObjectId;
+from:{type:ObjectId,ref:'user'}, //ref指向要关联的信息
 ```
 
 ## 异步
@@ -201,7 +152,7 @@ from:{type:ObjectId,ref:'user'}, //ref指向要关联的信息
 
 * Jquery1.5之后出现了Deferred，Promise也是从Deferred演变过来的，最后逐渐一套标准，独立出来了。
 
-*  重点还是回归到问题本身，Deferred是Jquery1.5版本对Ajax的改变衍生出来的一个东西，其遵循对扩展开发修改封闭的一个原则，看下以下封装示例：
+*  重点还是回归到问题本身，Deferred是Jquery1.5版本对Ajax的改变衍生出来的一个东西，其遵循对扩展开放修改封闭的一个原则，看下以下封装示例：
 
 ```html
 
@@ -234,7 +185,6 @@ from:{type:ObjectId,ref:'user'}, //ref指向要关联的信息
 		})
 </script>
 ```
-
 * Deferred与promise的区别
 > Deferred这种对象有主动触发resolve、reject这种函数，也有done、fail、then这种被动监听函数，这些函数混在一块很容易被外部篡改，通过生成promise对象进行隔离，promise只有被动监听，没有主动修改。
 
@@ -258,23 +208,5 @@ from:{type:ObjectId,ref:'user'}, //ref指向要关联的信息
 
 不论是Promise还是async/await在写法上解决了异步回调的问题，但是任何写法都不会改变JS单线程、异步的本质，除非js执行引擎发生变化。
 
-## 虚拟DOM
-
-#### virtualDom是什么？为什么会存在vdom?
-
-虚拟Dom是用JS来模拟DOM结构，为什么会使用vdom是因为在浏览器里对DOM的操作是非常耗性能的，因此，对DOM的对比操作放在JS层来做，是为了提高效率。
-
-#### virtualDom如何应用，核心API有哪些？
-
-#### diff算法
-
-在浏览器里Dom操作是昂贵的，因此尽量减少对Dom的操作，找出Dom更新的节点进行更新，其它部分不更新，那么找出Dom更新节点的过程就需要用到diff算法。
-
-在Linux里面使用diff可以比较两个文件的不同之处参见语法: ``` diff 文件1 文件2 ```，因此diff算法并不是React或Vue等提出的，在我们身边应用已久。
-
-diff实现，patch(container, vnode) path(vnode, newVnode)
-
-核心逻辑，createElement和updateChildren
-
-* 5种设计原则
-* 23种设计模式
+入网IP是我们公布在外网供他人来调用的IP
+出网IP是我们调用他人，他人进行解析加入白名单

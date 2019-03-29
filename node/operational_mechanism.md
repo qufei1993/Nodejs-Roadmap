@@ -10,7 +10,7 @@
 
 * 事件优先级顺序 ``` process.nextTick > promise.then > setTimeout > setImmediate ```
 
-* Event Loop(时间循环)处理异步任务，分为两种 宏任务（MacroTask）和微任务（MicroTask），在执行宏任务之前会先清空微任务。
+* Event Loop(事件循环)处理异步任务，分为两种 宏任务（MacroTask）和微任务（MicroTask），在执行宏任务之前会先清空微任务。
 
 术语:
 
@@ -155,7 +155,6 @@ setTimeout(
 // 1
 
 ```
-
 ```javascript
 setImmediate(function A() {
     console.log(1);

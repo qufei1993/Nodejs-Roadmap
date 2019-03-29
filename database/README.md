@@ -15,3 +15,6 @@
 - ### MySQL
 
 - ### PostgreSQL
+
+- ### 服务注册Consul
+

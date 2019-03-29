@@ -74,7 +74,7 @@ Jquery操作DOM实现
             container.append($table);
         }
 
-        // 单机修改数据
+        // 单击修改数据
         $('#btn-update').click(function() {
             data[1].id = Math.ceil(Math.random() * 100);
 
