@@ -63,7 +63,7 @@
     - ```[面试]``` ``` 假设有a.js、b.js两个模块相互引用，会有什么问题？是否为陷入死循环？```，参考：[#](/docs/nodejs/module.md#问题1)
     - ```[面试]``` ``` a模块中的undeclaredVariable变量在b.js中是否会被打印？```，参考：[#](/docs/nodejs/module.md#问题2)
 - **中间件** [[more]](/docs/nodejs/middleware.md)
-    - ```[Mddleware]``` [常用Web框架&中间件汇总](#) [[more]](/docs/nodejs/middleware.md)
+    - ```[Mddleware]``` [常用Web框架&中间件汇总](/docs/nodejs/middleware.md)
 
 ## 数据库
 
@@ -71,7 +71,7 @@
 
 - **服务注册发现之Consul** [[more]](/docs/microservice/consul.md)
     - ```[Consul]``` [使用Consul解决了哪些问题](/docs/microservice/consul.md#使用consul解决了哪些问题)
-    - ```[Consul]``` [微服务Consul系列之服务部署、搭建、使用](/docs/microservice/consul.mdconsul架构)
+    - ```[Consul]``` [微服务Consul系列之服务部署、搭建、使用](/docs/microservice/consul.md#consul架构)
     - ```[Consul]``` [微服务Consul系列之集群搭建](/docs/microservice/consul.md#集群搭建)
     - ```[Consul]``` [微服务Consul系列之服务注册与服务发现](/docs/microservice/consul.md#服务注册与发现)
     - ```[Question]``` [微服务Consul系列之问题汇总篇](/docs/microservice/consul.md#问题总结)
@@ -89,17 +89,17 @@
 ## DevOps
 
 - **Node.js生产环境完整部署指南** [[more]](/docs/devops/node-deploy.md)
-    - ```[Node.js]``` [用户权限管理及登陆服务器](#用户权限管理及登陆服务器)
-    - ```[Node.js]``` [增强服务器安全等级](#增强服务器安全等级)
-    - ```[Node.js]``` [Node.js生产环境部署](#nodejs生产环境部署)
-    - ```[Node.js]``` [Nginx端口映射](#nginx映射)
-    - ```[Node.js]``` [Mongodb生产环境部署](#mongodb)
-    - ```[Node.js]``` [实现服务器与第三方仓库的关联-PM2代码部署](#本地代码同步第三方仓库进行生产部署)
+    - ```[Node.js]``` [用户权限管理及登陆服务器](/docs/devops/node-deploy.md#用户权限管理及登陆服务器)
+    - ```[Node.js]``` [增强服务器安全等级](/docs/devops/node-deploy.md#增强服务器安全等级)
+    - ```[Node.js]``` [Node.js生产环境部署](/docs/devops/node-deploy.md#nodejs生产环境部署)
+    - ```[Node.js]``` [Nginx端口映射](/docs/devops/node-deploy.md#nginx映射)
+    - ```[Node.js]``` [Mongodb生产环境部署](/docs/devops/node-deploy.md#mongodb)
+    - ```[Node.js]``` [实现服务器与第三方仓库的关联-PM2代码部署](/docs/devops/node-deploy.md#本地代码同步第三方仓库进行生产部署)
 - **NPM模块管理** [[more]](/docs/devops/npm-deploy.md)
-    - ```[NPM]``` [npm源设置](#npm源设置)
-    - ```[NPM]``` [nnpm注册登录](#npm注册登录)
-    - ```[NPM]``` [npm module 发布](#npm-module-发布)
-    - ```[NPM]``` [可能遇到的问题](#可能遇到的问题)
+    - ```[NPM]``` [npm源设置](/docs/devops/npm-deploy.md#npm源设置)
+    - ```[NPM]``` [nnpm注册登录](/docs/devops/npm-deploy.md#npm注册登录)
+    - ```[NPM]``` [npm module 发布](/docs/devops/npm-deploy.md#npm-module-发布)
+    - ```[NPM]``` [可能遇到的问题](/docs/devops/npm-deploy.md#可能遇到的问题)
 
 ## 工具
 
