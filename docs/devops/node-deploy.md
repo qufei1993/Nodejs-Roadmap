@@ -230,7 +230,7 @@ action = %(action_mw)s
 
 开启fail2ban服务 ``` sudo service fail2ban start ```
 
-## Node.js生产环境部署
+## nodejs生产环境部署
 
 #### 安装相关依赖模块
 
