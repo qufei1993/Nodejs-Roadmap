@@ -14,15 +14,10 @@
 ## 常见问题
 
 * ```JavaScript```七种内置类型: ```number、string、boolean、undefined、null、object、symbol```(ES6新增加)
-
 * ```基本类型：```指保存在栈内存中的数据，```引用类型：```([对象引用]())指保存在堆内存中的对象，传递的是引用的地址
-
 * ```弱类型：```变量没有类型, 变量持有的值有类型
-
 * ```(typeof null === 'object') = true```，正确的返回值应该是```null```，但是这个```bug```由来已久。 ```(undefined == null) = true```
-
 * ```indexOf```为```ECMAScript5```新方法，```IE8```及以下不支持
-
 -  ```setTimeout(callback, 100)```，```setTimeout```只接受一个函数或者变量做为参数不接受闭包，因为闭包会自执行，最小延迟```4ms```
 
 ## undefined与undeclared的区别
