@@ -69,11 +69,46 @@
 
 ## 微服务
 
+- **服务注册发现之Consul** [[more]](/docs/microservice/consul.md)
+    - ```[Consul]``` [使用Consul解决了哪些问题](/docs/microservice/consul.md#使用consul解决了哪些问题)
+    - ```[Consul]``` [微服务Consul系列之服务部署、搭建、使用](/docs/microservice/consul.mdconsul架构)
+    - ```[Consul]``` [微服务Consul系列之集群搭建](/docs/microservice/consul.md#集群搭建)
+    - ```[Consul]``` [微服务Consul系列之服务注册与服务发现](/docs/microservice/consul.md#服务注册与发现)
+    - ```[Question]``` [微服务Consul系列之问题汇总篇](/docs/microservice/consul.md#问题总结)
+
+- **消息中间件之RabbitMQ** [[more]](/docs/microservice/rabbitmq.md)
+    - ```[RabbitMQ]``` [主流消息中间件简介](/database/rabbitmq_base.md#主流消息中间件简介)
+    - ```[RabbitMQ]``` [RabbitMQ安装、部署、启动](/database/rabbitmq_base.md#安装)
+        -  Mac版安装
+        - Linux系统（Ubuntu、CentOS）安装 
+        - 运行与启动 
+
+
 ## HTTP协议实战
 
 ## DevOps
 
+- **Node.js生产环境完整部署指南** [[more]](/docs/devops/node-deploy.md)
+    - ```[Node.js]``` [用户权限管理及登陆服务器](#用户权限管理及登陆服务器)
+    - ```[Node.js]``` [增强服务器安全等级](#增强服务器安全等级)
+    - ```[Node.js]``` [Node.js生产环境部署](#nodejs生产环境部署)
+    - ```[Node.js]``` [Nginx端口映射](#nginx映射)
+    - ```[Node.js]``` [Mongodb生产环境部署](#mongodb)
+    - ```[Node.js]``` [实现服务器与第三方仓库的关联-PM2代码部署](#本地代码同步第三方仓库进行生产部署)
+- **NPM模块管理** [[more]](/docs/devops/npm-deploy.md)
+    - ```[NPM]``` [npm源设置](#npm源设置)
+    - ```[NPM]``` [nnpm注册登录](#npm注册登录)
+    - ```[NPM]``` [npm module 发布](#npm-module-发布)
+    - ```[NPM]``` [可能遇到的问题](#可能遇到的问题)
+
 ## 工具
 
+- **Git** [[more]](/docs/tools/git.md)
+    - ```[Git]``` [Git常用命令及日常问题集锦](/docs/tools/git.md)
+- **SEO** [[more]](/docs/tools/seo.md)
+    - ```[SEO实战]``` [SEO网站优化title设置与快速排名](/docs/tools/seo.md)
+
 ## 资料
+
+- **书籍推荐** [[more]](/docs/materials/book.md)
 
