@@ -4,7 +4,17 @@
 
 > 在模块加载机制中，NodeJs采用了延迟加载的策略，只有在用到的情况下，系统模块才会被加载，加载完成后会放到binding_cache中。
 
-#### 面试指南
+## 快速导航
+
+- [模块的分类](#模块的分类)
+  - [系统模块](#系统模块)
+  - [第三方模块](#第三方模块)
+  - [目录结构](#目录结构)
+- [模块加载机制](#模块加载机制)
+- [模块循环引用](#模块循环引用)
+- [exports与module.exports的区别](#exports与moduleexports的区别)
+  
+## 面试指南
 
 * ```require的加载机制？ ```，参考：[模块加载机制](#模块加载机制)
 * ```module.exports与exports的区别```，参考：[module.exports与exports的区别](#module.exports与exports的区别)
@@ -67,7 +77,7 @@
 
 <center>require模块加载时序图</center>
 
-## 模块的循环引用
+## 模块循环引用
 
 #### 问题1
 
@@ -126,6 +136,8 @@ a模块加载完毕: b.test值： 2
 });
 ```
 
+
+## exports与moduleexports的区别
 ## exports与module.exports的区别
 
 exports相当于module.exports 的快捷方式如下所示:

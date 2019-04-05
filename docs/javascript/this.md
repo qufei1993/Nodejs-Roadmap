@@ -2,7 +2,7 @@
 
 相信javascript中的this会使很多同学在工作学习中产生困惑，笔者也同样是，经过阅读各种资料及实际工作中的应用，做了以下梳理，主要内容包括长期以来大家对this的错误认识及this的绑定规则，箭头函数、实际工作场景中遇到的问题，希望对于有此困惑的你能有所帮助。
 
-> @曲振飞，NodeJs工程师，慕课网认证作者，热爱技术，喜欢分享的90后青年。Github:https://github.com/Q-Angelo/summarize
+> @五月君，NodeJs工程师，慕课网认证作者，热爱技术，喜欢分享的90后青年。Github:https://github.com/Q-Angelo/summarize
 
 ## 快速导航
 * 错误认识
