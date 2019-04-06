@@ -99,14 +99,12 @@
 ## 数据库
 
 ## 微服务
-
 - **服务注册发现之Consul** [[more]](/docs/microservice/consul.md)
     - ```[Consul]``` [使用Consul解决了哪些问题](/docs/microservice/consul.md#使用consul解决了哪些问题)
     - ```[Consul]``` [微服务Consul系列之服务部署、搭建、使用](/docs/microservice/consul.md#consul架构)
     - ```[Consul]``` [微服务Consul系列之集群搭建](/docs/microservice/consul.md#集群搭建)
     - ```[Consul]``` [微服务Consul系列之服务注册与服务发现](/docs/microservice/consul.md#服务注册与发现)
     - ```[Question]``` [微服务Consul系列之问题汇总篇](/docs/microservice/consul.md#问题总结)
-
 - **消息中间件之RabbitMQ** [[more]](/docs/microservice/rabbitmq.md)
     - ```[RabbitMQ]``` [主流消息中间件简介](/database/rabbitmq_base.md#主流消息中间件简介)
     - ```[RabbitMQ]``` [RabbitMQ安装、部署、启动](/database/rabbitmq_base.md#安装)
@@ -116,16 +114,15 @@
 
 
 ## HTTP协议实战
-
 - **HTTP三次握手**
     - ```[HTTP-TCP]``` [三次握手时序图](#三次握手时序图)
     - ```[HTTP-TCP]``` [三次握手数据包详细内容分析](#三次握手数据包详细内容分析)
     - ```[HTTP-TCP]``` [分析总结](#总结)
-- **跨域**
+- **跨域** [[more]](/http-protocol#跨域cors-1)
     - `[CORS]` [跨域形成原理简介](#跨域cors)
     - `[CORS]` [实例来验证跨域的产生过程](#示例)
     - `[CORS]` [基于http协议层面的几种解决办法](#基于http协议层面的几种解决办法)
-    - `[CORS]` [CORS预请求](#cors预请求)
+    - `[CORS]` [CORS预请求](/http-protocol#cors预请求)
 - **缓存头Cache-Control**
     - `[Cache-Control]` [可缓存性（public、private、no-cache）](#可缓存性)
     - `[Cache-Control]` [到期 （max-age、s-maxage、max-stale）](#到期)
@@ -144,7 +141,7 @@
     * `[Nginx服务配置]` [Nginx配置缓存](#nginx配置缓存)
     * `[Nginx服务配置]` [nginx部署https服务](#nginx部署https服务)
     * `[Nginx服务配置]` [实现http2协议](#实现http2协议)
-    
+
 ## DevOps
 
 - **Node.js生产环境完整部署指南** [[more]](/docs/devops/node-deploy.md)
