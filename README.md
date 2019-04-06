@@ -9,7 +9,7 @@
 
 > **作者：** 五月君，Node.js Developer，[慕课网认证作者](https://www.imooc.com/u/2667395)。
 
-> **知识脑图：** ![查看](/docs/img/Node.js技术栈.png)
+> **Node.js技术栈知识脑图：** [点击查看](/docs/img/Node.js技术栈.png)
 
 ## JavaScript
 
