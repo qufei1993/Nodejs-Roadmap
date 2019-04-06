@@ -52,6 +52,40 @@
     - ```[RegExp]```  [常用正则表达式](/docs/javascript/regexp.md#常用正则表达式)
     
 ## ECMAScript6
+- **变量声明** [[more]](/docs/es6/readme.md)
+    - ```[Variable]``` [新增let&const变量声明](/docs/es6/readme.md#新增声明变量)
+
+- **解构赋值** [[more]](/docs/es6/readme.md#解构赋值)
+    - ```[Deconstruction]``` [数组解构赋值](/docs/es6/readme.md#数组解构赋值)
+    - ```[Deconstruction]``` [对象解构赋值](/docs/es6/readme.md#对象解构赋值)
+
+- **扩展系列** [[more]](/docs/es6/readme.md#解构赋值)
+    - ```[Extension]``` [正则表达式扩展](/docs/es6/readme.md#正则表达式扩展)
+    - ```[Extension]``` [字符串扩展](/docs/es6/readme.md#字符串扩展)
+    - ```[Extension]``` [数值扩展](/docs/es6/readme.md#数值扩展)
+    - ```[Extension]``` [数组扩展](/docs/es6/readme.md#数组扩展)
+    - ```[Extension]``` [函数扩展](/docs/es6/readme.md#函数扩展)
+    - ```[Extension]``` [对象扩展](/docs/es6/readme.md#对象扩展)
+
+- **集合系列** [[more]](/docs/es6/set-map.md#解构赋值)
+    - ```[Set]``` [集合Set](#set)、[WeakSet](#weakset)
+    - ```[Map]``` [集合Map](#map)、[WeakMap](#weakmap)
+    - ```[Map-Array]``` [Map与Array横向对比增、查、改、删](#map与array对比)
+    - ```[Set-Array]``` [Set与Array增、查、改、删对比](#set与array)
+    - ```[Map-Set-Array]``` [Map、Set、Object三者增、查、改、删对比](#集合map集合set对象三者对比)
+- **Promise** [[more]](/docs/es6/promise.md)
+    - ```[Promise]``` [Promise的基本使用和原理](/docs/es6/promise.md#promise的基本使用和原理)
+    - ```[Promise]``` [Callback方式书写](/docs/es6/promise.md#callback方式书写)
+    - ```[Promise]``` [Promise方式书写](/docs/es6/promise.md#promise方式书写)
+    - ```[Promise]``` [Promise.finally()](/docs/es6/promise.md#finally)
+    - ```[Promise]``` [Promise并行执行 Promise.all()](/docs/es6/promise.md#promise并行执行)
+    - ```[Promise]``` [Promise率先执行 Promise.race()](/docs/es6/promise.md#promise率先执行)
+    - ```[Promise]``` [错误捕获](/docs/es6/promise.md#错误捕获) 
+    - ```[面试]``` ```Promise 中 .then 的第二参数与 .catch 有什么区别?```，参考：[错误捕获](/docs/es6/promise.md#错误捕获)
+    - ```[面试]``` ```怎么让一个函数无论promise对象成功和失败都能被调用？```，参考：[finally](/docs/es6/promise.md#finally)
+- **Decorators** [[more]](/docs/es6/decorators.md)
+- **Symbol** [[more]](/docs/es6/symbol.md)
+- **Generator** [[more]](/docs/es6/generator.md)
 
 ## Node.js
 - **模块** [[more]](/docs/nodejs/module.md)

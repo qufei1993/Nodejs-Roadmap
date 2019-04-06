@@ -1,6 +1,9 @@
-### Generator
-Generator是一种异步编程的解决方案，异步编程早期使用回调之后Promise也可以解决这个问题，而Generator也是用来解决这个问个的，但是相对于Promise会更高级一点。Generator返回的就是一个Iterator接口  
-//提示 ```index.js:126 Uncaught ReferenceError: regeneratorRuntime is not defined``` 需要 ```import 'babel-polyfill'```
+# Generator
+
+> Generator是一种异步编程的解决方案，异步编程早期使用回调之后Promise也可以解决这个问题，而Generator也是用来解决这个问个的，但是相对于Promise会更高级一点。Generator返回的就是一个Iterator接口。
+
+**```提示：```** ```index.js:126 Uncaught ReferenceError: regeneratorRuntime is not defined```
+**```需要：```** ```import 'babel-polyfill'```
 ```javascript
 {
   let tell = function* (){
@@ -17,7 +20,8 @@ Generator是一种异步编程的解决方案，异步编程早期使用回调�
   //Object {value: "c", done: true}
 }
 ```
-Generator就是一个遍历器生成函数，所以我们直接可以把它赋值Symbol.iterator,从而使这个对象也具备这个iterator接口
+
+> Generator就是一个遍历器生成函数，所以我们直接可以把它赋值Symbol.iterator,从而使这个对象也具备这个iterator接口
 ```javascript
  //Generator一种新的应用
  {
@@ -36,7 +40,8 @@ Generator就是一个遍历器生成函数，所以我们直接可以把它赋�
    //value 3
  }
 ```
-Generator最好是用在状态机，是JS编程中比较高级的用法，比如我们需要有a b c三种状态去描述一个事物，也就是这个事务只存在3种状态a-b b-c c-a 总之就是三种循环，永远跑不出第四种状态，用Generator函数去处理这种状态机是特别适用的
+
+> Generator最好是用在状态机，是JS编程中比较高级的用法，比如我们需要有a b c三种状态去描述一个事物，也就是这个事务只存在3种状态a-b b-c c-a 总之就是三种循环，永远跑不出第四种状态，用Generator函数去处理这种状态机是特别适用的
 ```javascript
 
 {
