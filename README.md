@@ -114,33 +114,36 @@
 
 
 ## HTTP协议实战
-- **HTTP三次握手**
-    - ```[HTTP-TCP]``` [三次握手时序图](#三次握手时序图)
-    - ```[HTTP-TCP]``` [三次握手数据包详细内容分析](#三次握手数据包详细内容分析)
-    - ```[HTTP-TCP]``` [分析总结](#总结)
-- **跨域** [[more]](/http-protocol#跨域cors-1)
-    - `[CORS]` [跨域形成原理简介](#跨域cors)
-    - `[CORS]` [实例来验证跨域的产生过程](#示例)
-    - `[CORS]` [基于http协议层面的几种解决办法](#基于http协议层面的几种解决办法)
-    - `[CORS]` [CORS预请求](/http-protocol#cors预请求)
-- **缓存头Cache-Control**
-    - `[Cache-Control]` [可缓存性（public、private、no-cache）](#可缓存性)
-    - `[Cache-Control]` [到期 （max-age、s-maxage、max-stale）](#到期)
-    - `[Cache-Control]` [重新验证 （must-revalidate、proxy-revalidate）](#重新验证)
-    - `[Cache-Control]` [其它 （no-store、no-transform）](#其它)
-    - `[Cache-Control]` [示例](#示例)
-    - `[思考1.]` 在页面中引入静态资源文件，为什么静态资源文件改变后，再次发起请求还是之前的内容，没有变化呢？
-    - `[思考2.]` 在使用webpack等一些打包工具时，为什么要加上一串hash码？
+- **http三次握手** [[more]](#http三次握手)
+    * `[HTTP三次握手]` [三次握手时序图](#三次握手时序图)
+    * `[HTTP三次握手]` [三次握手数据包详细内容分析](#三次握手数据包详细内容分析)
+    * `[HTTP三次握手]` [分析总结](#总结)
+    * `[面试]` `说下TCP三次握手的过程?`，参考：[三次握手时序图](#三次握手时序图)
+- **跨域CORS** [[more]](#跨域cors)
+    * `[CORS]` [跨域形成原理简介](#跨域cors)
+    * `[CORS]` [实例来验证跨域的产生过程](#示例)
+    * `[CORS]` [基于http协议层面的几种解决办法](#基于http协议层面的几种解决办法)
+    * `[CORS]` [CORS预请求](#cors预请求)
+    * `[面试]` `你之前遇见过跨域吗？说一下跨域的形成与实现。`，参考：[CORS](#跨域cors)
+- **缓存头Cache-Control的含义和使用**
+    * `[Cache-Control]` [可缓存性（public、private、no-cache）](#可缓存性)
+    * `[Cache-Control]` [到期 （max-age、s-maxage、max-stale）](#到期)
+    * `[Cache-Control]` [重新验证 （must-revalidate、proxy-revalidate）](#重新验证)
+    * `[Cache-Control]` [其它 （no-store、no-transform）](#其它)
+    * `[Cache-Control]` [缓存cache-control示例](#缓存cache-control示例)
+    1. `[思考]` `在页面中引入静态资源文件，为什么静态资源文件改变后，再次发起请求还是之前的内容，没有变化呢？`，参考：[#](#缓存cache-control示例)
+    2. `[思考]` `在使用webpack等一些打包工具时，为什么要加上一串hash码？`，参考：[#](#缓存cache-control示例)
 - **HTTP长链接**
-    * `[HTTP长链接]` [http长链接简介](#http长链接)
-    * `[HTTP长链接]` [http/1.1中长链接的实现示例](#http长链接)
-    * `[HTTP长链接]` [长链接在http2中的应用与http/1.1协议中的对比](#http长链接)
+    * `[KeepAlive]` [http长链接简介](#http长链接)
+    * `[KeepAlive]` [http/1.1中长链接的实现示例](#http长链接)
+    * `[KeepAlive]` [长链接在http2中的应用与http/1.1协议中的对比](#http长链接)
+    * `[面试]` `Chrome浏览器允许的一次性最大TCP并发链接是几个？`，参考：[HTTP长链接分析](#http长链接)
 - **Nginx服务配置**
-    * `[Nginx服务配置]` [Nginx安装启动](#nginx安装启动)
-    * `[Nginx服务配置]` [修改hosts文件配置本地域名](#修改hosts文件配置本地域名)
-    * `[Nginx服务配置]` [Nginx配置缓存](#nginx配置缓存)
-    * `[Nginx服务配置]` [nginx部署https服务](#nginx部署https服务)
-    * `[Nginx服务配置]` [实现http2协议](#实现http2协议)
+    * `[Nginx]` [Nginx安装启动](#nginx安装启动)
+    * `[Nginx]` [修改hosts文件配置本地域名](#修改hosts文件配置本地域名)
+    * `[Nginx]` [Nginx配置缓存](#nginx配置缓存)
+    * `[Nginx]` [nginx部署https服务](#nginx部署https服务)
+    * `[Nginx]` [实现http2协议](#实现http2协议)
 
 ## DevOps
 
