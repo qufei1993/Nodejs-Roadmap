@@ -97,8 +97,17 @@
     - ```[面试]``` ``` a模块中的undeclaredVariable变量在b.js中是否会被打印？```，参考：[#](/docs/nodejs/module.md#问题2)
 - **中间件** [[more]](/docs/nodejs/middleware.md)
     - ```[Mddleware]``` [常用Web框架&中间件汇总](/docs/nodejs/middleware.md)
+- **模板引擎**
+    - `[Template]` [Ejs](https://ejs.co/)
+    - `[Template]` [Handlebarsjs](https://handlebarsjs.com/)
+    - `[Template]` [Jade](http://jade-lang.com/)
+- **框架**
+    - `Framework]` [Express 中文版](http://www.expressjs.com.cn/)、[Express of English Version](http://www.expressjs.com.cn/)
+    - `Framework]` [Koa 中文版](https://koajs.com/)、[Koa of English Version](https://koajs.com/)
+    - `Framework]` [Egg 中文版](https://eggjs.org/zh-cn/intro/quickstart.html)、[Egg of English Version](https://eggjs.org/en/intro/quickstart.html)
+    - `Framework]` [Nest.js](https://docs.nestjs.com/)
 
-## 数据库
+## :floppy_disk: 数据库
 
 ## 微服务
 - **服务注册发现之Consul** [[more]](/docs/microservice/consul.md)
