@@ -97,17 +97,44 @@
     - ```[面试]``` ``` a模块中的undeclaredVariable变量在b.js中是否会被打印？```，参考：[#](/docs/nodejs/module.md#问题2)
 - **中间件** [[more]](/docs/nodejs/middleware.md)
     - ```[Mddleware]``` [常用Web框架&中间件汇总](/docs/nodejs/middleware.md)
+- **缓存**
+  - `[Cache]` [memory-fs 将文件写入内存](https://github.com/webpack/memory-fs)
+  - `[Cache]` [Memory Cache](https://github.com/ptarjan/node-cache#readme)
+  - `[Cache]` [Node Cache](https://github.com/mpneuried/nodecache)
+- **定时任务**
+  - `[Schedule]` [node-schedule ](https://github.com/node-schedule/node-schedule)
+  - `[Schedule]` [Agenda 将Node中的定时任务存储在数据库中（官方推荐MongoDB）](https://github.com/agenda/agenda)
 - **模板引擎**
     - `[Template]` [Ejs](https://ejs.co/)
     - `[Template]` [Handlebarsjs](https://handlebarsjs.com/)
     - `[Template]` [Jade](http://jade-lang.com/)
+- **日志记录收集**
+    - `[Logger]` [Sentry--错误日志收集框架](https://sentry.io/welcome/)
+    - `[Logger]` [log4js 日志记录工具](https://github.com/log4js-node/log4js-node)
+    - `[Logger]` [ELK--开源的日志分析系统](https://www.elastic.co/cn/products)
+    - `[Logger]` [winston日志模块](https://github.com/winstonjs/winston)
+- **测试**
+  * `Unit Testing` [mocha NodeJS里最常用的测试框架](https://mochajs.org/)
+  * `Unit Testing` [chai 一个断言库](http://www.chaijs.com/api/)
+  * `Unit Testing` [Jest — Facebook推出的一款测试框架，集成了 Mocha，chai，jsdom，sinon等功能。](https://jestjs.io/)
+  * `BDD Testing` [Jasmine — 一款基于行为驱动的JavaScript测试框架](https://jasmine.github.io/)
+  * `Testing Tool` [istanbul Istanbul - a JS code coverage tool written in JS 测试覆盖率](https://github.com/gotwarlost/istanbul)
+  * `E2E Testing` [Puppeteer](https://github.com/GoogleChrome/puppeteer)
 - **框架**
-    - `Framework]` [Express 中文版](http://www.expressjs.com.cn/)、[Express of English Version](http://www.expressjs.com.cn/)
-    - `Framework]` [Koa 中文版](https://koajs.com/)、[Koa of English Version](https://koajs.com/)
-    - `Framework]` [Egg 中文版](https://eggjs.org/zh-cn/intro/quickstart.html)、[Egg of English Version](https://eggjs.org/en/intro/quickstart.html)
-    - `Framework]` [Nest.js](https://docs.nestjs.com/)
-
+    - `[Framework]` [Express 中文版](http://www.expressjs.com.cn/)、[Express of English Version](http://www.expressjs.com.cn/)
+    - `[Framework]` [Koa 中文版](https://koajs.com/)、[Koa of English Version](https://koajs.com/)
+    - `[Framework]` [Egg 中文版](https://eggjs.org/zh-cn/intro/quickstart.html)、[Egg of English Version](https://eggjs.org/en/intro/quickstart.html)
+    - `[Framework]` [Nest.js](https://docs.nestjs.com/)
 ## :floppy_disk: 数据库
+- **`Relational`** [MySql](https://www.mysql.com/)
+- **`Relational`** [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-2017)
+- **`Relational`** [PostgreSQL](https://www.postgresql.org/)
+- **`Relational`** [Oracle](https://www.oracle.com/index.html)
+- **`NoSQL`** [MongoDB]()
+- **`NoSQL`** [Redis](https://redis.io/)
+- **Search Engines** [ElasticSearch](https://www.elastic.co/)
+- **Search Engines** [Solr](http://lucene.apache.org/solr/)
+- **Search Engines** [Sphinxsearch](http://sphinxsearch.com/)
 
 ## 微服务
 - **服务注册发现之Consul** [[more]](/docs/microservice/consul.md)
