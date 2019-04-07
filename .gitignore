@@ -1,7 +1,0 @@
-node_modules
-npm-debug.log
-.idea
-test.js
-.vscode
-test/
-.DS_Store

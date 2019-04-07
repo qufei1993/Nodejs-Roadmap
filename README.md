@@ -9,7 +9,8 @@
 
 > **作者：** 五月君，Node.js Developer，[慕课网认证作者](https://www.imooc.com/u/2667395)。
 
-> **Node.js技术栈知识脑图：** [点击查看](/docs/img/Node.js技术栈.png)
+[`JavaScript`](#JavaScript)| [`ECMAScript6`](#JavaScript) | [`ECMAScript6`](#Node.js) | [`数据库`](#数据库)
+ :-: | :-: | :-: | :-:
 
 ## JavaScript
 
@@ -125,7 +126,7 @@
     - `[Framework]` [Koa 中文版](https://koajs.com/)、[Koa of English Version](https://koajs.com/)
     - `[Framework]` [Egg 中文版](https://eggjs.org/zh-cn/intro/quickstart.html)、[Egg of English Version](https://eggjs.org/en/intro/quickstart.html)
     - `[Framework]` [Nest.js](https://docs.nestjs.com/)
-## :floppy_disk: 数据库
+## 数据库
 - **`Relational`** [MySql](https://www.mysql.com/)
 - **`Relational`** [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-2017)
 - **`Relational`** [PostgreSQL](https://www.postgresql.org/)
