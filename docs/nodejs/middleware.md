@@ -7,6 +7,7 @@
 
 * 数据处理
   * [exceljs 一款优秀的excel表格数据处理插件](https://github.com/guyonroche/exceljs)
+  * [node-xlsx](https://github.com/mgcrea/node-xlsx#readme)
 
 * 数据转换
   * [transliteration中文转英文](https://github.com/andyhu/transliteration)
@@ -17,6 +18,9 @@
   * [log4js 日志记录工具](https://github.com/log4js-node/log4js-node)
   * [ELK--开源的日志分析系统](https://www.elastic.co/cn/products)
   * [winston日志模块](https://github.com/winstonjs/winston)
+
+* 爬虫
+  * [爬虫利器 Puppeteer](https://github.com/GoogleChrome/puppeteer)
 
 * 校验
   * [express-validator express框架校验](https://github.com/ctavan/express-validator)
@@ -36,11 +40,15 @@
   * `Unit Testing` [Jest — Facebook推出的一款测试框架，集成了 Mocha，chai，jsdom，sinon等功能。](https://jestjs.io/)
   * `BDD Testing` [Jasmine — 一款基于行为驱动的JavaScript测试框架](https://jasmine.github.io/)
   * `Testing Tool` [istanbul Istanbul - a JS code coverage tool written in JS 测试覆盖率](https://github.com/gotwarlost/istanbul)
+  * `Testing Tool` [《Superagent》 Small progressive client-side HTTP request library](https://github.com/visionmedia/superagent)
   * `E2E Testing` [Puppeteer](https://github.com/GoogleChrome/puppeteer)
 
 * 定时任务
   * [node-schedule ](https://github.com/node-schedule/node-schedule)
   * [Agenda 将Node中的定时任务存储在数据库中（官方推荐MongoDB）](https://github.com/agenda/agenda)
+
+* Redis
+  * [node-redlock Redis分布式锁](https://github.com/mike-marcacci/node-redlock)
 
 * 服务注册
   * [node-zookeeper](https://github.com/yfinkelstein/node-zookeeper)
