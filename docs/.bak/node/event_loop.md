@@ -23,3 +23,8 @@ EventLoop是Javascript实现异步的具体实现，在程序执行过程中，�
 如果是在面试中，如果问到轮询技术的实现一般也会考察select和epoll的区别
 
 
+## 参考
+
+* [The Node.js Event Loop, Timers, and process.nextTick()](https://github.com/nodejs/node/blob/v6.x/doc/topics/event-loop-timers-and-nexttick.md)
+* [Node.js Event Loop 的理解 Timers，process.nextTick()](https://cnodejs.org/topic/57d68794cb6f605d360105bf)
+* [什么是浏览器的事件循环（Event Loop）](https://segmentfault.com/a/1190000010622146)
