@@ -114,7 +114,7 @@ function cityList() {
 lpop、rpop  | 列表左侧或者右侧弹出一个值: ```lpop arr | rpop arr``` | O(1)
 ltrim  | 按照索引范围修剪列表: ```ltrim key start end``` | O(n)
 lrange  | 获取列表指定索引范围所有item: ```lrange key start end（包含end）``` | O(n)
-len  | 获取列表长度: ```llen key``` | O(1)
+llen  | 获取列表长度: ```llen key``` | O(1)
 lset  | 设置列表指定索引值为newValue: ```lset key index newValue``` | O(n)
 
 #### 集合
