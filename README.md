@@ -203,6 +203,8 @@
     - ```[NPM]``` [npm module 发布](/docs/devops/npm-deploy.md#npm-module-发布)
     - ```[NPM]``` [可能遇到的问题](/docs/devops/npm-deploy.md#可能遇到的问题)
 
+- **Linux系统问题汇总** [[more]](/docs/devops/linux-question.md)
+
 ## 工具
 
 - **Git** [[more]](/docs/tools/git.md)
