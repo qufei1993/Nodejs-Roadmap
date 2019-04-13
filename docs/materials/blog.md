@@ -12,6 +12,9 @@
 * [You Don't Know JS (book series)](https://github.com/getify/You-Dont-Know-JS)
 * [前端精读周刊](https://github.com/dt-fe/weekly)
 
+## 性能优化
+* [Web性能优化](https://github.com/laoqiren/web-performance)
+
 ## 算法
 * [十大经典排序算法](https://github.com/hustcc/JS-Sorting-Algorithm)
 
@@ -22,3 +25,10 @@
 * [AlloyTeam代码规范](https://github.com/AlloyTeam/CodeGuide)
 * [Spec](https://github.com/ecomfe/spec)
 * [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript)
+
+## HTTP
+* [RESTful API 设计](https://github.com/aisuhua/restful-api-design-references)
+
+## 团队博客
+
+* [搜车大无线团队博客](http://f2e.souche.com/blog/)
