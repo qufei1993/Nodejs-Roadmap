@@ -1,12 +1,24 @@
 # Redis
 
+- **Redis特性** [[more]](/docs/database/redis-base.md)
+- **五种数据类型** 
+    - `[Type]` [字符串](/docs/database/redis-base.md#字符串)
+    - `[Type]` [哈希](/docs/database/redis-base.md#哈希)
+    - `[Type]` [列表](/docs/database/redis-base.md#列表)
+    - `[Type]` [字符串](/docs/database/redis-base.md#字符串)
+    - `[Type]` [字符串](/docs/database/redis-base.md#字符串)
+- **Redis高级特性** 
+- **数据持久化**
+- **主从复制**
+
+
 ## Redis特性
 
-* 速度快 10W[OPS 每秒10万次读写]
+- **速度快 10W OPS[每秒10万次读写]**
 
-Redis将数据存在于内存中，基于C语言(离操作系统最近的语言)50000行代码（单机版的23000行）编写，单线程模型。
+Redis将数据存在于内存中，基于C语言(距操作系统最近的语言)50000行代码（单机版的23000行）编写，单线程模型。
 
-* 单线程
+- **单线程**
     * 为什么在单线程模型下如此快呢？取决于以下几点：
         * 基于内存
         * 非阻塞IO
@@ -15,25 +27,23 @@ Redis将数据存在于内存中，基于C语言(离操作系统最近的语言)
         * 一次只运行一条命令
         * 拒绝长（慢）命令：keys、flushall、flushdb、slow lua script、mutil/exec
 
-* 持久化
+- **持久化**
 
-内存数据断电后会丢失的，Redis将所有数据保持在内存中，对数据的更新将异步的保存到磁盘（是有数据持久化的）上。
+内存数据断电后会丢失的，`Redis`将所有数据保持在内存中，对数据的更新将异步的保存到磁盘（是有数据持久化的）上。
 
-* 多数据结构
+- **多数据结构**
+    * ```String```：字符串，是`Redis`里最基本的数据类型
+    * `HashTable`：键值对集合
+    * `List`：底层是一个链表
+    * `Set`：无序集合
+    * `Zset`：有序集合
+    * `新衍生的几个`：`BitMaps`（位图）、`HyperLogLog`（超小内存唯一计数）、`GEO`（地理信息定位）
 
-    * String：字符串，是Redis里最基本的数据类型
-    * HashTable：键值对集合
-    * List：底层是一个链表
-    * Set：无序集合
-    * Zset：有序集合
-    * 新衍生的几个：BitMaps（位图）、HyperLogLog（超小内存唯一计数）、GEO（地理信息定位）
+- **多语言**
+基于`TCP`的通信方式，支持`Node.js`、`Python`、`Java`、`Ruby`、`Lua`等
 
-* 多语言
-
-基于TCP的通信方式，支持Node.js、Python、Java、Ruby、Lua等
-
-* 多功能
-    发布订阅、简单的事务功能、Lua脚本（实现自定义命令）、pipeline提高客户端并发效率。
+- **多功能**
+发布订阅、简单的事务功能、Lua脚本（实现自定义命令）、pipeline提高客户端并发效率。
 
 ## 命令
 
@@ -79,11 +89,11 @@ function cityList() {
 
 #### 哈希
 
-所有哈希的命令都是以H开头
+> 所有哈希的命令都是以H开头
 
-注意：在使用hgetall的时候要注意，如果集合很大，将会浪费性能。
-优点：节省空间，可以部分更新。
-缺点：编程稍复杂，不支持TTL设置。
+- **注意**：在使用hgetall的时候要注意，如果集合很大，将会浪费性能。
+- **优点**：节省空间，可以部分更新。
+- **缺点**：不支持TTL设置。
 
 命令 |   含义  | 时间复杂度
 :-----:|:------:|:-------:
@@ -98,12 +108,12 @@ function cityList() {
 
 #### 列表
 
-列表的命令都是以L开头
+> 列表的命令都是以L开头
 
-* Stack：lpush + lpop
-* Queue：lpush + rpop
-* Capped Collection：lpush + ltrim
-* Message Queue：lpush + brpop
+* `Stack（栈）`：后进先出，实现命令`lpush + lpop`
+* `Queue（队列）`：先进先出，实现命令`lpush + rpop`
+* `Capped Collection（有限集合）`：lpush + ltrim
+* `Message Queue（消息队列）`：lpush + brpop
 
 
 命令 |   含义  | 时间复杂度
@@ -119,15 +129,15 @@ lset  | 设置列表指定索引值为newValue: ```lset key index newValue``` | 
 
 #### 集合
 
-以S开头的命令
+> 以S开头的命令
 
-* sadd key element：集合key中添加元素element，如果element存在则添加失败，O(1)。
-* srem key element：删除集合中的元素，O(1)。
-* smembers key：获取集合中所有元素，次命令谨慎使用，O(n)。
+* `sadd key element`：集合key中添加元素element，如果element存在则添加失败，O(1)。
+* `srem key element`：删除集合中的元素，O(1)。
+* `smembers key`：获取集合中所有元素，次命令谨慎使用，O(n)。
 
 #### 有序集合
 
-以Z开头的命令
+> 以Z开头的命令
 
 有序集合元素由两部分组成其中score代表分数（排序），具体可以看以命令介绍：
 
@@ -138,31 +148,31 @@ lset  | 设置列表指定索引值为newValue: ```lset key index newValue``` | 
 * zcard key ：返回元素的个数，O(1)。
 * smembers key：获取集合中所有元素，次命令谨慎使用，O(n)。
 
-## 五种数据类型之外的其它特性功能介绍
+## Redis高级特性
 
 #### 慢查询
 
-Redis整个生命周期：发送命令->排队->执行命令->返回结果，慢查询通常发生在执行命令阶段，可以通过满日志查询系统slowlog进行问题定位跟踪。
+> Redis整个生命周期：发送命令->排队->执行命令->返回结果，慢查询通常发生在执行命令阶段，可以通过满日志查询系统slowlog进行问题定位跟踪。
 
-在配置文件```redis.conf```中设置：
+**在配置文件```redis.conf```中设置：**
 
 * slowlog-max-len：表示满查询最大的条数，默认128，保存在内存中，当超过预先设置的值后会将最早的slowlog删除，是个先进先出队列。
 * slowlog-log-slower-than：慢查询阀值，默认10000微秒，只有命令执行时间大于该阀值才会被slowlog记录，如果记录所有命令将阀值设置为0。
 
-两种设置方式：
+**两种设置方式：**
 > Redis是一个每秒万级别的，所以在设置阀值的时候，默认为10000微妙（10毫秒），不要设置太大，建议1毫秒之下，这样才有意义。定期将慢查询持久化到其他数据库，便于排查。
 
 * 配置文件```redis.conf```中设置，以下为默认设置：
-    * slowlog-log-slower-than 10000
-    * slowlog-max-len 128
+    * `slowlog-log-slower-than 10000`
+    * `slowlog-max-len 128`
 * config动态设置slowlog：
-    * slowlog-max-len 1000
-    * slowlog-log-slower-than 1000
+    * `slowlog-max-len 1000`
+    * `slowlog-log-slower-than 1000`
 
-慢查询命令：
-* slowlog get [n]：获取慢查询队列
-* slowlog len：获取慢查询队列长度
-* slowlog reset：清空慢查询队列
+**慢查询命令：**
+* `slowlog get [n]`：获取慢查询队列
+* `slowlog len`：获取慢查询队列长度
+* `slowlog reset`：清空慢查询队列
 
 #### pipeline
 
@@ -175,7 +185,6 @@ API：
 * 发布消息```publish channel message```
 * 订阅消息```subscribe [channe] # 可以订阅多个频道```
 * 取消订阅```unsubscribe [channel]```
-
 
 #### BitMaps（位图）
 #### HyperLogLog（超小内存唯一计数
