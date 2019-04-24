@@ -1,5 +1,9 @@
 # redis安装
 
+## 单机版
+
+## Redis集群
+
 # Mac系统安装redis
 
 ### 下载 
