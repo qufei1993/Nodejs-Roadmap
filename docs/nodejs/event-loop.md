@@ -138,9 +138,41 @@ poll和select在实现上没有本质的区别，相比较select，poll基于链
 
 ## Node.js中的EventLoop
 
-```js
-// todo:
+在Node.js启动的时候，它会初始化EventLoop，处理程序代码，可能是调用异步API、定时器或者调用process.nextTick()，然后开始事件轮询。
+
+```txt
+   ┌───────────────────────┐
+┌─>│        timers         │
+│  └──────────┬────────────┘
+│  ┌──────────┴────────────┐
+│  │     I/O callbacks     │
+│  └──────────┬────────────┘
+│  ┌──────────┴────────────┐
+│  │     idle, prepare     │
+│  └──────────┬────────────┘      ┌───────────────┐
+│  ┌──────────┴────────────┐      │   incoming:   │
+│  │         poll          │<─────┤  connections, │
+│  └──────────┬────────────┘      │   data, etc.  │
+│  ┌──────────┴────────────┐      └───────────────┘
+│  │        check          │
+│  └──────────┬────────────┘
+│  ┌──────────┴────────────┐
+└──┤    close callbacks    │
+   └───────────────────────┘
 ```
+
+```!
+note: 以上每个方框被称为EventLoop的一个"阶段"
+```
+
+#### 阶段概述
+
+* timers: this phase executes callbacks scheduled by setTimeout() and setInterval().
+I/O callbacks: executes almost all callbacks with the exception of close callbacks, the ones scheduled by timers, and setImmediate().
+idle, prepare: only used internally.
+poll: retrieve new I/O events; node will block here when appropriate.
+check: setImmediate() callbacks are invoked here.
+close callbacks: e.g. socket.on('close', ...).
 
 ## 浏览器中的EventLoop
 
