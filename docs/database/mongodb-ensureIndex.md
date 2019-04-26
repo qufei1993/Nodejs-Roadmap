@@ -1,6 +1,20 @@
 # MongoDB索引
 
-## Mongodb索引类别
+在MongoDB中通过建立索引可以进行高效的查询，如果没有索引MongoDB将会扫描整个集合与查询的条件进行匹配，这对于性能会造成很大的消耗。
+
+## 快速导航
+- [Mongodb索引类型](#Mongodb索引类型)
+- [索引属性](#索引属性)
+- [索引实例测试](#索引实例测试)
+- [索引（Index）创建导致的库级锁问题](#Index导致的库级锁)
+
+## 面试指南
+
+* ``` 生产环境如何正确创建索引？ ```，参考：[#](#Index导致的库级锁)
+
+## Mongodb索引类型
+
+> MongoDB提供了不同的索引类型支持在不同的业务场景进行查询
 
 #### 1. _id索引
 
@@ -63,7 +77,6 @@ db.demo_admin2.find({x:1,y:2})
 db.demo_3.ensureIndex({time:1},{expireAfterSeconds:10})
 ```
 
-
 ***5.2 过期索引限制***
   * 过期索引字段值必须是指定的时间类型，必须是ISODate或ISODate数组，不能使用时间戳，否则不能被自动删除。
 
@@ -76,7 +89,7 @@ db.demo_3.ensureIndex({time:1},{expireAfterSeconds:30}
 db.demo_3.insert({time:new Date()});
 ```
 
-#### 6.全文索引
+#### 6. 全文索引
  
 > 在mongodb中每个集合只允许创建一个索引，因此不用担心存在多个索引造成冲突的问题。
 
@@ -162,15 +175,59 @@ db.demo_3.dropIndex(indexName)
 db.demo_3.ensureIndex({m:1,n:1},{unique:true})
 ```
 
-## 实例
+## 索引实例测试
 
-下面写个例子，测试下建立索引与未建立索引的区别，只有在数据量大的时候才有效果。
+> 建立500万条数据，分别用来测试建立索引和未建立索引的差别，只有在大量数据下才有效果，以下的示例中的时间消耗值，各电脑配置的不同在不同电脑上测试也会有不同的差别。
 
-未建立索引，此时删除数据为20秒,每台电脑配置不一样 会有差别。
-for(var i=0;i<10000;i++) db.demo_3.insert({b:i}) # 插入数据10000条
-for(var i=0;i<10000;i++) db.demo_3.remove({b:i}) # 删除
+- **建立测试数据**
 
-建立索引，此时删除数据时间为2秒，在大数据量的时候差别还是很大的
-for(var i=0;i<10000;i++) db.demo_3.insert({b:i}) # 插入数据10000条
-db.demo_3.ensureIndex({b:1}) 						//插入成功后立即建立索引
-for(var i=0;i<10000;i++) db.demo_3.remove({b:i})   	//删除
+```js
+> for(var i=0; i<5000000; i++) db.demo_user.insert({id: i})
+WriteResult({ "nInserted" : 1 })
+```
+
+- **未建立索引情况数据查询**
+
+> 在未建立索引的情况下，执行数据查询的时间消耗在6秒多。
+
+![](./img/mongo_index_19042601.png)
+
+- **建立索引情况查询数据**
+
+```js
+db.getCollection('demo_user').ensureIndex({"id": 1}) # 建立索引
+```
+
+下图为建立索引的情况，在数据查询中仅用了0.001秒，可见建立索引的重要的性。
+
+![](./img/mongo_index_19042602.png)
+
+
+## Index导致的库级锁
+
+这是一个很坑爹的事情，MongoDB没有像MySql、Oracle拥有行级粒度锁概念，在MongoDB中只有库级粒度锁概念，意味这当你在生产环境中不小心触发了一个写锁的操作时其它的业务也会受影响。
+
+MongoDB中建立索引就是一个触发写锁的过程，通常数据量越大建立的索引占用的写锁时间就会越长，MongoDB中建立索引的两种方式。
+
+- **前台创建（错误）**
+
+```js
+db.getCollection('demo_user').ensureIndex({"id": 1}) # 建立索引
+```
+
+![](./img/mongo_index_19042603.png)
+
+- **后台创建（推荐）**
+
+```js
+db.getCollection('demo_user').ensureIndex({"id": 1}, {background: 1}) # 建立索引
+```
+
+![](./img/mongo_index_19042604.png)
+
+
+## 推荐阅读
+
+- **[MongoDB Indexes](https://docs.mongodb.com/manual/indexes/)**
+- **[Github：MongoDB索引](#)**
+
