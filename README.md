@@ -132,7 +132,11 @@
     - `[Framework]` [Express 中文版](http://www.expressjs.com.cn/)、[Express of English Version](http://www.expressjs.com.cn/)
     - `[Framework]` [Koa 中文版](https://koajs.com/)、[Koa of English Version](https://koajs.com/)
     - `[Framework]` [Egg 中文版](https://eggjs.org/zh-cn/intro/quickstart.html)、[Egg of English Version](https://eggjs.org/en/intro/quickstart.html)
-    - `[Framework]` [Nest.js](https://docs.nestjs.com/)
+    - `[Framework]` [Nest.js 中文版](https://docs.nestjs.cn/)、[Nest.js](https://docs.nestjs.com/)
+- **ORM**
+    - `[typeorm]` [typeorm](https://typeorm.io/) 【右上角切换中文】 
+    - `[sequelize]` [sequelize](http://docs.sequelizejs.com/)
+    - `[prisma]` [prisma](https://www.prisma.io/docs)
 ## DataBase
 - **`Relational`**
     * [MySql](https://www.mysql.com/)
@@ -162,7 +166,8 @@
         -  Mac版安装
         - Linux系统（Ubuntu、CentOS）安装 
         - 运行与启动 
-
+- **RPC**
+   - ```[gRPC]``` 
 
 ## HTTP协议实战
 - **http三次握手** [[more]](#http三次握手)
