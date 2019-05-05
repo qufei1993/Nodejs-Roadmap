@@ -232,6 +232,16 @@
 - **Blog推荐** [[more]](/docs/materials/blog.md)
 - **文章推荐** [[more]](/docs/materials/article.md)
 
+## 联系我
+
+- **微信**
+添加我的微信备注“`Github`”
+<img src="./docs/img/wx.jpeg" width="180" height="180"/>
+
+- **公众号**
+专注于Node.js相关技术栈的研究分享，包括基础知识、Nodejs、Consul、Redis、微服务、消息中间件等，如果大家感兴趣可以给予关注支持！
+<img src="./docs/img/node_roadmap_wx.jpg" width="180" height="180"/>
+
 <hr/>
 
 **未完待续，持续更新中。。。**
