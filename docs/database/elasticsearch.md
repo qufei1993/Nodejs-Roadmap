@@ -26,7 +26,7 @@ cd elasticsearch-7.0.0/
 
 检查elasticsearch是否运行
 
-elasticsearch默认9200端口，控制台执行 ```$ curl localhost:9200 ``` 
+elasticsearch默认9200端口，控制台执行 ```$ curl http://localhost:9200 ``` 
 
 ```json
 {
@@ -48,7 +48,49 @@ elasticsearch默认9200端口，控制台执行 ```$ curl localhost:9200 ```
 }
 ```
 
+## 可视化界面kibanna
+
+- **安装**
+
+[官网：Install Kibana with .tar.gz](https://www.elastic.co/guide/en/kibana/current/targz.html)
+
+```shell
+$ wget https://artifacts.elastic.co/downloads/kibana/kibana-7.0.1-linux-x86_64.tar.gz
+$ shasum -a 512 kibana-7.0.1-linux-x86_64.tar.gz
+$ tar -xzf kibana-7.0.1-linux-x86_64.tar.gz
+$ mv kibana-7.0.1-linux-x86_64 kibana-7.0.1 # 目录重命名
+$ cd kibana-7.0.1/
+```
+
+- **运行kibana**
+
+默认情况下kibana前台运行，按Ctrl+C键停止
+
+```
+./bin/kibana
+```
+
+默认运行5601端口，打开网址`http://localhost:5601/`访问
+
+`注意`：因为我使用的本地虚拟机需要建立链接隧道才可在浏览器访问，命令`ssh -L5601:127.0.0.1:5601 qufei@192.168.6.128`，没有这个问题的可忽略。
+
+- **配置文件**
+
+kinaba默认配置文件路径`${kibana安装目录}/config/kibana.yml`，如若更新配置修改此文件即可，配置详细说明：[Configuring Kibana](https://www.elastic.co/guide/en/kibana/7.0/settings.html)
+
 ## 安全增强
+
+es安装好后任何人都可以访问、修改数据，这是不安全的，v6.X版本采用x-pack增强安全权限，之后最新版本可以通过Elastic Stack的 [Security](https://www.elastic.co/cn/products/stack/security) 功能进行权限管理。
+
+### kibana中配置security
+
+在群集上启用X-Pack安全性时，Kibana用户必须登录。为Kibana用户配置X-Pack安全角色，以控制这些用户可以访问的数据。
+
+### Elasticsearch中配置security
+
+```
+// todo
+```
 
 ## 问题指南
 
@@ -91,6 +133,21 @@ su es # 切换账户
 ```shell
 cd /data/soft/elasticsearch-7.0.0/bin # 进入bin目录
 ./elasticsearch # 执行启动命令
+```
+
+#### su: Authentication failure
+
+原因是ubuntu系统默认没有激活root用户，需要通过命令`sudo passwd root`进行手动操作，示例如下：
+
+```shell
+$ sudo passwd root
+[sudo] password for qufei: 
+Enter new UNIX password: 
+Retype new UNIX password: 
+passwd: password updated successfully
+$ su
+Password: 
+$ su es
 ```
 
 ## 阅读推荐
