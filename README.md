@@ -174,7 +174,7 @@
 ](https://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api#versioning)
    
 
-## HTTP协议实战
+## HTTP协议
 - **http三次握手** [[more]](https://github.com/Q-Angelo/http-protocol#http三次握手)
     * `[HTTP三次握手]` [三次握手时序图](https://github.com/Q-Angelo/http-protocol#三次握手时序图)
     * `[HTTP三次握手]` [三次握手数据包详细内容分析](https://github.com/Q-Angelo/http-protocol#三次握手数据包详细内容分析)
