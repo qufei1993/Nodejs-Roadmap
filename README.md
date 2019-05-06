@@ -161,11 +161,11 @@
     - ```[Consul]``` [微服务Consul系列之服务注册与服务发现](/docs/microservice/consul.md#服务注册与发现)
     - ```[Question]``` [微服务Consul系列之问题汇总篇](/docs/microservice/consul.md#问题总结)
 - **消息中间件之RabbitMQ** [[more]](/docs/microservice/rabbitmq-base.md)
-    - ```[RabbitMQ]``` [主流消息中间件简介](/database/rabbitmq-base.md#主流消息中间件简介)
-    - ```[RabbitMQ]``` [RabbitMQ安装、部署、启动](/database/rabbitmq-base.md#安装)
+    - ```[RabbitMQ]``` [主流消息中间件简介](/docs/microservice/rabbitmq-base.md#主流消息中间件简介)
+    - ```[RabbitMQ]``` [RabbitMQ安装、部署、启动](/docs/microservice/rabbitmq-base.md#安装)
         - Mac版安装
         - Linux系统（Ubuntu、CentOS）安装 
-        - 运行与启动 
+        - 运行与启动
 - **轻量级数据通信**
    - `[RPC]` [gRPC 官方文档中文版](http://doc.oschina.net/grpc?t=57966)
    - `[RPC]` [Apache Thrift](http://thrift.apache.org/)
