@@ -38,24 +38,26 @@
 
 rabbitmq和erlang安装包一定要对应，具体可以查看对应关系，官网有说明[RabbitMQ Erlang Version Requirements](http://www.rabbitmq.com/which-erlang.html)
 
-* 获取erlang安装包
+- ***获取erlang安装包***
 
 ```sudo wget http://www.rabbitmq.com/releases/erlang/erlang-18.3-1.el6.x86_64.rpm```
 
-* 获取socat安装包
+- ***获取socat安装包***
 
 socat支持多协议，用于协议处理、端口转发，rabbitmq依赖于此。
 
 ``` sudo wget http://repo.iotti.biz/CentOS/7/x86_64/socat-1.7.3.2-5.el7.lux.x86_64.rpm ```
 
-* 获取rabbitmq-server安装包
-rabbitmq-server 安装包列表[```http://www.rabbitmq.com/releases/rabbitmq-server/```](http://www.rabbitmq.com/releases/rabbitmq-server/)
-
+- ***获取rabbitmq-server安装包***
+rabbitmq-server [```安装包列表```](http://www.rabbitmq.com/releases/rabbitmq-server/)
 ```sudo wget http://www.rabbitmq.com/releases/rabbitmq-server/v3.6.5/rabbitmq-server-3.6.5-1.noarch.rpm```
+
 
 #### 安装
 
-这里采用rpm一键安装，centos 执行命令 ```rpm -ivh erlang-18.3-1.el6.x86_64.rpm```，在ubuntu中不支持此命令```rpm```，使用rpm提示如下信息：
+- **Centos rpm一键安装**
+
+这里采用rpm一键安装，centos 执行命令 ```rpm -ivh erlang-18.3-1.el6.x86_64.rpm```，在```ubuntu```中不支持此命令```rpm```，使用```rpm```提示如下信息：
 
 ```bash
 rpm: RPM should not be used directly install RPM packages, use Alien instead!
@@ -63,17 +65,22 @@ rpm: However assuming you know what you are doing...
 error: Failed dependencies:
 ```
 
-解决方法：
-* 安装```alien```，执行命令```apt-get install alien```
-* 转换```rpm```包为```.deb```格式，执行命令```alien package.rpm```其中```package.rpm```为你的包名
-* 通过dpkg安装，```dpkg -i package.rpm```
+- **```ubuntu```系统rpm一键安装解决方案**
+  1. 安装```alien```，执行命令```sudo apt-get install alien```
+  2. 转换```rpm```包为```.deb```格式，执行命令```sudo alien package.rpm```其中```package.rpm```为你的包名
+  3. 通过dpkg安装，```sudo dpkg -i package.deb```
 
-以下顺序安装（以下是基于CentOS系统安装）：
-1. rpm -ivh erlang-18.3-1.el6.x86_64.rpm
-2. rpm -ivh socat-1.7.3.2-5.el7.lux.x86_64.rpm
-3. rpm -ivh rabbitmq-server-3.6.5-1.noarch.rpm
+- **以下顺序安装（以下是基于CentOS系统安装）**
+```shell
+rpm -ivh erlang-18.3-1.el6.x86_64.rpm
+rpm -ivh socat-1.7.3.2-5.el7.lux.x86_64.rpm
+rpm -ivh rabbitmq-server-3.6.5-1.noarch.rpm
+```
 
-修改配置文件：```vim /usr/lib/rabbitmq/lib/rabbitmq_server-3.6.5/ebin/rabbit.app```
+- **修改配置文件**
+```
+vim /usr/lib/rabbitmq/lib/rabbitmq_server-3.6.5/ebin/rabbit.app
+```
 
 ```js
 {loopback_users, [<<"guest">>]}, // 修改为 {loopback_users, [guest]},
@@ -81,22 +88,34 @@ error: Failed dependencies:
 
 #### 运行与启动
 
-```rabbitmqctl start_app```开启rabbitmq
-
-```rabbitmq-plugins enable rabbitmq_management``` 开启管理插件
-
-```lsof  -i:5672``` 查看状态，看到以下提示则开启成功
-
+- **开启rabbitmq**
 ```
+rabbitmqctl start_app
+```
+
+- **开启管理插件**
+```
+rabbitmq-plugins enable rabbitmq_management
+``` 
+
+- **检查状态**
+```shell
+$ lsof  -i:5672 # 看到以下提示则开启成功
 COMMAND  PID     USER   FD   TYPE DEVICE SIZE/OFF NODE NAME
 beam    4678 rabbitmq   49u  IPv6 294158      0t0  TCP *:amqp (LISTEN)
 ```
 
+- **开启管理通知台**
 终端更多操作命令，以下有说明，浏览区输入```http://host:15672```打开管理控制台
 
 ![](./img/20181118_rabbitmq_001.png)
 
-注意: 阿里云ECS服务器如果出现RabbitMQ安装成功，外网不能访问是因为安全组的问题没有开放端口[解决方案](https://blog.csdn.net/lsq_401/article/details/79921221)
+- **几个端口区别说明**
+    * `5672`：通信默认端口号
+    * `15672`：管理控制台默认端口号
+    * `25672`：集群通信端口号
+
+`注意:` 阿里云ECS服务器如果出现RabbitMQ安装成功，外网不能访问是因为安全组的问题没有开放端口[解决方案](https://blog.csdn.net/lsq_401/article/details/79921221)
 
 ## 操作命令
 
