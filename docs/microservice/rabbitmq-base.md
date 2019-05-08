@@ -1,12 +1,12 @@
 # RabbitMQ高级消息队列
 
 ## 快速导航
-* [主流消息中间件简介](/database/rabbitmq_base.md#主流消息中间件简介)
-* [RabbitMQ安装](/database/rabbitmq_base.md#安装)
+* [主流消息中间件简介](/docs/microservice/rabbitmq-base.md#主流消息中间件简介)
+* [RabbitMQ安装](/docs/microservice/rabbitmq-base.md#安装)
     - `[RabbitMQ安装]` Mac版安装
     - `[RabbitMQ安装]` Linux系统（Ubuntu、CentOS）安装 
     - `[RabbitMQ安装]` 运行与启动 
-* [RabbitMQ延迟队列实现定时任务](/database/rabbitmq_base.md#RabbitMQ延迟队列实现定时任务)
+* [RabbitMQ延迟队列实现定时任务](/docs/microservice/rabbitmq-base.md#RabbitMQ延迟队列实现定时任务)
     - `[DLX]` 死信队列
     - `[TTL]` 消息TTL的存活时间
     - `[Task]` Nodejs操作RabbitMQ实现延迟队列
@@ -135,6 +135,13 @@ beam    4678 rabbitmq   49u  IPv6 294158      0t0  TCP *:amqp (LISTEN)
 * ```rabbitmqctl list_vhosts```：列出所有虚拟主机
 * ```rabbitmqctl list_queues```：查看所有队列
 * ```rabbitmqctl -p vhostpath purge_queue blue```：清除队列里消息
+
+## RabbitMQ幂等性实现
+
+### 业界常见幂等解决方案
+
+* 利用数据库主键设置唯一id
+* Redis的原子性功能实现
 
 ## RabbitMQ延迟队列实现定时任务
 
