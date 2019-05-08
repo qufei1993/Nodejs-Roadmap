@@ -297,6 +297,4 @@ testQu 队列为我们定义的正常队列消息过期，会变成死信，会�
 
 ![](./img/rabbitmq-queue-dlx.png)
 
-## 推荐资源
-[消息队列应用场景](http://www.cnblogs.com/stopfalling/p/5375492.html)
-[架构设计之NodeJS操作消息队列RabbitMQ](http://www.cnblogs.com/wukong-holmes/p/9306733.html)
+- **源码地址**：[RabbitMQ延迟队列实现定时任务（Node.js客户端版Demo）](https://github.com/Q-Angelo/project-training/tree/master/nodejs/rabbitmq-timed-task)
