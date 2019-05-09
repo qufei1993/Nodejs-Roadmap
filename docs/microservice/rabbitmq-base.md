@@ -136,6 +136,11 @@ beam    4678 rabbitmq   49u  IPv6 294158      0t0  TCP *:amqp (LISTEN)
 * ```rabbitmqctl list_queues```：查看所有队列
 * ```rabbitmqctl -p vhostpath purge_queue blue```：清除队列里消息
 
+
+## 生产者与消费者
+
+1. 生产者发消息的时候必须要指定一个exchange，若不指定exchange（为空）会默认指向 `AMQP default` 交换机，`AMQP default`路由规则是根据routingKey和mq上有没有相同名字的队列进行匹配路由。
+
 ## RabbitMQ幂等性实现
 
 ### 业界常见幂等解决方案
@@ -296,5 +301,9 @@ $ node producer # 执行生产者
 testQu 队列为我们定义的正常队列消息过期，会变成死信，会被路由到 testQueueDLX 队列，形成一个死信队列。
 
 ![](./img/rabbitmq-queue-dlx.png)
+
+- **注意问题**
+
+> 一个队列里的某个消息即使比同队列中的其它消息提前过期，也不会优先进入到死信队列，只有当过期的消息到了队列的顶端，才会被真正的丢弃或者进入死信队列。
 
 - **源码地址**：[RabbitMQ延迟队列实现定时任务（Node.js客户端版Demo）](https://github.com/Q-Angelo/project-training/tree/master/nodejs/rabbitmq-timed-task)
