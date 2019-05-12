@@ -234,6 +234,22 @@
 - **Blog推荐** [[more]](/docs/materials/blog.md)
 - **文章推荐** [[more]](/docs/materials/article.md)
 
+## 转载分享
+
+建立本开源项目的初衷是基于个人学习与工作中对 Node.js 相关技术栈的总结分享，如果您需要转载本仓库的一些文章到自己的博客，请按照以下格式注明出处，谢谢合作。
+
+```
+作者：五月君
+链接：https://github.com/Q-Angelo/Nodejs-Roadmap
+来源：Nodejs.js技术栈
+```
+
+## 参与贡献
+
+1. 如果您对本项目有任何建议或发现文中内容有误的，欢迎提交 issues 进行指正。
+2. 对于文中我没有涉及到知识点，欢迎提交 PR。
+3. 如果您有文章推荐请以 markdown 格式到邮箱 `qzfweb@gmail.com`，[中文技术文档的写作规范指南](https://github.com/ruanyf/document-style-guide)。
+
 ## 联系我
 
 - **微信**
