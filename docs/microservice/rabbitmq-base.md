@@ -136,6 +136,22 @@ beam    4678 rabbitmq   49u  IPv6 294158      0t0  TCP *:amqp (LISTEN)
 * ```rabbitmqctl list_queues```：查看所有队列
 * ```rabbitmqctl -p vhostpath purge_queue blue```：清除队列里消息
 
+## 
+
+- **Exchange**
+用于接收消息，根据路由键转发消息绑定队列
+* Name：交换机名称
+* Type：交换机类型direct、topic、fanout、headers
+    * direct：不需要Exchange进行绑定，根据RoutingKey匹配消息路由到指定的队列。
+    * topic：生产者指定RoutingKey消息根据消费端指定的队列通过模糊匹配的方式进行相应转发，两种通配符模式：
+        * `#`：可匹配一个或多个关键字
+        * `*`：只能匹配一个关键字
+
+* Durability：是否需要持久化
+* Auto Delete：最后一个绑定到Exchange上的队列删除之后自动删除该Exchange
+* Internal：当前Exchange是否应用于RabbitMQ内部使用，默认false。
+* Arguments：扩展参数
+    
 
 ## 生产者与消费者
 
