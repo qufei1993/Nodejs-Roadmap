@@ -283,13 +283,13 @@ await channel.consume(queueName, msg => {
 
 ![](./img/rabbitmq_qos_20190523_002.png)
 
-如上图所示，Unacked 未0，消息已全部消费成功。
+如上图所示，Unacked 为0，消息已全部消费成功。
 
 ### RabbitMQ限流使用总结
 
-限流在我们的实际工作中还是很有意义的，在使用上生产端没有变化，重点在消费端着重看以下两点
+限流在我们的实际工作中还是很有意义的，在使用上生产端没有变化，重点在消费端，着重看以下两点：
 
-* 限流情况ack不能设置自动签收，修改 `{ noAck: false }`
+* 限流情况 ack 不能设置自动签收，修改 `{ noAck: false }`
 * 增加限流参数设置 `channel.prefetch(1, false)`
 
 
