@@ -167,7 +167,8 @@
         - Mac版安装
         - Linux系统（Ubuntu、CentOS）安装 
         - 运行与启动
-    - ```[RabbitMQ]``` [RabbitMQ延迟队列实现定时任务](/docs/microservice/rabbitmq-base.md#RabbitMQ延迟队列实现定时任务)
+    - `[QOS]` [RabbitMQ高级特性消费端限流策略实现](/docs/microservice/rabbitmq-base.md#RabbitMQ高级特性消费端限流策略实现)
+    - `[RabbitMQ]` [RabbitMQ延迟队列实现定时任务](/docs/microservice/rabbitmq-base.md#RabbitMQ延迟队列实现定时任务)
 - **轻量级数据通信**
    - `[RPC]` [gRPC 官方文档中文版](http://doc.oschina.net/grpc?t=57966)
    - `[RPC]` [Apache Thrift](http://thrift.apache.org/)
