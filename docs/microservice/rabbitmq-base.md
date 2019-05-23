@@ -292,6 +292,7 @@ await channel.consume(queueName, msg => {
 * 限流情况 ack 不能设置自动签收，修改 `{ noAck: false }`
 * 增加限流参数设置 `channel.prefetch(1, false)`
 
+**源码地址**：[rabbitmq-prefetch（Node.js客户端版Demo）](https://github.com/Q-Angelo/project-training/tree/master/nodejs/rabbitmq-prefetch)
 
 ## RabbitMQ幂等性实现
 
