@@ -26,7 +26,7 @@
 
 ## 安装
 
-* ### Mac版安装
+- ### Mac版安装
 
 直接通过```HomeBrew```安装，执行以下命令
 
@@ -39,7 +39,7 @@
 
 浏览器输入```http://localhost:15672/#/```，默认用户名密码：guest
 
-* ### Linux系统安装
+- ### Linux系统安装
 
 #### 安装依赖
 ```apt-get install build-essential openssl openssl-devel unixODBC unixODBC-devel make gcc gcc-c++ kernel-devel m4 ncurses-devel tk tc xz lsof```
@@ -127,20 +127,23 @@ beam    4678 rabbitmq   49u  IPv6 294158      0t0  TCP *:amqp (LISTEN)
 
 `注意:` 阿里云ECS服务器如果出现RabbitMQ安装成功，外网不能访问是因为安全组的问题没有开放端口[解决方案](https://blog.csdn.net/lsq_401/article/details/79921221)
 
-## 操作命令
+- ### 操作命令
 
-* ```whereis rabbitmq```：查看rabbitmq安装位置
-* ```whereis erlang```：查看erlang安装位置
-* ```rabbitmqctl start_app```：启动应用
-* ```rabbitmqctl stop_app```：关闭应用
-* ```rabbitmqctl status```：节点状态
-* ```rabbitmqctl add_user username password```：添加用户
-* ```rabbitmqctl list_users```：列出所有用户
-* ```rabbitmqctl delete_user username```：删除用户
-* ```rabbitmqctl add_vhost vhostpath```：创建虚拟主机
-* ```rabbitmqctl list_vhosts```：列出所有虚拟主机
-* ```rabbitmqctl list_queues```：查看所有队列
-* ```rabbitmqctl -p vhostpath purge_queue blue```：清除队列里消息
+|命令                         |   含义  |
+|:---------------------------|:------|
+|whereis rabbitmq        | 查看rabbitmq安装位置 |
+|rabbitmqctl start_app   | 启动应用 |
+| whereis erlang | 查看erlang安装位置
+| rabbitmqctl start_app | 启动应用
+| rabbitmqctl stop_app | 关闭应用
+| rabbitmqctl status | 节点状态
+| rabbitmqctl add_user username password | 添加用户
+| rabbitmqctl list_users | 列出所有用户
+| rabbitmqctl delete_user username | 删除用户
+| rabbitmqctl add_vhost vhostpath | 创建虚拟主机
+| rabbitmqctl list_vhosts| 列出所有虚拟主机
+| rabbitmqctl list_queues | 查看所有队列
+| rabbitmqctl -p vhostpath purge_queue blue | 清除队列里消息
 
 ## 
 
