@@ -229,6 +229,7 @@
     - ```[Git]``` [Git常用命令及日常问题集锦](/docs/tools/git.md)
 - **SEO** [[more]](/docs/tools/seo.md)
     - ```[SEO实战]``` [SEO网站优化title设置与快速排名](/docs/tools/seo.md)
+- [Docsify 快速搭建个人博客](/tools/docsify.md)
 
 ## 资料
 - **书籍推荐** [[more]](/docs/materials/book.md)
@@ -255,11 +256,11 @@
 
 - **微信**
 添加我的微信备注“`Github`”
-<img src="./docs/img/wx.jpeg" width="180" height="180"/>
+<img src="https://nodejsred.oss-cn-shanghai.aliyuncs.com/wx.jpeg?x-oss-process=style/may" width="180" height="180"/>
 
 - **公众号**
 专注于Node.js相关技术栈的研究分享，包括基础知识、Nodejs、Consul、Redis、微服务、消息中间件等，如果大家感兴趣可以给予关注支持！
-<img src="./docs/img/node_roadmap_wx.jpg" width="180" height="180"/>
+<img src="https://nodejsred.oss-cn-shanghai.aliyuncs.com/node_roadmap_wx.jpg?x-oss-process=style/may" width="180" height="180"/>
 
 <hr/>
 

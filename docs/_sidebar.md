@@ -58,6 +58,7 @@
 * 工具
     - [Git 常用命令及日常问题集锦](/tools/git.md)
     - [SEO 网站优化 title 置与快速排名](/tools/seo.md)
+    - [Docsify 快速搭建个人博客](/tools/docsify.md)
 
 * 资料
     - [书籍推荐](/materials/book.md)
