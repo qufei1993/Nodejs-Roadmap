@@ -229,7 +229,7 @@
     - ```[Git]``` [Git常用命令及日常问题集锦](/docs/tools/git.md)
 - **SEO** [[more]](/docs/tools/seo.md)
     - ```[SEO实战]``` [SEO网站优化title设置与快速排名](/docs/tools/seo.md)
-- [Docsify 快速搭建个人博客](/tools/docsify.md)
+- [Docsify 快速搭建个人博客](/docs/tools/docsify.md)
 
 ## 资料
 - **书籍推荐** [[more]](/docs/materials/book.md)
