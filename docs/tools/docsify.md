@@ -23,10 +23,6 @@ $ npm i docsify-cli -g
 
 如果你正在用 Markdown 写一些 Blog 项目，那么也可以用你现在的项目，如果你没有，那么建议你在 Github 新建一个属于你的 Blog 项目，开始我们接下来的学习
 
-```
-Github： https://github.com/new
-```
-
 ![](./img/docsify_20190525_001.png)
 
 ## **初始化文档**
@@ -65,7 +61,7 @@ Listening at http://localhost:3000
 
 设置我们的封面图，需要两步，首先在 `docs/index.html` 文件中将设置 ```coverpage: true```，之后创建 ```docs/_coverpage.md```文件
 
-`docs/index.html`
+```docs/index.html```
 
 ```html
 <script>
