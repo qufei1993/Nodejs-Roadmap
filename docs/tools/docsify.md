@@ -61,7 +61,7 @@ Listening at http://localhost:3000
 
 设置我们的封面图，需要两步，首先在 `docs/index.html` 文件中将设置 ```coverpage: true```，之后创建 ```docs/_coverpage.md```文件
 
-```docs/index.html```
+docs/index.html
 
 ```html
 <script>
@@ -72,7 +72,7 @@ Listening at http://localhost:3000
 <script src="//unpkg.com/docsify"></script>
 ```
 
-```docs/_coverpage.md```
+docs/_coverpage.md
 
 ```markdown
 <img width="180px" style="border-radius: 50%" bor src="https://nodejsred.oss-cn-shanghai.aliyuncs.com/nodejs_roadmap-logo.jpeg?x-oss-process=style/may">
@@ -93,7 +93,7 @@ Listening at http://localhost:3000
 
 首先配置 ```loadNavbar: true```，之后创建 ```docs/_navbar.md```文件.
 
-`docs/index.html`
+docs/index.html
 
 ```html
 <script>
@@ -106,7 +106,7 @@ Listening at http://localhost:3000
 
 这里配置并不是很复杂，根据缩进生成对应的目录结构，注意目录的跳转链接是当前 (docs) 目录下的文件
 
-```docs/_navbar.md```
+docs/_navbar.md
 
 ```markdown
 * Introduction
