@@ -49,5 +49,3 @@
 - **公众号**
 专注于Node.js相关技术栈的研究分享，包括基础知识、Nodejs、Consul、Redis、微服务、消息中间件等，如果大家感兴趣可以给予关注支持！
 <img src="https://nodejsred.oss-cn-shanghai.aliyuncs.com/node_roadmap_wx.jpg?x-oss-process=style/may" width="180" height="180"/>
-
-<hr/>
