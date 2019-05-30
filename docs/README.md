@@ -34,12 +34,6 @@
 来源：Nodejs.js技术栈
 ```
 
-## 参与贡献
-
-1. 如果您对本项目有任何建议或发现文中内容有误的，欢迎提交 issues 进行指正。
-2. 对于文中我没有涉及到知识点，欢迎提交 PR。
-3. 如果您有文章推荐请以 markdown 格式到邮箱 `qzfweb@gmail.com`，[中文技术文档的写作规范指南](https://github.com/ruanyf/document-style-guide)。
-
 ## 联系我
 
 - **微信**
@@ -49,3 +43,9 @@
 - **公众号**
 专注于Node.js相关技术栈的研究分享，包括基础知识、Nodejs、Consul、Redis、微服务、消息中间件等，如果大家感兴趣可以给予关注支持！
 <img src="https://nodejsred.oss-cn-shanghai.aliyuncs.com/node_roadmap_wx.jpg?x-oss-process=style/may" width="180" height="180"/>
+
+## 参与贡献
+
+1. 如果您对本项目有任何建议或发现文中内容有误的，欢迎提交 issues 进行指正。
+2. 对于文中我没有涉及到知识点，欢迎提交 PR。
+3. 如果您有文章推荐请以 markdown 格式到邮箱 `qzfweb@gmail.com`，[中文技术文档的写作规范指南](https://github.com/ruanyf/document-style-guide)。
