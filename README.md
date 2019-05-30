@@ -118,6 +118,7 @@
     - `[Template]` [Handlebarsjs](https://handlebarsjs.com/)
     - `[Template]` [Jade](http://jade-lang.com/)
 - **日志记录收集**
+    - `[Logger]` [基于 egg-logger 定制日志中间件实现日志链路追踪](/nodejs/egg-custom-logger.md)
     - `[Logger]` [Sentry--错误日志收集框架](https://sentry.io/welcome/)
     - `[Logger]` [log4js 日志记录工具](https://github.com/log4js-node/log4js-node)
     - `[Logger]` [ELK--开源的日志分析系统](https://www.elastic.co/cn/products)
