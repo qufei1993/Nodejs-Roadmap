@@ -21,6 +21,7 @@
     * [Node模块加载机制与实际应用](/nodejs/module.md)
     * [事件轮询（Event Loop）](/nodejs/event-loop.md)
     * [常用 Web 框架&中间件汇总](/nodejs/middleware.md)
+    * [基于 egg-logger 定制日志中间件实现日志链路追踪](/nodejs/egg-custom-logger.md)
     - [缓存](/nodejs/base.md#缓存)
     - [定时任务](/nodejs/base.md#定时任务)
     - [模板引擎](/nodejs/base.md#模板引擎)
