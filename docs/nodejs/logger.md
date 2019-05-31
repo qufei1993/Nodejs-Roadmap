@@ -18,7 +18,7 @@
 
 API接口服务接收到调用请求，根据调用者传的traceId (如果没有自己生成)，在该次调用链中处理业务时，如需打印日志，日志信息按照约定的规范进行打印，并记录traceId，实现日志链路追踪。
 
-```
+```bash
 日志时间[]traceId[]服务端IP[]客户端IP[]日志级别[]日志内容
 ```
 
@@ -32,7 +32,9 @@ egg-logger 提供了多种传输通道，我们的需求主要是对请求的业
 
 - **编写logger.js**
 
-```egg-logger-custom/lib/logger.js```
+```
+egg-logger-custom/lib/logger.js
+```
 
 ```js
 const moment = require('moment');
@@ -94,7 +96,9 @@ module.exports = AppTransport;
 
 - **工具**
 
-```egg-logger-custom/lib/utils.js```
+```
+egg-logger-custom/lib/utils.js
+```
 
 ```js
 const interfaces = require('os').networkInterfaces();
@@ -139,7 +143,9 @@ module.exports = {
 
 - **初始化 Logger**
 
-```egg-logger-custom/app.js```
+```
+egg-logger-custom/app.js
+```
 ```js
 const Logger = require('egg-logger').Logger;
 const ConsoleTransport = require('egg-logger').ConsoleTransport;
