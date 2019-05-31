@@ -3,6 +3,18 @@
 
 > 平常写一些文档或者个人笔记时，Markdown 是我的第一个选择，因为它用起来真的很方便、简洁。那么今天要讲的 Docsify 是什么呢？
 
+## 快速导航
+
+- [Docsify简介](#Docsify简介)
+- [全局安装](#全局安装)
+- [Github 创建你的 Blog 项目](#Github创建你的Blog项目)
+- [初始化文档](#初始化文档)
+- [启动本地服务预览](#启动本地服务预览)
+- [搭建博客](#搭建博客)
+- [GithubPages预览](#GithubPages预览)
+- [增加评论功能](#增加评论功能)
+- [总结](#总结)
+
 ## Docsify简介
 
 Docsify 是一个动态生成文档网站的工具。不同于 GitBook、Hexo 的地方是它不会生成将 .md 转成 .html 文件，所有转换工作都是在运行时进行。 
@@ -11,7 +23,7 @@ Docsify 是一个动态生成文档网站的工具。不同于 GitBook、Hexo �
 
 [docsify 中文文档](https://docsify.js.org/#/zh-cn/)
 
-## **全局安装**
+## 全局安装
 
 安装脚手架工具 docsify-cli，安装过程中较慢的可以切换 npm 源为 [cnpm](/devops/npm-deploy.md)
 
@@ -19,13 +31,13 @@ Docsify 是一个动态生成文档网站的工具。不同于 GitBook、Hexo �
 $ npm i docsify-cli -g
 ```
 
-## Github 创建你的 Blog 项目
+## Github创建你的Blog项目
 
 如果你正在用 Markdown 写一些 Blog 项目，那么也可以用你现在的项目，如果你没有，那么建议你在 Github 新建一个属于你的 Blog 项目，开始我们接下来的学习
 
 ![](./img/docsify_20190525_001.png)
 
-## **初始化文档**
+## 初始化文档
 
 注意这里的文件名约定为 docs 也是官方推荐，请按照规则设置，否则发到 Github 可能会出现一些问题
 
@@ -134,6 +146,70 @@ docs/_navbar.md
 ![](./img/docsify_20190526_002.png)
 
 浏览器输入 https://q-angelo.github.io/Nodejs-Roadmap/ 即可访问，q-angelo 为您的用户名，Nodejs-Roadmap 为您的项目名称。
+
+## 增加评论功能
+
+[Gitalk](https://github.com/gitalk/gitalk) 是一个基于 GitHub Issue 和 Preact 开发的评论插件。
+
+clientID 和 clientSecret 需要在在你的 [Github Applications](https://github.com/settings/applications/new) 申请。
+
+- **gitalkConfig配置**
+
+* clientID：GitHub Application Client ID
+* clientSecret：GitHub Application Client Secret
+* repo：GitHub repository，例如：Nodejs-Roadmap
+* owner：仓库所有者
+* admin：管理员
+* id：页面唯一id，如果想要每个页面都有一个独立的评论，请保证这个页面id是唯一的
+
+```html
+
+<link rel="stylesheet" href="//unpkg.com/gitalk/dist/gitalk.css">
+
+<script>
+  var gitalkConfig = {
+    clientID: 'XXXXXX',
+    clientSecret: 'XXXXXXX',
+    repo: 'Nodejs-Roadmap',
+    owner: 'q-angelo',
+    admin: ["q-angelo"],
+    distractionFreeMode: false
+  };
+
+  window.$docsify = {
+    plugins: [
+      function (hook, vm) {
+        hook.doneEach(function() {
+          var label, domObj, main, divEle, gitalk;
+          label = vm.route.path.split("/").pop();
+          domObj = Docsify.dom;
+          main = domObj.getNode("#main");
+
+          Array.apply(
+            null,
+            document.querySelectorAll("div.gitalk-container")
+          ).forEach(function(ele) {
+            ele.remove();
+          });
+
+          divEle = domObj.create("div");
+          divEle.id = "gitalk-container-" + label;
+          divEle.className = "gitalk-container";
+          divEle.style = "width: " + main.clientWidth + "px; margin: 0 auto 20px;";
+          domObj.appendTo(domObj.find(".content"), divEle);
+          gitalk = new Gitalk(
+            Object.assign(gitalkConfig, { id: !label ? "home" : label })
+          );
+          gitalk.render("gitalk-container-" + label);
+        });
+      }
+    ]
+  }
+</script>
+
+<script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
+<script src="//unpkg.com/gitalk/dist/gitalk.min.js"></script>
+```
 
 ## 总结
 
