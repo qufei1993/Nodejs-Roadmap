@@ -13,12 +13,6 @@
 - `[Template]` [Handlebarsjs](https://handlebarsjs.com/)
 - `[Template]` [Jade](http://jade-lang.com/)
 
-## 日志记录收集
-- `[Logger]` [Sentry--错误日志收集框架](https://sentry.io/welcome/)
-- `[Logger]` [log4js 日志记录工具](https://github.com/log4js-node/log4js-node)
-- `[Logger]` [ELK--开源的日志分析系统](https://www.elastic.co/cn/products)
-- `[Logger]` [winston日志模块](https://github.com/winstonjs/winston)
-
 ## 测试
 * `Unit Testing` [mocha NodeJS里最常用的测试框架](https://mochajs.org/)
 * `Unit Testing` [chai 一个断言库](http://www.chaijs.com/api/)

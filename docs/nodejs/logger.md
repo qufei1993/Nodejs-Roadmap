@@ -1,13 +1,20 @@
-# 定制日志中间件实现日志链路追踪
+# 日志模块
 
 ## 快速导航
+- 日志记录收集
+    - `[Logger]` [Sentry--错误日志收集框架](https://sentry.io/welcome/)
+    - `[Logger]` [log4js 日志记录工具](https://github.com/log4js-node/log4js-node)
+    - `[Logger]` [ELK--开源的日志分析系统](https://www.elastic.co/cn/products)
+    - `[Logger]` [winston日志模块](https://github.com/winstonjs/winston)
+- 基于 egg-logger 定制日志中间件实现日志链路追踪
+    - `[Logger-Custom]` [需求背景](#需求背景)
+    - `[Logger-Custom]` [自定义日志插件开发](#自定义日志插件开发)
+    - `[Logger-Custom]` [项目扩展](#项目扩展)
+    - `[Logger-Custom]` [项目应用](#项目应用)
 
-- [需求背景](#需求背景)
-- [自定义日志插件开发](#自定义日志插件开发)
-- [项目扩展](#项目扩展)
-- [项目应用](#项目应用)
+## 基于 egg-logger 定制日志中间件实现日志链路追踪
 
-## 需求背景
+### 需求背景
 
 API接口服务接收到调用请求，根据调用者传的traceId (如果没有自己生成)，在该次调用链中处理业务时，如需打印日志，日志信息按照约定的规范进行打印，并记录traceId，实现日志链路追踪。
 
@@ -19,7 +26,7 @@ API接口服务接收到调用请求，根据调用者传的traceId (如果没�
 
 egg-logger 提供了多种传输通道，我们的需求主要是对请求的业务日志自定义格式存储，主要用到 fileTransport 和 consoleTransport 两个通道，分别打印日志到文件和终端。
 
-## 自定义日志插件开发
+### 自定义日志插件开发
 
 基于 egg-logger 定制开发一个插件项目，参考 [插件开发](https://eggjs.org/zh-cn/advanced/plugin.html)，以下以 egg-logger-custom 为项目，展示核心代码编写
 
@@ -156,7 +163,7 @@ module.exports = (ctx, options) => {
 
 以上对于日志定制格式开发已经好了，如果你有实际业务需要可以根据自己团队的需求，封装为团队内部的一个 npm 中间件来使用。
 
-## 项目扩展
+### 项目扩展
 
 自定义日志中间件封装好之后，在实际项目应用中我们还需要一步操作，Egg 提供了 [框架扩展](https://eggjs.org/zh-cn/basics/extend.html) 功能，包含五项：Application、Context、Request、Response、Helper，可以对这几项进行自定义扩展，对于日志因为每次日志记录我们需要记录当前请求携带的 traceId 做一个链路追踪，需要用到 Context（是 Koa 的请求上下文） 扩展项。
 
@@ -178,7 +185,7 @@ module.exports = {
 
 **建议**：对于日志级别，可以采用配置中心如 Consul 进行配置，上线时日志级别设置为 INFO，当需要生产问题排查时，可以动态开启 DEBUG 模式。关于 Consul 可以关注我之前写的 [服务注册发现 Consul 系列](https://www.nodejs.red/#/microservice/consul)
 
-## 项目应用
+### 项目应用
 
 错误日志记录，直接会将错误日志完整堆栈信息记录下来，并且输出到 errorLog 中，为了保证异常可追踪，必须保证所有抛出的异常都是 Error 类型，因为只有 Error 类型才会带上堆栈信息，定位到问题。
 
