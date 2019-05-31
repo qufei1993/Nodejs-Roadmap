@@ -151,9 +151,9 @@ docs/_navbar.md
 
 [Gitalk](https://github.com/gitalk/gitalk) 是一个基于 GitHub Issue 和 Preact 开发的评论插件。
 
-clientID 和 clientSecret 需要在在你的 [Github Applications](https://github.com/settings/applications/new) 申请。
+**gitalkConfig配置**
 
-- **gitalkConfig配置**
+> 以下 clientID 和 clientSecret 需要在你的 [Github Applications](https://github.com/settings/applications/new) 申请。
 
 * clientID：GitHub Application Client ID
 * clientSecret：GitHub Application Client Secret
