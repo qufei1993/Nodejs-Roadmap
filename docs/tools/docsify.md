@@ -151,16 +151,17 @@ docs/_navbar.md
 
 [Gitalk](https://github.com/gitalk/gitalk) 是一个基于 GitHub Issue 和 Preact 开发的评论插件。
 
-**gitalkConfig配置**
+- **gitalkConfig配置**
+  * clientID：GitHub Application Client ID
+  * clientSecret：GitHub Application Client Secret
+  * repo：GitHub repository，例如：Nodejs-Roadmap
+  * owner：仓库所有者
+  * admin：管理员
+  * id：页面唯一id，如果想要每个页面都有一个独立的评论，请保证这个页面id是唯一的
 
-> 以下 clientID 和 clientSecret 需要在你的 [Github Applications](https://github.com/settings/applications/new) 申请。
+以上 clientID 和 clientSecret 需要在你的 [Github Applications](https://github.com/settings/applications/new) 申请。
 
-* clientID：GitHub Application Client ID
-* clientSecret：GitHub Application Client Secret
-* repo：GitHub repository，例如：Nodejs-Roadmap
-* owner：仓库所有者
-* admin：管理员
-* id：页面唯一id，如果想要每个页面都有一个独立的评论，请保证这个页面id是唯一的
+修改 ```docs/index.html``` 文件
 
 ```html
 
