@@ -1,5 +1,5 @@
 ## NoSQL
-* [MongoDB](mongodb.md)
+* [MongoDB](database/mongodb.md)
 * [Redis](https://redis.io/)
 * [RocksDB](https://github.com/facebook/rocksdb/)、[RocksDB中文网](https://rocksdb.org.cn/)
 * [CouchDB](http://couchdb.apache.org/)
