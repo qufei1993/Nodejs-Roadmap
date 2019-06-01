@@ -229,5 +229,4 @@ db.getCollection('demo_user').ensureIndex({"id": 1}, {background: 1}) # 建立�
 ## 推荐阅读
 
 - **[MongoDB Indexes](https://docs.mongodb.com/manual/indexes/)**
-- **[Github：MongoDB索引](#)**
 
