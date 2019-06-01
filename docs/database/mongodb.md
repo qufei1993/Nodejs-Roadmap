@@ -218,6 +218,77 @@ db.demo_admin.update({"a":2},{$set:{"a":222}},false,true);
 db.demo_admin.update({"x":100},{$set:{"y":99}})
 ```
 
+
+- **MongoDB对象数组更新**
+
+> 例如：使用 update 对集合中的 orderNo 为 o111111 字段下的 userInfo 数组对象下的 cardNo 等于 123456789 这个对象中的 logs 字段和 status 字段(在更新的时候没有 status 字段将会创建) 进行日志更新
+
+```javascript
+{
+	"_id" : ObjectId("59546c5051eb690367d457fa"),
+	"orderNo" : "o111111"
+	"userInfo" : [
+		{
+			"name" : "o1111",
+			"cardNo" : "123456789",
+			"logs" : [
+				"2017-08-09 timeline ...",
+			]
+		}
+		...
+	]
+},
+...
+}
+```
+
+可以使用 $push 在找到 logs 数组后依次添加日志信息
+
+```javascript
+let condition = {"orderNo":"o111111","userInfo.cardNo":"123456789"}
+
+let update = {
+	$push: {
+		"passengers.$.logs": "2017-08-10 timeline1 ..."
+	}
+}
+db.collections.findOneAndUpdate(condition, update, { returnOriginal: false })
+```
+
+也可以使用 $set 对某个字段进行更新
+
+```javascript
+let condition = {"orderNo":"o111111","userInfo.cardNo":"123456789"}
+
+let update = {
+	$set: {"passengers.$.status": "已更新"}
+}
+
+DB.orderColl.updateOne(condition,update)
+```
+
+需要注意的点是位置运算符 $ 只能在查询中使用一次，官方对于这个问题提出了一个方案 [https://jira.mongodb.org/browse/SERVER-831](https://jira.mongodb.org/browse/SERVER-831) 如果能在未来发布这将是非常有用的。如果，目前你需要在嵌套层次很深的情况下想对数组的内容进行修改可以采用 forEach() 方法操作，像下面这样：
+
+```javascript
+db.post
+  .find({"answers.comments.name": "jeff"})
+  .forEach(function(post) {
+    if (post.answers) {
+      post.answers.forEach(function(answer) {
+        if (answer.comments) {
+          answer.comments.forEach(function(comment) {
+            if (comment.name === "jeff") {
+              comment.name = "joe";
+            }
+          });
+        }
+      });
+
+      db.post.save(post);
+    }
+});
+```
+
 #### 删除数据（Delete）
 
 - ***remove 删除一条数据***
@@ -239,15 +310,15 @@ true
 ## 聚合管道
 
 #### 管道操作符
-Name | Description |
-:---|:---|
-| $project | 包含、排除、重命名和显示字段
-| $match   | 查询，需要同 find() 一样的参数
-| $limit   | 限制结果数量
-| $skip    | 忽略结果的数量
-| $sort    | 按照给定的字段排序结果
-| $group   | 按照给定表达式组合结果
-| $unwind  | 分割嵌入数组到自己顶层文件
+| Name     | Description |
+:----------|:------------|
+| $project | 包含、排除、重命名和显示字段 |
+| $match   | 查询，需要同 find() 一样的参数 |
+| $limit   | 限制结果数量 |
+| $skip    | 忽略结果的数量 |
+| $sort    | 按照给定的字段排序结果 |
+| $group   | 按照给定表达式组合结果 |
+| $unwind  | 分割嵌入数组到自己顶层文件 |
 
 #### 比较类型操作符
 
@@ -348,88 +419,6 @@ db.collection.aggregate({"$match":{"name": /hello/i}})
 - **Nodejs 两种写法**
   * ```collection.name = new RegExp('hello', 'i')```
   * ```collection.name = {$regex: 'hello'}```
-
-## update更新操作
-
-#### MongoDB 对集合中 某个数组对象下的字段进行更新
-
-
-> 例如：使用update对集合中的orderNo为o111111字段下的userInfo数组对象下的cardNo等于123456789这个对象中的logs字段和status字段(在更新的时候没有status字段将会创建) 进行日志更新
-
-```javascript
-{
-	"_id" : ObjectId("59546c5051eb690367d457fa"),
-	"orderNo" : "o111111"
-	"userInfo" : [
-		{
-			"name" : "o1111",
-			"cardNo" : "123456789",
-			"logs" : [
-				"2017-08-09 timeline ...",
-        "2017-08-10 timeline1 ...",
-			]
-		},
-		{
-			"name" : "o1111",
-			"cardNo": "987654321",
-			"logs": [
-				"2017-08-09 timeline ...",
-			]
-		},
-		...
-	]
-},
-...
-}
-```
-
-* 在Nodejs中操作，可以使用$push在找到logs数组后依次添加日志信息
-
-```javascript
-let condition = {"orderNo":"o111111","userInfo.cardNo":"123456789"}
-
-let update = {
-	$push: {
-		"passengers.$.logs": "2017-08-10 timeline1 ..."
-	}
-}
-db.collections.findOneAndUpdate(condition, update, { returnOriginal: false })
-```
-
-* 也可以使用$set 对某个字段进行更新
-
-```javascript
-let condition = {"orderNo":"o111111","userInfo.cardNo":"123456789"}
-
-let update = {
-	$set: {"passengers.$.status": "已更新"}
-}
-
-DB.orderColl.updateOne(condition,update)
-```
-#### 注意：
-
-需要注意的点是位置运算符$只能在查询中使用一次，官方对于这个问题提出了一个方案[Mongodb](https://jira.mongodb.org/browse/SERVER-831) `https://jira.mongodb.org/browse/SERVER-831` 如果能在为未来发布这将是非常有用的。如果，目前你需要在嵌套层次很深的情况下想对数组的内容进行修改可以采用forEach()方法操作，像下面这样：
-
-```javascript
-db.post
-  .find({"answers.comments.name": "jeff"})
-  .forEach(function(post) {
-    if (post.answers) {
-      post.answers.forEach(function(answer) {
-        if (answer.comments) {
-          answer.comments.forEach(function(comment) {
-            if (comment.name === "jeff") {
-              comment.name = "joe";
-            }
-          });
-        }
-      });
-
-      db.post.save(post);
-    }
-});
-```
 
 ## dbref数据引用
 
