@@ -17,7 +17,7 @@
 
 #### AES/ECB/PKCS5Padding
 
-* ```DES```：代表算法
+* ```AES```：代表算法
 
 * ```ECB```：代表模式
 
