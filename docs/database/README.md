@@ -5,7 +5,7 @@
     - ```[MongoDB]``` [MongoDB 聚合管道（Aggregation Pipeline）](database/mongodb.md#聚合管道)
     - ```[MongoDB]``` [DBRef 数据引用](database/mongodb.md#dbref数据引用)
     - ```[MongoDB]``` [Nodejs 客户端链接 MongoDB](database/mongodb.md#Nodejs客户端链接MongoDB)
-    - ```[Indexes]``` [MongoDB 索引](database/mongodb.mddatabase/mongodb-indexes.md)
+    - ```[Indexes]``` [MongoDB 索引](database/mongodb-indexes.md)
 
 * [Redis](https://redis.io/)
 * [RocksDB](https://github.com/facebook/rocksdb/)、[RocksDB中文网](https://rocksdb.org.cn/)
