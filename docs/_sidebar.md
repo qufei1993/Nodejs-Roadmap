@@ -31,8 +31,8 @@
     - [Node.js Web 开发框架选型](/nodejs/base.md#框架)
     - [对象关系映射 (ORM)](/nodejs/base.md#ORM)
 * DataBase
-    - [关系型数据库 Relational](/database/base.md#Relational)
     - [非关系型数据库 NoSQL](/database/base.md#NoSQL)
+    - [关系型数据库 Relational](/database/base.md#Relational)
     - [搜索引擎 Search Engines](/database/base.md#SearchEngines)
 
 * Microservice

@@ -4,10 +4,9 @@
 - [Mac 系统安装 MongoDB](#Mac系统下安装MongoDB)
 - [CRUD 操作](#CRUD操作)
 - [MongoDB 聚合管道（Aggregation Pipeline）](#聚合管道)
-- [Update 更新操作](#update更新操作)
 - [DBRef 数据引用](#dbref数据引用)
 - [Nodejs 客户端链接 MongoDB](#Nodejs客户端链接MongoDB)
-- [MongoDB 索引](mongodb-indexes.md)
+- [MongoDB 索引](database/mongodb-indexes.md)
 
 ## Mac系统下安装MongoDB
 
