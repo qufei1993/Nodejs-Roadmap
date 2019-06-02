@@ -1,6 +1,6 @@
 # Git
 
-> 记录日常工作中常用 Git 命令及问题，如果您在使用中还有其它问题欢迎评论留言
+> Git 当下最流行的版本管理工具，结合自己工作中的实际应用做了以下梳理，如果您在使用中还有其它问题欢迎评论留言
 
 ## 快速导航
 
@@ -67,10 +67,11 @@
 * 切换到其中某个子分支：```git checkout -b dev origin/dev```  
 
 * 可能会报这种错误:
+
 ```
 fatal: Cannot update paths and switch to branch 'dev' at the same time.
 Did you intend to checkout 'origin/dev' which can not be resolved as commit?
- ```
+```
 * 原因是你本地并没有dev这个分支，这时你可以用 ```git branch -a``` 命令来查看本地是否具有dev分支
 
 * 我们需要：```git fetch origin dev``` 命令来把远程分支拉到本地
@@ -98,29 +99,36 @@ Did you intend to checkout 'origin/dev' which can not be resolved as commit?
 
 #### Question2
 
-``` If you wish to set tracking information for this branch you can do so with: ```
-
-```	git branch --set-upstream-to=origin/<branch> master ```
+```
+If you wish to set tracking information for this branch you can do so with:
+git branch --set-upstream-to=origin/<branch> master
+```
 
 #### Answer2
 
 指定当前当前工作目录工作分支，跟远程仓库分支之间的联系
 
-``` git branch --set-upstream master origin/master  ```
+```
+git branch --set-upstream master origin/master
+```
 
 <hr>
 
 #### Question3
 
-``` git pull ``` 获取最新代码报以下错误
+获取 ```git pull``` 最新代码报以下错误:
 
-``` fatal: refusing to merge unrelated histories ```
+```
+fatal: refusing to merge unrelated histories
+```
 
 #### Answer3
 
 git pull之后加上可选参数 --allow-unrelated-histories 强制合并
 
-``` git pull origin master --allow-unrelated-histories ```
+```
+git pull origin master --allow-unrelated-histories
+```
 
 <hr>
 
@@ -144,7 +152,7 @@ pre-commit:
 
 #### Answer4
 
-* 打开项目中的```.git/hooks```文件夹，找到```pre-commit.sample```文件，将以下代码替换到文件中，或者，```npm install pre-commit --save```也可以，这个命令会自动执行以下操作。
+* 打开项目中的 ```.git/hooks``` 文件夹，找到 ```pre-commit.sample``` 文件，将以下代码替换到文件中，或者，```npm install pre-commit --save``` 也可以，这个命令会自动执行以下操作。
 
 ```shell
 #!/bin/bash
@@ -158,12 +166,12 @@ do
 done
 ```
 * 将```pre-commit.sample```文件名修改为```pre-commit```。
-<hr>
 
+<hr>
 
 #### Question5
 
-.gitignore规则不生效的解决办法
+.gitignore 规则不生效的解决办法
 
 #### Answer5
 
@@ -174,4 +182,3 @@ git rm -r --cached . 或者 git rm -r README.md
 git add .
 git commit -m 'update .gitignore'
 ```
-
