@@ -1,5 +1,9 @@
 # Git
 
+> 记录日常工作中常用 Git 命令及问题，如果您在使用中还有其它问题欢迎评论留言
+
+## 快速导航
+
 * [基础命令](#基础命令)
 * [分支操作](#分支操作)
 * [修改远程仓库地址](#修改远程仓库地址)
@@ -84,11 +88,11 @@ Did you intend to checkout 'origin/dev' which can not be resolved as commit?
 
 #### Question1
 
-	如何解决 ``` failed to push some refs to git ```
+如何解决 ``` failed to push some refs to git ```
 
 #### Answer1
-	* ```git pull --rebase origin master``` 进行代码合并
-	* ```git push -u origin master``` 即可完成代码上传
+* ```git pull --rebase origin master``` 进行代码合并
+* ```git push -u origin master``` 即可完成代码上传
 
 <hr>
 
@@ -159,7 +163,7 @@ done
 
 #### Question5
 
-```.gitignore规则不生效的解决办法```
+.gitignore规则不生效的解决办法
 
 #### Answer5
 
