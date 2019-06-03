@@ -11,6 +11,7 @@
     - `[Logger-Custom]` [自定义日志插件开发](#自定义日志插件开发)
     - `[Logger-Custom]` [项目扩展](#项目扩展)
     - `[Logger-Custom]` [项目应用](#项目应用)
+    - `[Logrotator]` [日志切割](#日志切割)
 
 ## 基于 egg-logger 定制日志中间件实现日志链路追踪
 
@@ -18,6 +19,13 @@
 
 API接口服务接收到调用请求，根据调用者传的traceId (如果没有自己生成)，在该次调用链中处理业务时，如需打印日志，日志信息按照约定的规范进行打印，并记录traceId，实现日志链路追踪。
 
+- **日志路径**
+
+```
+/root/logs/${projectName}/bizLog/${projectName}-yyyyMMdd.log
+```
+
+- **日志格式**
 ```bash
 日志时间[]traceId[]服务端IP[]客户端IP[]日志级别[]日志内容
 ```
@@ -217,7 +225,107 @@ class ExampleController extends Controller {
 2019/05/30 01:50:21[]d373c38a-344b-4b36-b931-1e8981aef14f[]192.168.1.20[]221.69.245.153[]INFO[]测试
 ```
 
-**扩展**：基于以上日志格式，可以采用 ELK 做日志搜集、分析、检索。
+## 日志切割
 
+框架提供了 ```[egg-logrotator](https://github.com/eggjs/egg-logrotator)``` 中间件，默认切割为按天切割，其它方式可参考官网自行配置。
+
+- **框架默认日志路径**
+
+> egg-logger 模块 lib/egg/config/config.default.js
+
+```js
+config.logger = {
+    dir: path.join(appInfo.root, 'logs', appInfo.name),
+    ...
+};
+```
+
+- **自定义日志目录**
+
+很简单按照我们的需求在项目配置文件重新定义 logger 的 dir 路径
+
+```js
+config.logger = {
+    dir: /root/logs/test/bizLog/
+}
+```
+
+这样是否就可以呢？按照我们上面自定义的日志文件名格式（```${projectName}-yyyyMMdd.log```），貌似是不行的，在日志分割过程中默认的文件名格式为 ``` .log.YYYY-MM-DD ```，参考源码
+
+> [https://github.com/eggjs/egg-logrotator/blob/master/app/lib/day_rotator.js](https://github.com/eggjs/egg-logrotator/blob/master/app/lib/day_rotator.js)
+
+```js
+ _setFile(srcPath, files) {
+    // don't rotate logPath in filesRotateBySize
+    if (this.filesRotateBySize.indexOf(srcPath) > -1) {
+      return;
+    }
+
+    // don't rotate logPath in filesRotateByHour
+    if (this.filesRotateByHour.indexOf(srcPath) > -1) {
+      return;
+    }
+
+    if (!files.has(srcPath)) {
+      // allow 2 minutes deviation
+      const targetPath = srcPath + moment()
+        .subtract(23, 'hours')
+        .subtract(58, 'minutes')
+        .format('.YYYY-MM-DD'); // 日志格式定义
+      debug('set file %s => %s', srcPath, targetPath);
+      files.set(srcPath, { srcPath, targetPath });
+    }
+ }
+```
+
+- **日志分割扩展**
+
+中间件 ```[egg-logrotator](https://github.com/eggjs/egg-logrotator)``` 预留了扩展接口，对于自定义的日志文件名，可以框架提供的 app.LogRotator 做一个定制。
+
+> app/schedule/custom.js
+```js
+const moment = require('moment');
+
+module.exports = app => {
+    const rotator = getRotator(app);
+
+    return {
+        schedule: {
+            type: 'worker', // only one worker run this task
+            cron: '1 0 0 * * *', // run every day at 00:00
+        },
+        async task() {
+            await rotator.rotate();
+        }
+    };
+};
+
+function getRotator(app) {
+    class CustomRotator extends app.LogRotator {
+        async getRotateFiles() {
+            const files = new Map();
+            const srcPath = `/root/logs/test/bizLog/test.log`;
+            const targetPath = `/root/logs/test/bizLog/test-${moment().subtract(1, 'days').format('YYYY-MM-DD')}.log`;
+            files.set(srcPath, { srcPath, targetPath });
+            return files;
+        }
+    }
+
+    return new CustomRotator({ app });
+}
+```
+
+经过分割之后文件展示如下：
+
+```bash
+$ ls -lh /root/logs/test/bizLog/
+total 188K
+-rw-r--r-- 1 root root 135K Jun  1 11:00 test-2019-06-01.log
+-rw-r--r-- 1 root root  912 Jun  2 09:44 test-2019-06-02.log
+-rw-r--r-- 1 root root  40K Jun  3 11:49 test.log
+```
+
+
+**扩展**：基于以上日志格式，可以采用 ELK 做日志搜集、分析、检索。
 
 

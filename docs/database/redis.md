@@ -1,12 +1,13 @@
 # Redis
 
 - **Redis特性** [[more]](/docs/database/redis-base.md)
-- **五种数据类型** 
+- **应用场景**
+- **五种数据结构** 
     - `[Type]` [字符串](/docs/database/redis-base.md#字符串)
     - `[Type]` [哈希](/docs/database/redis-base.md#哈希)
     - `[Type]` [列表](/docs/database/redis-base.md#列表)
-    - `[Type]` [字符串](/docs/database/redis-base.md#字符串)
-    - `[Type]` [字符串](/docs/database/redis-base.md#字符串)
+    - `[Type]` [集合](/docs/database/redis-base.md#集合)
+    - `[Type]` [有序集合](/docs/database/redis-base.md#有序集合)
 - **Redis高级特性** 
 - **数据持久化**
 - **主从复制**
@@ -45,6 +46,17 @@ Redis将数据存在于内存中，基于C语言(距操作系统最近的语言)
 - **多功能**
 发布订阅、简单的事务功能、Lua脚本（实现自定义命令）、pipeline提高客户端并发效率。
 
+## 应用场景
+
+1. 缓存设计
+2. 任务队列
+3. 排行榜
+4. 计数器
+5. Session存储
+6. 网站PV、UV统计
+7. Publish/Subscribe
+
+
 ## 命令
 
 #### 通用命令
@@ -57,7 +69,7 @@ Redis将数据存在于内存中，基于C语言(距操作系统最近的语言)
 * persist：```persist key```去掉key的过期时间，时间复杂度为O(1)
 * type：```type key```查看key的类型，时间复杂度为O(1)
 
-## 五种数据类型
+## 五种数据结构
 
 #### 字符串
 
