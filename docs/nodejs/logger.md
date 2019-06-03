@@ -22,7 +22,7 @@ API接口服务接收到调用请求，根据调用者传的traceId (如果没�
 - **日志路径**
 
 ```
-/root/logs/${projectName}/bizLog/${projectName}-yyyyMMdd.log
+/var/logs/${projectName}/bizLog/${projectName}-yyyyMMdd.log
 ```
 
 - **日志格式**
@@ -40,9 +40,7 @@ egg-logger 提供了多种传输通道，我们的需求主要是对请求的业
 
 - **编写logger.js**
 
-```
-egg-logger-custom/lib/logger.js
-```
+> egg-logger-custom/lib/logger.js
 
 ```js
 const moment = require('moment');
@@ -104,9 +102,7 @@ module.exports = AppTransport;
 
 - **工具**
 
-```
-egg-logger-custom/lib/utils.js
-```
+> egg-logger-custom/lib/utils.js
 
 ```js
 const interfaces = require('os').networkInterfaces();
@@ -164,7 +160,7 @@ module.exports = (ctx, options) => {
 
     logger.set('file', new AppTransport({
         level: options.fileLoggerLevel || 'INFO',
-        file: `/var/logs/${options.appName}.log`,
+        file: `/var/logs/${options.appName}/bizLog/${options.appName}.log`,
     }, ctx));
 
     logger.set('console', new ConsoleTransport({
@@ -184,7 +180,7 @@ module.exports = (ctx, options) => {
 新建 ``` app/extend/context.js ``` 文件
 
 ```js
-const AppLogger = require('@boluome/egg-logger');
+const AppLogger = require('egg-logger-custom'); // 上面定义的中间件
 
 module.exports = {
     get logger() { // 名字自定义 也可以是 customLogger
@@ -246,7 +242,7 @@ config.logger = {
 
 ```js
 config.logger = {
-    dir: /root/logs/test/bizLog/
+    dir: /var/logs/test/bizLog/
 }
 ```
 
@@ -283,6 +279,7 @@ config.logger = {
 中间件 ```[egg-logrotator](https://github.com/eggjs/egg-logrotator)``` 预留了扩展接口，对于自定义的日志文件名，可以框架提供的 app.LogRotator 做一个定制。
 
 > app/schedule/custom.js
+
 ```js
 const moment = require('moment');
 
@@ -304,8 +301,8 @@ function getRotator(app) {
     class CustomRotator extends app.LogRotator {
         async getRotateFiles() {
             const files = new Map();
-            const srcPath = `/root/logs/test/bizLog/test.log`;
-            const targetPath = `/root/logs/test/bizLog/test-${moment().subtract(1, 'days').format('YYYY-MM-DD')}.log`;
+            const srcPath = `/var/logs/test/bizLog/test.log`;
+            const targetPath = `/var/logs/test/bizLog/test-${moment().subtract(1, 'days').format('YYYY-MM-DD')}.log`;
             files.set(srcPath, { srcPath, targetPath });
             return files;
         }
@@ -318,13 +315,12 @@ function getRotator(app) {
 经过分割之后文件展示如下：
 
 ```bash
-$ ls -lh /root/logs/test/bizLog/
+$ ls -lh /var/logs/test/bizLog/
 total 188K
 -rw-r--r-- 1 root root 135K Jun  1 11:00 test-2019-06-01.log
 -rw-r--r-- 1 root root  912 Jun  2 09:44 test-2019-06-02.log
 -rw-r--r-- 1 root root  40K Jun  3 11:49 test.log
 ```
-
 
 **扩展**：基于以上日志格式，可以采用 ELK 做日志搜集、分析、检索。
 
