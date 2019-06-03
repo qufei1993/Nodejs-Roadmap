@@ -6,26 +6,26 @@
     - `[Logger]` [log4js 日志记录工具](https://github.com/log4js-node/log4js-node)
     - `[Logger]` [ELK--开源的日志分析系统](https://www.elastic.co/cn/products)
     - `[Logger]` [winston日志模块](https://github.com/winstonjs/winston)
-- 基于 egg-logger 定制日志中间件实现日志链路追踪
+- 基于Egg框架的日志链路追踪实践
     - `[Logger-Custom]` [需求背景](#需求背景)
     - `[Logger-Custom]` [自定义日志插件开发](#自定义日志插件开发)
     - `[Logger-Custom]` [项目扩展](#项目扩展)
     - `[Logger-Custom]` [项目应用](#项目应用)
     - `[Logrotator]` [日志切割](#日志切割)
 
-## 基于 egg-logger 定制日志中间件实现日志链路追踪
+## 基于Egg框架的日志链路追踪实践
 
 ### 需求背景
 
-API 接口服务接收到调用请求，根据调用方传的 traceId (如果没有自己生成)，在该次调用链中处理业务时，如需打印日志，日志信息按照约定的规范进行打印，并记录 traceId，实现日志链路追踪。
+实现全链路日志追踪，便于日志监控、问题排查、接口响应耗时数据统计等，首先 API 接口服务接收到调用方请求，根据调用方传的 traceId，在该次调用链中处理业务时，如需打印日志的，日志信息按照约定的规范进行打印，并记录 traceId，实现日志链路追踪。
 
-- **日志路径**
+- **日志路径约定**
 
 ```
 /var/logs/${projectName}/bizLog/${projectName}-yyyyMMdd.log
 ```
 
-- **日志格式**
+- **日志格式约定**
 
 ```bash
 日志时间[]traceId[]服务端IP[]客户端IP[]日志级别[]日志内容
