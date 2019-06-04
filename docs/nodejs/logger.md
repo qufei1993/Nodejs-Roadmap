@@ -11,7 +11,7 @@
     - `[Logger-Custom]` [自定义日志插件开发](#自定义日志插件开发)
     - `[Logger-Custom]` [项目扩展](#项目扩展)
     - `[Logger-Custom]` [项目应用](#项目应用)
-    - `[Egg-Logger]` [contextFormatter自定义日志格式](#contextFormatter自定义日志格式)
+    - `[ContextFormatter]` [contextFormatter自定义日志格式](#contextFormatter自定义日志格式)
     - `[Logrotator]` [日志切割](#日志切割)
 
 ## 基于Egg框架的日志链路追踪实践
@@ -152,7 +152,7 @@ module.exports = {
 }
 ```
 
-注意：以上方式获取当前请求客户端IP的方式，如果你需要对用户的 IP 做限流、防刷限制，请不要使用如上方式，参见 [科普文：如何伪造和获取用户真实 IP ？](https://www.yuque.com/egg/nodejs/coopsc)，在 Egg.js 里你也可以通过 ctx.ip 来获取，参考 [前置代理模式](https://eggjs.org/zh-cn/tutorials/proxy.html)。
+**注意**：以上获取当前请求客户端IP的方式，如果你需要对用户的 IP 做限流、防刷限制，请不要使用如上方式，参见 [科普文：如何伪造和获取用户真实 IP ？](https://www.yuque.com/egg/nodejs/coopsc)，在 Egg.js 里你也可以通过 ctx.ip 来获取，参考 [前置代理模式](https://eggjs.org/zh-cn/tutorials/proxy.html)。
 
 - **初始化 Logger**
 
