@@ -11,6 +11,7 @@
     - `[Logger-Custom]` [自定义日志插件开发](#自定义日志插件开发)
     - `[Logger-Custom]` [项目扩展](#项目扩展)
     - `[Logger-Custom]` [项目应用](#项目应用)
+    - `[Egg-Logger]` [contextFormatter自定义日志格式](#contextFormatter自定义日志格式)
     - `[Logrotator]` [日志切割](#日志切割)
 
 ## 基于Egg框架的日志链路追踪实践
@@ -134,6 +135,7 @@ module.exports = {
 
     /**
      * 获取当前请求客户端IP
+     * 不安全的写法
      */
     clientIPAddress: req => {
         const address = req.headers['x-forwarded-for'] || // 判断是否有反向代理 IP
@@ -142,9 +144,15 @@ module.exports = {
         req.connection.socket.remoteAddress;
 
         return address.replace(/::ffff:/ig, '');
-    }
+    },
+
+    clientIPAddress: ctx => {    
+        return ctx.ip;
+    },
 }
 ```
+
+注意：以上方式获取当前请求客户端IP的方式，如果你需要对用户的 IP 做限流、防刷限制，请不要使用如上方式，参见 [科普文：如何伪造和获取用户真实 IP ？](https://www.yuque.com/egg/nodejs/coopsc)，在 Egg.js 里你也可以通过 ctx.ip 来获取，参考 [前置代理模式](https://eggjs.org/zh-cn/tutorials/proxy.html)。
 
 - **初始化 Logger**
 
@@ -220,6 +228,37 @@ class ExampleController extends Controller {
 
 ```
 2019/05/30 01:50:21[]d373c38a-344b-4b36-b931-1e8981aef14f[]192.168.1.20[]221.69.245.153[]INFO[]测试
+```
+
+## contextFormatter自定义日志格式
+
+Egg-Logger 最新版本支持通过 contextFormatter 函数自定义日志格式，参见之前 [PR：support contextFormatter #51](https://github.com/eggjs/egg-logger/pull/51) 
+
+应用也很简单，通过配置 contextFormatter 函数即可，以下是简单的应用
+
+```js
+config.logger = {
+    contextFormatter: function(meta) {
+        console.log(meta);
+        return [
+            meta.date,
+            meta.message
+        ].join('[]')
+    },
+    ...
+};
+```
+
+同样的在你的业务里对于需要打印日志的地方，和之前一样
+
+```js
+ctx.logger.info('这是一个测试数据');
+```
+
+输出结果如下所示：
+
+```
+2019-06-04 12:20:10,421[]这是一个测试数据
 ```
 
 ## 日志切割
