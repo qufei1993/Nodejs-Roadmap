@@ -84,10 +84,9 @@ child_process.spawn(command[, args][, options])
 
 ```js
 const spawn = require('child_process').spawn;
-const child = spawn('ls', ['-l'], {
-    cwd: '/usr', // 指定子进程的工作目录，默认当前目录
-})
+const child = spawn('ls', ['-l'], { cwd: '/usr' }) // cwd 指定子进程的工作目录，默认当前目录
 
+child.stdout.pipe(process.stdout);
 console.log(process.pid, child.pid); // 主进程id3243 子进程3244
 ```
 
@@ -245,7 +244,6 @@ child_process.fork(modulePath[, args][, options])
     * ```uid <number>``` 设置该进程的用户标识
     * ```gid <number>``` 设置该进程的组标识
 * 返回 ```<ChildProcess>```
-
 
 创建parent_process.js
 
