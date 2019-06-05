@@ -156,7 +156,7 @@ Node.js 提供了 child_process 内置模块，用于创建子进程，更多详
 * ```child_process.spawn()```：适用于返回大量数据，例如图像处理，二进制数据处理。
 * ```child_process.exec()```：适用于小量数据，maxBuffer 默认值为 200 * 1024 超出这个默认值将会导致程序崩溃，数据量过大可采用 spawn。
 * ```child_process.execFile()```：类似 child_process.exec()，区别是不能通过 shell 来执行，不支持像 I/O 重定向和文件查找这样的行为
-* ```child_process.fork()```： 衍生新的进程，进程之前是相互独立的，每个进程都有自己的 V8 实例、内存，系统资源是有限的，不建议衍生太多的子进程出来，通长根据系统 CPU 核心数设置。
+* ```child_process.fork()```： 衍生新的进程，进程之间是相互独立的，每个进程都有自己的 V8 实例、内存，系统资源是有限的，不建议衍生太多的子进程出来，通长根据系统 CPU 核心数设置。
 
 **方式一：spawn**
 
@@ -166,6 +166,7 @@ Node.js 提供了 child_process 内置模块，用于创建子进程，更多详
 
 * 让子进程的stdio和当前进程的stdio之间建立管道链接 ```child.stdout.pipe(process.stdout);```
 * 父进程子进程之间共用stdio
+* 事件监听
 
 ```js
 const spawn = require('child_process').spawn;
