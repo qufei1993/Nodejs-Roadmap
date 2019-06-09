@@ -1,18 +1,18 @@
 # RabbitMQ高级消息队列
 
 ## 快速导航
-* [主流消息中间件简介](/docs/microservice/rabbitmq-base.md#主流消息中间件简介)
-* [RabbitMQ安装](/docs/microservice/rabbitmq-base.md#安装)
+* [主流消息中间件简介](#主流消息中间件简介)
+* [RabbitMQ安装](#安装)
     - `[RabbitMQ安装]` Mac版安装
     - `[RabbitMQ安装]` Linux系统（Ubuntu、CentOS）安装 
     - `[RabbitMQ安装]` 运行与启动 
-* [RabbitMQ高级特性消费端限流策略实现](/docs/microservice/rabbitmq-base.md#RabbitMQ高级特性消费端限流策略实现)
+* [RabbitMQ高级特性消费端限流策略实现](#RabbitMQ高级特性消费端限流策略实现)
     - `[QOS]` 业务场景
     - `[QOS]` RabbitMQ消费端限流机制
     - `[QOS]` 建立生产端
     - `[QOS]` 建立消费端
     - `[QOS]` RabbitMQ限流使用总结
-* [RabbitMQ延迟队列实现定时任务](/docs/microservice/rabbitmq-base.md#RabbitMQ延迟队列实现定时任务)
+* [RabbitMQ延迟队列实现定时任务](#RabbitMQ延迟队列实现定时任务)
     - `[DLX]` 死信队列
     - `[TTL]` 消息TTL的存活时间
     - `[Task]` Nodejs操作RabbitMQ实现延迟队列
