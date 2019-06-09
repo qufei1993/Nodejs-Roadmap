@@ -145,7 +145,7 @@ beam    4678 rabbitmq   49u  IPv6 294158      0t0  TCP *:amqp (LISTEN)
 | rabbitmqctl list_queues | 查看所有队列
 | rabbitmqctl -p vhostpath purge_queue blue | 清除队列里消息
 
-## 
+## 交换机
 
 - **Exchange**
 用于接收消息，根据路由键转发消息绑定队列
