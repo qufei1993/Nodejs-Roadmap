@@ -46,15 +46,7 @@ Redis将数据存在于内存中，基于C语言(距操作系统最近的语言)
 - **多功能**
 发布订阅、简单的事务功能、Lua脚本（实现自定义命令）、pipeline提高客户端并发效率。
 
-## 应用场景
 
-1. 缓存设计
-2. 任务队列
-3. 排行榜
-4. 计数器
-5. Session存储
-6. 网站PV、UV统计
-7. Publish/Subscribe
 
 
 ## 命令
@@ -79,10 +71,12 @@ Redis将数据存在于内存中，基于C语言(距操作系统最近的语言)
 :-----:|:------:|:-------:
  set、get、del  | 对key进行设置、读取、删除 | O(1)
  incr、decr     | 计数 | O(1)
+ incrby、decrby     | 对计数设置增量 | O(1)
+ setnx     | key 存在，不做任何操作 | O(1)
  getset     | 设置新值返回旧值 ``` getset key newValue```|  O(1)
  mset、mget     | 多个key进行设置、读取   | O(n) 
 
- 例如，对城市列表数据进行缓存，伪代码如下：
+例如，对城市列表数据进行缓存，伪代码如下：
 
  ```js
 function cityList() {
@@ -262,3 +256,13 @@ AOF重写实现方式：
 * 配置实现
     * ```slaveof ip port```：
     * ```slave-read-only yes```：设置为只读模式
+
+## 应用场景
+1. 缓存设计
+2. 任务队列
+3. 排行榜
+4. 计数器
+5. Session存储
+6. 网站PV、UV统计
+7. Publish/Subscribe
+
