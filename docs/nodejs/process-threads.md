@@ -7,9 +7,9 @@
 - [Nodejs进程创建](#Nodejs进程创建)
 - [守护进程编写](#守护进程)
 
-## 问题思考
+## 面试指南
 
-- 什么是孤儿进程？
+- 什么是孤儿进程？参考：[Interview1](#Interview1)
 - 什么场景下需要用到 IPC 通信？如何建立 IPC 通信？
 - 关于守护进程，是什么、为什么、怎么编写？
 - 进程 fork 时，代码里有 ```app.listen(port)``` 为什么没有报错端口被占用？ 
@@ -294,6 +294,59 @@ process.on('message', msg => {
 
 守护进程运行在后台不受终端的影响，什么意思呢？Node.js 开发的同学们可能熟悉，当我们打开终端执行 ```node app.js``` 开启一个服务进程之后，这个终端就会一直被占用，如果关掉终端，服务就会断掉，即前台运行模式。如果采用守护进程进程方式，这个终端我执行 ```node app.js``` 开启一个服务进程之后，我还可以在这个终端上做些别的事情，且不会相互影响。
 
+## Interview1
+
+> 什么是孤儿进程？
+
+父进程创建子进程之后，父进程退出了，但是父进程对应的一个或多个子进程还在运行，这些子进程会被系统的 init 进程收养，对应的进程 ppid 为 1，这就是孤儿进程。通过以下代码示例说明。
+
+```js
+// master.js
+const fork = require('child_process').fork;
+const server = require('net').createServer();
+server.listen(3000);
+const worker = fork('worker.js');
+
+worker.send('server', server);
+console.log('worker process created, pid: %s ppid: %s', worker.pid, process.pid);
+process.exit(0); // 创建子进程之后，主进程退出，此时创建的 worker 进程会成为孤儿进程
+```
+
+```js
+// worker.js
+const http = require('http');
+const server = http.createServer((req, res) => {
+	res.end('I am worker, pid: ' + process.pid + ', ppid: ' + process.ppid); // 记录当前工作进程 pid 及父进程 ppid
+});
+
+let worker;
+process.on('message', function (message, sendHandle) {
+	if (message === 'server') {
+		worker = sendHandle;
+		worker.on('connection', function(socket) {
+			server.emit('connection', socket);
+		});
+	}
+});
+```
+控制台进行测试，输出当前工作进程 pid 和 父进程 ppid
+
+```bash
+$ node master
+worker process created, pid: 32971 ppid: 32970
+```
+
+由于在 master.js 里退出了父进程，活动监视器所显示的也就只有工作进程。
+
+![](./img/orphan-process.png)
+
+控制台调用接口，可以看到工作进程 32971 对应的 ppid 为 1，此时已经成为了孤儿进程
+
+```bash
+$ curl http://127.0.0.1:3000
+I am worker, pid: 32971, ppid: 1
+```
+
 [进程与线程的一个简单解释](http://www.ruanyifeng.com/blog/2013/04/processes_and_threads.html)  
 [Node.js编写守护进程](https://cnodejs.org/topic/57adfadf476898b472247eac)
-
+[通过源码解析 Node.js 中 cluster 模块的主要功能实现](https://cnodejs.org/topic/56e84480833b7c8a0492e20c)
