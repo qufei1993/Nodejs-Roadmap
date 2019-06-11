@@ -4,7 +4,7 @@
 
 ## Redis集群
 
-# Mac系统安装redis
+## Mac系统安装redis
 
 ### 下载 
 
@@ -48,9 +48,19 @@ src/redis-cli -p 6380
 src/redis-cli -h localhost -p 6380
 ```
 
+## Redis集群
+
+
+
 ### Redis常用配置
 
-* daemonize：是否是守护进程(no|yes)
-* port：Redis对外端口号
-* logfile：Redis系统日志
-* dir：常用工作目录
+```shell
+daemonize yes # 是否是守护进程(no|yes)
+port 6380 # Redis对外端口号
+dir "/usr/src/redis/data" # 常用工作目录
+logfile "6380.log" # Redis系统日志
+dbfilename "dump-7000.rdb" # rdb文件
+cluster-enabled yes # 集群模式
+cluster-config-file nodes-6380.conf # 集群本地配置文件
+cluster-require-full-coverange no # 整个集群节点全部在线才提供服务（进行关闭）
+```

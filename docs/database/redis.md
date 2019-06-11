@@ -1,7 +1,6 @@
 # Redis
 
 - **Redis特性** [[more]](/docs/database/redis-base.md)
-- **应用场景**
 - **五种数据结构** 
     - `[Type]` [字符串](/docs/database/redis-base.md#字符串)
     - `[Type]` [哈希](/docs/database/redis-base.md#哈希)
@@ -78,7 +77,7 @@ Redis将数据存在于内存中，基于C语言(距操作系统最近的语言)
 
 例如，对城市列表数据进行缓存，伪代码如下：
 
- ```js
+```js
 function cityList() {
     const redisKey = 'city';
     let cities = redis.get(redis.Key);
@@ -91,7 +90,7 @@ function cityList() {
 
     return cities;
 }
- ```
+```
 
 #### 哈希
 
@@ -266,3 +265,4 @@ AOF重写实现方式：
 6. 网站PV、UV统计
 7. Publish/Subscribe
 
+[Redis CacheCloud](https://github.com/sohutv/cachecloud)
