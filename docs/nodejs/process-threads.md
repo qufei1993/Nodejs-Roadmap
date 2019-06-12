@@ -336,6 +336,8 @@ $ node master
 worker process created, pid: 32971 ppid: 32970
 ```
 
+[孤儿进程 Demo](https://github.com/Q-Angelo/project-training/tree/master/nodejs/orphan-process)
+
 由于在 master.js 里退出了父进程，活动监视器所显示的也就只有工作进程。
 
 ![](./img/orphan-process.png)
@@ -377,9 +379,10 @@ http.createServer((req, res) => {
 那么多进程模式下怎么实现多端口监听呢？答案还是有的，通过句柄传递 Node.js v0.5.9 版本之后支持进程间可发送句柄功能，怎么发送？如下所示：
 
 ```js
-// http://nodejs.cn/api/child_process.html#child_process_subprocess_send_message_sendhandle_options_callback
 /**
+ * http://nodejs.cn/api/child_process.html#child_process_subprocess_send_message_sendhandle_options_callback
  * message
+ * sendHandle
  */
 subprocess.send(message, sendHandle)
 ```
@@ -431,6 +434,9 @@ worker process created, pid: 34515 ppid: 34511
 ```
 
 关于多进程端口占用问题，cnode 上有篇文章也可以看下 [通过源码解析 Node.js 中 cluster 模块的主要功能实现](https://cnodejs.org/topic/56e84480833b7c8a0492e20c)
+
+* [多进程端口占用冲突](https://github.com/Q-Angelo/project-training/tree/master/nodejs/port-conflict)
+* [句柄传递解决多进程端口占用冲突问题](https://github.com/Q-Angelo/project-training/tree/master/nodejs/handle-pass)
 
 [进程与线程的一个简单解释](http://www.ruanyifeng.com/blog/2013/04/processes_and_threads.html)  
 [Node.js编写守护进程](https://cnodejs.org/topic/57adfadf476898b472247eac)
