@@ -476,8 +476,10 @@ $ node pipe.js
 const spawn = require('child_process').spawn;
 const child = spawn('node', ['worker.js'])
 child.stdout.pipe(process.stdout);
-console.log(process.pid, child.pid); // 主进程id3243 子进程3244
+console.log(process.pid, child.pid);
 ```
+
+[父子进程 IPC 通信 源码示例](https://github.com/Q-Angelo/project-training/tree/master/nodejs/master-worker-ipc)
 
 再次验证，控制台执行 ```node pipe.js```，worker.js 的信息也打印了出来
 
