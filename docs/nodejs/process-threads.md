@@ -11,7 +11,7 @@
 
 - 什么是孤儿进程？参考：[Interview1](#Interview1)
 - 创建多进程时，代码里有 ```app.listen(port)``` 在进行 fork 时，为什么没有报端口被占用？参考：[Interview2](#Interview2)
-- 什么场景下需要用到 IPC 通信？如何建立 IPC 通信？
+- 什么是 IPC 通信，如何建立 IPC 通信？什么场景下需要用到 IPC 通信？参考：[Interview3](#Interview3)
 - 关于守护进程，是什么、为什么、怎么编写？
 
 ## 进程
@@ -439,6 +439,61 @@ worker process created, pid: 34515 ppid: 34511
 ```
 
 关于多进程端口占用问题，cnode 上有篇文章也可以看下 [通过源码解析 Node.js 中 cluster 模块的主要功能实现](https://cnodejs.org/topic/56e84480833b7c8a0492e20c)
+
+## Interview3
+
+> 什么是 IPC 通信，如何建立 IPC 通信？什么场景下需要用到 IPC 通信？
+
+IPC (Inter-process communication) ，即进程间通信技术，由于每个进程创建之后都有自己的独立地址空间，实现 IPC 的目的就是为了进程之间资源共享访问，实现 IPC 的方式有多种：管道、消息队列、信号量、Domain Socket，Node.js 通过 pipe 来实现。
+
+**看一下 Demo，未使用 IPC 的情况**
+
+```js
+// pipe.js
+const spawn = require('child_process').spawn;
+const child = spawn('node', ['worker.js'])
+console.log(process.pid, child.pid); // 主进程id3243 子进程3244
+```
+
+```js
+// worker.js
+console.log('I am worker, PID: ', process.pid);
+```
+
+控制台执行 ```node pipe.js```，输出主进程id、子进程id，但是子进程 ```worker.js``` 的信息并没有在控制台打印，原因是新创建的子进程有自己的stdio 流。
+
+**创建一个父进程和子进程之间传递消息的 IPC 通道实现输出信息**
+
+```bash
+$ node pipe.js
+41948 41949
+```
+
+修改 pipe.js 让子进程的 stdio 和当前进程的 stdio 之间建立管道链接，还可以通过 spawn() 方法的 stdio 选项建立 IPC 机制，参考   [options.stdio](http://nodejs.cn/api/child_process.html#child_process_options_stdio)
+
+```js
+// pipe.js
+const spawn = require('child_process').spawn;
+const child = spawn('node', ['worker.js'])
+child.stdout.pipe(process.stdout);
+console.log(process.pid, child.pid); // 主进程id3243 子进程3244
+```
+
+再次验证，控制台执行 ```node pipe.js```，worker.js 的信息也打印了出来
+
+```bash
+$ 42473 42474
+I am worker, PID:  42474
+```
+
+**关于父进程与子进程是如何通信的？**
+
+参考了深入浅出 Node.js 一书，父进程在创建子进程之前会先去创建 IPC 通道并一直监听该通道，之后开始创建子进程并通过环境变量（NODE_CHANNEL_FD）的方式将 IPC 频道的文件描述符传递给子进程，子进程启动时根据传递的文件描述符去链接 IPC 通道，从而建立父子进程之间的通信机制。
+
+<div style="text-align:center; padding: 10px;">
+    <img src="./img/master-worker-ipc.jpg" />
+    <p>父子进程 IPC 通信交互图</p>
+</div>
 
 [进程与线程的一个简单解释](http://www.ruanyifeng.com/blog/2013/04/processes_and_threads.html)  
 [Node.js编写守护进程](https://cnodejs.org/topic/57adfadf476898b472247eac)
