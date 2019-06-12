@@ -10,9 +10,9 @@
 ## 面试指南
 
 - 什么是孤儿进程？参考：[Interview1](#Interview1)
+- 创建多进程时，代码里有 ```app.listen(port)``` 在进行 fork 时，为什么没有报端口被占用？参考：[Interview2](#Interview2)
 - 什么场景下需要用到 IPC 通信？如何建立 IPC 通信？
 - 关于守护进程，是什么、为什么、怎么编写？
-- 进程 fork 时，代码里有 ```app.listen(port)``` 为什么没有报错端口被占用？ 
 
 ## 进程
 
@@ -340,13 +340,97 @@ worker process created, pid: 32971 ppid: 32970
 
 ![](./img/orphan-process.png)
 
-控制台调用接口，可以看到工作进程 32971 对应的 ppid 为 1，此时已经成为了孤儿进程
+再次验证，打开控制台调用接口，可以看到工作进程 32971 对应的 ppid 为 1（为 init 进程），此时已经成为了孤儿进程
 
 ```bash
 $ curl http://127.0.0.1:3000
 I am worker, pid: 32971, ppid: 1
 ```
 
+## Interview2
+
+> 创建多进程时，代码里有 ```app.listen(port)``` 在进行 fork 时，为什么没有报端口被占用？
+
+先看下端口被占用的情况
+
+```js
+// master.js
+const fork = require('child_process').fork;
+const cpus = require('os').cpus();
+
+for (let i=0; i<cpus.length; i++) {
+    const worker = fork('worker.js');
+    console.log('worker process created, pid: %s ppid: %s', worker.pid, process.pid);
+}
+```
+
+```js
+//worker.js
+const http = require('http');
+http.createServer((req, res) => {
+	res.end('I am worker, pid: ' + process.pid + ', ppid: ' + process.ppid);
+}).listen(3000);
+```
+
+以上代码示例，控制台执行 ```node master.js``` 只有一个 worker 可以监听到 3000 端口，其余将会抛出 ``` Error: listen EADDRINUSE :::3000 ``` 错误
+
+那么多进程模式下怎么实现多端口监听呢？答案还是有的，通过句柄传递 Node.js v0.5.9 版本之后支持进程间可发送句柄功能，怎么发送？如下所示：
+
+```js
+// http://nodejs.cn/api/child_process.html#child_process_subprocess_send_message_sendhandle_options_callback
+/**
+ * message
+ */
+subprocess.send(message, sendHandle)
+```
+
+当父子进程之间建立 IPC 通道之后，通过子进程对象的 send 方法发送消息，第二个参数 sendHandle 就是句柄，可以是 TCP套接字、TCP服务器、UDP套接字等，为了解决上面多进程端口占用问题，我们将主进程的 socket 传递到子进程，修改代码，如下所示：
+
+```js
+//master.js
+const fork = require('child_process').fork;
+const cpus = require('os').cpus();
+const server = require('net').createServer();
+server.listen(3000);
+process.title = 'node-master'
+
+for (let i=0; i<cpus.length; i++) {
+    const worker = fork('worker.js');
+    worker.send('server', server);
+    console.log('worker process created, pid: %s ppid: %s', worker.pid, process.pid);
+}
+```
+
+```js
+// worker.js
+const http = require('http');
+http.createServer((req, res) => {
+	res.end('I am worker, pid: ' + process.pid + ', ppid: ' + process.ppid);
+})
+
+let worker;
+process.title = 'node-worker'
+process.on('message', function (message, sendHandle) {
+	if (message === 'server') {
+		worker = sendHandle;
+		worker.on('connection', function(socket) {
+			server.emit('connection', socket);
+		});
+	}
+});
+```
+
+验证一番，控制台执行 ```node master.js``` 以下结果是我们预期的，多进程端口占用问题已经被解决了。
+
+```bash
+$ node master.js
+worker process created, pid: 34512 ppid: 34511
+worker process created, pid: 34513 ppid: 34511
+worker process created, pid: 34514 ppid: 34511
+worker process created, pid: 34515 ppid: 34511
+```
+
+关于多进程端口占用问题，cnode 上有篇文章也可以看下 [通过源码解析 Node.js 中 cluster 模块的主要功能实现](https://cnodejs.org/topic/56e84480833b7c8a0492e20c)
+
 [进程与线程的一个简单解释](http://www.ruanyifeng.com/blog/2013/04/processes_and_threads.html)  
 [Node.js编写守护进程](https://cnodejs.org/topic/57adfadf476898b472247eac)
-[通过源码解析 Node.js 中 cluster 模块的主要功能实现](https://cnodejs.org/topic/56e84480833b7c8a0492e20c)
