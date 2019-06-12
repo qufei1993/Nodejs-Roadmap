@@ -12,7 +12,7 @@
 - 什么是孤儿进程？参考：[Interview1](#Interview1)
 - 创建多进程时，代码里有 ```app.listen(port)``` 在进行 fork 时，为什么没有报端口被占用？参考：[Interview2](#Interview2)
 - 什么是 IPC 通信，如何建立 IPC 通信？什么场景下需要用到 IPC 通信？参考：[Interview3](#Interview3)
-- 关于守护进程，是什么、为什么、怎么编写？
+- 关于守护进程，是什么、为什么、怎么编写？参考，[守护进程](#守护进程)
 
 ## 进程
 
@@ -292,7 +292,75 @@ process.on('message', msg => {
 
 ## 守护进程
 
+> 关于守护进程，是什么、为什么、怎么编写？本节将解密这些疑点
+
 守护进程运行在后台不受终端的影响，什么意思呢？Node.js 开发的同学们可能熟悉，当我们打开终端执行 ```node app.js``` 开启一个服务进程之后，这个终端就会一直被占用，如果关掉终端，服务就会断掉，即前台运行模式。如果采用守护进程进程方式，这个终端我执行 ```node app.js``` 开启一个服务进程之后，我还可以在这个终端上做些别的事情，且不会相互影响。
+
+**创建步骤**
+1. 创建子进程
+2. 在子进程中创建新会话（调用系统函数 setsid）
+3. 改变子进程工作目录（如：“/” 或 “/usr/ 等）
+4. 父进程终止
+
+**Node.js 编写守护进程 Demo 展示**
+
+index.js 文件里的处理逻辑使用 spawn 创建子进程完成了上面的第一步操作。设置 options.detached 为 true 可以使子进程在父进程退出后继续运行（系统层会调用 setsid 方法），参考 [options_detached](http://nodejs.cn/api/child_process.html#child_process_options_detached)，这是第二步操作。options.cwd 指定当前子进程工作目录若不做设置默认继承当前工作目录，这是第三步操作。运行 daemon.unref() 退出父进程，参考 [options.stdio](http://nodejs.cn/api/child_process.html#child_process_options_stdio)，这是第四步操作。
+
+```js
+// index.js
+const spawn = require('child_process').spawn;
+
+function startDaemon() {
+    const daemon = spawn('node', ['daemon.js'], {
+        cwd: '/usr',
+        detached : true,
+        stdio: 'ignore',
+    });
+
+    console.log('守护进程开启 父进程 pid: %s, 守护进程 pid: %s', process.pid, daemon.pid);
+    daemon.unref();
+}
+
+startDaemon()
+```
+
+daemon.js 文件里处理逻辑开启一个定时器每 10 秒执行一次，使得这个资源不会退出，同时写入日志到子进程当前工作目录下
+
+```js
+// /usr/daemon.js
+const fs = require('fs');
+const { Console } = require('console');
+
+// custom simple logger
+const logger = new Console(fs.createWriteStream('./stdout.log'), fs.createWriteStream('./stderr.log'));
+
+setInterval(function() {
+	logger.log('daemon pid: ', process.pid, ', ppid: ', process.ppid);
+}, 1000 * 10);
+```
+
+[守护进程实现 Node.js 版本 源码地址](https://github.com/Q-Angelo/project-training/tree/master/nodejs/simple-daemon)
+
+**运行测试**
+
+```bash
+$ node index.js
+守护进程开启 父进程 pid: 47608, 守护进程 pid: 47609
+```
+
+打开活动监视器查看，目前只有一个进程 47609，这就是我们需要进行守护的进程
+
+![](./img/deamon-process.png)
+
+**守护进程阅读推荐**
+
+- [守护进程实现 (Node.js版本)](https://cnodejs.org/topic/57adfadf476898b472247eac)
+- [守护进程实现 (C语言版本)](https://github.com/ElemeFE/node-interview/blob/master/sections/zh-cn/process.md#%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B)
+
+
+**守护进程总结**
+
+在实际工作中对于守护进程并不陌生，例如 PM2、Egg-Cluster 等，以上只是一个简单的 Demo 对守护进程做了一个说明，在实际工作中对守护进程的健壮性要求还是很高的，例如：进程的异常监听、工作进程管理调度、进程挂掉之后重启等等，这些还需要我们去不断思考。
 
 ## Interview1
 
@@ -495,5 +563,4 @@ I am worker, PID:  42474
 ![](./img/master-worker-ipc.jpg)
 <p style="text-align:center; padding: 10px;">父子进程 IPC 通信交互图</p>
 
-[进程与线程的一个简单解释](http://www.ruanyifeng.com/blog/2013/04/processes_and_threads.html)  
-[Node.js编写守护进程](https://cnodejs.org/topic/57adfadf476898b472247eac)
+[进程与线程的一个简单解释](http://www.ruanyifeng.com/blog/2013/04/processes_and_threads.html)
