@@ -492,10 +492,8 @@ I am worker, PID:  42474
 
 参考了深入浅出 Node.js 一书，父进程在创建子进程之前会先去创建 IPC 通道并一直监听该通道，之后开始创建子进程并通过环境变量（NODE_CHANNEL_FD）的方式将 IPC 频道的文件描述符传递给子进程，子进程启动时根据传递的文件描述符去链接 IPC 通道，从而建立父子进程之间的通信机制。
 
-<div style="text-align:center; padding: 10px;">
-    <img src="./img/master-worker-ipc.jpg" />
-    <p>父子进程 IPC 通信交互图</p>
-</div>
+![](./img/master-worker-ipc.jpg)
+<p style="text-align:center; padding: 10px;">父子进程 IPC 通信交互图</p>
 
 [进程与线程的一个简单解释](http://www.ruanyifeng.com/blog/2013/04/processes_and_threads.html)  
 [Node.js编写守护进程](https://cnodejs.org/topic/57adfadf476898b472247eac)
