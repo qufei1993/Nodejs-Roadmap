@@ -329,14 +329,15 @@ process.on('message', function (message, sendHandle) {
 	}
 });
 ```
+
+[孤儿进程 示例源码](https://github.com/Q-Angelo/project-training/tree/master/nodejs/orphan-process)
+
 控制台进行测试，输出当前工作进程 pid 和 父进程 ppid
 
 ```bash
 $ node master
 worker process created, pid: 32971 ppid: 32970
 ```
-
-[孤儿进程 Demo](https://github.com/Q-Angelo/project-training/tree/master/nodejs/orphan-process)
 
 由于在 master.js 里退出了父进程，活动监视器所显示的也就只有工作进程。
 
@@ -373,6 +374,8 @@ http.createServer((req, res) => {
 	res.end('I am worker, pid: ' + process.pid + ', ppid: ' + process.ppid);
 }).listen(3000);
 ```
+
+[多进程端口占用冲突 示例源码](https://github.com/Q-Angelo/project-training/tree/master/nodejs/port-conflict)
 
 以上代码示例，控制台执行 ```node master.js``` 只有一个 worker 可以监听到 3000 端口，其余将会抛出 ``` Error: listen EADDRINUSE :::3000 ``` 错误
 
@@ -423,6 +426,8 @@ process.on('message', function (message, sendHandle) {
 });
 ```
 
+[句柄传递解决多进程端口占用冲突问题 示例源码](https://github.com/Q-Angelo/project-training/tree/master/nodejs/handle-pass)
+
 验证一番，控制台执行 ```node master.js``` 以下结果是我们预期的，多进程端口占用问题已经被解决了。
 
 ```bash
@@ -434,9 +439,6 @@ worker process created, pid: 34515 ppid: 34511
 ```
 
 关于多进程端口占用问题，cnode 上有篇文章也可以看下 [通过源码解析 Node.js 中 cluster 模块的主要功能实现](https://cnodejs.org/topic/56e84480833b7c8a0492e20c)
-
-* [多进程端口占用冲突](https://github.com/Q-Angelo/project-training/tree/master/nodejs/port-conflict)
-* [句柄传递解决多进程端口占用冲突问题](https://github.com/Q-Angelo/project-training/tree/master/nodejs/handle-pass)
 
 [进程与线程的一个简单解释](http://www.ruanyifeng.com/blog/2013/04/processes_and_threads.html)  
 [Node.js编写守护进程](https://cnodejs.org/topic/57adfadf476898b472247eac)
