@@ -49,7 +49,7 @@ Javascript 就是属于单线程，程序顺序执行，可以想象一下队列
 
 **一个计算耗时造成线程阻塞的例子**
 
-先看一段例子，运行下面程序，浏览器执行 http://127.0.0.1:3000/compute 大约每次需要 15657.310ms，也就意味下次用户请求需要等待 15657.310ms，文末将会采用 child_process 实现多个进程来处理。
+先看一段例子，运行下面程序，浏览器执行 http://127.0.0.1:3000/compute 大约每次需要 15657.310ms，也就意味下次用户请求需要等待 15657.310ms，[下文 Node.js 进程创建一节](#fork子进程充分利用CPU资源) 将采用 child_process.fork 实现多个进程来处理。
 
 ```js
 // compute.js
@@ -264,7 +264,7 @@ server.listen(3000, 127.0.0.1, () => {
 
 > fork_compute.js
 
-针对上个例子需要进行计算的部分拆分出来单独进行运算。
+针对 [上文单线程一节](#单线程) 的例子需要进行计算的部分拆分出来单独进行运算。
 
 ```js
 const computation = () => {
@@ -530,12 +530,12 @@ console.log('I am worker, PID: ', process.pid);
 
 控制台执行 ```node pipe.js```，输出主进程id、子进程id，但是子进程 ```worker.js``` 的信息并没有在控制台打印，原因是新创建的子进程有自己的stdio 流。
 
-**创建一个父进程和子进程之间传递消息的 IPC 通道实现输出信息**
-
 ```bash
 $ node pipe.js
 41948 41949
 ```
+
+**创建一个父进程和子进程之间传递消息的 IPC 通道实现输出信息**
 
 修改 pipe.js 让子进程的 stdio 和当前进程的 stdio 之间建立管道链接，还可以通过 spawn() 方法的 stdio 选项建立 IPC 机制，参考   [options.stdio](http://nodejs.cn/api/child_process.html#child_process_options_stdio)
 
@@ -561,6 +561,7 @@ I am worker, PID:  42474
 参考了深入浅出 Node.js 一书，父进程在创建子进程之前会先去创建 IPC 通道并一直监听该通道，之后开始创建子进程并通过环境变量（NODE_CHANNEL_FD）的方式将 IPC 频道的文件描述符传递给子进程，子进程启动时根据传递的文件描述符去链接 IPC 通道，从而建立父子进程之间的通信机制。
 
 ![](./img/master-worker-ipc.jpg)
+
 <p style="text-align:center; padding: 10px;">父子进程 IPC 通信交互图</p>
 
 [进程与线程的一个简单解释](http://www.ruanyifeng.com/blog/2013/04/processes_and_threads.html)
