@@ -18,8 +18,7 @@
     * [Symbol](/es6/symbol.md)
     * [Generator](/es6/generator.md)
 * Node.js
-    * [Node模块加载机制与实际应用](/nodejs/module.md)
-    * [常用 Web 框架&中间件汇总](/nodejs/middleware.md)
+    * [Module 模块加载机制与实际应用](/nodejs/module.md)
     * [Logger 日志模块](/nodejs/logger.md)
     * [Crypto 加解密模块](/nodejs/crypto.md)
     * [线程和进程](/nodejs/process-threads.md)
@@ -30,6 +29,7 @@
     - [测试框架&工具](/nodejs/base.md#测试)
     - [Node.js Web 开发框架选型](/nodejs/base.md#框架)
     - [对象关系映射 (ORM)](/nodejs/base.md#ORM)
+    - [常用 Web 框架&中间件汇总](/nodejs/middleware.md)
 * DataBase
     - [非关系型数据库 NoSQL](/database/README.md#NoSQL)
         - [MongoDB](/database/mongodb.md)
