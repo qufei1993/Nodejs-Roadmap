@@ -3,8 +3,9 @@
 ## 快速导航
 - [进程](#进程)
 - [线程](#线程)
-- [Nodejs的线程与进程](#Nodejs的线程与进程)
-- [Nodejs进程创建](#Nodejs进程创建)
+- [Node.js 的线程与进程](#Nodejs的线程与进程)
+- [Node.js 进程创建](#Nodejs进程创建)
+- [Node.js 多进程架构模型](#Nodejs多进程架构模型)
 - [守护进程编写](#守护进程)
 
 ## 面试指南
@@ -179,6 +180,7 @@ Node.js 中的进程 Process 是一个全局对象，无需 require 直接使用
 * Node.js 和 Nginx 均采用事件驱动方式，避免了多线程的线程创建、线程上下文切换的开销。如果你的业务大多是基于 I/O 操作，那么你可以选择 Node.js 来开发。
 
 
+
 ## Nodejs进程创建
 
 Node.js 提供了 child_process 内置模块，用于创建子进程，更多详细信息可参考 [Node.js 中文网 child_process](http://nodejs.cn/api/child_process.html#child_process_child_process)
@@ -300,6 +302,128 @@ process.on('message', msg => {
     process.send(sum);
 })
 ```
+
+## Nodejs多进程架构模型
+
+多进程架构解决了单进程、单线程无法充分利用系统多核 CPU 的问题，本节通过一个 Demo 来展示如何启动一批 Node.js 进程来提供服务。
+
+**多进程架构模型交互图**
+
+**编写主进程**
+
+master.js 主要处理以下逻辑：
+
+* 创建一个 server 并监听 3000 端口。
+* 根据系统 cpus 开启多个子进程
+* 通过子进程对象的 send 方法发送消息到子进程进行通信
+* 在主进程中监听了子进程的变化，如果是自杀信号重新启动一个工作进程。
+* 主进程在监听到退出消息的时候，先退出子进程在退出主进程
+
+```js
+// master.js
+const fork = require('child_process').fork;
+const cpus = require('os').cpus();
+
+const server = require('net').createServer();
+server.listen(3000);
+process.title = 'node-master'
+
+const workers = {};
+const createWorker = () => {
+    const worker = fork('worker.js')
+    worker.on('message', function (message) {
+        if (message.act === 'suicide') {
+            createWorker();
+        }
+    })
+    worker.on('exit', function(code, signal) {
+        console.log('worker process exited, code: %s signal: %s', code, signal);
+        delete workers[worker.pid];
+    });
+    worker.send('server', server);
+    workers[worker.pid] = worker;
+    console.log('worker process created, pid: %s ppid: %s', worker.pid, process.pid);
+}
+
+for (let i=0; i<cpus.length; i++) {
+    createWorker();
+}
+
+process.once('SIGINT', close.bind(this, 'SIGINT')); // kill(2) Ctrl-C
+process.once('SIGQUIT', close.bind(this, 'SIGQUIT')); // kill(3) Ctrl-\
+process.once('SIGTERM', close.bind(this, 'SIGTERM')); // kill(15) default
+process.once('exit', close.bind(this));
+
+function close (code) {
+    console.log('进程退出！', code);
+
+    if (code !== 0) {
+        for (let pid in workers) {
+            console.log('master process exited, kill worker pid: ', pid);
+            workers[pid].kill('SIGINT');
+        }
+    }
+
+    process.exit(0);
+}
+```
+
+**工作进程**
+
+worker.js 子进程处理逻辑如下：
+
+* 创建一个 server 对象，注意这里最开始并没有监听 3000 端口
+* 通过 message 事件接收主进程 send 方法发送的消息
+* 监听 uncaughtException 事件，捕获未处理的异常，发送自杀信息由主进程重建进程，子进程在链接关闭之后退出
+
+```js
+// worker.js
+const http = require('http');
+const server = http.createServer((req, res) => {
+	res.writeHead(200, {
+		'Content-Type': 'text/plan'
+	});
+	res.end('I am worker, pid: ' + process.pid + ', ppid: ' + process.ppid);
+	throw new Error('worker process exception!'); // 测试异常进程退出、重建
+});
+
+let worker;
+process.title = 'node-worker'
+process.on('message', function (message, sendHandle) {
+	if (message === 'server') {
+		worker = sendHandle;
+		worker.on('connection', function(socket) {
+			server.emit('connection', socket);
+		});
+	}
+});
+
+process.on('uncaughtException', function (err) {
+	console.log(err);
+	process.send({act: 'suicide'});
+	worker.close(function () {
+		process.exit(1);
+	})
+})
+```
+
+**测试**
+
+控制台执行 node master.js 可以看到已成功创建了四个工作进程
+
+```bash
+$ node master
+worker process created, pid: 19280 ppid: 19279
+worker process created, pid: 19281 ppid: 19279
+worker process created, pid: 19282 ppid: 19279
+worker process created, pid: 19283 ppid: 19279
+```
+
+打开活动监视器查看我们的进程情况，由于在创建进程时对进程进行了命名，很清楚的看到一个主进程对应多个子进程。
+
+![](./img/multi-process-architecture.png)
+
+以上 Demo 简单的介绍了多进程创建、异常监听、重启等，但是做为企业级应用程序我们还需要考虑的更完善，例如：进程的重启次数限制、与守护进程结合、多进程模式下定时任务处理等，感兴趣的同学推荐看下阿里 [Egg.js 多进程模式](多进程模型和进程间通讯)
 
 ## 守护进程
 
