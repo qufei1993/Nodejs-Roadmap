@@ -157,12 +157,22 @@ Node.js 是 Javascript 在服务端的运行环境，构建在 chrome 的 V8 引
 
 #### Process
 
-Node.js 中的进程 Process 是一个全局对象，无需 require。
+Node.js 中的进程 Process 是一个全局对象，无需 require 直接使用，给我们提供了当前进程中的相关信息。官方文档提供了详细的说明，感兴趣的可以亲自实践下 [Process 文档](http://nodejs.cn/api/process.html)。
 
-> todo://
+* process.env：环境变量，例如通过 process.env.NODE_ENV 获取不同环境项目配置信息
+* process.nextTick：这个在谈及 Event Loop 时经常为会提到
+* process.pid：获取当前进程id
+* process.ppid：当前进程对应的父进程
+* process.cwd()：获取当前进程工作目录
+* process.platform：获取当前进程运行的操作系统平台
+* process.uptime()：当前进程已运行时间，例如：pm2 守护进程的 uptime 值
+* 进程事件：process.on('uncaughtException', cb) 捕获异常信息、process.on('exit', cb）进程推出监听
+* 三个标准流：process.stdout 标准输出、process.stdin 标准输入、process.stderr 标准错误输出
+
+以上仅列举了部分常用到功能点，除了 Process 之外 Node.js 还提供了 child_process 模块用来对子进程进行操作，在下文 [Nodejs进程创建一节](#Nodejs进程创建) 会讲述。
 
 
-**总结**
+**关于 Node.js 进程的几点总结**
 * Javascript 是单线程，但是做为宿主环境的 Node.js 并非是单线程的。
 * 由于单线程原故，一些复杂的、消耗 CPU 资源的任务建议不要交给 Node.js 来处理，当你的业务需要一些大量计算、视频编码解码等 CPU 密集型的任务，可以采用 C 语言。
 * Node.js 和 Nginx 均采用事件驱动方式，避免了多线程的线程创建、线程上下文切换的开销。如果你的业务大多是基于 I/O 操作，那么你可以选择 Node.js 来开发。
@@ -228,7 +238,7 @@ fork('./worker.js'); // fork 一个新的子进程
 
 #### fork子进程充分利用CPU资源
 
-在上个例子中，当 CPU 计算密度大的情况程序会造成阻塞导致后续请求需要等待，下面采用 child_process.fork 方法，在进行 cpmpute 计算时创建子进程，子进程计算完成通过 send 方法将结果发送给主进程，主进程通过 message 监听到信息后处理并退出。
+[上文单线程一节](#单线程) 例子中，当 CPU 计算密度大的情况程序会造成阻塞导致后续请求需要等待，下面采用 child_process.fork 方法，在进行 cpmpute 计算时创建子进程，子进程计算完成通过 send 方法将结果发送给主进程，主进程通过 message 监听到信息后处理并退出。
 
 > fork_app.js
 
