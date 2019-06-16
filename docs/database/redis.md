@@ -7,6 +7,7 @@
     - `[Type]` [列表](/docs/database/redis-base.md#列表)
     - `[Type]` [集合](/docs/database/redis-base.md#集合)
     - `[Type]` [有序集合](/docs/database/redis-base.md#有序集合)
+    
 - **Redis高级特性** 
 - **数据持久化**
 - **主从复制**
@@ -242,19 +243,7 @@ AOF重写实现方式：
 
 ```// todo:```
 
-## 主从复制
 
-单机带来的问题：机器故障、容量限制、QPS瓶颈，主从复制提供了一种一主多从的模式解决了单机带来的机器故障问题。也是高可用、分布式的基础。
-
-#### 实现方式
-
-* 命令实现
-    * slaveof ip port：开启一个主从复制，ip为主节点ip地址，port为主节点端口号，例如在6380机器上开启一个主从复制：```slaveof 127.0.0.1 6379```
-    * slaveof no one：取消主从复制，取消之前的数据不会清除。
-
-* 配置实现
-    * ```slaveof ip port```：
-    * ```slave-read-only yes```：设置为只读模式
 
 ## 应用场景
 1. 缓存设计

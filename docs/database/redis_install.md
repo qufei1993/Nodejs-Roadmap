@@ -1,45 +1,32 @@
-# redis安装
+# Redis
 
-## 单机版
+## Redis安装
 
-## Redis集群
+**下载和编译**
 
-## Mac系统安装redis
-
-### 下载 
-
-```r
-wget http://download.redis.io/releases/redis-4.0.8.tar.gz
-```
-### 解压文件
-
-```r
-tar xzf redis-4.0.8.tar.gz
+```bash
+$ wget http://download.redis.io/releases/redis-5.0.5.tar.gz # 下载 
+$ tar xzf redis-5.0.5.tar.gz # 解压
+$ # ln -s redis-5.0.5 redis
+$ cd redis-5.0.5 # 执行了上面一步 此处 cd redis
+$ make
 ```
 
-### 进入文件目录 cd redis-4.0.8 执行make命令
 
-```r
-cd redis-4.0.8
-make
-```
-
-### 启动redis
+**启动redis**
 
 安装好后，在当前目录下有个src目录，控制台输入redis-server，启动redis
 
-```javascript
-src/redis-server
-
-//指定端口号启动
-src/redis-server --port 6380
+```bash
+$ src/redis-server
+$ src/redis-server --port 6380 # 指定端口号启动
 ```
 
 看到以下界面，启动成功
 
 ![图片](img/redis_start.png)
 
-### 打开redis客户端
+**打开redis客户端**
 
 ```javascript
 src/redis-cli -p 6380
@@ -48,11 +35,9 @@ src/redis-cli -p 6380
 src/redis-cli -h localhost -p 6380
 ```
 
-## Redis集群
+**配置**
 
-
-
-### Redis常用配置
+查看所有配置 ```config get *```，以下列举一些常用配置信息：
 
 ```shell
 daemonize yes # 是否是守护进程(no|yes)
@@ -64,3 +49,5 @@ cluster-enabled yes # 集群模式
 cluster-config-file nodes-6380.conf # 集群本地配置文件
 cluster-require-full-coverange no # 整个集群节点全部在线才提供服务（进行关闭）
 ```
+
+## Redis集群
