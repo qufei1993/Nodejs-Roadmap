@@ -14,7 +14,9 @@
 - 创建多进程时，代码里有 ```app.listen(port)``` 在进行 fork 时，为什么没有报端口被占用？参考：[Interview2](#Interview2)
 - 什么是 IPC 通信，如何建立 IPC 通信？什么场景下需要用到 IPC 通信？参考：[Interview3](#Interview3)
 - Node.js 是单线程还是多线程？进一步会提问为什么是单线程？参考：[Interview4](#Interview4)
-- 关于守护进程，是什么、为什么、怎么编写？参考：[守护进程](#守护进程)
+- 关于守护进程，是什么、为什么、怎么编写？参考：[Interview5](#Interview5)
+- 实现一个简单的命令行交互程序？参考：[Interview6](#Interview6)
+- 如何让一个 js 文件在 Linux 下成为一个可执行命令程序？参考：[Interview7](#Interview7)
 
 ## 进程
 
@@ -704,3 +706,46 @@ I am worker, PID:  42474
 第一个问题，Node.js 是单线程还是多线程？这个问题是个基本的问题，在以往面试中偶尔提到还是有不知道的，Javascript 是单线程的，但是做为其在服务端运行环境的 Node.js 并非是单线程的。
 
 第二个问题，Javascript 为什么是单线程？这个问题需要从浏览器说起，在浏览器环境中对于 DOM 的操作，试想如果多个线程来对同一个 DOM 操作是不是就乱了呢，那也就意味着对于DOM的操作只能是单线程，避免 DOM 渲染冲突。在浏览器环境中 UI 渲染线程和 JS 执行引擎是互斥的，一方在执行时都会导致另一方被挂起，这是由 JS 引擎所决定的。
+
+## Interview5
+
+> 关于守护进程，是什么、为什么、怎么编写？
+
+参考守护进程一节 [守护进程编写](#守护进程)
+
+## Interview6
+
+采用子进程 child_process 的 spawn 方法，如下所示：
+
+```js
+const spawn = require('child_process').spawn;
+const child = spawn('echo', ["简单的命令行交互"]);
+child.stdout.pipe(process.stdout);
+```
+
+```
+$ node execfile
+简单的命令行交互
+```
+
+## Interview7
+
+> 如何让一个 js 文件在 Linux 下成为一个可执行命令程序?
+
+1. 新建 hello.js 文件，头部须加上 ```#!/usr/bin/env node```，表示当前脚本使用 Node.js 进行解析
+2. 赋予文件可执行权限 chmod +x chmod +x /${dir}/hello.js，目录自定义
+3. 在 /usr/local/bin 目录下创建一个软链文件 ```sudo ln -s /${dir}/hello.js /usr/local/bin/hello```，文件名就是我们在终端使用的名字
+4. 终端执行 hello 相当于输入 node hello.js
+
+```js
+#!/usr/bin/env node
+
+console.log('hello world!');
+```
+
+终端测试
+
+```bash
+$ hello
+hello world!
+```
