@@ -18,6 +18,7 @@
 - 实现一个简单的命令行交互程序？参考：[Interview6](#Interview6)
 - 如何让一个 js 文件在 Linux 下成为一个可执行命令程序？参考：[Interview7](#Interview7)
 - 进程的当前工作目录是什么? 有什么作用？参考：[Interview8](#Interview8)
+- 多进程或多个 Web 服务之间的状态共享问题？参考：[Interview9](#Interview9)
 
 ## 进程
 
@@ -765,3 +766,9 @@ process.chdir('/Users/may/Documents/test/') // 设置当前进程目录
 
 console.log(process.cwd()); // 获取当前进程目录
 ```
+
+## Interview9
+
+> 多进程或多个 Web 服务之间的状态共享问题？
+
+多进程模式下各个进程之间是相互独立的，例如用户登陆之后 session 的保存，如果保存在服务进程里，那么如果我有 4 个工作进程，每个进程都要保存一份这是没必要的，假设服务重启了数据也会丢失。多个 Web 服务也是一样的，还会出现我在 A 机器上创建了 Session，当负载均衡分发到 B 机器上之后还需要在创建一份。一般的做法是通过 Redis 或者 数据库来做数据共享。
