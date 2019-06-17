@@ -17,6 +17,7 @@
 - 关于守护进程，是什么、为什么、怎么编写？参考：[Interview5](#Interview5)
 - 实现一个简单的命令行交互程序？参考：[Interview6](#Interview6)
 - 如何让一个 js 文件在 Linux 下成为一个可执行命令程序？参考：[Interview7](#Interview7)
+- 进程的当前工作目录是什么? 有什么作用？参考：[Interview8](#Interview8)
 
 ## 进程
 
