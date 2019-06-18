@@ -10,15 +10,16 @@
 
 ## 面试指南
 
-- 什么是孤儿进程？参考：[Interview1](#Interview1)
-- 创建多进程时，代码里有 ```app.listen(port)``` 在进行 fork 时，为什么没有报端口被占用？参考：[Interview2](#Interview2)
-- 什么是 IPC 通信，如何建立 IPC 通信？什么场景下需要用到 IPC 通信？参考：[Interview3](#Interview3)
-- Node.js 是单线程还是多线程？进一步会提问为什么是单线程？参考：[Interview4](#Interview4)
-- 关于守护进程，是什么、为什么、怎么编写？参考：[Interview5](#Interview5)
-- 实现一个简单的命令行交互程序？参考：[Interview6](#Interview6)
-- 如何让一个 js 文件在 Linux 下成为一个可执行命令程序？参考：[Interview7](#Interview7)
-- 进程的当前工作目录是什么? 有什么作用？参考：[Interview8](#Interview8)
-- 多进程或多个 Web 服务之间的状态共享问题？参考：[Interview9](#Interview9)
+- 什么是进程和线程？之间的区别？参考：[Interview1](#Interview1)
+- 什么是孤儿进程？参考：[Interview2](#Interview2)
+- 创建多进程时，代码里有 ```app.listen(port)``` 在进行 fork 时，为什么没有报端口被占用？参考：[Interview3](#Interview3)
+- 什么是 IPC 通信，如何建立 IPC 通信？什么场景下需要用到 IPC 通信？参考：[Interview4](#Interview4)
+- Node.js 是单线程还是多线程？进一步会提问为什么是单线程？参考：[Interview5](#Interview5)
+- 关于守护进程，是什么、为什么、怎么编写？参考：[Interview6](#Interview6)
+- 实现一个简单的命令行交互程序？参考：[Interview7](#Interview7)
+- 如何让一个 js 文件在 Linux 下成为一个可执行命令程序？参考：[Interview8](#Interview8)
+- 进程的当前工作目录是什么? 有什么作用？参考：[Interview9](#Interview9)
+- 多进程或多个 Web 服务之间的状态共享问题？参考：[Interview10](#Interview10)
 
 ## 进程
 
@@ -501,6 +502,12 @@ $ node index.js
 
 ## Interview1
 
+> 什么是进程和线程？之间的区别？
+
+关于线程和进程是服务端一个很基础的概念，在文章 [Node.js进阶之进程与线程](https://www.imooc.com/article/288006) 中介绍了进程与线程的概念之后又给出了在 Node.js 中的进程和线程的实际应用，对于这块不是很理解的建议先看下。
+
+## Interview2
+
 > 什么是孤儿进程？
 
 父进程创建子进程之后，父进程退出了，但是父进程对应的一个或多个子进程还在运行，这些子进程会被系统的 init 进程收养，对应的进程 ppid 为 1，这就是孤儿进程。通过以下代码示例说明。
@@ -555,7 +562,7 @@ $ curl http://127.0.0.1:3000
 I am worker, pid: 32971, ppid: 1
 ```
 
-## Interview2
+## Interview3
 
 > 创建多进程时，代码里有 ```app.listen(port)``` 在进行 fork 时，为什么没有报端口被占用？
 
@@ -645,7 +652,7 @@ worker process created, pid: 34515 ppid: 34511
 
 关于多进程端口占用问题，cnode 上有篇文章也可以看下 [通过源码解析 Node.js 中 cluster 模块的主要功能实现](https://cnodejs.org/topic/56e84480833b7c8a0492e20c)
 
-## Interview3
+## Interview4
 
 > 什么是 IPC 通信，如何建立 IPC 通信？什么场景下需要用到 IPC 通信？
 
@@ -701,7 +708,7 @@ I am worker, PID:  42474
 
 <p style="text-align:center; padding: 10px;">父子进程 IPC 通信交互图</p>
 
-## Interview4
+## Interview5
 
 > Node.js 是单线程还是多线程？进一步会提问为什么是单线程？
 
@@ -709,13 +716,13 @@ I am worker, PID:  42474
 
 第二个问题，Javascript 为什么是单线程？这个问题需要从浏览器说起，在浏览器环境中对于 DOM 的操作，试想如果多个线程来对同一个 DOM 操作是不是就乱了呢，那也就意味着对于DOM的操作只能是单线程，避免 DOM 渲染冲突。在浏览器环境中 UI 渲染线程和 JS 执行引擎是互斥的，一方在执行时都会导致另一方被挂起，这是由 JS 引擎所决定的。
 
-## Interview5
+## Interview6
 
 > 关于守护进程，是什么、为什么、怎么编写？
 
 参考守护进程一节 [守护进程编写](#守护进程)
 
-## Interview6
+## Interview7
 
 采用子进程 child_process 的 spawn 方法，如下所示：
 
@@ -730,7 +737,7 @@ $ node execfile
 简单的命令行交互
 ```
 
-## Interview7
+## Interview8
 
 > 如何让一个 js 文件在 Linux 下成为一个可执行命令程序?
 
@@ -752,7 +759,7 @@ $ hello
 hello world!
 ```
 
-## Interview8
+## Interview9
 
 > 进程的当前工作目录是什么? 有什么作用?
 
@@ -767,7 +774,7 @@ process.chdir('/Users/may/Documents/test/') // 设置当前进程目录
 console.log(process.cwd()); // 获取当前进程目录
 ```
 
-## Interview9
+## Interview10
 
 > 多进程或多个 Web 服务之间的状态共享问题？
 
