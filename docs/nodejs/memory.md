@@ -123,3 +123,5 @@ $ node --expose-gc example.js
 未声明的变量或挂在全局 global 下的变量不会自动回收，将会常驻内存直到进程退出才会被释放，除非通过通过 delete 或 重新赋值为 undefined/null 解决之间的引用关系，才会被回收。
 
 ### 闭包
+
+* [Node.js Garbage Collection Explained](https://blog.risingstack.com/node-js-at-scale-node-js-garbage-collection/?utm_source=nodeweekly&utm_medium=email)
