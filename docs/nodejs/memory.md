@@ -116,6 +116,10 @@ $ node --expose-gc example.js
 
 ![](./img/memory-0190621-002.png)
 
+## V8垃内存限制与对象分配
+
+
+
 ## 内存泄漏情况
 
 ### 全局变量
@@ -125,3 +129,4 @@ $ node --expose-gc example.js
 ### 闭包
 
 * [Node.js Garbage Collection Explained](https://blog.risingstack.com/node-js-at-scale-node-js-garbage-collection/?utm_source=nodeweekly&utm_medium=email)
+* [如何分析 Node.js 中的内存泄漏](https://zhuanlan.zhihu.com/p/25736931)
