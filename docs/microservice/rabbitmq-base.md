@@ -477,9 +477,9 @@ testQu 队列为我们定义的正常队列消息过期，会变成死信，会�
 以下我建立了 rabbitmq.js 文件主要做以下功能：
 
 * 初始化 Rabbitmq connection
-* 通过监听 error、close 事件获取异常消息
+* 通过监听 error、close 事件获取异常消息，进行重连
 * isConnection 字段是为了防止建立多个连接（kill -9 processId 会同时触发 error、close 两个事件）
-* 建立重连机制，每个 10 秒钟重试一次
+* 建立重连机制，每隔 10 秒钟重试一次
 * 统计重连次数，这个可以设置一个阀值做为监控报警
 * 链接成功之后初始化我们的消费端
 
@@ -679,7 +679,7 @@ ps -ef | grep 5672 找到进程 id，kill -9 26179 暴力退出，如下所示
 
 **正常情况下测试**
 
-curl http://127.0.0.1:3000/producer 如下所示，每次仅消费 1 条消息待消息确认后在推送下一条，5 分钟间隔事件为 setTimeout 设置的延迟。
+curl http://127.0.0.1:3000/producer 如下所示，每次仅消费 1 条消息待消息确认后在推送下一条，5 分钟间隔时间为 setTimeout 设置的延迟。
 
 ```bash
 Producer： 第0条消息
@@ -696,4 +696,4 @@ Producer： 第4条消息
 
 [本节源码 Github 地址](https://github.com/Q-Angelo/project-training/tree/master/rabbitmq/reconnection)
 
-以上就是本文对服务重连、服务限流的实践，文中对于生产者如果出现链接终断情况，没有做消息保存这样消息是会丢失的所以牵扯到另外一个内容高可用性，关于 RabbitMQ 消息的高可用性将会在下一节进行讲解。欢迎关注微信公众号 “Nodejs技术栈”、Github [https://www.nodejs.red](https://www.nodejs.red)
+以上就是本文对服务重连、服务限流的实践，文中对于生产者如果出现链接终断情况，没有做消息保存这样消息是会丢失的所以牵扯到另外一个内容高可用性，关于 RabbitMQ 消息的高可用性将会在下一节进行讲解。欢迎关注微信公众号 “Nodejs技术栈”、Github [https://www.nodejs.red](https://www.nodejs.red) 获取最新消息。
