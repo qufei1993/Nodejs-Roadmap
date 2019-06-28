@@ -200,6 +200,9 @@ heapTotal: 1289.42 MB, heapUsed: 1283.96 MB
 
 Scavenge 是一种复制算法，新生代空间会被一分为二划分成两个相等大小的 from-space 和 to-space。它的工作方式是将 from space 中存活的对象复制出来，然后移动它们到 to space 中或者被提升到老生代空间中，对于 from space 中没有存活的对象将会被释放。完成这些复制后在将 from space 和 to space 进行互换。
 
+
+![](./img/scavenge.png)
+
 Scavenge 算法非常快适合少量内存的垃圾回收，但是它有很大的空间开销，对于新生代少量内存是可以接受的。
 
 #### 老生代空间
