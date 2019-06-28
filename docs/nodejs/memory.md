@@ -213,11 +213,15 @@ Scavenge 算法非常快适合少量内存的垃圾回收，但是它有很大�
 
 Mark-Sweep 处理时分为标记、清除两个步骤，与 Scavenge 算法只复制活对象相反的是在老生代空间中由于活对象占多数 Mark-Sweep 在标记阶段遍历堆中的所有对象仅标记活对象把未标记的死对象清除，这时一次标记清除就已经完成了。
 
+![](./img/mark-sweep.png)
+
 看似一切 perfect 但是还遗留一个问题，被清除的对象遍布于各内存地址，产生很多内存碎片。
 
 **Mark-Compact**
 
 在老生代空间中为了解决 Mark-Sweep 算法的内存碎片问题，引入了 Mark-Compact（标记整理算法），其在工作过程中将活着的对象往一端移动，这时内存空间是紧凑的，移动完成之后，直接清理边界之外的内存。
+
+![](./img/mark-compact.png)
 
 ### V8垃圾回收总结
 
@@ -234,10 +238,32 @@ Mark-Sweep 处理时分为标记、清除两个步骤，与 Scavenge 算法只�
 ### 闭包
 
 
+## 内存检测工具
+
+**node-heapdump**
+
+heapdump是一个dumpV8堆信息的工具，[node-heapdump](https://github.com/bnoordhuis/node-heapdump)
+
+**node-profiler**
+
+node-profiler 是 alinode 团队出品的一个 与node-heapdump 类似的抓取内存堆快照的工具，[node-profiler](https://github.com/ali-sdk/node-profiler/wiki/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8Node-Profiler)
+
+**Easy-Monitor**
+
+轻量级的 Node.js 项目内核性能监控 + 分析工具，[https://github.com/hyj1991/easy-monitor](https://github.com/hyj1991/easy-monitor)
+
+**Node.js-Troubleshooting-Guide**
+
+Node.js 应用线上/线下故障、压测问题和性能调优指南手册，[Node.js-Troubleshooting-Guide](https://github.com/aliyun-node/Node.js-Troubleshooting-Guide)
+
+**alinode**
+
+Node.js 性能平台（Node.js Performance Platform）是面向中大型 Node.js 应用提供 性能监控、安全提醒、故障排查、性能优化 等服务的整体性解决方案。[alinode](https://www.aliyun.com/product/nodejs)
+
 ## 阅读推荐
 
 * [Node.js Garbage Collection Explained](https://blog.risingstack.com/node-js-at-scale-node-js-garbage-collection/?utm_source=nodeweekly&utm_medium=email)
-* [A tour of V8: Garbage Collection](http://jayconrod.com/posts/55/a-tour-of-v8-garbage-collection)
+* [A tour of V8: Garbage Collection](http://jayconrod.com/posts/55/a-tour-of-v8-garbage-collection) [中文版 V8 之旅： 垃圾回收器](http://newhtml.net/v8-garbage-collection/)
 * [Memory Management Reference.](https://www.memorymanagement.org/)
 * [深入浅出 Node.js](https://book.douban.com/subject/25768396/)
 * [如何分析 Node.js 中的内存泄漏](https://zhuanlan.zhihu.com/p/25736931)
