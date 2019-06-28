@@ -1,6 +1,20 @@
-# V8
+# Nodejs中的内存管理和V8垃圾回收机制
 
 对于 Node.js 服务端研发的同学来说，关于垃圾回收、内存释放这块不需要向 C/C++ 的同学那样在创建一个对象之后还需要手动创建一个 delete/free 这样的一个操作进行 GC（垃圾回收）， Node.js 与 Java 一样，由虚拟机进行内存自动管理，但是这样并不表示就此可以高枕无忧了，在开发中可能由于疏忽或者程序错误导致的内存泄漏也是一个很严重的问题，所以做为一名合格的服务端研发工程师，还是有必要的去了解下虚拟机是怎样使用内存的，遇到问题才能从容应对。
+
+## 快速导航
+* [Nodejs中的GC](#Nodejs中的GC)
+* [Nodejs垃圾回收内存管理实践](#Nodejs垃圾回收内存管理实践)
+    * [内存泄漏识别](#内存泄漏识别)
+    * [内存泄漏例子](#内存泄漏例子)
+    * [手动执行垃圾回收内存释放](#手动执行垃圾回收内存释放)
+* [V8垃圾回收机制](#V8垃圾回收机制)
+    * [V8堆内存限制](#V8堆内存限制)
+    * [新生代与老生代](#新生代与老生代)
+    * [新生代空间 & Scavenge 算法](#新生代空间)
+    * [老生代空间 & Mark-Sweep Mark-Compact 算法](#老生代空间)
+    * [V8垃圾回收总结](#V8垃圾回收总结)
+* [内存泄漏](#内存泄漏)
 
 ## Nodejs中的GC
 
@@ -16,7 +30,7 @@ Node.js 与 V8 的关系也好比 Java 之于 JVM 的关系，另外 Node.js 之
 
 在 Node.js 环境里提供了 process.memoryUsage 方法用来查看当前进程内存使用情况，单位为字节
 
-* rss（resident set size）：所有内存占用，包括指令区和堆栈。
+* rss（resident set size）：RAM 中保存的进程占用的内存部分，包括代码本身、栈、堆。
 * heapTotal：堆中总共申请到的内存量。
 * heapUsed：堆中目前用到的内存量，判断内存泄漏我们主要以这个字段为准。
 * external： V8 引擎内部的 C++ 对象占用的内存。
@@ -116,11 +130,99 @@ $ node --expose-gc example.js
 
 ![](./img/memory-0190621-002.png)
 
-## V8垃内存限制与对象分配
+## V8垃圾回收机制
+
+垃圾回收是指回收那些在应用程序中不在引用的对象，当一个对象无法从根节点访问这个对象就会做为垃圾回收的候选对象。这里的根对象可以为全局对象、局部变量，无法从根节点访问指的也就是不会在被任何其它活动对象所引用。
+
+### V8堆内存限制
+
+内存在服务端本来就是一个寸土寸金的东西，在 V8 中限制 64 位的机器大约 1.4GB，32 位机器大约为 0.7GB。因此，对于一些大内存的操作需谨慎否则超出 V8 内存限制将会造成进程退出。
+
+**一个内存溢出超出边界限制的例子**
+
+```js
+// overflow.js
+const format = function (bytes) {
+    return (bytes / 1024 / 1024).toFixed(2) + ' MB';
+};
+
+const print = function() {
+    const memoryUsage = process.memoryUsage();
+    console.log(`heapTotal: ${format(memoryUsage.heapTotal)}, heapUsed: ${format(memoryUsage.heapUsed)}`);
+}
+
+const total = [];
+setInterval(function() {
+    total.push(new Array(20 * 1024 * 1024)); // 大内存占用
+    print();
+}, 1000)
+```
+
+以上例子中 total 为全局变量每次大约增长 160 MB 左右且不会被回收，在接近 V8 边界时无法在分配内存导致进程内存溢出。
+
+```bash
+$ node overflow.js
+heapTotal: 166.84 MB, heapUsed: 164.23 MB
+heapTotal: 326.85 MB, heapUsed: 324.26 MB
+heapTotal: 487.36 MB, heapUsed: 484.27 MB
+heapTotal: 649.38 MB, heapUsed: 643.98 MB
+heapTotal: 809.39 MB, heapUsed: 803.98 MB
+heapTotal: 969.40 MB, heapUsed: 963.98 MB
+heapTotal: 1129.41 MB, heapUsed: 1123.96 MB
+heapTotal: 1289.42 MB, heapUsed: 1283.96 MB
+
+<--- Last few GCs --->
+
+[87581:0x103800000]    11257 ms: Mark-sweep 1283.9 (1290.9) -> 1283.9 (1290.9) MB, 512.1 / 0.0 ms  allocation failure GC in old space requested
+[87581:0x103800000]    11768 ms: Mark-sweep 1283.9 (1290.9) -> 1283.9 (1287.9) MB, 510.7 / 0.0 ms  last resort GC in old space requested
+[87581:0x103800000]    12263 ms: Mark-sweep 1283.9 (1287.9) -> 1283.9 (1287.9) MB, 495.3 / 0.0 ms  last resort GC in old space requested
 
 
+<--- JS stacktrace --->
+```
 
-## 内存泄漏情况
+**在 V8 中也提供了两个参数仅在启动阶段调整内存限制大小**
+
+分别为调整老生代、新生代空间，关于老生代、新生代稍后会做介绍。
+
+* --max-old-space-size=2048
+* --max-new-space-size=2048
+
+当然内存也并非越大越好，一方面**服务器资源**是昂贵的，另一方面据说 V8 以 **1.5GB 的堆内存**进行一次小的**垃圾回收大约需要 50 毫秒**以上时间，这将会导致 JavaScript 线程暂停，这也是最主要的一方面。
+
+### 新生代与老生代
+
+绝对大多数的应用程序对象的存活周期都会很短，而少数对象的存活周期将会很长为了利用这种情况，V8 将堆分为两类新生代和老生代，新空间中的对象都非常小大约为 1-8MB，这里的垃圾回收也很快。新生代空间中垃圾回收过程中幸存下来的对象会被提升到老生代空间。
+
+#### 新生代空间
+
+由于新空间中的垃圾回收很频繁，因此它的处理方式必须非常的快，采用的 Scavenge 算法，该算法由 C.J. Cheney 在 1970 年在论文 [A nonrecursive list compacting algorithm](https://dl.acm.org/citation.cfm?doid=362790.362798) 提出。
+
+Scavenge 是一种复制算法，新生代空间会被一分为二划分成两个相等大小的 from-space 和 to-space。它的工作方式是将 from space 中存活的对象复制出来，然后移动它们到 to space 中或者被提升到老生代空间中，对于 from space 中没有存活的对象将会被释放。完成这些复制后在将 from space 和 to space 进行互换。
+
+Scavenge 算法非常快适合少量内存的垃圾回收，但是它有很大的空间开销，对于新生代少量内存是可以接受的。
+
+#### 老生代空间
+
+新生代空间在垃圾回收满足一定条件（是否经历过 Scavenge 回收、to space 的内存占比）会被晋升到老生代空间中，在老生代空间中的对象都已经至少经历过一次或者多次的回收所以它们的存活概率会更大。在使用 Scavenge 算法则会有两大缺点一是将会重复的复制存活对象使得效率低下，二是对于空间资源的浪费，所以在老生代空间中采用了 Mark-Sweep（标记清除） 和 Mark-Compact（标记整理） 算法。
+
+**Mark-Sweep**
+
+Mark-Sweep 处理时分为标记、清除两个步骤，与 Scavenge 算法只复制活对象相反的是在老生代空间中由于活对象占多数 Mark-Sweep 在标记阶段遍历堆中的所有对象仅标记活对象把未标记的死对象清除，这时一次标记清除就已经完成了。
+
+看似一切 perfect 但是还遗留一个问题，被清除的对象遍布于各内存地址，产生很多内存碎片。
+
+**Mark-Compact**
+
+在老生代空间中为了解决 Mark-Sweep 算法的内存碎片问题，引入了 Mark-Compact（标记整理算法），其在工作过程中将活着的对象往一端移动，这时内存空间是紧凑的，移动完成之后，直接清理边界之外的内存。
+
+### V8垃圾回收总结
+
+为何垃圾回收是昂贵的？在 V8 中三种垃圾回收算法都避免不了在进行垃圾回收时需要将应用程序暂停，待垃圾回收完成之后在恢复应用逻辑。为此 V8 使用了不同的垃圾回收算法Scavenge、Mark-Sweep、Mark-Compact。
+
+关于 V8 垃圾回收这块笔者讲的很浅只是自己在学习过程中做的总结，如果你想了解更多原理可参考这篇文章 [A tour of V8: Garbage Collection](http://jayconrod.com/posts/55/a-tour-of-v8-garbage-collection)、 [Memory Management Reference.](https://www.memorymanagement.org/)。
+
+## 内存泄漏
 
 ### 全局变量
 
@@ -128,5 +230,11 @@ $ node --expose-gc example.js
 
 ### 闭包
 
+
+## 阅读推荐
+
 * [Node.js Garbage Collection Explained](https://blog.risingstack.com/node-js-at-scale-node-js-garbage-collection/?utm_source=nodeweekly&utm_medium=email)
+* [A tour of V8: Garbage Collection](http://jayconrod.com/posts/55/a-tour-of-v8-garbage-collection)
+* [Memory Management Reference.](https://www.memorymanagement.org/)
+* [深入浅出 Node.js](https://book.douban.com/subject/25768396/)
 * [如何分析 Node.js 中的内存泄漏](https://zhuanlan.zhihu.com/p/25736931)
