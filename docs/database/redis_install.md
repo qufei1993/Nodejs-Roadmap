@@ -1,6 +1,4 @@
-# Redis
-
-## Redis安装
+#  Redis安装
 
 **下载和编译**
 
@@ -11,7 +9,6 @@ $ # ln -s redis-5.0.5 redis
 $ cd redis-5.0.5 # 执行了上面一步 此处 cd redis
 $ make
 ```
-
 
 **启动redis**
 
@@ -49,5 +46,3 @@ cluster-enabled yes # 集群模式
 cluster-config-file nodes-6380.conf # 集群本地配置文件
 cluster-require-full-coverange no # 整个集群节点全部在线才提供服务（进行关闭）
 ```
-
-## Redis集群
