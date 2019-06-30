@@ -38,7 +38,7 @@
     - [搜索引擎 Search Engines](/database/README.md#SearchEngines)
 
 * Microservice
-    - [服务注册发现之Consul](/microservice/consul.md)
+    - [服务注册发现之Consul](microservice/consul.md)
     - [消息中间件之RabbitMQ](/microservice/rabbitmq-base.md)
     - 轻量级数据通信
         - [gRPC 官方文档中文版](http://doc.oschina.net/grpc?t=57966)
