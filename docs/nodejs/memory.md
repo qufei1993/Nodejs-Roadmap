@@ -232,9 +232,9 @@ Mark-Sweep 处理时分为标记、清除两个步骤，与 Scavenge 算法只�
 
 ### V8垃圾回收总结
 
-为何垃圾回收是昂贵的？在 V8 中三种垃圾回收算法都避免不了在进行垃圾回收时需要将应用程序暂停，待垃圾回收完成之后在恢复应用逻辑。为此 V8 使用了不同的垃圾回收算法Scavenge、Mark-Sweep、Mark-Compact。
+为何垃圾回收是昂贵的？V8 使用了不同的垃圾回收算法 Scavenge、Mark-Sweep、Mark-Compact。这三种垃圾回收算法都避免不了在进行垃圾回收时需要将应用程序暂停，待垃圾回收完成之后在恢复应用逻辑，对于新生代空间来说由于很快所以影响不大，但是对于老生代空间由于存活对象较多，停顿还是会造成影响的，因此，V8 又新增加了增量标记的方式减少停顿时间。
 
-关于 V8 垃圾回收这块笔者讲的很浅只是自己在学习过程中做的总结，如果你想了解更多原理可参考这篇文章 [A tour of V8: Garbage Collection](http://jayconrod.com/posts/55/a-tour-of-v8-garbage-collection)、 [Memory Management Reference.](https://www.memorymanagement.org/)。
+关于 V8 垃圾回收这块笔者讲的很浅只是自己在学习过程中做的总结，如果你想了解更多原理，深入浅出 Node.js 这本书是一个不错的选择，还可参考这两篇文章 [A tour of V8: Garbage Collection](http://jayconrod.com/posts/55/a-tour-of-v8-garbage-collection)、 [Memory Management Reference.](https://www.memorymanagement.org/)。
 
 ## 内存泄漏
 
