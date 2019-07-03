@@ -8,8 +8,10 @@
 * 数据处理
   * [exceljs 一款优秀的excel表格数据处理插件](https://github.com/guyonroche/exceljs)
   * [node-xlsx](https://github.com/mgcrea/node-xlsx#readme)
+  * [spritejs 支持使用 node-canvas 在服务端跑，生成 png 或者 gif 文件](https://github.com/spritejs/spritejs#server-side-render)
 
 * 数据转换
+  * [pinyin 汉字拼音转换工具](https://github.com/hotoo/pinyin)
   * [transliteration中文转英文](https://github.com/andyhu/transliteration)
   * [coordtransform 经纬度转换](https://github.com/wandergis/coordtransform)
 
