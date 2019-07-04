@@ -22,6 +22,9 @@ Consul 是 HashiCorp 公司提出的一款分布式服务治理工具，提供�
     - [服务注册与发现准备工作](#服务注册与发现准备工作)
     - [服务注册](#服务注册)
     - [服务发现](#服务发现)
+- [客户端集成]
+    - [Node.js 集成 Consul 配置中心](#Nodejs集成Consul配置中心)
+    - [Spring Boot 集成 Consul 配置中心](#SpringBoot集成Consul配置中心)
 - [题汇总篇](#问题总结)
     - [启动报错](#启动报错)
     - [查看集群成员报错](#查看集群成员报错)
@@ -552,6 +555,18 @@ $ sudo consul agent -config-file=/usr/src/consul/consul_config.json -join=192.16
 下图为Web管理界面展示的健康检查情况，可以看到进行了接口请求，且响应状态为200，输出结果为ok。
 
 ![](./img/consul_20190328_003.png)
+
+## 客户端集成
+
+### Nodejs集成Consul配置中心
+
+```
+todo://
+```
+
+### SpringBoot集成Consul配置中心
+
+之前在 Spring Boot 系列文章中有写到与 Consul 的结合，参考文章 [Spring Boot 集成 Consul 配置中心](https://github.com/Q-Angelo/SpringBoot-Course/blob/master/chapter7/README.md)
 
 ### 服务发现
 
