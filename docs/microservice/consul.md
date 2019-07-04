@@ -1,14 +1,35 @@
 # Consul
 
+Consul 是 HashiCorp 公司退出的一款分布式服务治理工具，提供了服务注册与发现、健康检查、配置中心功能。
+
 ## 快速导航
 
-- [使用Consul解决了哪些问题](#使用consul解决了哪些问题)
-- [微服务Consul系列之服务部署、搭建、使用](consul架构)
-- [微服务Consul系列之集群搭建](#集群搭建)
-- [微服务Consul系列之服务注册与服务发现](#服务注册与发现)
-- [微服务Consul系列之问题汇总篇](#问题总结)
+- [Consul 入门](#Consul入门)
+    - [使用 Consul 解决了哪些问题](#使用consul解决了哪些问题)
+    - [Consul 的四大核心特性](#Consul的四大核心特性)
+    - [Consul 架构](#consul架构)
+    - [安装](#consul安装)
+    - [Agent](#ConsulAgent)
+    - [简单的服务注册](#简单的服务注册)
+    - [ConsulTemplate](#ConsulTemplate)
+- [集群搭建](#集群搭建)
+    - [集群准备工作](#集群准备工作)
+    - [Server 端部署](#Server端部署)
+    - [Server 端集群建立](#Server端集群建立)
+    - [Client 端部署](#Client端部署)
+    - [管理工具中查看](#管理工具中查看)
+- [服务注册与发现](#服务注册与发现)
+    - [服务注册与发现准备工作](#服务注册与发现准备工作)
+    - [服务注册](#服务注册)
+    - [服务发现](#服务发现)
+- [题汇总篇](#问题总结)
+    - [启动报错](#启动报错)
+    - [查看集群成员报错](#查看集群成员报错)
+    - [关于开启 Consul Web 可视化界面的一些问题](#关于开启ConsulWeb可视化界面的一些问题)
 
-## 使用consul解决了哪些问题
+## Consul入门
+
+### 使用consul解决了哪些问题
 
 * 是否在为不同环境来维护不同项目配置而发愁
 * 是否有因为配置的更改，导致代码还要进行修改、发布，因为客流量大了还要规避开高峰期等到半夜来发布
@@ -16,14 +37,14 @@
 
 以上只是列举的笔者曾经遇到的几点问题，当然问题还不止于这些，下面介绍的Consul可以有效解决这些问题，当然还有一些其它的优点，让我们一起期待下文的Consul的讲解。
 
-## Consul的四大核心特性:
+### Consul的四大核心特性:
 
 * 服务发现：可以方便的实现服务注册，通过DNS或者HTTP应用程序可以很容易的找到他所依赖的服务.
 * Key/Value存储：使用Key/Value进行数据存储。
 * 多数据中心：Consul支持开箱即用的多数据中心。这意味着用户不需要担心建立额外的抽象层让业务扩展到多个区域
 * 健康检查：可以对指定服务进行健康检查例如，Response Status是否为200，避免将流量转发到不健康的服务上。
 
-## consul架构
+### consul架构
 
 图片来自官网 [Consul Architecture](https://www.consul.io/docs/internals/architecture.html)
 
@@ -33,7 +54,7 @@
 
 Consul是一个分布式高可用的系统，一个发现和配置服务的工具。客户端可以利用它提供的API注册和发现服务，及监控检测功能实现服务的高可用，深入的架构描述具体细节，可以参考官网[Consul Architecture](https://www.consul.io/docs/internals/architecture.html)，下面开始进入实战操作部分。
 
-## 安装
+### consul安装
 
 本处主要以linux来讲解，其他操作平台见官网[Download Consul](https://www.consul.io/downloads.html)
 
@@ -78,7 +99,7 @@ Available commands are:
     watch          Watch for changes in Consul
 ```
 
-## Consul Agent
+### ConsulAgent
 
 执行``` consul agent -dev ```，启动开发模式，这个模式会快速启动一个单节点的Consul。注意，这个模式不能数据持久化，因此，不能用于生产环境
 
@@ -142,7 +163,7 @@ Available commands are:
 Agent两种停止方式：```gracefully```或```forcefully```
 ```gracefully```方式停止，则是发送中断信号到Agent进程两种方法：```Ctrl+C```、```kill -INT consul_pid```
 
-## 服务注册
+### 服务注册
 
 Consul服务搭建好之后，通过```提供服务定义```或```HTTP API```注册一个服务，通用的模式是通过提供服务定义的方式，下文还会介绍怎么应用Consul进行```健康检查```
 
@@ -231,7 +252,7 @@ curl -X PUT \
 
 
 
-## Consul Template
+### ConsulTemplate
 
 Consul Template是Consul的一个UI扩展工具，方便的在Web页面进行操作。
 ``` Github: https://github.com/hashicorp/consul-template```
@@ -244,31 +265,11 @@ Consul Template是Consul的一个UI扩展工具，方便的在Web页面进行操
 consul agent -server -bootstrap -ui -data-dir=/data/soft/consul_1.4/consul-data -bind=0.0.0.0 -client=0.0.0.0  -node=120.27.239.212
 ```
 
-#### install
-
-[consul template](https://releases.hashicorp.com/consul-template/)版本页面，可以选择相应的版本进行下载安装，下面以```consul-template_0.20.0```为例：
-
-```
-$ wget https://releases.hashicorp.com/consul-template/0.18.3/consul-template_0.18.3_linux_amd64.zip
-$ unzip consul-template_0.18.3_linux_amd64.zip
-```
-
-设置环境变量：
-
-```
-$ mv consul-template /usr/local/bin/consul-template
-```
-
-执行命令：```$ consul-template -h```，校验是否成功
-
-
-````// todo:````
-
 ## 集群搭建
 
 至少3台机器，因为在异常处理中，如果出现Leader挂了，只要有超过一半的Server还处于活跃状态，consul就会重新选举新的Leader，保证集群可以正常工作。
 
-#### 准备工作
+### 集群准备工作
 
 测试用建议本地搭建几台虚拟机用于调试，这里的虚拟机分别为3台Server模式，1台Client模式，共以下4台：
 
@@ -306,15 +307,17 @@ $ mv consul-template /usr/local/bin/consul-template
 * bind_addr：等同于-bind
 * client_addr：等同于-client
 
-#### Server端部署
+### Server端部署
 
 * 部署第一台192.168.6.128
 
 注意：在第一台启动的时候加上-ui，只初始化一次，在其它2个节点进行相同操作，但是配置文件中的```node_name```、```bind_addr```、```client_addr```要进行更改，每台机器保持唯一。
 
-```$ sudo consul agent -ui -config-file=/usr/src/consul/consul_config.json```
+```
+$ sudo consul agent -ui -config-file=/usr/src/consul/consul_config.json
+```
 
-``` -config-file：```加载启动的配置文件
+命令 ```-config-file：``` 加载启动的配置文件
 
 * 部署第二台192.168.6.129
 
@@ -373,7 +376,7 @@ Node      Address             Status  Type    Build  Protocol  DC              S
 consul_1  192.168.6.128:8301  alive   server  1.4.0  2         consul_cluster  <all>
 ```
 
-#### Server端集群建立
+### Server端集群建立
 
 每个Consul Agent之后，都是相对独立的并不知道其它节点的存在，现在我们要做的是加入集群，将上面创建的consul_2、consul_3加入到同一个集群consul_1中。
 
@@ -415,7 +418,7 @@ $ curl 192.168.6.128:8500/v1/status/peers
 ["192.168.6.129:8300","192.168.6.130:8300","192.168.6.128:8300"]
 ```
 
-#### Client端部署
+### Client端部署
 
 现在开始客户端的部署，方式同服务端有不同
 
@@ -454,7 +457,7 @@ consul_3  192.168.6.130:8301  alive   server  1.4.0  2         consul_cluster  <
 consul_4  192.168.6.131:8301  alive   client  1.4.0  2         consul_cluster  <default>
 ```
 
-#### 管理工具中查看
+### 管理工具中查看
 
 在部署第一台192.168.6.128机器的时候，consul agent之后有跟一个-ui参数，这个是用于启动WebUI界面，这个是Consul本身所提供的Web可视化界面，浏览器输入[http://192.168.6.128:8500](http://192.168.6.128:8500)进行访问
 
@@ -465,7 +468,7 @@ consul_4  192.168.6.131:8301  alive   client  1.4.0  2         consul_cluster  <
 
 在进行服务注册之前先确认集群是否建立，关于服务注册可以看上篇[]()的介绍，两种注册方式：一种是注册HTTP API、另一种是通过配置文件定义，下面讲解的是基于后者配置文件定义的形式，也是Consul官方所建议的方式。
 
-#### 准备工作
+### 服务注册与发现准备工作
 
 以下是上节做Consul集群的时候列的机器列表，下面我们将192.168.6.131机器安装了Node服务，起了两个端口
 
@@ -490,7 +493,7 @@ $ curl http://192.168.6.131:3011/health
 ok
 ```
 
-#### 服务注册
+### 服务注册
 
 对order_service、user_service两个服务在consul_4节点上进行服务定义，配置中包含了服务的名称、地址、端口以及每10秒中对服务进行一次健康检查。
 
@@ -550,7 +553,7 @@ $ sudo consul agent -config-file=/usr/src/consul/consul_config.json -join=192.16
 
 ![](./img/consul_20190328_003.png)
 
-#### 服务发现
+### 服务发现
 
 Consul服务发现支持H```TTP API```和```DNS```两种方式
 
@@ -719,7 +722,7 @@ consul.                 0       IN      SOA     ns.consul. hostmaster.consul. 15
 
 ## 问题总结
 
-#### 启动报错
+### 启动报错
 
 ```html
 $ consul agent -dev -config-dir /etc/consul.d
@@ -741,7 +744,7 @@ root     21018 19751  0 16:45 pts/0    00:00:00 grep --color=auto consul
 
 如果想要关闭，执行命令```kill -9 consul_pid```强制杀死进程，第一个元素（上面的16140）就是进程id
 
-#### 查看集群成员报错
+### 查看集群成员报错
 
 ```
 $ consul members
@@ -756,7 +759,7 @@ Node      Address             Status  Type    Build  Protocol  DC              S
 consul_1  192.168.6.128:8301  alive   server  1.4.0  2         consul_cluster  <all>
 ```
 
-#### 关于开启Consul Web可视化界面的一些问题
+### 关于开启ConsulWeb可视化界面的一些问题
 
 这是最简单快速的启动方式，在启动consul时直接启动webui界面，跟上-ui参数参考以下示例，端口默认为8500
 
