@@ -18,12 +18,12 @@
     * [Symbol](/es6/symbol.md)
     * [Generator](/es6/generator.md)
 * Node.js
-    * [Module 模块加载机制与实际应用](/nodejs/module.md)
+    * [Module 模块机制](/nodejs/module.md)
     * [Logger 日志模块](/nodejs/logger.md)
     * [Crypto 加解密模块](/nodejs/crypto.md)
-    - [内存管理和V8垃圾回收机制](/nodejs/memory.md)
-    - [线程和进程](/nodejs/process-threads.md)
-    * [事件轮询（Event Loop）](/nodejs/event-loop.md)
+    - [Memory 内存管理和V8垃圾回收机制](/nodejs/memory.md)
+    - [Process 线程和进程](/nodejs/process-threads.md)
+    * [Event Loop 事件轮询](/nodejs/event-loop.md)
     - [缓存](/nodejs/base.md#缓存)
     - [定时任务](/nodejs/base.md#定时任务)
     - [模板引擎](/nodejs/base.md#模板引擎)
@@ -31,21 +31,16 @@
     - [Node.js Web 开发框架选型](/nodejs/base.md#框架)
     - [对象关系映射 (ORM)](/nodejs/base.md#ORM)
     - [常用 Web 框架&中间件汇总](/nodejs/middleware.md)
-* DataBase
-    - [非关系型数据库 NoSQL](/database/README.md#NoSQL)
-        - [MongoDB](/database/mongodb.md)
-    - [关系型数据库 Relational](/database/README.md#Relational)
-    - [搜索引擎 Search Engines](/database/README.md#SearchEngines)
+* [DataBase](/database/README.md)
+    - [「NoSQL」MongoDB](/database/mongodb.md)
+    - [「NoSQL」Redis](/database/mongodb.md)
+    - [「Relational」关系型数据库](/database/README.md#Relational)
+    - [「Search Engines」搜索引擎](/database/README.md#SearchEngines)
 
 * Microservice
-    - [服务注册发现之Consul](microservice/consul.md)
-    - [消息中间件之RabbitMQ](/microservice/rabbitmq-base.md)
-    - 轻量级数据通信
-        - [gRPC 官方文档中文版](http://doc.oschina.net/grpc?t=57966)
-        - [Apache Thrift](http://thrift.apache.org/)
-        - [Apache Dubbo一款高性能Java RPC框架](http://dubbo.apache.org/zh-cn/index.html)
-        - [RESTful API 设计指南](http://www.ruanyifeng.com/blog/2014/05/restful_api.html) [Best Practices for Designing a Pragmatic RESTful API
-        ](https://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api#versioning)
+    - [「服务发现」Consul](microservice/consul.md)
+    - [「消息中间件」RabbitMQ](/microservice/rabbitmq-base.md)
+    - [「数据通信」RPC、HTTP、消息队列](/microservice/data-communication.md)
     
 * HTTP协议
     - [http 三次握手](https://github.com/Q-Angelo/http-protocol#http三次握手)
