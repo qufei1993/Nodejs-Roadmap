@@ -22,7 +22,7 @@ Consul 是 HashiCorp 公司提出的一款分布式服务治理工具，提供�
     - [服务注册与发现准备工作](#服务注册与发现准备工作)
     - [服务注册](#服务注册)
     - [服务发现](#服务发现)
-- [客户端集成]
+- [客户端集成](#客户端集成)
     - [Node.js 集成 Consul 配置中心](#Nodejs集成Consul配置中心)
     - [Spring Boot 集成 Consul 配置中心](#SpringBoot集成Consul配置中心)
 - [题汇总篇](#问题总结)
@@ -425,7 +425,8 @@ $ curl 192.168.6.128:8500/v1/status/peers
 
 现在开始客户端的部署，方式同服务端有不同
 
-修改```/usr/src/consul/consul_config.json```：
+修改 ```/usr/src/consul/consul_config.json``` 如下所示:
+
 ```js
 {
     "datacenter": "consul_cluster",
