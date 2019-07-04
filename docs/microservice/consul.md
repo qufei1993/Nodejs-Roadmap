@@ -18,7 +18,7 @@ Consul 是 HashiCorp 公司提出的一款分布式服务治理工具，提供�
     - [Server 端集群建立](#Server端集群建立)
     - [Client 端部署](#Client端部署)
     - [管理工具中查看](#管理工具中查看)
-- [服务注册与发现](#服务注册与发现)
+- [服务注册与发现实践](#服务注册与发现)
     - [服务注册与发现准备工作](#服务注册与发现准备工作)
     - [服务注册](#服务注册)
     - [服务发现](#服务发现)
@@ -427,7 +427,7 @@ $ curl 192.168.6.128:8500/v1/status/peers
 
 修改 ```/usr/src/consul/consul_config.json``` 如下所示:
 
-```js
+```json
 {
     "datacenter": "consul_cluster",
     "node_name": "consul_4",
@@ -557,17 +557,7 @@ $ sudo consul agent -config-file=/usr/src/consul/consul_config.json -join=192.16
 
 ![](./img/consul_20190328_003.png)
 
-## 客户端集成
 
-### Nodejs集成Consul配置中心
-
-```
-todo://
-```
-
-### SpringBoot集成Consul配置中心
-
-之前在 Spring Boot 系列文章中有写到与 Consul 的结合，参考文章 [Spring Boot 集成 Consul 配置中心](https://github.com/Q-Angelo/SpringBoot-Course/blob/master/chapter7/README.md)
 
 ### 服务发现
 
@@ -632,7 +622,7 @@ $ curl http://192.168.6.128:8500/v1/catalog/service/order_service?passing=true
 
 对于上面注册的两个Web服务对应域名分别为```order_service.service.consul```和```user_service.service.consul```，下面先对于```order_service.service.consul```进行服务查询
 
-```
+```bash
 $ dig @192.168.6.128 -p 8600 order_service.service.consul        
 
 ; <<>> DiG 9.10.3-P4-Ubuntu <<>> @192.168.6.128 -p 8600 order_service.service.consul
@@ -664,7 +654,7 @@ order_service.service.consul. 0 IN      TXT     "consul-network-segment="
 
 为了展示更详细的信息，在dig命令中我们可以加上```SRV```参数，可以返回服务所在的节点信息、端口号。
 
-```
+```bash
 $ dig @192.168.6.128 -p 8600 order_service.service.consul SRV
 
 ; <<>> DiG 9.10.3-P4-Ubuntu <<>> @192.168.6.128 -p 8600 order_service.service.consul SRV
@@ -700,7 +690,7 @@ consul_4.node.consul_cluster.consul. 0 IN TXT   "consul-network-segment="
 
 现在我们来做些处理将consul_4节点上的order_service服务停掉，此时可以看到故障服务order_service已经不在当前结果列表页了，保证了客户端在服务发现过程中只能获取当前可用的服务节点。
 
-```
+```bash
 $ dig @192.168.6.128 -p 8600 order_service.service.consul                      
 
 ; <<>> DiG 9.10.3-P4-Ubuntu <<>> @192.168.6.128 -p 8600 order_service.service.consul
@@ -735,6 +725,17 @@ consul.                 0       IN      SOA     ns.consul. hostmaster.consul. 15
 
 ![](./img/consul_20190329_002.png)
 
+## 客户端集成
+
+### Nodejs集成Consul配置中心
+
+```
+todo://
+```
+
+### SpringBoot集成Consul配置中心
+
+之前在 Spring Boot 系列文章中有写到与 Consul 的结合，参考文章 [Spring Boot 集成 Consul 配置中心](https://github.com/Q-Angelo/SpringBoot-Course/blob/master/chapter7/README.md)
 
 ## 问题总结
 
