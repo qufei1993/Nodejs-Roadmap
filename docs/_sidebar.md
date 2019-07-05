@@ -31,7 +31,7 @@
     - [Node.js Web 开发框架选型](/nodejs/base.md#框架)
     - [对象关系映射 (ORM)](/nodejs/base.md#ORM)
     - [常用 Web 框架&中间件汇总](/nodejs/middleware.md)
-* **[DataBase]**(/database/README.md)
+* **[DataBase](/database/README.md)**
     - [「NoSQL」MongoDB](/database/mongodb.md)
     - [「NoSQL」Redis](/database/README.md)
     - [「Relational」关系型数据库](/database/README.md#Relational)

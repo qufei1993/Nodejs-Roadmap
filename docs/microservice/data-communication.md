@@ -15,7 +15,7 @@
 
 **RabbitMQ**
 
-一个由 erlang（有着和原生 Socket 一样低的延迟）语言开发基于 AMQP 协议的开源消息队列系统。能保证消息的可靠性、稳定性、安全性。[more](microservice/consul.md)
+一个由 erlang（有着和原生 Socket 一样低的延迟）语言开发基于 AMQP 协议的开源消息队列系统。能保证消息的可靠性、稳定性、安全性。[more](microservice/rabbitmq-base.md)
 
 **RocketMQ**
 
