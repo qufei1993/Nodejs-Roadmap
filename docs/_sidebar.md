@@ -24,20 +24,41 @@
     - [Memory 内存管理和V8垃圾回收机制](/nodejs/memory.md)
     - [Process 线程和进程](/nodejs/process-threads.md)
     * [Event Loop 事件轮询](/nodejs/event-loop.md)
-    - [缓存](/nodejs/base.md#缓存)
-    - [定时任务](/nodejs/base.md#定时任务)
-    - [模板引擎](/nodejs/base.md#模板引擎)
-    - [测试框架&工具](/nodejs/base.md#测试)
-    - [Node.js Web 开发框架选型](/nodejs/base.md#框架)
-    - [对象关系映射 (ORM)](/nodejs/base.md#ORM)
-    - [常用 Web 框架&中间件汇总](/nodejs/middleware.md)
-* **[DataBase](/database/README.md)**
-    - [「NoSQL」MongoDB](/database/mongodb.md)
-    - [「NoSQL」Redis](/database/README.md)
-    - [「Relational」关系型数据库](/database/README.md#Relational)
-    - [「Search Engines」搜索引擎](/database/README.md#SearchEngines)
+    - [Cache 缓存](/nodejs/cache.md#缓存)
+    - [Schedule 定时任务](/nodejs/schedule.md#定时任务)
+    - [Template 模板引擎](/nodejs/template.md#模板引擎)
+    - [Test 测试框架&工具](/nodejs/test.md#测试)
+    - [Framework Web 开发框架选型](/nodejs/framework.md#框架)
+    - [ORM 对象关系映射](/nodejs/orm.md#ORM)
+    - [Middleware 常用 Web 框架&中间件汇总](/nodejs/middleware.md)
+- DataBase
+    - <b>[数据库类型](/database/readme.md)</b>
+    - <details><summary><b>Redis</b></summary>
+      <p>
 
-* Microservice
+        - [基础总结](/database/redis.md)
+        - [主从复制](/database/redis-master-slave.md)
+        - [数据持久化](/database/redis-persistence.md)
+        - [哨兵高可用](/database/redis-sentinel.md)
+        - [集群模式](/database/redis-cluster.md)
+        - [缓存设计](/database/redis-cache.md)
+        - [应用场景](/database/redis-scene.md)
+        - [面试指南](/database/redis-interview.md)
+
+      </p>
+      </details>
+    - <details><summary><b>MongoDB</b></summary>
+      <p>
+
+        - [安装与部署](/database/redis-type.md)
+        - [CURD 操作](/database/mongodb-curd.md)
+        - [Index 索引](/database/mongodb-indexes.md)
+        - [操作符](/database/mongodb-operator.md)
+        
+      </p>
+      </details>
+
+- Microservice
     - [「服务发现」Consul](microservice/consul.md)
     - [「消息中间件」RabbitMQ](/microservice/rabbitmq-base.md)
     - [「数据通信」RPC、HTTP、消息队列](/microservice/data-communication.md)
