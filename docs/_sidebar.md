@@ -32,7 +32,7 @@
     - [ORM 对象关系映射](/nodejs/orm.md#ORM)
     - [Middleware 常用 Web 框架&中间件汇总](/nodejs/middleware.md)
 - DataBase
-    - <b>[数据库类型](/database/readme.md)</b>
+    - [数据库类型](/database/readme.md)
     - <details><summary><b>Redis</b></summary>
       <p>
 
