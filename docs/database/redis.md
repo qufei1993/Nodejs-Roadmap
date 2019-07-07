@@ -1,17 +1,4 @@
-# Redis
-
-- **Redis特性** [[more]](/docs/database/redis-base.md)
-- **五种数据结构** 
-    - `[Type]` [字符串](/docs/database/redis-base.md#字符串)
-    - `[Type]` [哈希](/docs/database/redis-base.md#哈希)
-    - `[Type]` [列表](/docs/database/redis-base.md#列表)
-    - `[Type]` [集合](/docs/database/redis-base.md#集合)
-    - `[Type]` [有序集合](/docs/database/redis-base.md#有序集合)
-    
-- **Redis高级特性** 
-- **数据持久化**
-- **主从复制**
-
+# Redis 基础总结
 
 ## Redis特性
 
@@ -26,7 +13,7 @@ Redis将数据存在于内存中，基于C语言(距操作系统最近的语言)
         * 避免线程切换
     * 需要注意的问题：
         * 一次只运行一条命令
-        * 拒绝长（慢）命令：keys、flushall、flushdb、slow lua script、mutil/exec
+        * 拒绝长（慢）命令：keys、flushall、flushdb、slow lua script、mutil/exec 等
 
 - **持久化**
 
@@ -46,12 +33,7 @@ Redis将数据存在于内存中，基于C语言(距操作系统最近的语言)
 - **多功能**
 发布订阅、简单的事务功能、Lua脚本（实现自定义命令）、pipeline提高客户端并发效率。
 
-
-
-
-## 命令
-
-#### 通用命令
+## 通用命令
 
 * keys * ：会遍历出所有的key，生产环境不建议使用时间复杂度O(n)
 * dbsize：计算key的总数，Redis内置了这个计数器，会实时更新key的总数，时间复杂度为O(1)
@@ -61,7 +43,9 @@ Redis将数据存在于内存中，基于C语言(距操作系统最近的语言)
 * persist：```persist key```去掉key的过期时间，时间复杂度为O(1)
 * type：```type key```查看key的类型，时间复杂度为O(1)
 
-## 五种数据结构
+## 五种数据类型
+
+以下仅列举一些常用数据类型，更多信息可参见官网 
 
 #### 字符串
 
@@ -204,54 +188,9 @@ API：
 
 * ```geodist key member1 member2 [unit]```获取两地理位置距离，unit为单位(m，米；km，千米；mi，英里；ft，尺)，示例：```geodist cities: beijing shanghai km```
 
-## 数据持久化
+## 阅读推荐
 
-Redis数据存储都是在内存里，对数据的更新异步的存储在磁盘里。
-
-#### RDB
-
-RDB是Redis持久化的一种方式，把当前内存中的数据集快照写入磁盘。恢复时将快照文件直接读到内存里。
-
-触发机制：
-* save同步：会阻塞，时间复杂度为O(n)
-* bgsave异步：异步，Redis会fork一个子进程创建到RDB文件，成功之后进行通知，时间复杂度为O(n)
-* 自动：提供一些配置，例如60秒中改变1000条数据，自动触发，内部执行策略还是使用的bgsave
-
-RDB的一些问题：
-* 耗时：在进行save的时候数据会有多条，是一个O(n)的操作
-* 耗性能：在bgsave机制下会进行fork操作，也是需要耗内存的，在fork的过程中也会造成阻塞
-
-#### AOF
-
-以写日志的方式在执行redis命令之后，将数据写入到AOF日志文件。
-
-三种策略：
-* always：redis在写命令过程，是先写入硬盘的缓冲区中，缓冲区根据策略写入系统中，always指写的每条命令都会写入到AOF中，保证数据不会丢失。但是I／O开销会很大。
-* everysec：每秒把缓冲区中的数据写入到硬盘，如果出现故障可能会丢失1秒的数据。
-* no：这个策略根据操作系统定义的进行写入，虽然不需要我们操作，但同时也是不可控的。
-
-AOF重写：
-
-> AOF重写是将那些过期的、重复的命令进行压缩减少，从而达到减少硬盘占用量，提高数据恢复速度。
-
-AOF重写实现方式：
-
-* bgrewriteaof：类似于RDB中的bgsave
-* 重写配置：
-    * auto-aof-rewrite-min-size：AOF重写需要的最小尺寸
-    * auto-aof-rewrite-percentage：AOF文件增长率
-
-```// todo:```
-
-
-
-## 应用场景
-1. 缓存设计
-2. 任务队列
-3. 排行榜
-4. 计数器
-5. Session存储
-6. 网站PV、UV统计
-7. Publish/Subscribe
-
-[Redis CacheCloud](https://github.com/sohutv/cachecloud)
+* [Redis 设计与实现](http://redisbook.com/index.html)
+* [Redis 开发与运维](https://book.douban.com/subject/26971561/)
+* [Redis CacheCloud](https://github.com/sohutv/cachecloud)
+* [极客学院 Redis WIKI](http://wiki.jikexueyuan.com/list/redis/)
