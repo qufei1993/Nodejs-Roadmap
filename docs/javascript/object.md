@@ -199,8 +199,8 @@ ES5之后才拥有了描述对象检测对象属性的方法
     * ``` {value: 1, writable: true, enumerable: true, configurable: true} ```
     * ``` value ``` 属性值
     * ``` writable ``` 属性值是否可以修改
-    * ``` enumerable ``` 属性是否可以配置，如果是可配置，可以结合 ``` Object.defineProperty() ``` 方法使用
-    * ``` configurable ``` 是否希望某些属性出现在枚举中
+    * ``` enumerable ``` 是否希望某些属性出现在枚举中
+    * ``` configurable ``` 属性是否可以配置，如果是可配置，可以结合 ``` Object.defineProperty() ``` 方法使用
 
 * Object.getOwnPropertyDescriptor(obj, prop)
     * 获取指定对象的自身属性描述符
