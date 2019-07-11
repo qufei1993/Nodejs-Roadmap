@@ -415,6 +415,7 @@ $ curl 192.168.6.128:8500/v1/status/leader
 ```
 
 * 通过HTTP API的方式查看集群成员
+
 ```
 $ curl 192.168.6.128:8500/v1/status/peers 
 
