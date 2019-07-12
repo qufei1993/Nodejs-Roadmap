@@ -796,7 +796,7 @@ consul.agent.service.register({
 })
 ```
 
-#### 配置Consul管理控制台
+### 配置Consul管理控制台
 
 Consul 提供了 Key/Value 存储，可以做为服务的配置中心，并且提供了 JSON、YAML、HCL 三种格式，在最早的 Consul 版本中只有一种 JSON 格式。
 
@@ -826,6 +826,12 @@ consul.kv.get(key)
 ```js
 consul.kv.set('develop/user', JSON.stringify(user))
 ```
+
+**HTTP API 调用**
+
+还可以直接通过 HTTP API 接口直接调用，例如：http://192.168.6.128:8500/v1/kv/develop/user?raw，如果你只想用 Consul 做为配置中心，也可以通过简单的 HTTP API 调用将数据存入本地定时更新本地配置，但这要你自己去实现。
+
+![](./img/consul_20190711_004.png)
 
 #### 在Nodejs中进行测试
 
