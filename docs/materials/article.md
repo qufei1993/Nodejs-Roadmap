@@ -1,4 +1,11 @@
-# 文章推荐
+# 公众号「Node.js 技术栈」文章列表
+
+## 19 年文章记录
+
+* [编程能力的四种境界](./19/the-four-stages-of-programming-competence.md)
+* [Node.js + Consul 实现服务注册、健康检查、配置中心](./19/im-sure-it-will-only-take-you-a-few-days-to-code.md)
+
+## 其它文章推荐
 
 * [天猫双11前端分享系列（四）：大规模 Node.js 应用](https://github.com/tmallfe/tmallfe.github.io/issues/28)
 * [天猫双11前端分享系列（六）：大规模 Node.js 应用（续）](https://github.com/tmallfe/tmallfe.github.io/issues/30)
@@ -8,3 +15,6 @@
 * [前后端分离的思考与实践](https://frontenddev.org/link/full-stack-development-with-nodejs-1.html)，作者：```@云淡然```
 * [面试官问我，Redis分布式锁如何续期？懵了](https://mp.weixin.qq.com/s/y-8W6H9JriUv557Nhudpow)，作者：```@肥朝```
 * [百万级别长连接，并发测试指南](https://blog.51cto.com/youerning/2089930?lb)，作者：```@youerning```
+
+
+
