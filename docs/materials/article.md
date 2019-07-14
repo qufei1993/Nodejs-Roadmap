@@ -2,8 +2,8 @@
 
 ## 19 年文章记录
 
-* [编程能力的四种境界](./19/the-four-stages-of-programming-competence.md)
-* [Node.js + Consul 实现服务注册、健康检查、配置中心](./19/im-sure-it-will-only-take-you-a-few-days-to-code.md)
+* [编程能力的四种境界](https://mp.weixin.qq.com/s?__biz=MzIyNDU2NTc5Mw==&mid=2247483741&idx=1&sn=79870410f12db9255ae0cf109636e95f&chksm=e80c4e13df7bc705961f4c4e2ad13d4715abbf5a84d11509b20065c93ad0a5b110e170a05427&token=1600964791&lang=zh_CN#rd)
+* [Node.js + Consul 实现服务注册、健康检查、配置中心](https://mp.weixin.qq.com/s?__biz=MzIyNDU2NTc5Mw==&mid=2247483742&idx=1&sn=0a9d4e75324a2399da9d811d3e6baae8&chksm=e80c4e10df7bc7064011f737fa08715a8b5db24a2ba52694ea1dc7cc3f16d8f4466b66401c73&token=1600964791&lang=zh_CN#rd)
 
 ## 其它文章推荐
 
