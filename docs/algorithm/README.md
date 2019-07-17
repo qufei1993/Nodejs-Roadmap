@@ -16,3 +16,9 @@ O(n2)
 * O(n^3)：Floyd 最短路、普通矩阵乘法
 * O(nlogn)：归并排序、快速排序的期望复杂度、基于比较排序的算法下界
 * O(2^n)：枚举全部子集数量
+
+## Reference
+
+* [数据结构与算法/leetcode/lintcode题解](https://algorithm.yuanbin.me/zh-hans/)
+* [JavaScript 算法与数据结构](https://github.com/trekhleb/javascript-algorithms/blob/master/README.zh-CN.md)
+* [在 JavaScript 中学习数据结构与算法](https://juejin.im/post/594dfe795188250d725a220a)
