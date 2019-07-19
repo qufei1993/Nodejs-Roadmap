@@ -238,3 +238,11 @@ Percentage of the requests served within a certain time (ms)
 * Time per request：用户请求平均等待时间（Time token for tests / (Complete requests / Concurrency Level)）
 * Time per request (mean, across all concurrent requests)：服务器完成一个请求所花费的时间（Time taken for tests / Complete requests）
 * Transfer rate：网络传输速度（Total trnasferred / Time taken for tests）
+
+## 问题
+
+**最大连接数设置**
+
+* [Mac的最大连接数限制和端口的相关参数的设置
+](https://blog.csdn.net/ys5773477/article/details/73614220)
+
