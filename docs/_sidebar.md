@@ -27,7 +27,7 @@
     - [Cache 缓存](/nodejs/cache.md#缓存)
     - [Schedule 定时任务](/nodejs/schedule.md#定时任务)
     - [Template 模板引擎](/nodejs/template.md#模板引擎)
-    - [Test 测试框架&工具](/nodejs/test.md#测试)
+    - [Testing 测试](/nodejs/test.md)
     - [Framework Web 开发框架选型](/nodejs/framework.md#框架)
     - [ORM 对象关系映射](/nodejs/orm.md#ORM)
     - [Middleware 常用 Web 框架&中间件汇总](/nodejs/middleware.md)
