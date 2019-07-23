@@ -616,15 +616,20 @@ for (let i=0; i<cpus.length; i++) {
     const worker = fork('worker.js');
     worker.send('server', server);
     console.log('worker process created, pid: %s ppid: %s', worker.pid, process.pid);
+
+    if (i+1 === cpus.length) {
+        console.log('serve close');
+        server.close(); // 关闭服务器监听，交由子进程处理
+    }
 }
 ```
 
 ```js
 // worker.js
 const http = require('http');
-http.createServer((req, res) => {
+const server = http.createServer((req, res) => {
 	res.end('I am worker, pid: ' + process.pid + ', ppid: ' + process.ppid);
-})
+});
 
 let worker;
 process.title = 'node-worker'
