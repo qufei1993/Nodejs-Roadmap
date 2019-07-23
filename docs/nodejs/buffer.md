@@ -23,7 +23,7 @@
 
 Buffer 用于读取或操作二进制数据流，做为 Node.js API 的一部分使用时无需 require，用于操作网络协议、数据库、图片和文件 I/O 等一些需要大量二进制数据的场景。Buffer 在创建时大小已经被确定且是无法调整的，在内存分配这块 Buffer 是由 C++ 层面提供而不是 V8 具体后面会讲解。
 
-在这里不知道你是否认为这是很简单的？但是上面提到的一些关键词二进制、流（Stream）、缓冲区（Buffer），这些又都是什么呢？下面尝试做一些简单的介绍。
+在这里不知道你是否认为这是很简单的？但是上面提到的一些关键词```二进制```、```流（Stream）```、```缓冲区（Buffer）```，这些又都是什么呢？下面尝试做一些简单的介绍。
 
 ### 什么是二进制数据？
 
@@ -166,9 +166,9 @@ console.log(buf.toString('UTF-8', 0, 11)); // Node.js 技
 
 ## Buffer 应用场景
 
-### 通过 Stream 的形式操作文件
+### I/O 操作
 
-以下为通过流的方式将 input.txt 的信息读取出来之后写入到 output.txt 文件，关于 Stream 与 Buffer 的关系不明白的在回头看下 Buffer 初识一节讲解的什么是 Stream、什么是 Buffer
+关于 I/O 可以是文件或网络 I/O，以下为通过流的方式将 input.txt 的信息读取出来之后写入到 output.txt 文件，关于 Stream 与 Buffer 的关系不明白的在回头看下 Buffer 初识一节讲解的```什么是 Stream?```、```什么是 Buffer?```
 
 ```js
 const fs = require('fs');
@@ -179,7 +179,7 @@ const outputStream = fs.createWriteStream('output.txt'); // 创建可写流
 inputStream.pipe(outputStream); // 管道读写
 ```
 
-在 Stream 中我们是不需要手动去创建自己的缓冲区，在 Node.js 的流中将会自动创建。
+在 Stream 中我们是不需要手动去创建自己的缓冲区，在 Node.js 的**流中将会自动创建**。
 
 ### zlib.js
 
@@ -193,7 +193,9 @@ zlib.js 为 Node.js 的核心库之一，主要利用了缓冲区（Buffer）的
 
 ## Buffer内存机制
 
-由于 Buffer 需要处理的是大量的二进制数据，假如用一点就向系统去申请，则会造成频繁的向系统申请内存调用，所以 Buffer 所占用的内存不再由 V8 分配，而是在 Node.js 的 C++ 层面完成申请。因此，这部分内存我们称之为堆外内存。
+在 [Nodejs 中的 内存管理和 V8 垃圾回收机制](https://www.nodejs.red/#/nodejs/memory) 一节主要讲解了在 Node.js 的垃圾回收中主要使用 V8 来管理，但是并没有提到 Buffer 类型的数据是如何回收的，想到了佛教的一句话：“超出三界外，不在五行中”，下面让我们来了解 Buffer 的内存回收机制。
+
+由于 Buffer 需要处理的是大量的二进制数据，假如用一点就向系统去申请，则会造成频繁的向系统申请内存调用，所以 Buffer 所占用的内存**不再由 V8 分配**，而是在 Node.js 的 **C++ 层面完成申请**。因此，这部分内存我们称之为**堆外内存**。
 
 ## 缓冲 VS 缓存
 
