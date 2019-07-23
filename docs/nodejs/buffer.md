@@ -13,9 +13,12 @@
     - Buffer 字符编码
     - 字符串与 Buffer 类型互转
 - [Buffer 内存机制](#Buffer内存机制)
-- [Buffer 应用场景](#Buffer应用场景)
-- [缓冲 VS 缓存](#缓冲VS缓存)
+- [缓冲（Buffer） VS 缓存（Cache）](#缓冲VS缓存)
 - [性能压测 Buffer VS String](#性能压测BufferVSString)
+- [Buffer 应用场景](#Buffer应用场景)
+    - I/O 操作
+    - zlib.js
+    - 加解密
 
 ## Buffer初识
 
@@ -164,32 +167,6 @@ console.log(buf.toString('UTF-8', 0, 11)); // Node.js 技
 
 可以看到已经正常输出了
 
-## Buffer 应用场景
-
-### I/O 操作
-
-关于 I/O 可以是文件或网络 I/O，以下为通过流的方式将 input.txt 的信息读取出来之后写入到 output.txt 文件，关于 Stream 与 Buffer 的关系不明白的在回头看下 Buffer 初识一节讲解的```什么是 Stream?```、```什么是 Buffer?```
-
-```js
-const fs = require('fs');
-
-const inputStream = fs.createReadStream('input.txt'); // 创建可读流
-const outputStream = fs.createWriteStream('output.txt'); // 创建可写流
-
-inputStream.pipe(outputStream); // 管道读写
-```
-
-在 Stream 中我们是不需要手动去创建自己的缓冲区，在 Node.js 的**流中将会自动创建**。
-
-### zlib.js
-
-zlib.js 为 Node.js 的核心库之一，主要利用了缓冲区（Buffer）的功能来操作二进制数据流，提供了压缩或解压功能。参考源代码 [zlib.js 源码](https://github.com/nodejs/node/blob/master/lib/zlib.js)
-
-### 加解密
-
-```
-// todo:
-```
 
 ## Buffer内存机制
 
@@ -268,6 +245,64 @@ $ ab -c 200 -t 60 http://192.168.6.131:3000/buffer
 在 HTTP 传输中传输的是二进制数据，上面例子中的 /string 接口直接返回的字符串，这时候 HTTP 在传输之前会先将字符串转换为 Buffer 类型，以二进制数据传输，通过流（Stream）的方式一点点返回到客户端。但是直接返回 Buffer 类型，则少了每次的转换操作，对于性能也是有提升的。
 
 在一些 Web 应用中，对于静态数据可以预先转为 Buffer 进行传输，可以有效减少 CPU 的重复使用（重复的字符串转 Buffer 操作）。
+
+## Buffer 应用场景
+
+以下列举一些 Buffer 在实际业务中的应用场景，也欢迎大家在评论区补充！
+
+### I/O 操作
+
+关于 I/O 可以是文件或网络 I/O，以下为通过流的方式将 input.txt 的信息读取出来之后写入到 output.txt 文件，关于 Stream 与 Buffer 的关系不明白的在回头看下 **Buffer 初识** 一节讲解的 ```什么是 Stream?```、```什么是 Buffer?```
+
+```js
+const fs = require('fs');
+
+const inputStream = fs.createReadStream('input.txt'); // 创建可读流
+const outputStream = fs.createWriteStream('output.txt'); // 创建可写流
+
+inputStream.pipe(outputStream); // 管道读写
+```
+
+在 Stream 中我们是不需要手动去创建自己的缓冲区，在 Node.js 的**流中将会自动创建**。
+
+### zlib.js
+
+zlib.js 为 Node.js 的核心库之一，其利用了缓冲区（Buffer）的功能来操作二进制数据流，提供了压缩或解压功能。参考源代码 [zlib.js 源码](https://github.com/nodejs/node/blob/master/lib/zlib.js)
+
+### 加解密
+
+在一些加解密算法中会遇到使用 Buffer，例如 crypto.createCipheriv 的第二个参数 key 为 String 或 Buffer 类型，如果是 Buffer 类型，就用到了本篇我们讲解的内容，以下做了一个简单的加密示例，重点使用了 Buffer.alloc() 初始化一个实例（这个上面有介绍），之后使用了 fill 方法做了填充，这里重点在看下这个方法的使用。
+
+**buf.fill(value[, offset[, end]][, encoding])**
+
+* value: 第一个参数为要填充的内容
+* offset: 偏移量，填充的起始位置
+* end: 结束填充 buf 的偏移量
+* encoding: 编码集
+
+**以下为 Cipher 的对称加密 Demo**
+
+```js
+const crypto = require('crypto');
+const [key, iv, algorithm, encoding, cipherEncoding] = [
+    'a123456789', '', 'aes-128-ecb', 'utf8', 'base64'
+];
+
+const handleKey = key => {
+    const bytes = Buffer.alloc(16); // 初始化一个 Buffer 实例，每一项都用 00 填充
+    console.log(bytes); // <Buffer 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00>
+    bytes.fill(key, 0, 10) // 填充
+    console.log(bytes); // <Buffer 61 31 32 33 34 35 36 37 38 39 00 00 00 00 00 00>
+
+    return bytes;
+}
+
+let cipher = crypto.createCipheriv(algorithm, handleKey(key), iv);
+let crypted = cipher.update('Node.js 技术栈', encoding, cipherEncoding);
+    crypted += cipher.final(cipherEncoding);
+
+console.log(crypted) // jE0ODwuKN6iaKFKqd3RF4xFZkOpasy8WfIDl8tRC5t0=
+```
 
 ## Reference
 
