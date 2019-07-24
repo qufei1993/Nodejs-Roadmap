@@ -84,7 +84,7 @@ Buffer 用于读取或操作二进制数据流，做为 Node.js API 的一部分
 
 ## Buffer基本使用
 
-了解了 Buffer 的一些概念之后，我们来看下 Buffer 的一些基本使用，这里并不会列举所有的 API 使用，仅列举一部分常用的，对于完成推荐大家去 [Node.js 中文网观看](http://nodejs.cn/api/buffer.html)。
+了解了 Buffer 的一些概念之后，我们来看下 Buffer 的一些基本使用，这里并不会列举所有的 API 使用，仅列举一部分常用的，更详细的可参考 [Node.js 中文网](http://nodejs.cn/api/buffer.html)。
 
 ### 创建Buffer
 
@@ -278,8 +278,8 @@ function allocate(size) {
 1. 在初次加载时就会初始化 1 个 **8KB 的内存空间**，buffer.js 源码有体现
 2. 根据申请的内存大小分为 **小 Buffer 对象** 和 **大 Buffer 对象**
 3. 小 Buffer 情况，会继续判断这个 slab 空间是否足够
-    3.1 如果空间足够就去使用剩余空间同时更新 slab 分配状态，偏移量会增加
-    3.2 如果空间不足，slab 空间不足，就会去创建一个新的 slab 空间用来分配
+    * 如果空间足够就去使用剩余空间同时更新 slab 分配状态，偏移量会增加
+    * 如果空间不足，slab 空间不足，就会去创建一个新的 slab 空间用来分配
 4. 大 Buffer 情况，则会直接走 createUnsafeBuffer(size) 函数
 5. 不论是小 Buffer 对象还是大 Buffer 对象，内存分配是在 C++ 层面完成，内存管理在 JavaScript 层面，最终还是可以被 V8 的垃圾回收标记所回收。
 
