@@ -17,16 +17,16 @@
     - 8KB 限制
     - 透过 buffer.js 源码了解 Buffer 对象分配
     - Buffer 内存分配总结
-- [Buffer 应用场景](#Buffer应用场景)
+- [Buffer 应用场景](#Buffer-应用场景)
     - I/O 操作
     - zlib.js
     - 加解密
-- [Buffer VS Cache](#BufferVSCache)
-- [Buffer VS String](#BufferVSString)
+- [Buffer VS Cache](#buffer-vs-cache)
+- [Buffer VS String](#buffer-vs-string)
 
 ## 面试指南
 
-* ``` 缓冲（Buffer）与缓存（Cache）的区别？ ```，参考：[#](BufferVSCache)
+* ``` 缓冲（Buffer）与缓存（Cache）的区别？ ```，参考：[#](#buffer-vs-cache)
 
 ## Buffer初识
 
