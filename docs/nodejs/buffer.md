@@ -8,7 +8,7 @@
     - 什么是二进制数据？
     - 什么是 Stream？
     - 什么是 Buffer？
-- [Buffer基本使用](#Buffer基本使用)
+- [Buffer 基本使用](#Buffer基本使用)
     - 创建 Buffer
     - Buffer 字符编码
     - 字符串与 Buffer 类型互转
@@ -17,7 +17,7 @@
     - 8KB 限制
     - 透过 buffer.js 源码了解 Buffer 对象分配
     - Buffer 内存分配总结
-- [Buffer 应用场景](#Buffer-应用场景)
+- [Buffer 应用场景](#Buffer应用场景)
     - I/O 操作
     - zlib.js
     - 加解密
@@ -273,7 +273,7 @@ function allocate(size) {
 4. 大 Buffer 情况，则会直接走 createUnsafeBuffer(size) 函数
 5. 不论是小 Buffer 对象还是大 Buffer 对象，内存分配是在 C++ 层面完成，内存管理在 JavaScript 层面，最终还是可以被 V8 的垃圾回收标记所回收。
 
-## Buffer 应用场景
+## Buffer应用场景
 
 以下列举一些 Buffer 在实际业务中的应用场景，也欢迎大家在评论区补充！
 
