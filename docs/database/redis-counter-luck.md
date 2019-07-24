@@ -14,7 +14,7 @@
 
 ## 流程图
 
-> // todo:
+![](./img/redis_counter_luck.png)
 
 ## 编码工作
 

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile modified="2019-07-24T02:26:33.973Z" host="www.draw.io" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36" etag="KhN1ZEYWAz84XVjKSbcA" version="11.0.4" type="device" compressed="false">
+  <diagram name="Page-1" id="8ce9d11a-91a2-4d17-14d8-a56ed91bf033">
+    <mxGraphModel dx="1186" dy="690" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" background="#ffffff" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="oTOEZcwR1MxuMm1zH_sb-3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="oTOEZcwR1MxuMm1zH_sb-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="510" y="242" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oTOEZcwR1MxuMm1zH_sb-1" value="Entry" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="450" y="152" width="120" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="oTOEZcwR1MxuMm1zH_sb-21" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="oTOEZcwR1MxuMm1zH_sb-4" target="oTOEZcwR1MxuMm1zH_sb-17">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="510" y="382" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oTOEZcwR1MxuMm1zH_sb-4" value="&lt;br&gt;判断key是否存在&lt;br&gt;exists" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="440" y="244" width="140" height="82" as="geometry"/>
+        </mxCell>
+        <mxCell id="oTOEZcwR1MxuMm1zH_sb-24" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="oTOEZcwR1MxuMm1zH_sb-9" target="oTOEZcwR1MxuMm1zH_sb-17">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="660" y="462"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oTOEZcwR1MxuMm1zH_sb-9" value="对key初始化&lt;br&gt;setnx" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="600" y="342" width="120" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="oTOEZcwR1MxuMm1zH_sb-11" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;labelBackgroundColor=none;startArrow=none;startFill=0;startSize=5;endArrow=classicThin;endFill=1;endSize=5;jettySize=auto;orthogonalLoop=1;strokeColor=#000000;strokeWidth=1;fontFamily=Verdana;fontSize=8;fontColor=#000000;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="580" y="285" as="sourcePoint"/>
+            <mxPoint x="661" y="342" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oTOEZcwR1MxuMm1zH_sb-25" value="Text" style="text;html=1;resizable=0;points=[];align=center;verticalAlign=middle;labelBackgroundColor=#ffffff;" vertex="1" connectable="0" parent="oTOEZcwR1MxuMm1zH_sb-11">
+          <mxGeometry x="-0.5326" relative="1" as="geometry">
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oTOEZcwR1MxuMm1zH_sb-28" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="oTOEZcwR1MxuMm1zH_sb-17" target="oTOEZcwR1MxuMm1zH_sb-27">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="oTOEZcwR1MxuMm1zH_sb-17" value="增加领取数量&lt;br&gt;result=redis.incr(key)" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="450" y="432" width="120" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="oTOEZcwR1MxuMm1zH_sb-32" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="oTOEZcwR1MxuMm1zH_sb-27">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="445" y="182" as="targetPoint"/>
+            <Array as="points">
+              <mxPoint x="350" y="577"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oTOEZcwR1MxuMm1zH_sb-33" value="Y" style="text;html=1;resizable=0;points=[];align=center;verticalAlign=middle;labelBackgroundColor=#ffffff;" vertex="1" connectable="0" parent="oTOEZcwR1MxuMm1zH_sb-32">
+          <mxGeometry x="-0.8188" relative="1" as="geometry">
+            <mxPoint as="offset"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oTOEZcwR1MxuMm1zH_sb-35" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="oTOEZcwR1MxuMm1zH_sb-27">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="620" y="577" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="oTOEZcwR1MxuMm1zH_sb-27" value="数量是否超限&lt;br&gt;result&amp;lt;count" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="445" y="542" width="130" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="oTOEZcwR1MxuMm1zH_sb-37" value="领取数量超限，活动结束" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="620" y="547" width="120" height="60" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

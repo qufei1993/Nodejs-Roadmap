@@ -1,4 +1,4 @@
-# Buffer
+# Node.js 中的 Buffer 是什么？
 
 从前端转入 Node.js 的童鞋对这一部分内容会比较陌生，因为在前端中一些简单的字符串操作已经满足基本的业务需求，有时可能也会觉得 Buffer、Stream 这些会很神秘。回到服务端，如果你不想只做一名普通的 Node.js 开发工程师，你应该深入去学习一下 Buffer 揭开这一层神秘的面纱，同时也会让你对 Node.js 的理解提升一个水平。
 
@@ -13,12 +13,20 @@
     - Buffer 字符编码
     - 字符串与 Buffer 类型互转
 - [Buffer 内存机制](#Buffer内存机制)
-- [缓冲（Buffer） VS 缓存（Cache）](#缓冲VS缓存)
-- [性能压测 Buffer VS String](#性能压测BufferVSString)
+    - Buffer 内存分配原理
+    - 8KB 限制
+    - 透过 buffer.js 源码了解 Buffer 对象分配
+    - Buffer 内存分配总结
 - [Buffer 应用场景](#Buffer应用场景)
     - I/O 操作
     - zlib.js
     - 加解密
+- [Buffer VS Cache](#BufferVSCache)
+- [Buffer VS String](#BufferVSString)
+
+## 面试指南
+
+* ``` 缓冲（Buffer）与缓存（Cache）的区别？ ```，参考：[#](BufferVSCache)
 
 ## Buffer初识
 
@@ -66,7 +74,7 @@ Buffer 用于读取或操作二进制数据流，做为 Node.js API 的一部分
 
 ## Buffer基本使用
 
-了解了 Buffer 的一些概念之后，我们来看下 Buffer 的一些基本使用。
+了解了 Buffer 的一些概念之后，我们来看下 Buffer 的一些基本使用，这里并不会列举所有的 API 使用，仅列举一部分常用的，对于完成推荐大家去 [Node.js 中文网观看](http://nodejs.cn/api/buffer.html)。
 
 ### 创建Buffer
 
@@ -170,81 +178,100 @@ console.log(buf.toString('UTF-8', 0, 11)); // Node.js 技
 
 ## Buffer内存机制
 
-在 [Nodejs 中的 内存管理和 V8 垃圾回收机制](https://www.nodejs.red/#/nodejs/memory) 一节主要讲解了在 Node.js 的垃圾回收中主要使用 V8 来管理，但是并没有提到 Buffer 类型的数据是如何回收的，想到了佛教的一句话：“超出三界外，不在五行中”，下面让我们来了解 Buffer 的内存回收机制。
+在 [Nodejs 中的 内存管理和 V8 垃圾回收机制](https://www.nodejs.red/#/nodejs/memory) 一节主要讲解了在 Node.js 的垃圾回收中主要使用 V8 来管理，但是并没有提到 Buffer 类型的数据是如何回收的，下面让我们来了解 Buffer 的内存回收机制。
 
-由于 Buffer 需要处理的是大量的二进制数据，假如用一点就向系统去申请，则会造成频繁的向系统申请内存调用，所以 Buffer 所占用的内存**不再由 V8 分配**，而是在 Node.js 的 **C++ 层面完成申请**。因此，这部分内存我们称之为**堆外内存**。
+由于 Buffer 需要处理的是大量的二进制数据，假如用一点就向系统去申请，则会造成频繁的向系统申请内存调用，所以 Buffer 所占用的内存**不再由 V8 分配**，而是在 Node.js 的 **C++ 层面完成申请**，在 **JavaScript 中进行内存分配**。因此，这部分内存我们称之为**堆外内存**。
 
-## 缓冲 VS 缓存
+**注意**：以下使用到的 buffer.js 源码为 Node.js v10.x 版本，地址：[https://github.com/nodejs/node/blob/v10.x/lib/buffer.js](https://github.com/nodejs/node/blob/v10.x/lib/buffer.js)
 
-> 缓冲（Buffer）与缓存（Cache）的区别？
+### Buffer内存分配原理
 
-**缓冲（Buffer）**
+Node.js 采用了 slab 机制进行**预先申请、事后分配**，是一种动态的管理机制。
 
-缓冲（Buffer）是用于处理二进制流数据，将数据缓冲起来，它是临时性的，对于流式数据，会采用缓冲区将数据临时存储起来，等缓冲到一定的大小之后在存入硬盘中。视频播放器就是一个经典的例子，有时你会看到一个缓冲的图标，这意味着此时这一组缓冲区并未填满，当数据到达填满缓冲区并且被处理之后，此时缓冲图标消失，你可以看到一些图像数据。
+使用 Buffer.alloc(size) 传入一个指定的 size 就会申请一块固定大小的内存区域，slab 具有如下三种状态：
 
-**缓存（Cache）**
+* full：完全分配状态
+* partial：部分分配状态
+* empty：没有被分配状态
 
-缓存（Cache）我们可以看作是一个中间层，它可以是永久性的将热点数据进行缓存，使得访问速度更快，例如我们通过 Memory、Redis 等将数据从硬盘或其它第三方接口中请求过来进行缓存，目的就是将数据存于内存的缓存区中，这样对同一个资源进行访问，速度会更快，也是性能优化一个重要的点。
+**8KB 限制**
 
-来自知乎的一个讨论，点击 [more](https://www.zhihu.com/question/26190832) 查看
-
-## 性能压测 Buffer VS String
+Node.js 以 8KB 为界限来区分是小对象还是大对象，在 [buffer.js](https://github.com/nodejs/node/blob/v10.x/lib/buffer.js) 中可以看到以下代码
 
 ```js
-const http = require('http');
-let s = '';
-for (let i=0; i<1024*10; i++) {
-    s+='a'
+Buffer.poolSize = 8 * 1024; // 102 行，Node.js 版本为 v10.x
+```
+
+在 **Buffer 初识** 一节里有提到过 ```Buffer 在创建时大小已经被确定且是无法调整的``` 到这里应该就明白了。
+
+**Buffer 对象分配**
+
+以下代码示例，在加载时直接调用了 createPool() 相当于直接初始化了一个 8 KB 的内存空间，这样在第一次进行内存分配时也会变得更高效。另外在初始化的同时还初始化了一个新的变量 **poolOffset = 0** 这个变量会记录已经使用了多少字节。
+
+```js
+Buffer.poolSize = 8 * 1024;
+var poolSize, poolOffset, allocPool;
+
+... // 中间代码省略
+
+function createPool() {
+  poolSize = Buffer.poolSize;
+  allocPool = createUnsafeArrayBuffer(poolSize);
+  poolOffset = 0;
 }
-
-const str = s;
-const bufStr = Buffer.from(s);
-const server = http.createServer((req, res) => {
-    console.log(req.url);
-
-    if (req.url === '/buffer') {
-        res.end(bufStr);
-    } else if (req.url === '/string') {
-        res.end(str);
-    }
-});
-
-server.listen(3000);
+createPool(); // 129 行
 ```
 
-以上实例我放在虚拟机里进行测试，你也可以在本地电脑测试，使用 AB 测试工具。
+此时，新构造的 slab 如下所示：
 
-**测试 string**
+![](./img/slab_poolOffset_0.png)
 
-看以下几个重要的参数指标，之后通过 buffer 传输进行对比
+现在让我们来尝试分配一个大小为 2048 的 Buffer 对象，代码如下所示：
 
-* Complete requests:      21815
-* Requests per second:    363.58 [#/sec] (mean)
-* Transfer rate:          3662.39 [Kbytes/sec] received
-
-```
-$ ab -c 200 -t 60 http://192.168.6.131:3000/string
+```js
+Buffer.alloc(2 * 1024)
 ```
 
-![](./img/ab_string.png)
+现在让我们先看下当前的 slab 内存是怎么样的？如下所示：
 
-**测试 buffer**
+![](./img/slab_poolOffset_2048.png)
 
-可以看到通过 buffer 传输总共的请求数为 50000、QPS 达到了两倍多的提高、每秒传输的字节为 9138.82 KB，从这些数据上可以证明提前将数据转换为 Buffer 的方式，可以使性能得到近一倍的提升。
+那么这个分配过程是怎样的呢？让我们再看 buffer.js 另外一个核心的方法 allocate(size)
 
-* Complete requests:      50000
-* Requests per second:    907.24 [#/sec] (mean)
-* Transfer rate:          9138.82 [Kbytes/sec] received
+```js
+// https://github.com/nodejs/node/blob/v10.x/lib/buffer.js#L318
+function allocate(size) {
+  if (size <= 0) {
+    return new FastBuffer();
+  }
 
+  // 当分配的空间小于 Buffer.poolSize 向右移位，这里得出来的结果为 4KB
+  if (size < (Buffer.poolSize >>> 1)) {
+    if (size > (poolSize - poolOffset))
+      createPool();
+    var b = new FastBuffer(allocPool, poolOffset, size);
+    poolOffset += size; // 已使用空间累加
+    alignPool(); // 8 字节内存对齐处理
+    return b;
+  } else { // C++ 层面申请
+    return createUnsafeBuffer(size);
+  }
+}
 ```
-$ ab -c 200 -t 60 http://192.168.6.131:3000/buffer
-```
 
-![](./img/ab_buffer.png)
+读完上面的代码，已经很清晰的可以看到何时会分配小 Buffer 对象，又何时会去分配大 Buffer 对象。
 
-在 HTTP 传输中传输的是二进制数据，上面例子中的 /string 接口直接返回的字符串，这时候 HTTP 在传输之前会先将字符串转换为 Buffer 类型，以二进制数据传输，通过流（Stream）的方式一点点返回到客户端。但是直接返回 Buffer 类型，则少了每次的转换操作，对于性能也是有提升的。
+### Buffer 内存分配总结
 
-在一些 Web 应用中，对于静态数据可以预先转为 Buffer 进行传输，可以有效减少 CPU 的重复使用（重复的字符串转 Buffer 操作）。
+这块内容着实难理解，翻了几本 Node.js 相关书籍，朴灵大佬的「深入浅出 Node.js」Buffer 一节还是讲解的挺详细的，推荐大家去阅读下。
+
+1. 在初次加载时就会初始化 1 个 **8KB 的内存空间**，buffer.js 源码有体现
+2. 根据申请的内存大小分为 **小 Buffer 对象** 和 **大 Buffer 对象**
+3. 小 Buffer 情况，会继续判断这个 slab 空间是否足够
+    3.1 如果空间足够就去使用剩余空间同时更新 slab 分配状态，偏移量会增加
+    3.2 如果空间不足，slab 空间不足，就会去创建一个新的 slab 空间用来分配
+4. 大 Buffer 情况，则会直接走 createUnsafeBuffer(size) 函数
+5. 不论是小 Buffer 对象还是大 Buffer 对象，内存分配是在 C++ 层面完成，内存管理在 JavaScript 层面，最终还是可以被 V8 的垃圾回收标记所回收。
 
 ## Buffer 应用场景
 
@@ -304,9 +331,84 @@ let crypted = cipher.update('Node.js 技术栈', encoding, cipherEncoding);
 console.log(crypted) // jE0ODwuKN6iaKFKqd3RF4xFZkOpasy8WfIDl8tRC5t0=
 ```
 
+## Buffer VS Cache
+
+> 缓冲（Buffer）与缓存（Cache）的区别？
+
+**缓冲（Buffer）**
+
+缓冲（Buffer）是用于处理二进制流数据，将数据缓冲起来，它是临时性的，对于流式数据，会采用缓冲区将数据临时存储起来，等缓冲到一定的大小之后在存入硬盘中。视频播放器就是一个经典的例子，有时你会看到一个缓冲的图标，这意味着此时这一组缓冲区并未填满，当数据到达填满缓冲区并且被处理之后，此时缓冲图标消失，你可以看到一些图像数据。
+
+**缓存（Cache）**
+
+缓存（Cache）我们可以看作是一个中间层，它可以是永久性的将热点数据进行缓存，使得访问速度更快，例如我们通过 Memory、Redis 等将数据从硬盘或其它第三方接口中请求过来进行缓存，目的就是将数据存于内存的缓存区中，这样对同一个资源进行访问，速度会更快，也是性能优化一个重要的点。
+
+来自知乎的一个讨论，点击 [more](https://www.zhihu.com/question/26190832) 查看
+
+## Buffer VS String
+
+通过压力测试来看看 String 和 Buffer 两者的性能如何？
+
+```js
+const http = require('http');
+let s = '';
+for (let i=0; i<1024*10; i++) {
+    s+='a'
+}
+
+const str = s;
+const bufStr = Buffer.from(s);
+const server = http.createServer((req, res) => {
+    console.log(req.url);
+
+    if (req.url === '/buffer') {
+        res.end(bufStr);
+    } else if (req.url === '/string') {
+        res.end(str);
+    }
+});
+
+server.listen(3000);
+```
+
+以上实例我放在虚拟机里进行测试，你也可以在本地电脑测试，使用 AB 测试工具。
+
+**测试 string**
+
+看以下几个重要的参数指标，之后通过 buffer 传输进行对比
+
+* Complete requests:      21815
+* Requests per second:    363.58 [#/sec] (mean)
+* Transfer rate:          3662.39 [Kbytes/sec] received
+
+```
+$ ab -c 200 -t 60 http://192.168.6.131:3000/string
+```
+
+![](./img/ab_string.png)
+
+**测试 buffer**
+
+可以看到通过 buffer 传输总共的请求数为 50000、QPS 达到了两倍多的提高、每秒传输的字节为 9138.82 KB，从这些数据上可以证明提前将数据转换为 Buffer 的方式，可以使性能得到近一倍的提升。
+
+* Complete requests:      50000
+* Requests per second:    907.24 [#/sec] (mean)
+* Transfer rate:          9138.82 [Kbytes/sec] received
+
+```
+$ ab -c 200 -t 60 http://192.168.6.131:3000/buffer
+```
+
+![](./img/ab_buffer.png)
+
+在 HTTP 传输中传输的是二进制数据，上面例子中的 /string 接口直接返回的字符串，这时候 HTTP 在传输之前会先将字符串转换为 Buffer 类型，以二进制数据传输，通过流（Stream）的方式一点点返回到客户端。但是直接返回 Buffer 类型，则少了每次的转换操作，对于性能也是有提升的。
+
+在一些 Web 应用中，对于静态数据可以预先转为 Buffer 进行传输，可以有效减少 CPU 的重复使用（重复的字符串转 Buffer 操作）。
+
 ## Reference
 
 - [http://nodejs.cn/api/buffer.html](http://nodejs.cn/api/buffer.html)
-- [深入浅出 Node.js Buffer 一节](https://book.douban.com/subject/25768396/)
+- [深入浅出 Node.js Buffer](https://book.douban.com/subject/25768396/)
 - [Do you want a better understanding of Buffer in Node.js? Check this out.](https://www.freecodecamp.org/news/do-you-want-a-better-understanding-of-buffer-in-node-js-check-this-out-2e29de2968e8/)
 - [A cartoon intro to ArrayBuffers and SharedArrayBuffers](https://hacks.mozilla.org/2017/06/a-cartoon-intro-to-arraybuffers-and-sharedarraybuffers/)
+- [buffer.js v10.x](https://github.com/nodejs/node/blob/v10.x/lib/buffer.js)
