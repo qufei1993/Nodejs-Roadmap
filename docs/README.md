@@ -37,8 +37,8 @@
 
 ## 联系我
 
-- **微信**
-添加我的微信备注“`Github`”
+- **加入群聊**
+本群的宗旨是给大家提供一个良好的技术学习交流平台，所以杜绝一切广告！由于微信群人满 100 之后无法加入，请扫描下方二维码先添加作者 “五月君” 微信，备注：Node.js。
 <img src="https://nodejsred.oss-cn-shanghai.aliyuncs.com/wx.jpeg?x-oss-process=style/may" width="180" height="180"/>
 
 - **公众号**
