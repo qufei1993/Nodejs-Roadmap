@@ -24,7 +24,7 @@
     - [Buffer 缓冲区模块](/nodejs/buffer.md)
     - [Process 线程和进程](/nodejs/process-threads.md)
     - [Memory 内存管理和V8垃圾回收机制](/nodejs/memory.md)
-    - [Event Loop 事件轮询](/nodejs/event-loop.md)
+    - [I/O 模型浅谈](/nodejs/io.md)
     - [Cache 缓存](/nodejs/cache.md#缓存)
     - [Schedule 定时任务](/nodejs/schedule.md#定时任务)
     - [Template 模板引擎](/nodejs/template.md#模板引擎)
