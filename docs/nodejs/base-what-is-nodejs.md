@@ -134,6 +134,6 @@ Backend For Frontend，简称 BFF，服务于前端的后端，并非是一种�
 
 ## Node.js 技术栈学习指南路线图
 
-![](https://mmbiz.qpic.cn/mmbiz_png/zPkNS9m6iatKRvHS939VJa3ic8Gs51ab2FBuj4AJ8TvzS69aC16KiaID0J9XYcxEdRZheibjbXvJ3Pppibr6v2f6NmA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![](./img/nodejs-roadmap.png)
 
 这是最近画的一张 Node.js 技术栈学习指南路线图，从中可以看出抛开语言这一层面，剩下的（数据库、中间件、HTTP 等）都是我们要学习的。欢迎大家关注公众号「**Nodejs技术栈**」专注于 Node.js 相关技术栈研究分享，若有 Node.js 相关文章也欢迎大家投稿！共同成长！
