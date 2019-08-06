@@ -65,7 +65,7 @@ Redis将数据存在于内存中，基于C语言(距操作系统最近的语言)
 ```js
 function cityList() {
     const redisKey = 'city';
-    let cities = redis.get(redis.Key);
+    let cities = redis.get(redisKey);
 
     if (!cities) {
         cities = mongo.getCityList();
