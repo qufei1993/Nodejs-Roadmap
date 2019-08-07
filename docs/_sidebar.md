@@ -18,8 +18,8 @@
     * [Symbol](/es6/symbol.md)
     * [Generator](/es6/generator.md)
 * Node.js 基础
-    - [Node.js 是什么？我为什么选择它？](/nodejs/base-what-is-nodejs.md)
-    - [Node.js 版本知多少？又该如何选择？](/nodejs/base-release.md)
+    - [Node.js 是什么？我为什么选择它？](/nodejs/base/what-is-nodejs.md)
+    - [Node.js 版本知多少？又该如何选择？](/nodejs/base/release.md)
 * Node.js 模块
     - [Module 模块机制](/nodejs/module.md)
     - [Logger 日志模块](/nodejs/logger.md)
