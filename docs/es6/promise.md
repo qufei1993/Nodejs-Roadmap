@@ -223,7 +223,7 @@ Promise.all([
 
 > .then第二个回调参数捕获错误具有就近的原则，不会影响后续then的进行。
 
-```javascript
+```js
 {
   const ajax = function(){
     console.log('promise开始执行');
@@ -239,14 +239,14 @@ Promise.all([
       console.log('then1');
 
       return Promise.resolve();
-    })
+    }, err => {
+	    console.log('then1里面捕获的err: ', err);
+	  })
     .then(function(){
       console.log('then2');
 
       return Promise.reject(`There's a then mistake`);
-    }, err => {
-	    console.log('then1里面捕获的err: ', err);
-	  })
+    })
 	  .catch(err => {
       console.log('catch里面捕获的err: ', err);
     })
