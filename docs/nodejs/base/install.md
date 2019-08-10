@@ -98,33 +98,8 @@ git clone https://github.com/jasongin/nvs "$NVS_HOME"
 $ nvs ls # 列出本地所有版本
 $ nvs ls-remote # 列出 Node.js 可供下载的版本
 $ nvs add <version> # 下载一个指定版本
-$ nvs add <version> # 下载一个指定版本
 $ nvs use [version] # 在当前 shell 中指定版本
 ```
-
-以下为 NVS 官方文档提供的命令参数列表，供大家参考
-
-Command | Description
-------- | -----------
-`nvs help <command>`             | Get detailed help for a command
-`nvs install`                    | Initialize your profile for using NVS
-`nvs uninstall`                  | Remove NVS from profile and environment
-`nvs --version`                  | Display the NVS tool version
-`nvs add <version>`              | Download and extract a node version
-`nvs rm <version>`               | Remove a node version
-`nvs migrate <fromver> [tover]`  | Migrate global modules
-`nvs upgrade [fromver]`          | Upgrade to latest patch of major version
-`nvs use [version]`              | Use a node version in the current shell
-`nvs auto [on/off]`              | Automatically switch based on cwd
-`nvs run <ver> <js> [args...]`   | Run a script using a node version
-`nvs exec <ver> <exe> [args...]` | Run an executable using a node version
-`nvs which [version]`            | Show the path to a node version binary
-`nvs ls [filter]`                | List local node versions
-`nvs ls-remote [filter]`         | List node versions available to download
-`nvs link [version]`             | Link a version as the default
-`nvs unlink [version]`           | Remove links to a default version
-`nvs alias [name] [value]`       | Set or recall aliases for versions
-`nvs remote [name] [value]`      | Set or recall download base URIs
 
 NVS：[https://github.com/jasongin/nvs](https://github.com/jasongin/nvs)
 
