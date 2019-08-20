@@ -56,7 +56,7 @@
     - <details><summary><b>MongoDB</b></summary>
       <p>
 
-        - [安装与部署](/database/redis-type.md)
+        - [安装与部署](/database/mongodb.md)
         - [CURD 操作](/database/mongodb-curd.md)
         - [Index 索引](/database/mongodb-indexes.md)
         - [操作符](/database/mongodb-operator.md)
