@@ -1,57 +1,42 @@
-# console模块解读之实现一个console.log
+# Console 模块解读及简单实现
 
-## 目录
+Console 模块提供了简单的调试功能，这在一些测试调试中有时也是使用最方便、用的最多的，它和浏览器中的 console 类似，但是在浏览器中它是同步的，在 Node.js 中，就有个疑问了是同步还是异步？
 
-* [console是同步的还是异步的?](#console是同步的还是异步的?)
+本文主要参考了官方源码，实现了一个简单版的 Console 模块，介绍了一些基本使用，同时提出了一些常见的问题，供大家学习参考，具体看以下正文介绍。
 
-* [实现一个console.log](#实现一个console.log)
-
+## 快速导航
+-  Logger 模块实现
     * [实现步骤](#实现步骤)
+    * [创建 logger.js 文件](#创建logger文件)
+-  Logger 模块基本使用
+    * [日志输出至终端 log、info、error、warn、clear](#日志输出至终端)
+    * [日志输出至文件](#日志输出至文件)
+    * [trace 打印错误堆栈](#trace打印错误堆栈)
+    * [dir 显示一个对象的所有属性和方法](#dir显示一个对象的所有属性和方法)
+    * [time 和 timeEnd 计算程序执行消耗时间](#计算程序执行消耗时间)
+- 面试指南
+    * ``` console 是同步的还是异步的? ```，参考：[#](#Interview1)
+    * ``` 如何实现一个 console.log? ```，参考：[#](#Interview2)
+    * ``` 为什么 console.log() 执行完后就退出? ```，参考：[#](#Interview3)
 
-    * [创建logger.js文件](#创建logger.js文件)
+## Logger 模块实现
 
-* [使用说明](#使用说明)
+### 实现步骤
 
-    * [基础例子log、info、error、warn、clear](#基础例子)
+1. 初始化 Logger 对象
+2. 对参数进行检验，当前对象是否为 Logger 实例，是否为一个可写流实例
+3. 为 Logger 对象定义 _stdout，_stderr 等属性
+4. 将原型方法上的属性绑定到 Logger 实例上
+5. 实现 log、error、warning、trace、clear 等方法
 
-    * [trace打印错误堆栈](#trace打印错误堆栈)
-
-    * [dir显示一个对象的所有属性和方法](#dir显示一个对象的所有属性和方法)
-
-    * [time和timeEnd计算程序执行消耗时间](#time和timeEnd计算程序执行消耗时间)
-
-## console是同步的还是异步的?
-
-console.log既不是总是同步的，也不总是异步的。是否为同步取决于链接的是什么流以及操作系统是Windows还是POSIX:
-
-注意: 同步写将会阻塞事件循环直到写完成。 有时可能一瞬间就能写到一个文件，但当系统处于高负载时，管道的接收端可能不会被读取、缓慢的终端或文件系统，因为事件循环被阻塞的足够频繁且足够长的时间，这些可能会给系统性能带来消极的影响。当你向一个交互终端会话写时这可能不是个问题，但当生产日志到进程的输出流时要特别留心。
-
-* 文件(Files): Windows和POSIX平台下都是同步
-
-* 终端(TTYs): 在Windows平台下同步，在POSIX平台下异步
-
-* 管道(Pipes): 在Windows平台下同步，在POSIX平台下异步
-
-## 实现一个console.log
-
-> 实现console.log在控制台打印，利用process.stdout将输入流数据输出到输出流(即输出到终端)，一个简单的例子输出hello world ``` process.stdout.write('hello world!' + '\n'); ```，以下例子是对console源码解读实现，将Console取名为Logger。
-
-#### 实现步骤
-
-1. 初始化Logger对象
-2. 对参数进行检验，当前对象是否为Logger实例，是否为一个可写流实例
-3. 为Logger对象定义_stdout，_stderr等属性
-4. 将原型方法上的属性绑定到Logger实例上
-5. 实现log、error、warning、trace、clear等方法
-
-#### 创建logger.js文件
+### 创建logger文件
 
 ```js
 const util = require('util');
 
 /**
  * 初始化Logger对象
- * @param {*} stdout 
+ * @param {*} stdout
  * @param {*} stderr 
  */
 function Logger(stdout, stderr){
@@ -179,11 +164,13 @@ module.exports = new Logger(process.stdout, process.stderr);
 module.exports.Logger = Logger;
 ```
 
-## 使用说明
 
-#### 基础例子
 
-无特殊说明，日志都是默认打印到控制台
+## Logger 模块基本使用
+
+### 日志输出至终端
+
+无特殊说明，日志都是默认打印到控制台，在一些代码调试中也是用的最多的。
 
 ```js
 const logger = reuqire('logger');
@@ -195,7 +182,9 @@ logger.warn('hello world') // 等同于logger.error
 logger.clear() // 清除控制台信息
 ```
 
-将调试信息打印到本地指定文件，这里要注意版本问题，以下代码示例在nodev10.x以下版本可以，具体原因参考 [TypeError: Console expects a writable stream instance](https://github.com/nodejs/node/issues/21366)
+### 日志输出至文件
+
+定义要输出的日志文件，实例化我们自定义的 Logger 对象
 
 ```js
 const fs = require('fs');
@@ -205,11 +194,29 @@ const { Logger } = require('./logger');
 
 const logger = Logger(output, errorOutput);
 
-logger.info('hello world!'); // 内容输出到stdout.txt文件
-logger.error('错误日志记录'); // 内容输出到stderr.txt文件
+logger.info('hello world!'); // 内容输出到 stdout.txt 文件
+logger.error('错误日志记录'); // 内容输出到 stderr.txt 文件
 ```
 
-#### trace打印错误堆栈
+**版本问题**
+
+将日志信息打印到本地指定文件，这里要注意版本问题，以下代码示例在 nodev10.x 以下版本可以，nodev10.x 及以上的版本这块有改动，可能会报错如下，具体原因参见 [https://github.com/nodejs/node/issues/21366](https://github.com/nodejs/node/issues/21366)
+
+```bash
+TypeError: Console expects a writable stream instance
+    at new Console (console.js:35:11)
+    at Object.<anonymous> (/Users/ryzokuken/Code/temp/node/console/21366.js:11:16)
+    at Module._compile (module.js:652:30)
+    at Object.Module._extensions..js (module.js:663:10)
+    at Module.load (module.js:565:32)
+    at tryModuleLoad (module.js:505:12)
+    at Function.Module._load (module.js:497:3)
+    at Function.Module.runMain (module.js:693:10)
+    at startup (bootstrap_node.js:188:16)
+    at bootstrap_node.js:609:3
+```
+
+### trace打印错误堆栈
 
 ```js
 logger.trace('测试错误');
@@ -227,7 +234,7 @@ Trace: 测试错误
     at bootstrap_node.js:626:3
 ```
 
-#### dir显示一个对象的所有属性和方法
+### dir显示一个对象的所有属性和方法
 
 depth - 表示最大递归的层数。如果对象很复杂，可以指定层数控制输出信息的多少。
 
@@ -244,9 +251,9 @@ logger.dir(family, {depth: 3});
 // { name: 'Jack', brother: { hobby: [ '篮球', '足球' ] } }
 ```
 
-#### time和timeEnd计算程序执行消耗时间
+### 计算程序执行消耗时间
 
-logger.time 和 logger.timeEnd用来测量一个javascript脚本程序执行消耗的时间，单位是毫秒
+logger.time 和 logger.timeEnd 用来测量一个 javascript 脚本程序执行消耗的时间，单位是毫秒
 
 ```js
 // 启动计时器
@@ -260,3 +267,38 @@ logger.timeEnd('计时器');
 
 // 计时器: 718.034ms
 ```
+
+## Interview1
+
+> console 是同步的还是异步的?
+
+console 既不是总是同步的，也不总是异步的。**是否为同步取决于链接的是什么流以及操作系统是 Windows 还是 POSIX**:
+
+**注意**: 同步写将会阻塞事件循环直到写完成。 有时可能一瞬间就能写到一个文件，但当系统处于高负载时，管道的接收端可能不会被读取、缓慢的终端或文件系统，因为事件循环被阻塞的足够频繁且足够长的时间，这些可能会给系统性能带来消极的影响。当你向一个交互终端会话写时这可能不是个问题，但当生产日志到进程的输出流时要特别留心。
+
+* 文件(Files): Windows 和 POSIX 平台下都是同步
+
+* 终端(TTYs): 在 Windows 平台下同步，在 POSIX 平台下异步
+
+* 管道(Pipes): 在 Windows 平台下同步，在 POSIX 平台下异步
+
+## Interview2
+
+> 如何实现一个 console.log? 
+
+实现 console.log 在控制台打印，利用 process.stdout 将输入流数据输出到输出流(即输出到终端)，一个简单的例子输出 hello world
+
+```js
+process.stdout.write('hello world!' + '\n');
+```
+
+## Interview3
+
+> 为什么 console.log() 执行完后就退出?
+
+这个问题第一次看到是来自于朴灵大神的一次演讲，涉及到 EventLoop 的执行机制，一旦产生事件循环，就会产生一个 While(true) 的死循环，例如定时器 setInterval，但是 console.log 它没有产生 watch、handlers 在事件循环中执行了一次就退出了。同时另一个疑问开启一个 http server 为什么进程没有退出？参考下文章 [Node.js 为什么进程没有 exit？](https://mp.weixin.qq.com/s/r7qH147-88bd2Be5Guxd8w)。
+
+## Reference
+
+* [http://nodejs.cn/api/console.html](http://nodejs.cn/api/console.html)
+* [http://nodejs.cn/api/process.html#process_a_note_on_process_i_o](http://nodejs.cn/api/process.html#process_a_note_on_process_i_o)
