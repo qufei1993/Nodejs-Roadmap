@@ -89,6 +89,9 @@
     - [SEO 网站优化 title 置与快速排名](/tools/seo.md)
     - [Docsify 快速搭建个人博客](/tools/docsify.md)
 
+* 数据结构与算法
+    - [Queue 队列](/algorithm/queue.md)
+
 * 资料
     - [书籍推荐](/materials/book.md)
     - [Blog推荐](/materials/blog.md)
