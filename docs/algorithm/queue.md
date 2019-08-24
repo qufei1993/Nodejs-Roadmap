@@ -1,4 +1,4 @@
-# 数据结构知否知否系列之 —— 队列篇
+# 数据结构知否知否系列之 — 队列篇
 
 队列，英文 First In First Out 简称 FIFO，遵从先进先出的原则，与 “栈” 相反，在队列的尾部添加元素，在队列的头部删除元素，如果队列中没有元素就称为空队列。
 
@@ -268,7 +268,8 @@ q1.traversing();
 
 源码参见 [https://github.com/Q-Angelo/project-training/tree/master/algorithm/queue-ring.js](https://github.com/Q-Angelo/project-training/tree/master/algorithm/queue-ring.js)
 
-## Reference
+## 总结
 
-* [学习JavaScript数据结构与算法（第2版）](https://book.douban.com/subject/27129352/)
-* [图解数据结构使用 Python](https://book.douban.com/subject/30204082/)
+以上就是队列的讲解，最开始讲解了在 JavaScript 中如何应用队列，同时也使用 JavaScript 数组提供的 API 功能实现了优先队列，最后介绍了从零开始如何实现一个环形队列，这个是重点，通过环形队列这个例子也可以帮助大家理解队列的基本实现机制是怎么样的，对环形队列这块不理解的建议多看几遍，总之多动手、多实践。
+
+推荐我在学习数据结构中看的两本书 [学习JavaScript数据结构与算法（第2版）](https://book.douban.com/subject/27129352/)、[图解数据结构使用 Python](https://book.douban.com/subject/30204082/) 当然也不乏有其它更好的资源，供大家学习参考。
