@@ -1,6 +1,6 @@
 # 浅谈 Node.js 模块机制及常见面试问题解答
 
-Node.js 模块机制采用了 Commonjs 规范，弥补了当前 JavaScript 开发大型没有标准的缺陷，类似于 Java 中的类文件，Python 中的 import 机制，Node.js 中可以通过 module.exports、require 来导出和引入一个模块.
+Node.js 模块机制采用了 Commonjs 规范，弥补了当前 JavaScript 开发大型应用没有标准的缺陷，类似于 Java 中的类文件，Python 中的 import 机制，Node.js 中可以通过 module.exports、require 来导出和引入一个模块.
 
 在模块加载机制中，Node.js 采用了延迟加载的策略，只有在用到的情况下，系统模块才会被加载，加载完成后会放到 binding_cache 中。
 
@@ -146,7 +146,7 @@ b模块加载完毕: a.test值： 1
 a模块加载完毕: b.test值： 2
 ```
 
-启动 ```a.js``` 的时候，会加载 ```b.js```，那么在 ```b.js``` 中又加载了 ```a.js```，但是此时 ```a.js``` 模块还没有执行完，返回的是一个 ```a.js``` 模块的 ```exports``` 对象 ```未完成的副本``` 给到 ```b.js``` 模块。然后 ```b.js``` 完成加载之后将 ```exports``` 对象提供给了 ```a.js``` 模块
+问题1，启动 ```a.js``` 的时候，会加载 ```b.js```，那么在 ```b.js``` 中又加载了 ```a.js```，但是此时 ```a.js``` 模块还没有执行完，返回的是一个 ```a.js``` 模块的 ```exports``` 对象 ```未完成的副本``` 给到 ```b.js``` 模块（因此是不会陷入死循环的）。然后 ```b.js``` 完成加载之后将 ```exports``` 对象提供给了 ```a.js``` 模块
 
 问题2，因为 ```undeclaredVariable``` 是一个未声明的变量，也就是一个挂在全局的变量，那么在其他地方当然是可以拿到的。
 
