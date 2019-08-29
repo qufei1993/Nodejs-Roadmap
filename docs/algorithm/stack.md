@@ -178,7 +178,7 @@ s1.traversing(true) // 从栈底遍历：Nodejs | 技 | 术
 栈的运行机制源码地址如下：
 
 ```
-[https://github.com/Q-Angelo/project-training/tree/master/algorithm/stack.js](https://github.com/Q-Angelo/project-training/tree/master/algorithm/stack.js)
+https://github.com/Q-Angelo/project-training/tree/master/algorithm/stack.js
 ```
 
 ## JavaScript 数组实现栈
@@ -222,7 +222,7 @@ StackStudy.prototype.deStack = function() {
 通过 JavaScript 数组实现是很简单的，源码如下：
 
 ```
-[https://github.com/Q-Angelo/project-training/tree/master/algorithm/stack-js.js](https://github.com/Q-Angelo/project-training/tree/master/algorithm/stack-js.js)
+https://github.com/Q-Angelo/project-training/tree/master/algorithm/stack-js.js
 ```
 
 ## 栈的经典应用
@@ -286,7 +286,7 @@ dataConversion(1024, 2); // 10000000000
 十进制转换为二进制、八进制、十六进制源码地址: 
 
 ```
-[https://github.com/Q-Angelo/project-training/tree/master/algorithm/stack-data-conversion.js](https://github.com/Q-Angelo/project-training/tree/master/algorithm/stack-data-conversion.js)
+https://github.com/Q-Angelo/project-training/tree/master/algorithm/stack-data-conversion.js
 ```
 
 ### 平衡园括号
@@ -385,5 +385,5 @@ test('()()][]') // 检测通过
 平衡园括号问题源码地址: 
 
 ```
-[https://github.com/Q-Angelo/project-training/tree/master/algorithm/stack-balance-symbol.js](https://github.com/Q-Angelo/project-training/tree/master/algorithm/stack-balance-symbol.js)
+https://github.com/Q-Angelo/project-training/tree/master/algorithm/stack-balance-symbol.js
 ```
