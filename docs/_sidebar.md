@@ -92,6 +92,7 @@
 * 数据结构与算法
     - [Queue 队列](/algorithm/queue.md)
     - [Stack 栈](/algorithm/stack.md)
+    - [Linear List 线性表](/algorithm/linear-list.md)
 
 * 资料
     - [书籍推荐](/materials/book.md)
