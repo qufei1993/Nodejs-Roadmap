@@ -1,6 +1,6 @@
 # kubernetes（K8S）二进制方式集群搭建
 
-在 K8S 学习之前，集群搭建部分也能难倒一大片童鞋，这里采用二进制方式安装 Kubernetes 集群，难点是所有的步骤都要一步步走一遍，并且还易出错，但是同时好处是会对 K8S 的认识有一个更加深刻的理解。
+在 K8S 学习之前，集群搭建部分也能难倒一大片童鞋，这里采用二进制方式安装 Kubernetes 集群，难点是所有的步骤都要一步步走一遍，并且还易出错，但是同时好处是会对 K8S 的认识有一个整体的、更加深刻的理解。
 
 ## 搭建前准备工作
 
@@ -38,6 +38,8 @@ $ sudo vim /etc/hosts
 ## K8S证书和密钥创建
 
 在网络通信中会存在一些不可信任的操作，例如信息可能会被第三方窃取、篡改。创建证书和密钥也是为了防范这种事情的发生，防止他人轻易入侵你的集群。对于网络安全业内也有一些成熟的方案，例如 **对称与非对称**、**SSL/TLS** 等。
+
+这也是我们迈向集群搭建的第一步，先创建好各组件需要的证书和密钥
 
 #### 安装 CFSSL
 
@@ -183,6 +185,8 @@ admin.csr  admin-csr.json  admin-key.pem  admin.pem
 ```
 
 #### 创建 ETCD 证书
+
+
 
 ```bash
 # etcd 证书存放目录
@@ -497,25 +501,179 @@ $ ETCDCTL_API=3 etcdctl \
 https://192.168.6.128:2379 is healthy: successfully committed proposal: took = 59.751468ms
 ```
 
-## Master节点kube-apiserver部署
+## Master 三大组件 kube-apiserver 部署
 
 APIServer 负责对外提供 RESTful 的 kubernetes API 的服务，它是系统管理指令的统一接口，任何对资源的增删该查都要交给 APIServer 处理后再交给 etcd。
 
-**新建 kube-apiserver.service 配置文件**
+#### 配置文件
 
-vim /usr/lib/systemd/system/kube-apiserver.service
+目录 ```/usr/lib/systemd/system/``` 新建配置文件 ```kube-apiserver.service``` 配置信息可参考 [官方：kube-apiserver 配置详解](https://kubernetes.io/zh/docs/reference/command-line-tools-reference/kube-apiserver/)
+
+**生成 Token 认证文件**
 
 ```
+$ head -c 16 /dev/urandom | od -An -t x | tr -d ' '
+28b965fd841a996434a7a16237e4fa1a
+$ echo "28b965fd841a996434a7a16237e4fa1a,kubelet-bootstrap,10001,\"system:kubelet-bootstrap\"" > /usr/src/kubernetes/ca/kubernetes/token.csv
+```
 
+**部分配置详解**
+
+* admission-control：控制资源进入集群的准入控制插件的顺序列
+* service-cluster-ip-range：CIDR表示的IP范围
+* service-node-port-range：服务端口范围
+* enable-swagger-ui：在 apiserver 的 /swagger-ui 路径启用 swagger ui
+* allow-privileged：如果为 true, 将允许特权容器
+* audit-log-path：如果设置该值，所有到 apiserver 的请求都将会被记录到这个文件。'-'表示记录到标准输出
+* kubelet-https：为 kubelet 启用 https（默认值true）
+* bind-address：监听--seure-port的IP地址。被关联的接口必须能够被集群其它节点和CLI/web客户端访问。如果为空，则将使用所有接口（0.0.0.0）。（默认值0.0.0.0）
+
+**vim /usr/lib/systemd/system/kube-apiserver.service**
+
+```bash
+[Unit]
+Description=Kubernetes API Service
+Documentation=https://github.com/GoogleCloudPlatform/kubernetes
+After=network.target
+After=etcd.service
+
+[Service]
+ExecStart=/usr/local/bin/kube-apiserver \
+  --admission-control=NamespaceLifecycle,NodeRestriction,LimitRanger,ServiceAccount,DefaultStorageClass,ResourceQuota \
+  --bind-address=192.168.6.128 \
+  --authorization-mode=Node,RBAC \
+  --runtime-config=api/all \
+  --enable-bootstrap-token-auth \
+  --token-auth-file=/usr/src/kubernetes/ca/kubernetes/token.csv \
+  --service-cluster-ip-range=10.68.0.0/16 \
+  --service-node-port-range=1-32767 \
+  --tls-cert-file=/usr/src/kubernetes/ca/kubernetes/kubernetes.pem \
+  --tls-private-key-file=/usr/src/kubernetes/ca/kubernetes/kubernetes-key.pem \
+  --client-ca-file=/usr/src/kubernetes/ca/ca.pem \
+  --kubelet-client-certificate=/usr/src/kubernetes/ca/kubernetes/kubernetes.pem \
+  --kubelet-https=true \
+  --kubelet-client-key=/usr/src/kubernetes/ca/kubernetes/kubernetes-key.pem \
+  --service-account-key-file=/usr/src/kubernetes/ca/ca-key.pem \
+  --etcd-cafile=/usr/src/kubernetes/ca/ca.pem \
+  --etcd-certfile=/usr/src/kubernetes/ca/kubernetes/kubernetes.pem \
+  --etcd-keyfile=/usr/src/kubernetes/ca/kubernetes/kubernetes-key.pem \
+  --etcd-servers=https://192.168.6.128:2379 \
+  --enable-swagger-ui=true \
+  --allow-privileged=true \
+  --audit-log-maxage=30 \
+  --audit-log-maxbackup=3 \
+  --audit-log-maxsize=100 \
+  --audit-log-path=/var/log/kube-apiserver-audit.log \
+  --event-ttl=1h \
+  --v=2
+Restart=on-failure
+Type=notify
+LimitNOFILE=65536
+
+[Install]
+WantedBy=multi-user.target
+```
+
+**启动 Kube Apiserver 服务**
+
+```bash
+$ cd /usr/lib/systemd/system/
+$ systemctl daemon-reload
+$ systemctl enable kube-apiserver.service
+
+# 执行以下步骤如果出现启动错误，根据 "systemctl status kube-apiserver.service 或 journalctl -xe 找到 Error 的地方进行排查
+$ service kube-apiserver start
+```
+
+**检查 Kube Apiserver 服务**
+
+```
+$ systemctl status kube-apiserver
+● kube-apiserver.service - Kubernetes API Service
+   Loaded: loaded (/usr/lib/systemd/system/kube-apiserver.service; enabled; vendor preset: enabled)
+   Active: active (running) since Fri 2019-09-20 03:08:26 PDT; 1min 48s ago
+     Docs: https://github.com/GoogleCloudPlatform/kubernetes
+ Main PID: 34393 (kube-apiserver)
+    Tasks: 8
+   Memory: 194.1M
+      CPU: 11.863s
+   CGroup: /system.slice/kube-apiserver.service
+           └─34393 /usr/local/bin/kube-apiserver --admission-control=NamespaceLifecycle,NodeRestriction,LimitRanger,ServiceAccount,DefaultStorageClass,ResourceQuota --bind-address=192.168.6.128 
+
+Sep 20 03:08:29 ubuntu kube-apiserver[34393]: I0920 03:08:29.922993   34393 controller.go:606] quota admission added evaluator for: rolebindings.rbac.authorization.k8s.io
+Sep 20 03:08:29 ubuntu kube-apiserver[34393]: I0920 03:08:29.929755   34393 storage_rbac.go:284] created rolebinding.rbac.authorization.k8s.io/system:controller:bootstrap-signer in kube-public
+Sep 20 03:08:29 ubuntu kube-apiserver[34393]: I0920 03:08:29.971198   34393 storage_rbac.go:284] created rolebinding.rbac.authorization.k8s.io/system::extension-apiserver-authentication-reader i
+Sep 20 03:08:30 ubuntu kube-apiserver[34393]: I0920 03:08:30.014130   34393 storage_rbac.go:284] created rolebinding.rbac.authorization.k8s.io/system::leader-locking-kube-controller-manager in k
+Sep 20 03:08:30 ubuntu kube-apiserver[34393]: I0920 03:08:30.049138   34393 storage_rbac.go:284] created rolebinding.rbac.authorization.k8s.io/system::leader-locking-kube-scheduler in kube-syste
+Sep 20 03:08:30 ubuntu kube-apiserver[34393]: I0920 03:08:30.094243   34393 storage_rbac.go:284] created rolebinding.rbac.authorization.k8s.io/system:controller:bootstrap-signer in kube-system
+Sep 20 03:08:30 ubuntu kube-apiserver[34393]: I0920 03:08:30.130311   34393 storage_rbac.go:284] created rolebinding.rbac.authorization.k8s.io/system:controller:cloud-provider in kube-system
+Sep 20 03:08:30 ubuntu kube-apiserver[34393]: I0920 03:08:30.173883   34393 storage_rbac.go:284] created rolebinding.rbac.authorization.k8s.io/system:controller:token-cleaner in kube-system
+Sep 20 03:08:30 ubuntu kube-apiserver[34393]: W0920 03:08:30.280703   34393 lease.go:222] Resetting endpoints for master service "kubernetes" to [192.168.6.128]
+Sep 20 03:08:30 ubuntu kube-apiserver[34393]: I0920 03:08:30.328625   34393 controller.go:606] quota admission added evaluator for: endpoints
+```
+
+## Master 三大组件 kube-controller-manager 部署
+
+**配置文件**
+
+目录 /usr/lib/systemd/system/ 新建配置文件 kube-controller-manager.service 配置信息可参考 [官方：kube-controller-manager 配置详解](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-controller-manager/)
+
+**配置讲解**
+
+**vim /usr/lib/systemd/system/kube-controller-manager.service**
+
+```bash
+[Unit]
+Description=Kubernetes Controller Manager
+Documentation=https://github.com/GoogleCloudPlatform/kubernetes
+[Service]
+ExecStart=/usr/local/bin/kube-controller-manager \
+  --address=127.0.0.1 \
+  --master=http://127.0.0.1:8080 \
+  --allocate-node-cidrs=true \
+  --service-cluster-ip-range=10.68.0.0/16 \
+  --cluster-cidr=172.20.0.0/16 \
+  --cluster-name=kubernetes \
+  --leader-elect=true \
+  --cluster-signing-cert-file=/usr/src/kubernetes/ca/ca.pem \
+  --cluster-signing-key-file=/usr/src/kubernetes/ca/ca-key.pem \
+  --service-account-private-key-file=/usr/src/kubernetes/ca/ca-key.pem \
+  --root-ca-file=/usr/src/kubernetes/ca/ca.pem \
+  --v=2
+Restart=on-failure
+RestartSec=5
+[Install]
+WantedBy=multi-user.target
+```
+
+**启动 Kube kube-controller-manager 服务**
+
+```bash
+$ cd /usr/lib/systemd/system/
+$ systemctl daemon-reload # 修改配置重启的时候用
+$ systemctl enable kube-controller-manager.service
+$ service kube-controller-manager start
+```
+
+**检查 Kube kube-controller-manager 服务**
+
+```
+$ systemctl status kube-controller-manager
+● kube-controller-manager.service - Kubernetes Controller Manager
+   Loaded: loaded (/usr/lib/systemd/system/kube-controller-manager.service; enabled; vendor preset: enabled)
+   Active: active (running) since Fri 2019-09-20 22:37:21 PDT; 1min 39s ago
+     Docs: https://github.com/GoogleCloudPlatform/kubernetes
+ Main PID: 35904 (kube-controller)
+    Tasks: 7
+   Memory: 94.2M
+      CPU: 3.194s
+   CGroup: /system.slice/kube-controller-manager.service
 ```
 
 ## Master节点kube-proxy部署
 
 [kube-proxy 配置详解](https://kubernetes.io/zh/docs/reference/command-line-tools-reference/kube-proxy/)
 
-## kube-apiserver组件部署(Master)
-
-[kube-apiserver 配置详解](https://kubernetes.io/zh/docs/reference/command-line-tools-reference/kube-apiserver/)
 
 ## 阅读推荐
 
