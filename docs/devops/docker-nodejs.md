@@ -167,15 +167,15 @@ RUN cat /root/.npmrc
 
 也可参考 Egg Issues “docker容器不能run起来，请问有碰到的吗？” [https://github.com/eggjs/egg/issues/1543](https://github.com/eggjs/egg/issues/1543) 
 
-## 优化 Docker 镜像体积
+## Docker 镜像体积与构建时间优化
 
 如果一个镜像在不经过优化的情况下体积通常都是会很大的，以下也是在实践过程中做的几点优化。
 
 #### RUN/COPY 分层
 
-Dockerfile 中的每条指令都会创建一个镜像层，在 Dockerfile 指令或复制的项目文件在没有修改变动的情况下，每个镜像层是可以被复用和缓存的。
+Dockerfile 中的每条指令都会创建一个镜像层，Dockerfile 指令或复制的项目文件在没有修改变动的情况下，每个镜像层是可以被复用和缓存的。
 
-以下代码可在 mayjun/hello-docker:latest 镜像仓库找到，在以下示例中，源码改变之后，不管 package.json 有没有改变的情况下都会重新安装 NPM 模块，这样显然是不好，因此下面我们要改进
+以下代码可在 mayjun/hello-docker:latest 镜像仓库找到，以下示例中，源码改变之后，不管 package.json 有没有改变的情况下都会重新安装 NPM 模块，这样显然是不好的，因此下面我们要改进
 
 ```Dockerfile
 # ...
