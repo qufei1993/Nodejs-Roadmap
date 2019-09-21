@@ -73,7 +73,7 @@ foo();
 
 当函数调用属于独立调用（不带函数引用的调用），无法调用其他的绑定规则，我们给它一个称呼“默认绑定”，在非严格模式下绑定到全局对象，在使用了严格模式(use strict)下绑定到undefined。
 
-严格模式下调用
+**严格模式下调用**
 
 ```js
 'use strict'
@@ -87,11 +87,25 @@ const a = 1;
 demo();
 ```
 
-非严格模式下，在浏览器window全局对象下会将a绑定到window.a
+**非严格模式下，在浏览器 window 全局对象下会将 a 绑定到 window.a**
+
+如果是 var 声明的以下代码会输出 1 
 
 ```js
 function demo(){
 	console.log(this.a); // 1
+}
+
+var a = 1;
+
+demo();
+```
+
+如果是 let 声明的以下代码会输出 undefined
+
+```js
+function demo(){
+	console.log(this.a); // undefined
 }
 
 let a = 1;
@@ -99,7 +113,11 @@ let a = 1;
 demo();
 ```
 
-非严格模式下，在node环境中，不会将a绑定到global，因此下面输出undefined
+在举例子的时候其实想要重点说明 this 的默认绑定关系的，但是你会发现上面两种代码因为分别使用了 var、let 进行声明导致的结果也是不一样的，归其原因涉及到 **顶层对象的概念**
+
+在 [Issue: Nodejs-Roadmap/issues/11](https://github.com/Q-Angelo/Nodejs-Roadmap/issues/11) 里有童鞋提到这个疑问，也是之前的疏忽，再简单聊下顶层对象的概念，**顶层对象（浏览器环境指 window、Node.js 环境指 Global）的属性和全局变量属性的赋值是相等价的**，使用 var 和 function 声明的是顶层对象的属性，而 let 就属于 ES6 规范了，但是 ES6 规范中 let、const、class 这些声明的全局变量，不再属于顶层对象的属性。
+
+**非严格模式下，在 node 环境中，不会将 a 绑定到 global，因此下面输出undefined**
 
 ```js
 function demo(){
