@@ -1,4 +1,4 @@
-# kubernetes（K8S）二进制方式集群搭建
+# kubernetes 二进制方式集群搭建
 
 在 K8S 学习之前，集群搭建部分也能难倒一大片童鞋，这里采用二进制方式安装 Kubernetes 集群，难点是所有的步骤都要一步步走一遍，并且还易出错，但是同时好处是会对 K8S 的认识有一个整体的、更加深刻的理解。
 
@@ -35,7 +35,7 @@ $ sudo vim /etc/hosts
 需要在每台机器上安装 Docker，对 Docker 不熟悉的可参考之前写的文章 [Docker 入门到实践]() 中间有详细介绍对 Docker 的安装
 
 
-## K8S证书和密钥创建
+## K8S 证书和密钥创建
 
 在网络通信中会存在一些不可信任的操作，例如信息可能会被第三方窃取、篡改。创建证书和密钥也是为了防范这种事情的发生，防止他人轻易入侵你的集群。对于网络安全业内也有一些成熟的方案，例如 **对称与非对称**、**SSL/TLS** 等。
 
@@ -186,8 +186,6 @@ admin.csr  admin-csr.json  admin-key.pem  admin.pem
 
 #### 创建 ETCD 证书
 
-
-
 ```bash
 # etcd 证书存放目录
 $ sudo mkdir /usr/src/kubernetes/ca/etcd
@@ -282,7 +280,66 @@ $ ls
 kubernetes.csr  kubernetes-csr.json  kubernetes-key.pem  kubernetes.pem
 ```
 
-## kubectl命令行工具部署
+#### 创建 calico 证书
+
+```bash
+# calico 证书存放目录
+$ mkdir /usr/src/kubernetes/ca/calico
+
+# 创建 calico 证书签名存放文件
+$ vim calico-csr.json
+{
+  "CN": "calico",
+  "hosts": [],
+  "key": {
+    "algo": "rsa",
+    "size": 2048
+  },
+  "names": [
+    {
+      "C": "CN",
+      "ST": "ShangHai",
+      "L": "XS",
+      "O": "k8s",
+      "OU": "System"
+    }
+  ]
+}
+```
+
+**生成 calico 证书和密钥**
+
+使用根证书（ca.pem、ca-key.pem）签发 calico 证书
+
+```bash
+$ cfssl gencert \
+    -ca=/usr/src/kubernetes/ca/ca.pem \
+    -ca-key=/usr/src/kubernetes/ca/ca-key.pem \
+    -config=/usr/src/kubernetes/ca/ca-config.json \
+    -profile=kubernetes calico-csr.json | cfssljson -bare calico
+
+$ ls
+calico.csr  calico-csr.json  calico-key.pem  calico.pem
+```
+
+#### 证书签名同步到其余机器
+
+```bash
+# 压缩
+$ tar -zcvf /usr/src/kubernetes/ca.tar.gz /usr/src/kubernetes/ca
+
+# 同步到 192.168.6.129 机器
+$ scp /usr/src/kubernetes/ca.tar.gz 用户名@192.168.6.129:/home/用户名
+# 同步到 192.168.6.130 机器
+$ scp /usr/src/kubernetes/ca.tar.gz 用户名@192.168.6.130:/home/用户名
+
+# 6.129、6.130 两台机器分别执行如下命令解压文件移动至 /usr/src/kubernetes/ 目录下
+$ cd /home/用户名
+$ tar -xvf ca.tar.gz 
+$ mv ca /usr/src/kubernetes/
+```
+
+## kubectl 命令行工具部署
 
 #### 选择二进制文件
 
@@ -389,7 +446,7 @@ kubectl config use-context kubernetes
 经过以上 4 个步骤之后会生成一个 ~/.kube/config 文件，使用 **cat ~/.kube/config** 命令可查看
 
 
-## ETCD部署
+## ETCD 部署
 
 ETCD 类似于 Consul、ZK，常用于服务发现、注册、配置中心等，kubernetes 使用 ETCD 做为数据中心，用于存储节点信息、组件信息等。生产环境为了保证数据中心高可用，至少为 3 个节点，通常为 3～5 个节点。此处主要用于学习使用，仅建立一个单实例。
 
@@ -670,7 +727,180 @@ $ systemctl status kube-controller-manager
    CGroup: /system.slice/kube-controller-manager.service
 ```
 
-## Master节点kube-proxy部署
+## Master 三大组件 kube-scheduler 部署
+
+**配置文件**
+
+目录 /usr/lib/systemd/system/ 新建配置文件 kube-scheduler.service 配置信息可参考 [官方：kube-scheduler 配置详解](https://kubernetes.io/zh/docs/reference/command-line-tools-reference/kube-scheduler/)
+
+**配置讲解**
+
+**vim /usr/lib/systemd/system/kube-scheduler.service**
+
+```bash
+[Unit]
+Description=Kubernetes Scheduler
+Documentation=https://github.com/GoogleCloudPlatform/kubernetes
+
+[Service]
+ExecStart=/usr/local/bin/kube-scheduler \
+  --address=127.0.0.1 \
+  --master=http://127.0.0.1:8080 \
+  --leader-elect=true \
+  --log-dir=/var/log/kubernetes \
+  --v=2
+Restart=on-failure
+RestartSec=5
+[Install]
+WantedBy=multi-user.target
+```
+
+**启动 Kube kube-scheduler 服务**
+
+```bash
+$ cd /usr/lib/systemd/system/
+$ systemctl daemon-reload # 修改配置重启的时候用
+$ systemctl enable kube-scheduler.service
+$ service kube-scheduler start
+```
+
+**检查 Kube kube-scheduler 服务**
+
+```
+$ systemctl status kube-scheduler
+● kube-scheduler.service - Kubernetes Scheduler
+   Loaded: loaded (/usr/lib/systemd/system/kube-scheduler.service; enabled; vendor preset: enabled)
+   Active: active (running) since Sat 2019-09-21 04:52:01 PDT; 5s ago
+     Docs: https://github.com/GoogleCloudPlatform/kubernetes
+ Main PID: 36508 (kube-scheduler)
+    Tasks: 7
+   Memory: 35.9M
+      CPU: 1.774s
+   CGroup: /system.slice/kube-scheduler.service
+           └─36508 /usr/local/bin/kube-scheduler --address=127.0.0.1 --master=http://127.0.0.1:8080 --leader-elect=true --log-dir=/var/log/kubernetes --v=2
+```
+
+## Master 节点验证
+
+这里就要使用到了 kubectl 工具，验证下上面安装的 kube-scheduler、kube-controller-manager 和 kube-apiserver 这三个节点的状态
+
+```bash
+#  查看各组件信息
+$ kubectl get componentstatuses
+NAME                 STATUS    MESSAGE             ERROR
+controller-manager   Healthy   ok                  
+scheduler            Healthy   ok                  
+etcd-0               Healthy   {"health":"true"} 
+```
+
+## Calico 部署
+
+Calico 为容器和虚拟机工作负载提供安全的网络连接。
+
+Calico 创建并管理平面第 3 层网络，为每个工作负载分配一个完全可路由的 IP 地址。 工作负载无需 IP 封装或网络地址转换即可进行通信，以实现裸机性能，更轻松的故障排除和更好的互操作性。 在需要覆盖的环境中，Calico 使用 IP-in-IP 隧道或可以与其他覆盖网络一起使用。
+
+Calico 还提供动态实施网络安全规则的功能。 使用 Calico 的简单策略语言，您可以实现对容器，虚拟机工作负载和裸机主机端点之间的通信的细粒度控制。
+
+Calico v3.2 经过量产证明，可与 Kubernetes，OpenShift 和 OpenStack 集成。
+
+[Calico 官网的快速入门文档介绍: https://docs.projectcalico.org/v3.2/introduction/](https://docs.projectcalico.org/v3.2/introduction/)
+
+
+#### 系统服务加 Docker 方式安装
+
+查看了很多安装方式，官网也有介绍，但是对于新手来说还是有点无从下手，这里采用系统服务加 Docker 方式来安装
+
+**vim /usr/lib/systemd/system/kube-calico.service**
+
+```bash
+[Unit]
+Description=calico node
+After=docker.service
+Requires=docker.service
+
+[Service]
+User=root
+PermissionsStartOnly=true
+ExecStart=/usr/bin/docker run --net=host --privileged --name=calico-node \
+  -e ETCD_ENDPOINTS=https://192.168.6.128:2379 \
+  -e ETCD_CA_CERT_FILE=/usr/src/kubernetes/ca/ca.pem \
+  -e ETCD_CERT_FILE=/usr/src/kubernetes/ca/calico/calico.pem \
+  -e ETCD_KEY_FILE=/usr/src/kubernetes/ca/calico/calico-key.pem \
+  -e CALICO_LIBNETWORK_ENABLED=true \
+  -e CALICO_NETWORKING_BACKEND=bird \
+  -e CALICO_DISABLE_FILE_LOGGING=true \
+  -e CALICO_IPV4POOL_CIDR=172.20.0.0/16 \
+  -e CALICO_IPV4POOL_IPIP=off \
+  -e FELIX_DEFAULTENDPOINTTOHOSTACTION=ACCEPT \
+  -e FELIX_IPV6SUPPORT=false \
+  -e FELIX_LOGSEVERITYSCREEN=info \
+  -e FELIX_IPINIPMTU=1440 \
+  -e FELIX_HEALTHENABLED=true \
+  -e IP= \
+  -v /usr/src/kubernetes/ca:/usr/src/kubernetes/ca \
+  -v /var/run/calico:/var/run/calico \
+  -v /lib/modules:/lib/modules \
+  -v /run/docker/plugins:/run/docker/plugins \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  -v /var/log/calico:/var/log/calico \
+  registry.cn-hangzhou.aliyuncs.com/imooc/calico-node:v2.6.2
+ExecStop=/usr/bin/docker rm -f calico-node
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
+```
+
+**启动 kube-calico 服务**
+
+```bash
+$ cd /usr/lib/systemd/system/
+$ systemctl daemon-reload # 修改配置重启的时候用
+$ systemctl enable kube-calico.service
+$ service kube-calico start
+```
+
+**检查 kube-calico 服务**
+
+以下通过 systemctl status kube-calico 命令检查  Active 状态是否为 running，也可以通过 journalctl -f -u kube-calico 检查运行日志
+
+```
+$ systemctl status kube-calico
+● kube-calico.service - calico node
+   Loaded: loaded (/usr/lib/systemd/system/kube-calico.service; enabled; vendor preset: enabled)
+   Active: active (running) since Sun 2019-09-22 16:36:41 PDT; 1h 47min ago
+ Main PID: 45540 (docker)
+    Tasks: 7
+   Memory: 54.9M
+      CPU: 1.181s
+   CGroup: /system.slice/kube-calico.service
+           └─45540 /usr/bin/docker run --net=host --privileged --name=calico-node -e ETCD_ENDPOINTS=https://192.168.6.128:2379 -e ETCD_CA_CERT_FILE=/usr/src/kubernetes/ca/ca.pem -e ETCD_CERT_FIL
+
+Sep 22 18:24:00 ubuntu docker[45540]: 2019-09-23 01:24:00.368 [INFO][82] table.go 717: Invalidating dataplane cache ipVersion=0x4 reason="refresh timer" table="nat"
+Sep 22 18:24:00 ubuntu docker[45540]: 2019-09-23 01:24:00.368 [INFO][82] table.go 438: Loading current iptables state and checking it is correct. ipVersion=0x4 table="nat"
+Sep 22 18:24:00 ubuntu docker[45540]: 2019-09-23 01:24:00.368 [INFO][82] table.go 717: Invalidating dataplane cache ipVersion=0x4 reason="refresh timer" table="filter"
+Sep 22 18:24:00 ubuntu docker[45540]: 2019-09-23 01:24:00.368 [INFO][82] table.go 438: Loading current iptables state and checking it is correct. ipVersion=0x4 table="filter"
+Sep 22 18:24:00 ubuntu docker[45540]: 2019-09-23 01:24:00.376 [INFO][82] int_dataplane.go 705: Finished applying updates to dataplane. msecToApply=8.127987
+Sep 22 18:24:01 ubuntu docker[45540]: 2019-09-23 01:24:01.726 [INFO][82] int_dataplane.go 690: Applying dataplane updates
+Sep 22 18:24:01 ubuntu docker[45540]: 2019-09-23 01:24:01.726 [INFO][82] ipsets.go 224: Asked to resync with the dataplane on next update. family="inet"
+Sep 22 18:24:01 ubuntu docker[45540]: 2019-09-23 01:24:01.726 [INFO][82] ipsets.go 255: Resyncing ipsets with dataplane. family="inet"
+Sep 22 18:24:01 ubuntu docker[45540]: 2019-09-23 01:24:01.728 [INFO][82] ipsets.go 297: Finished resync family="inet" numInconsistenciesFound=0 resyncDuration=1.935659ms
+Sep 22 18:24:01 ubuntu docker[45540]: 2019-09-23 01:24:01.728 [INFO][82] int_dataplane.go 705: Finished applying updates to dataplane. msecToApply=2.3065450000000003
+```
+
+#### calico 客户端工具 calicoctl
+
+Calico 的二进制程序文件 calicoctl 可以直接操作 Calico 存储来查看，修改或配置 Calico 系统特性
+
+```bash
+$ wget https://github.com/projectcalico/calicoctl/releases/download/v3.2.8/calicoctl
+$ chmod 755 calicoctl
+$ mv calicoctl /usr/local/bin/
+```
+
+
+## kube-proxy 部署
 
 [kube-proxy 配置详解](https://kubernetes.io/zh/docs/reference/command-line-tools-reference/kube-proxy/)
 
