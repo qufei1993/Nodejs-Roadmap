@@ -535,6 +535,7 @@ ETCD_ADVERTISE_CLIENT_URLS="https://192.168.6.128:2379"
 **启动 ETCD 服务**
 
 ```bash
+$ systemctl daemon-reload # 配置更新执行
 $ service etcd start
 
 # 查看服务日志
@@ -805,12 +806,11 @@ Calico v3.2 经过量产证明，可与 Kubernetes，OpenShift 和 OpenStack 集
 
 [Calico 官网的快速入门文档介绍: https://docs.projectcalico.org/v3.2/introduction/](https://docs.projectcalico.org/v3.2/introduction/)
 
-
 #### 系统服务加 Docker 方式安装
 
 查看了很多安装方式，官网也有介绍，但是对于新手来说还是有点无从下手，这里采用系统服务加 Docker 方式来安装
 
-**vim /usr/lib/systemd/system/kube-calico.service**
+**vim /lib/systemd/system/kube-calico.service**
 
 ```bash
 [Unit]
@@ -855,7 +855,7 @@ WantedBy=multi-user.target
 **启动 kube-calico 服务**
 
 ```bash
-$ cd /usr/lib/systemd/system/
+$ cd /lib/systemd/system/
 $ systemctl daemon-reload # 修改配置重启的时候用
 $ systemctl enable kube-calico.service
 $ service kube-calico start
@@ -868,25 +868,11 @@ $ service kube-calico start
 ```
 $ systemctl status kube-calico
 ● kube-calico.service - calico node
-   Loaded: loaded (/usr/lib/systemd/system/kube-calico.service; enabled; vendor preset: enabled)
-   Active: active (running) since Sun 2019-09-22 16:36:41 PDT; 1h 47min ago
- Main PID: 45540 (docker)
-    Tasks: 7
-   Memory: 54.9M
-      CPU: 1.181s
+   Loaded: loaded (/lib/systemd/system/kube-calico.service; enabled; vendor preset: enabled)
+   Active: active (running) since Mon 2019-09-23 00:35:53 PDT; 1min 45s ago
+ Main PID: 54179 (docker)
    CGroup: /system.slice/kube-calico.service
-           └─45540 /usr/bin/docker run --net=host --privileged --name=calico-node -e ETCD_ENDPOINTS=https://192.168.6.128:2379 -e ETCD_CA_CERT_FILE=/usr/src/kubernetes/ca/ca.pem -e ETCD_CERT_FIL
-
-Sep 22 18:24:00 ubuntu docker[45540]: 2019-09-23 01:24:00.368 [INFO][82] table.go 717: Invalidating dataplane cache ipVersion=0x4 reason="refresh timer" table="nat"
-Sep 22 18:24:00 ubuntu docker[45540]: 2019-09-23 01:24:00.368 [INFO][82] table.go 438: Loading current iptables state and checking it is correct. ipVersion=0x4 table="nat"
-Sep 22 18:24:00 ubuntu docker[45540]: 2019-09-23 01:24:00.368 [INFO][82] table.go 717: Invalidating dataplane cache ipVersion=0x4 reason="refresh timer" table="filter"
-Sep 22 18:24:00 ubuntu docker[45540]: 2019-09-23 01:24:00.368 [INFO][82] table.go 438: Loading current iptables state and checking it is correct. ipVersion=0x4 table="filter"
-Sep 22 18:24:00 ubuntu docker[45540]: 2019-09-23 01:24:00.376 [INFO][82] int_dataplane.go 705: Finished applying updates to dataplane. msecToApply=8.127987
-Sep 22 18:24:01 ubuntu docker[45540]: 2019-09-23 01:24:01.726 [INFO][82] int_dataplane.go 690: Applying dataplane updates
-Sep 22 18:24:01 ubuntu docker[45540]: 2019-09-23 01:24:01.726 [INFO][82] ipsets.go 224: Asked to resync with the dataplane on next update. family="inet"
-Sep 22 18:24:01 ubuntu docker[45540]: 2019-09-23 01:24:01.726 [INFO][82] ipsets.go 255: Resyncing ipsets with dataplane. family="inet"
-Sep 22 18:24:01 ubuntu docker[45540]: 2019-09-23 01:24:01.728 [INFO][82] ipsets.go 297: Finished resync family="inet" numInconsistenciesFound=0 resyncDuration=1.935659ms
-Sep 22 18:24:01 ubuntu docker[45540]: 2019-09-23 01:24:01.728 [INFO][82] int_dataplane.go 705: Finished applying updates to dataplane. msecToApply=2.3065450000000003
+           └─54179 /usr/bin/docker run --net=host --privileged --name=calico-node -e ETCD_ENDPOINTS=https://192.168.6.128:2379 -e ETCD_CA_CERT_FILE=/usr/src/kubernetes/ca/ca.pem -e ETCD_CERT_FIL
 ```
 
 #### calico 客户端工具 calicoctl
@@ -899,6 +885,9 @@ $ chmod 755 calicoctl
 $ mv calicoctl /usr/local/bin/
 ```
 
+**calicoctl 配置**
+
+[https://docs.projectcalico.org/v3.2/usage/calicoctl/configure/](https://docs.projectcalico.org/v3.2/usage/calicoctl/configure/)
 
 ## kube-proxy 部署
 
