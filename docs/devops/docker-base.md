@@ -563,3 +563,4 @@ $ docker-compose up -d
 $ docker-compose stop
 ```
 
+本文是作者 “五月君” 在实践 Docker 过程中的一些知识总结，刚开始也是从零开始的，如果你想学习 Docker 不知道该如何入手，可以参考本文，后续还会有 Docker 在应用程序中的实践分享，感兴趣的可以关注公众号 “Nodejs技术栈” Github: [https://github.com/Q-Angelo/Nodejs-Roadmap ](https://github.com/Q-Angelo/Nodejs-Roadmap ) 获取最新消息
