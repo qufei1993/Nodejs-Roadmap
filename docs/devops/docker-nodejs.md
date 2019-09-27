@@ -1,6 +1,16 @@
 # Node.js 服务 Docker 容器化应用实践
 
-本篇不会讲解 Docker 命令的使用、安装等，因为在之前一篇文章 [Docker 入门与实践]() 中也已经讲解的很详细了，不清楚的可以点击链接回头在重新看下，本篇重点是介绍 Node.js 项目如何进行 Docker 容器化及一些实践优化，还有一些常见的问题，当然如果还有其它使用上的问题也欢迎大家在评论区进行留言补充。
+> 谁不会休息，谁就不会工作。 —— 列宁
+
+本篇不会讲解 Docker 命令的使用、安装等，因为在之前一篇文章 [一文零基础教你学会 Docker 入门到实践](https://mp.weixin.qq.com/s/S7ksqF8z4SYJvcG1DOupNA) 中也已经讲解的很详细了，不清楚的可以点击链接回头在重新看下，本篇重点是介绍 Node.js 项目如何进行 Docker 容器化及一些实践优化，还有一些常见的问题，当然如果还有其它使用上的问题也欢迎大家在评论区进行留言补充。
+
+**通过本篇文章能学到什么？**
+
+* 学会如何用 Docker 容器化一个 Node.js 服务
+* 动态设置环境变量一份 Dockerfile 文件构建不同的版本
+* Node.js 私有 NPM 包在构建镜像时如何认证
+* Egg.js 框架 Docker 容器化应该注意的问题
+* Docker 镜像体积与构建时间的优化
 
 ## Docker 化一个 Node.js 应用程序
 
@@ -361,7 +371,4 @@ RUN npm i
 ...
 ```
 
-## Refenrce
 
-* [https://docs.npmjs.com/about-authentication-tokens](https://docs.npmjs.com/about-authentication-tokens)
-* [https://docs.npmjs.com/creating-and-viewing-authentication-tokens](https://docs.npmjs.com/creating-and-viewing-authentication-tokens)
