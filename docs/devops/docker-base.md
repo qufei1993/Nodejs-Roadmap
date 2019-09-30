@@ -80,6 +80,12 @@ $ sudo vim /etc/docker/daemon.json
 }
 ```
 
+也推荐使用中科大和网易的
+
+```
+"registry-mirrors": [ "https://hub-mirror.c.163.com", "https://docker.mirrors.ustc.edu.cn" ]
+```
+
 * 重启 Docker 服务
 
 ```
@@ -132,12 +138,6 @@ sudo apt-get update
 
 ```shell
 sudo apt-get install docker-ce docker-ce-cli containerd.io
-```
-
-执行以下命令使用脚本自动安装，这也是最简化的安装流程，它会检测你当前使用的 Linux 版本，选择合适的安装包进行安装，
-
-```shell
-sudo wget -qO- https://get.docker.com | sh
 ```
 
 #### 添加 Docker 用户组
@@ -344,8 +344,8 @@ RUN mkdir -p /usr/src/nodejs/
 WORKDIR /usr/src/nodejs/
 
 # RUN/COPY 是分层的，package.json 提前，只要没修改，就不会重新安装包
-COPY package.json /usr/src/app/package.json
-RUN cd /usr/src/app/
+COPY package.json /usr/src/nodejs/package.json
+RUN cd /usr/src/nodejs/
 RUN npm i
 
 # 把当前目录下的所有文件拷贝到 Image 的 /usr/src/nodejs/ 目录下
