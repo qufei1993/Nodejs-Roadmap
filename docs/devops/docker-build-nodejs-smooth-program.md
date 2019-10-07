@@ -1,6 +1,8 @@
 # Dcoker 容器环境下 Node.js 应用程序的优雅退出
 
-Dcoker 容器环境下 Node.js 应用程序的优雅退出，也就是在程序意外退出之后服务进程要接收到 SIGTERM 信号，待当前链接处理完成之后在退出，这样是比较优雅的，但是在 Docker 容器中实践时却发现容器停掉时却发生了一些异常现象，服务进程并没有接收到 SIGTERM 信号，然后随着容器的销毁服务进程也被强制 kill 了，显然当前正在处理的链接也就无法正常完成了。
+> 把时间用在思考上是最能节省时间的事情。 —— 卡曾斯
+
+Dcoker 容器环境下 Node.js 应用程序的优雅退出，也就是在程序意外退出之后服务进程要接收到 SIGTERM 信号，待当前链接处理完成之后再退出，这样是比较优雅的，但是在 Docker 容器中实践时却发现容器停掉时却发生了一些异常现象，服务进程并没有接收到 SIGTERM 信号，然后随着容器的销毁服务进程也被强制 kill 了，显然当前正在处理的链接也就无法正常完成了。
 
 **本篇文章主要讲解了什么？**
 
@@ -8,7 +10,7 @@ Dcoker 容器环境下 Node.js 应用程序的优雅退出，也就是在程序�
 * Docker 容器环境下程序优雅退出测试
 * Dcoker 容器下应用无法接收退出信号原因分析
 * Dcoker 容器环境下构建平滑的 Node.js 应用程序多种实现方案
-* 10 Second 问题
+* Docker 容器 stop 10s 问题
 
 ## 一个简单的 Node.js 应用程序
 
@@ -159,7 +161,7 @@ Running on http://localhost: 30010  PID:  70991
 
 ## Docker 环境下测试
 
-这里假设你已经了解了 Docker 的基本操作和在 Node.js 中的应用，不清楚的你需要先看下这两篇介绍 [一文零基础教你学会 Docker 入门到实践](https://mp.weixin.qq.com/s/S7ksqF8z4SYJvcG1DOupNA) 与 [Node.js 服务 Docker 容器化应用实践](https://mp.weixin.qq.com/s/vTD63u6F1hQYZcMkoSaj6g)
+这里假设你已经了解了 Docker 的基本操作和在 Node.js 中的应用，不清楚的你需要先看下这两篇介绍 [一文零基础教你学会 Docker 入门到实践](https://mp.weixin.qq.com/s/S7ksqF8z4SYJvcG1DOupNA) 与 [Node.js 服务 Docker 容器化应用实践](https://mp.weixin.qq.com/s/ZUw_qLk3m77ATkYXpfP08A)
 
 **启动容器**
 
@@ -347,7 +349,7 @@ npm(1)---node(24)---node(39)-+-node(46)
                              `-node(74)
 ```
 
-## 10 Second 问题
+## Docker 容器 stop 10s 问题
 
 以下对 app.js 做了改造，将原先等待 5 秒，设置为了 15 秒，在进行测试下
 

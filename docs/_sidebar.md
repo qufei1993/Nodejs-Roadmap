@@ -84,6 +84,7 @@
     - [NPM 模块管理应用实践](/devops/npm-deploy.md)
     - [Docker系列一：入门到实践](/devops/docker-base.md)
     - [Docker系列二：Node.js 服务容器化实践](/devops/docker-nodejs.md)
+    - [Docker系列三：Node.js 进程的优雅退出](/devops/docker-build-nodejs-smooth-program.md)
 * 工具
     - [Git 常用命令及日常问题集锦](/tools/git.md)
     - [SEO 网站优化 title 置与快速排名](/tools/seo.md)
