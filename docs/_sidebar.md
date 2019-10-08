@@ -40,32 +40,21 @@
     - [ORM 对象关系映射](/nodejs/orm.md#ORM)
     - [Middleware 常用 Web 框架&中间件汇总](/nodejs/middleware.md)
 
-- DataBase
-    - [数据库类型](/database/README.md)
-    - <details><summary><b>Redis</b></summary>
-      <p>
+- DataBase | Redis
+    - [基础总结](/database/redis.md)
+    - [主从复制](/database/redis-master-slave.md)
+    - [数据持久化](/database/redis-persistence.md)
+    - [哨兵高可用](/database/redis-sentinel.md)
+    - [集群模式](/database/redis-cluster.md)
+    - [缓存设计](/database/redis-cache.md)
+    - [应用场景](/database/redis-scene.md)
+    - [面试指南](/database/redis-interview.md)
 
-        - [基础总结](/database/redis.md)
-        - [主从复制](/database/redis-master-slave.md)
-        - [数据持久化](/database/redis-persistence.md)
-        - [哨兵高可用](/database/redis-sentinel.md)
-        - [集群模式](/database/redis-cluster.md)
-        - [缓存设计](/database/redis-cache.md)
-        - [应用场景](/database/redis-scene.md)
-        - [面试指南](/database/redis-interview.md)
-
-      </p>
-      </details>
-    - <details><summary><b>MongoDB</b></summary>
-      <p>
-
-        - [安装与部署](/database/mongodb.md)
-        - [CURD 操作](/database/mongodb-curd.md)
-        - [Index 索引](/database/mongodb-indexes.md)
-        - [操作符](/database/mongodb-operator.md)
-        
-      </p>
-      </details>
+- DataBase | MongoDB
+    - [安装与部署](/database/mongodb.md)
+    - [CURD 操作](/database/mongodb-curd.md)
+    - [Index 索引](/database/mongodb-indexes.md)
+    - [操作符](/database/mongodb-operator.md)
 
 - Microservice
     - [「服务发现」Consul](microservice/consul.md)
