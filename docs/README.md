@@ -7,7 +7,7 @@
 > 为 Node.js 面试及常见问题打造的一个项目 [:cn: Node.js 面试问题](https://interview.nodejs.red/#/zh/) | [:uk: Nodejs-Interview-Questions](https://interview.nodejs.red)
 
 **如何支持：**
-- 搜索公众号 **```Node.js技术栈```** 进行关注
+- 关注公众号 [Nodejs技术栈](https://nodejsred.oss-cn-shanghai.aliyuncs.com/node_roadmap_wx.jpg?x-oss-process=style/may)
 - 点击右上角Star :star: 给予关注
 - 分享给您身边更多的小伙伴
 
