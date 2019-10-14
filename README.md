@@ -1,13 +1,16 @@
 # Node.js技术栈
 
-> 本文档是作者从事```Node.js Developer```以来的学习历程，旨在为大家提供一个较详细的学习教程，侧重点更倾向于Node.js服务端所涉及的技术栈，如果本文能为您得到帮助，请给予支持！
+[![stars](https://badgen.net/github/stars/Q-Angelo/Nodejs-Roadmap?icon=github&color=4ab8a1)](https://github.com/Q-Angelo/Nodejs-Roadmap) [![forks](https://badgen.net/github/forks/Q-Angelo/Nodejs-Roadmap?icon=github&color=4ab8a1)](https://github.com/Q-Angelo/Nodejs-Roadmap) [<img src="https://img.shields.io/static/v1.svg?label=%E6%85%95%E8%AF%BE&message=3k%20stars&color=ef151f">](https://www.imooc.com/u/2667395) [<img src="https://img.shields.io/badge/%E5%BE%AE%E4%BF%A1-%E5%85%AC%E4%BC%97%E5%8F%B7-brightgreen">](https://nodejsred.oss-cn-shanghai.aliyuncs.com/node_roadmap_wx.jpg?x-oss-process=style/may)
+
+本文档是作者从事 ```Node.js Developer``` 以来的学习历程，旨在为大家提供一个较详细的学习教程，侧重点更倾向 于Node.js 服务端所涉及的技术栈，如果本文能为您得到帮助，请给予支持！
+
+**如何支持：**
+- 关注公众号 [Nodejs技术栈](https://nodejsred.oss-cn-shanghai.aliyuncs.com/node_roadmap_wx.jpg?x-oss-process=style/may)
+- 点击右上角Star :star: 给予关注
+- 分享给您身边更多的小伙伴
 
 > 为 Node.js 面试及常见问题打造的一个项目 [:cn: Node.js 面试问题](https://interview.nodejs.red/#/zh/) | [:uk: Nodejs-Interview-Questions](https://interview.nodejs.red)
 
-**如何支持：**
-- 搜索公众号 **```Node.js技术栈```** 进行关注
-- 点击右上角Star :star: 给予关注
-- 分享给您身边更多的小伙伴
 
 > **作者：** 五月君，Node.js Developer，[慕课网认证作者](https://www.imooc.com/u/2667395)。
 
