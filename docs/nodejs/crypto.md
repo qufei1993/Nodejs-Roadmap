@@ -47,17 +47,19 @@ seed-ecb       seed-ofb
 
 #### Cipher加解密实例演示
 
-- **数据加密**
-    * ```crypto.createCipher(algorithm', pwd)``` 指定算法、密码创建 cipher 加密对象
-    * ```crypto.createCipheriv(algorithm, pwd, iv) ``` 指定算法、密码、向量创建 cipher 加密对象
+> **注意**：[crypto.createCipher](http://nodejs.cn/api/crypto.html#crypto_crypto_createcipher_algorithm_password_options) 已废弃，推荐使用 [crypto.createCipheriv](http://nodejs.cn/api/crypto.html#crypto_crypto_createcipheriv_algorithm_key_iv_options)
+
+**数据加密**
+* ```crypto.createCipher(algorithm', pwd)``` 指定算法、密码创建 cipher 加密对象
+* ```crypto.createCipheriv(algorithm, pwd, iv) ``` 指定算法、密码、向量创建 cipher 加密对象
 
 ```js
 function cipher(str){
     try{
         const crypto = require('crypto');
-        const cipher = crypto.createCipher('des-ecb', '123456');
+        // const cipher = crypto.createCipher('des-ecb', '123456');
 
-        // const cipher = crypto.createCipheriv('des-ecb', '12345678', ''); 与其他语言加密采用这种写法
+        const cipher = crypto.createCipheriv('des-ecb', '12345678', ''); 与其他语言加密采用这种写法
 
         /**
          * update方法
@@ -84,17 +86,17 @@ function cipher(str){
 cipher('hello world ！！！') // 81c66a1d39d302205c55f0afac95c06bc985155d4ddb751c
 ```
 
-- **数据解密**
-    * ```crypto.createDecipher(algorithm, pwd)``` 指定算法、密码创建 decipher 解密对象
-    * ```crypto.createDecipheriv(algorithm, pwd, iv)``` 指定算法、密码、向量创建 decipher 解密对象
+**数据解密**
+* ```crypto.createDecipher(algorithm, pwd)``` 指定算法、密码创建 decipher 解密对象
+* ```crypto.createDecipheriv(algorithm, pwd, iv)``` 指定算法、密码、向量创建 decipher 解密对象
 
 ```js
 function decipher(encrypted){
     try{
         const crypto = require('crypto');
-        const decipher = crypto.createDecipher('des-ecb', '123456');
+        // const decipher = crypto.createDecipher('des-ecb', '123456');
 
-        // const decipher = crypto.createDecipheriv('des-ecb', '12345678', '');
+        const decipher = crypto.createDecipheriv('des-ecb', '12345678', '');
 
         let decrypted = decipher.update(encrypted, 'hex', 'utf8');
             decrypted += decipher.final('utf8');
