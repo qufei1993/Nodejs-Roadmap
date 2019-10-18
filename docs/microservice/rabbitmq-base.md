@@ -1,4 +1,4 @@
-# RabbitMQ 系列之：入门篇
+# 消息中间件 RabbitMQ 入门篇
 
 RabbitMQ 是一套开源（MPL）的消息队列服务软件，是由 LShift 提供的一个 Advanced Message Queuing Protocol (AMQP) 的开源实现，由以高性能、健壮以及可伸缩性出名的 Erlang 写成。
 
