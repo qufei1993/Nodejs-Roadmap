@@ -1,15 +1,23 @@
-# RabbitMQ 高级消息队列入门篇
+# RabbitMQ 系列之：入门篇
 
 RabbitMQ 是一套开源（MPL）的消息队列服务软件，是由 LShift 提供的一个 Advanced Message Queuing Protocol (AMQP) 的开源实现，由以高性能、健壮以及可伸缩性出名的 Erlang 写成。
 
 **通过本篇能学到什么？**
 
 * 为什么要使用 RabbitMQ？
+* RabbitMQ 应用场景？
+* MQ 的空间与时间解耦是什么？
 * 常用的主流消息中间件都有哪些？
 * 如何安装、启动一个 RabbitMQ 服务？
 * 如何构建一个简单的生产者与消费者模型？
 
 ## 为什么要使用 RabbitMQ？
+
+近两年谈的很多的一个概念**微服务**，在一个大型业务系统架构中，会被拆分成很多小的业务系统，这些业务系统之间如何建立通信呢？大家熟知的 HTTP、RPC 可以实现不同系统、不同语言之间的通信，除了这些往往还会使用消息队列（RabbitMQ、ActiveMQ、Kafafa 等）将这些系统链接起来，达到各系**统间的解耦**。
+
+另外，在后端使用 Node.js 哪怕开发一个稍微大点的系统，消息队列这些知识也是值得你去关注学习的。例如，生产端我可以使用 Node.js 生产一些数据放到队列中，另一段完全可以根据需要我使用 Python 或者其它语言去实现。
+
+## RabbitMQ 应用场景
 
 **1. 同步转异步**
 
@@ -22,6 +30,12 @@ RabbitMQ 是一套开源（MPL）的消息队列服务软件，是由 LShift 提
 **3. 流量削峰**
 
 流量削峰在一些营销活动、秒杀活动场景中应用还是比较广泛的，如果短时间流量过大，可以通过设置阀值丢弃掉一部分消息或者根据服务的承受能力设置处理消息限制，也就是限流，之后也会单独进行讲解。
+
+## MQ 的空间与时间解耦
+
+从空间上来看，消息的生产者无需提前知道消费者的存在，反之消费者亦是，两者之间得到了解耦，不会强依赖，从而实现**空间上的解耦**。
+
+从时间上来看，消息的生产者只负责生产数据将数据放入队列，之后无需关心消费者什么时间去消费，消费则可以根据自己的业务需要来选择实时消费还是延迟消费，两者都拥有了自己的生命周期，从而实现了**时间上的解耦**。
 
 ## 主流消息中间件一览
 
@@ -149,29 +163,31 @@ beam    4678 rabbitmq   49u  IPv6 294158      0t0  TCP *:amqp (LISTEN)
 
 `注意:` 阿里云 ECS 服务器如果出现 RabbitMQ 安装成功，外网不能访问是因为安全组的问题没有开放端口 [解决方案](https://blog.csdn.net/lsq_401/article/details/79921221)
 
-- ### 操作命令
+### 操作命令
 
-|命令                         |   含义  |
-|:---------------------------|:------|
-| whereis rabbitmq        | 查看rabbitmq安装位置 |
-| rabbitmqctl start_app   | 启动应用 |
-| whereis erlang | 查看erlang安装位置
-| rabbitmqctl start_app | 启动应用
-| rabbitmqctl stop_app | 关闭应用
-| rabbitmqctl status | 节点状态
-| rabbitmqctl add_user username password | 添加用户
-| rabbitmqctl list_users | 列出所有用户
-| rabbitmqctl delete_user username | 删除用户
-| rabbitmqctl add_vhost vhostpath | 创建虚拟主机
-| rabbitmqctl list_vhosts| 列出所有虚拟主机
-| rabbitmqctl list_queues | 查看所有队列
-| rabbitmqctl -p vhostpath purge_queue blue | 清除队列里消息
+以下列举一些在终端常用的操作命令
+
+* whereis rabbitmq：查看 rabbitmq 安装位置
+* rabbitmqctl start_app：启动应用
+* whereis erlang：查看erlang安装位置
+* rabbitmqctl start_app：启动应用
+* rabbitmqctl stop_app：关闭应用
+* rabbitmqctl status：节点状态
+* rabbitmqctl add_user username password：添加用户
+* rabbitmqctl list_users：列出所有用户
+* rabbitmqctl delete_user username：删除用户
+* rabbitmqctl add_vhost vhostpath：创建虚拟主机
+* rabbitmqctl list_vhosts：列出所有虚拟主机
+* rabbitmqctl list_queues：查看所有队列
+* rabbitmqctl -p vhostpath purge_queue blue：清除队列里消息
 
 ## 构建一个简单的生产者与消费者模型
 
-生产者发消息的时候必须要指定一个 exchange，若不指定 exchange（为空）会默认指向 `AMQP default` 交换机，`AMQP default` 路由规则是根据 routingKey 和 mq 上有没有相同名字的队列进行匹配路由。
+生产者-消费者模型是指一方生产数据一方消费数据。两者之间会有一个缓冲区做为中介，生产者把数据放入缓冲区，消费者从缓冲区取出数据。另外，生产者消费者模式也是是面向过程编程其中的一种设计模式。
 
 ### 构建生产者与消费者步骤
+
+以下列举一下生产者与消费者模型在实现时的一些步骤，各语言在实现的过程中也都是大同小异的。
 
 **生产者步骤**
 - 创建链接工厂
@@ -199,6 +215,8 @@ $ npm install amqplib
 ```
 
 **构建生产者**
+
+生产者发消息的时候必须要指定一个 exchange，若不指定 exchange（为空）会默认指向 `AMQP default` 交换机，`AMQP default` 路由规则是根据 routingKey 和 mq 上有没有相同名字的队列进行匹配路由。
 
 ```js
 const amqp = require('amqplib');
@@ -380,3 +398,9 @@ https://github.com/Q-Angelo/SpringBoot-Course
 源码地址如下：
 https://github.com/Q-Angelo/SpringBoot-Course/tree/master/chapter8/chapter8-1
 ```
+
+在上面的这个 **生产者-消费者** 例子中，也需你会感到疑惑生产者和消费者之间的消息是如何进行匹配传递的？在之后的一节 **RabbitMQ 的交换机详解** 中会介绍，它们是如何进行消息的匹配投递工作。
+
+## 总结
+
+通过本文学习，希望你能掌握什么场景下会应用到 MQ、可以自己尝试下安装一下 MQ 服务并构建一个简单的生产者-消费者模型。因为它很重要，通常也是互联网企业必备的基础组件之一，因此后续也打算写一个系列文章，包含不同交换机的消息投递机制、限流、延迟队列、重试、高可用设计等等，敬请关注本公众号 “Nodejs技术栈” 获取最新消息。
