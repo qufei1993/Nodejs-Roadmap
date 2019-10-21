@@ -1,4 +1,4 @@
-# RabbitMQ 系列之：延迟队列实现定时任务
+# 利用 RabbitMQ 死信队列和 TTL 实现定时任务
 
 实际业务中对于定时任务的需求是不可避免的，例如，订单超时自动取消、每天定时拉取数据等，在 Node.js 中系统层面提供了 setTimeout、setInterval 两个 API 或通过 node-schedule 这种第三方库来实现。
 
