@@ -59,11 +59,11 @@
 - Microservice
     - [服务注册与发现 Consul](microservice/consul.md)
     - [数据通信方式 RPC、HTTP、消息队列](/microservice/data-communication.md)
-    - [消息中间件 RabbitMQ：入门篇](/microservice/rabbitmq-base.md)
-    - [消息中间件 RabbitMQ：交换机消息投递机制](/microservice/rabbitmq-exchange.md)
-    - [消息中间件 RabbitMQ：死信队列+TTL 实现定时任务](/microservice/rabbitmq-schudule.md)
-    - [消息中间件 RabbitMQ：高并发下消费端限流实践](/microservice/rabbitmq-prefetch.md)
-    - [消息中间件 RabbitMQ：服务异常重连](/microservice/rabbitmq-reconnecting.md)
+    - [RabbitMQ：入门篇](/microservice/rabbitmq-base.md)
+    - [RabbitMQ：交换机消息投递机制](/microservice/rabbitmq-exchange.md)
+    - [RabbitMQ：死信队列+TTL 实现定时任务](/microservice/rabbitmq-schudule.md)
+    - [RabbitMQ：高并发下消费端限流实践](/microservice/rabbitmq-prefetch.md)
+    - [RabbitMQ：服务异常重连](/microservice/rabbitmq-reconnecting.md)
     
 * HTTP协议
     - [http 三次握手](https://github.com/Q-Angelo/http-protocol#http三次握手)
