@@ -151,7 +151,8 @@ var result=pattern.exec(str,'')[1];
 console.log('|'+result+'|');
 ```
 
-> ***方法三***：(.+)贪婪模式，改为惰性模式，使用分组模式，只取匹配的内容		
+> ***方法三***：(.+)贪婪模式，改为惰性模式，使用分组模式，只取匹配的内容
+
 ```js
 var pattern=/^\s+(.+?)\s+$/;
 var str="     google         ";
