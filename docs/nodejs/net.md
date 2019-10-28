@@ -170,7 +170,7 @@ client.on('close', err => {
 **源码实现地址**
 
 ```
-https://github.com/Q-Angelo/project-training/tree/master/nodejs/net/chapter-1-client-servre 
+https://github.com/Q-Angelo/project-training/tree/master/nodejs/net/chapter-1-client-server 
 ```
 
 ### 客户端与服务端 Demo 测试
