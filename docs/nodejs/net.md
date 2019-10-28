@@ -268,7 +268,7 @@ $ node client.js
 **源码实现地址**
 
 ```
-https://github.com/Q-Angelo/project-training/tree/master/nodejs/net/chapter-1-delay
+https://github.com/Q-Angelo/project-training/tree/master/nodejs/net/chapter-2-delay
 ```
 
 ### 方案二：Nagle 算法
