@@ -28,6 +28,7 @@
     - [Crypto 加解密模块](/nodejs/crypto.md)
     - [Buffer 缓冲区模块](/nodejs/buffer.md)
     - [Process 线程和进程](/nodejs/process-threads.md)
+    - [Net 网络模块](/nodejs/net.md)
 * Node.js 进阶
     - [Egg-Logger 模块实践](/nodejs/logger.md)
     - [I/O 模型浅谈](/nodejs/IO.md)
