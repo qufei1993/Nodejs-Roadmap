@@ -50,6 +50,7 @@
     - [缓存设计](/database/redis-cache.md)
     - [应用场景](/database/redis-scene.md)
     - [面试指南](/database/redis-interview.md)
+    - [实践 | Redis 计数器实现并发场景下的优惠券领取功能](/database/redis-counter-luck.md)
 
 - DataBase | MongoDB
     - [安装与部署](/database/mongodb.md)
