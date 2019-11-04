@@ -23,12 +23,14 @@
     - [“3N 兄弟” 助您完成 Node.js 环境搭建](/nodejs/base/install.md)
     - [Node.js 包管理器 NPM](/nodejs/base/npm.md)
 * Node.js 模块
-    - [Console 日志模块](/nodejs/console.md)
     - [Module 模块机制](/nodejs/module.md)
+    - [Events 事件触发器](/nodejs/events.md)
     - [Crypto 加解密模块](/nodejs/crypto.md)
     - [Buffer 缓冲区模块](/nodejs/buffer.md)
     - [Process 线程和进程](/nodejs/process-threads.md)
+    - [Console 日志模块](/nodejs/console.md)
     - [Net 网络模块](/nodejs/net.md)
+    
 * Node.js 进阶
     - [Egg-Logger 模块实践](/nodejs/logger.md)
     - [I/O 模型浅谈](/nodejs/IO.md)
