@@ -141,7 +141,7 @@ npm login
 
 如果是公司团队或者个人项目的私有npm包，进行发布的时候要注意下啦，模块的名字要以```@```符号开始、```/```符号结束，中间部分为私有包的组织名。例如，```@may/logger ```，may为组织的名称，logger为包名。
 
-```package.json```
+**package.json**
 ```json
 {
   "name": "@may/logger"
