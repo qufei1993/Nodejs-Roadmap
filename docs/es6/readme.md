@@ -115,6 +115,7 @@ function last(){
 - **构造函数 ES5声明对象 情况一**
 
 > 第一个参数是字符; 第二个是修饰符
+
 ```js
 let regex = new RegExp('xyz', 'i');
 
