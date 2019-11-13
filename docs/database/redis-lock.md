@@ -222,6 +222,12 @@ name1 26e02970-0532-11ea-b978-2160dffafa30 上锁成功
 unLock:  name1 26e02970-0532-11ea-b978-2160dffafa30 true
 ```
 
+**源码地址**
+
+```
+https://github.com/Q-Angelo/project-training/tree/master/redis/lock/redislock.js
+```
+
 ## Redlock 算法
 
 以上是使用 Node.js 对 Redis 分布式锁的一个简单实现，在单实例中是可用的，当我们对 Redis 节点做一个扩展，在 Sentinel、Redis Cluster 下会怎么样呢？
