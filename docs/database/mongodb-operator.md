@@ -72,6 +72,64 @@ WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
 { "_id" : ObjectId("5bd1a85eca656270cb3c1405"), "name" : "Jack", "email" : [ "aaa@qq.com", "abc@qq.com" ] }
 ```
 
+* ```$project``` 包含、排除、重命名和显示字段
+
+```js
+// 查询之前结构
+{
+    "_id" : ObjectId("5bd83b5749fec9c2dc934aca"),
+    "name" : "小B",
+    "age" : 18,
+    "idCard" : "410328200005201235",
+    "_class" : "com.angelo.User",
+    "contactor" : {
+        "name" : "zhang",
+        "age" : 18
+    }
+}
+
+// 查询语句
+db.user.aggregate([
+    {
+        "$project":{
+            "_id":0,
+            "a":1,
+            "contactorName":"$contactor.name",
+            "contactorArray":[
+                "$contactor.name",
+                "$contactor.age",
+                "$contactor.sex"
+            ]
+        }
+    }
+]);
+
+// 查询结果，如果指定的字段不存在则返回 null
+{ "contactorName" : "zhang", "contactorArray" : [ "zhang", 18, null ] }
+```
+
+* ```$unwind``` 展开数组元素
+
+如果需要展开的字段不存在或者等于 null 和 [] 会被过滤掉，也可以使用 preserveNullAndEmptyArrays 字段告诉 unwind 不要过滤一些数据
+
+```js
+// 查询语句
+db.user.aggregate([
+    {
+        "$unwind":{
+            "path": "$hobby",
+            "includeArrayIndex": "habbyIndex", // 添加新字段展示展开的位置
+            "preserveNullAndEmptyArrays": true // 需要展开的字段不存在或者等于 null 和 [] 不会在被过滤
+        }
+    }
+]);
+
+// 查询结果
+
+{ "_id" : ObjectId("5bd83b5749fec9c2dc934aca"), "name" : "小B", "age" : 18, "idCard" : "410328200005201235", "_class" : "com.angelo.User", "contactor" : { "name" : "zhang", "age" : 18 }, "hobby" : "篮球", "habbyIndex" : NumberLong(0) }
+{ "_id" : ObjectId("5bd83b5749fec9c2dc934aca"), "name" : "小B", "age" : 18, "idCard" : "410328200005201235", "_class" : "com.angelo.User", "contactor" : { "name" : "zhang", "age" : 18 }, "hobby" : "足球", "habbyIndex" : NumberLong(1) }
+```
+
 #### 高级查询操作符
 
 * ```$in```，包含
