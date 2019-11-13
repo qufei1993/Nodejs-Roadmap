@@ -125,6 +125,7 @@ console.log(regex.test('xyz123'), regex.test('xyZ123')); // true true
 - **构造函数 ES5声明对象 情况二**
 
 > 第一个参数是正则表达式; 但是此时不接受第二个参数是一个修饰符，否则会报错
+
 ```js
 let regex2 = new RegExp(/xyz/i); // 正确
 let regex3 = new RegExp(/xyz/i, 'i'); // 错误；Uncaught TypeError: Cannot supply flags when constructing one RegExp 
