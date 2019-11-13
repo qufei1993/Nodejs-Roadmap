@@ -204,6 +204,7 @@ console.log(regex3.flags); // i
 ```
 
 - **模板字符串**
+
 ```javascript
 {
   let name = "张三";
@@ -216,7 +217,6 @@ console.log(regex3.flags); // i
   console.log(String.raw`Hi\n${1+2}`);//Hi\n3
   console.log(`Hi\n${1+2}`);
 }
-
 ```
 
 - **标签模板**
