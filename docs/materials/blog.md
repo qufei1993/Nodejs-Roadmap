@@ -19,6 +19,7 @@
 
 ## 性能优化
 * [Web性能优化](https://github.com/laoqiren/web-performance)
+* [Node.js 应用故障排查&性能调优](https://github.com/aliyun-node/Node.js-Troubleshooting-Guide)
 
 ## 算法
 * [十大经典排序算法](https://github.com/hustcc/JS-Sorting-Algorithm)
