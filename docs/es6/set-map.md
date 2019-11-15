@@ -113,6 +113,7 @@
 要注意集合Set添加元素用add()，而集合Map添加元素用set()
 
 - **第一种定义方式**
+
 ```javascript
 let map = new Map();
 let arr=['123'];
@@ -120,10 +121,10 @@ map.set(arr,456);
 console.log('map',map,map.get(arr));
 
 //map Map {["123"] => 456} 456
-
 ```
 
 - **第二种定义方式**
+
 ```js
 let map = new Map([['a',123],['b',456]]);
 console.log('map args',map);
@@ -138,6 +139,7 @@ console.log('clear',map); //clear Map {}
 ## weakmap  
 
 > 同WeakSet一样接收的key值必须是对象，没有size属性，clear方法，也是不能遍历
+
 ```javascript
 {
   let weakmap=new WeakMap();
@@ -157,6 +159,7 @@ let array=[];
 ```
 
 - **增**
+
 ```js
 map.set('t',1);
 array.push({t:1});
@@ -165,6 +168,7 @@ console.info('map-array',map,array); // map-array Map {"t" => 1} [Object]
 ```
 
 - **查**
+
 ```js
 let map_exist=map.has('t');
 let array_exist=array.find(item=>item.a);
@@ -173,6 +177,7 @@ console.info('map-array',map_exist,!!array_exist); // map-array true false
 ```
 
 - **改**
+
 ```js
 map.set('t',2);
 array.forEach(item=>item.t?item.t=2:'');
@@ -181,6 +186,7 @@ console.info('map-array-modify',map,array); // map-array-modify Map {"t" => 2} [
 ```
 
 - **删**
+
 ```js
 map.delete('t');
 let index=array.findIndex(item=>item.t);
@@ -199,6 +205,7 @@ let array=[];
 ```
 
 - **增**
+
 ```js
 set.add({t:1});
 array.push({t:1});
@@ -208,6 +215,7 @@ console.info('set-array',set,array);
 ```
 
 - **查**
+
 ```js
 let set_exist=set.has({t:1}); // 没有对象引用，将一直为false
 let array_exist=array.find(item=>item.t);
@@ -217,6 +225,7 @@ console.info('set-array',set_exist,array_exist);
 ```
 
 - **改**
+
 ```js
 set.forEach(item=>item.t?item.t=2:'');
 array.forEach(item=>item.t?item.t=2:'');
@@ -226,6 +235,7 @@ console.info('set-array-modify',set,array);
 ```
 
 - **删**
+
 ```js
 set.forEach(item=>item.t?set.delete(item):'');
 let index=array.findIndex(item=>item.t);
@@ -247,6 +257,7 @@ let obj={};
 ```
 
 - **增**
+
 ```js
 map.set('t',1);
 set.add(item);
@@ -257,6 +268,7 @@ console.info('map-set-obj',obj,map,set);
 ```
 
 - **查**
+
 ```js
 // Object {map_exist: true, set_exist: true, obj_exist: true}
 console.info({
@@ -267,6 +279,7 @@ console.info({
 ```
 
 - **改**
+
 ```js
 map.set('t',2);
 item.t=2;
@@ -277,6 +290,7 @@ console.info('map-set-obj-modify',obj,map,set);
 ```
 
 - **删**
+
 ```js
 map.delete('t');
 set.delete(item);
