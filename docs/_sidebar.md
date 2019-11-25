@@ -54,6 +54,7 @@
     - [面试指南](/database/redis-interview.md)
     - [实践 | Redis 计数器实现并发场景下的优惠券领取功能](/database/redis-counter-luck.md)
     - [实践 | Node.js 中实践 Redis Lua 脚本](/database/redis-lua.md)
+    - [实践 | Node.js 中实践 Redis 分布式锁](/database/redis-lock.md)
 
 - DataBase | MongoDB
     - [安装与部署](/database/mongodb.md)
