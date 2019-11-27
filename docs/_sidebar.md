@@ -71,7 +71,9 @@
     - [RabbitMQ：高并发下消费端限流实践](/microservice/rabbitmq-prefetch.md)
     - [RabbitMQ：服务异常重连](/microservice/rabbitmq-reconnecting.md)
     
-* HTTP协议
+* HTTP
+    - [Socket hang up 是什么？](https://github.com/Q-Angelo/http-protocol/docs/socket-hang-up.md)
+    - [DNS 是什么？叙述下解析过程？](https://github.com/Q-Angelo/http-protocol/docs/dns-process.md)
     - [http 三次握手](https://github.com/Q-Angelo/http-protocol#http三次握手)
     - [跨域 CORS 的形成与实现](https://github.com/Q-Angelo/http-protocol#跨域cors)
     - [缓存头Cache-Control的含义和应用](https://github.com/Q-Angelo/http-protocol#可缓存性)
