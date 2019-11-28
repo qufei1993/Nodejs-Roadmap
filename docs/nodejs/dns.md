@@ -67,6 +67,10 @@ dns.resolve('www.nodejs.red', (err, records) => {
 ]
 ```
 
+通过上面的 API 可以实现一个类似下面的 DNS 域名解析功能也不是很难，感兴趣的可以亲自去实践下，更多 API 也可参考 nodejs 官网 dns 模块。
+
+![](./img/dns_analysis.jpg)
+
 ## dns.lookup() 与 dns.resolve() 不同
 
 > dns.lookup() 是同步的还是异步的？
