@@ -30,6 +30,7 @@
     - [Process 线程和进程](/nodejs/process-threads.md)
     - [Console 日志模块](/nodejs/console.md)
     - [Net 网络模块](/nodejs/net.md)
+    - [DNS 域名解析](/nodejs/dns.md)
     
 * Node.js 进阶
     - [Egg-Logger 模块实践](/nodejs/logger.md)
@@ -73,7 +74,7 @@
     
 * HTTP
     - [Socket hang up 是什么？](https://github.com/Q-Angelo/http-protocol/blob/master/docs/socket-hang-up.md)
-    - [DNS 是什么？叙述下解析过程？](https://github.com/Q-Angelo/http-protocol/blob/master/docs/dns-process.md)
+    - [DNS 域名解析过程](https://github.com/Q-Angelo/http-protocol/blob/master/docs/dns-process.md)
     - [http 三次握手](https://github.com/Q-Angelo/http-protocol#http三次握手)
     - [跨域 CORS 的形成与实现](https://github.com/Q-Angelo/http-protocol#跨域cors)
     - [缓存头Cache-Control的含义和应用](https://github.com/Q-Angelo/http-protocol#可缓存性)
@@ -86,6 +87,7 @@
     - [Docker系列一：入门到实践](/devops/docker-base.md)
     - [Docker系列二：Node.js 服务容器化实践](/devops/docker-nodejs.md)
     - [Docker系列三：Node.js 进程的优雅退出](/devops/docker-build-nodejs-smooth-program.md)
+
 * 工具
     - [Git 常用命令及日常问题集锦](/tools/git.md)
     - [SEO 网站优化 title 置与快速排名](/tools/seo.md)
