@@ -78,9 +78,9 @@ dns.resolve('www.nodejs.red', (err, records) => {
 注意事项参考：
 [nodejs.cn/api/dns.html#dns_implementation_considerations](http://nodejs.cn/api/dns.html#dns_implementation_considerations)
 
-## 什么是DNS 解析过程？什么是 DNS 本地解析?
+## 什么是 DNS 解析过程？什么是 DNS 本地解析?
 
-当我们访问一个域名（www.nodejs.red）的时候会有一个 DNS 域名系统，会将我们的域名转换为相应的 IP，所经历的步骤大致为：浏览器 DNS 缓存 —> 系统（OS）缓存 -> 路由器缓存 -> ISP DNS 缓存，详细可参考 [github.com/Q-Angelo/http-protocol/blob/master/docs/dns-process.md](https://github.com/Q-Angelo/http-protocol/blob/master/docs/dns-process.md)
+当我们访问一个域名 [www.nodejs.red](www.nodejs.red) 的时候会有一个 DNS 域名系统，会将我们的域名转换为相应的 IP，所经历的步骤大致为：浏览器 DNS 缓存 —> 系统（OS）缓存 -> 路由器缓存 -> ISP DNS 缓存，详细可参考 [github.com/Q-Angelo/http-protocol/blob/master/docs/dns-process.md](https://github.com/Q-Angelo/http-protocol/blob/master/docs/dns-process.md)
 
 DNS 本地解析指的是 **系统（OS）缓存** 这一阶段，在浏览器 DNS 缓存未命中的情况下，会从本地系统的一个 hosts 文件寻找对应 IP。
 
