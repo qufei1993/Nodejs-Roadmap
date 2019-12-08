@@ -22,6 +22,7 @@ Consul 是 HashiCorp 公司提出的一款分布式服务治理工具，提供�
     - [服务注册与发现准备工作](#服务注册与发现准备工作)
     - [服务注册](#服务注册)
     - [服务发现](#服务发现)
+- [KV 的导入、导出、备份及恢复]
 - [客户端集成](#客户端集成)
     - [Node.js 集成 Consul 配置中心](#Nodejs集成Consul配置中心)
     - [Spring Boot 集成 Consul 配置中心](#SpringBoot集成Consul配置中心)
@@ -462,6 +463,19 @@ consul_3  192.168.6.130:8301  alive   server  1.4.0  2         consul_cluster  <
 consul_4  192.168.6.131:8301  alive   client  1.4.0  2         consul_cluster  <default>
 ```
 
+### 集群离开
+
+在需要离开集群的 server 节点执行 consul leave 命令离开集群，之后可看到已离开集群的 server 节点状态为 left，在 Consul 的升级过程中我们也可以这样来做，这会让该节点主动退出集群并结束进程。
+
+```
+$ consul leave  --http-addr 192.168.6.130:8500
+$ consul members --http-addr 192.168.6.128:8500
+Node      Address             Status  Type    Build  Protocol  DC              Segment
+consul_1  192.168.6.128:8301  alive   server  1.4.0  2         consul_cluster  <all>
+consul_2  192.168.6.129:8301  alive   server  1.4.0  2         consul_cluster  <all>
+consul_3  192.168.6.130:8301  left    server  1.4.0  2         consul_cluster  <all>
+```
+
 ### 管理工具中查看
 
 在部署第一台192.168.6.128机器的时候，consul agent之后有跟一个-ui参数，这个是用于启动WebUI界面，这个是Consul本身所提供的Web可视化界面，浏览器输入[http://192.168.6.128:8500](http://192.168.6.128:8500)进行访问
@@ -725,6 +739,107 @@ consul.                 0       IN      SOA     ns.consul. hostmaster.consul. 15
 点击consul_4可以看到详细的健康检查信息结果，例如上面我们停掉的order_service服务返回链接被拒。
 
 ![](./img/consul_20190329_002.png)
+
+## KV 的导入、导出、备份及恢复
+
+### KV 导出
+
+KV 的 ```consul kv export``` 命令用于从 Consul's KV 存储库中检索指定的 KV 对，默认情况下检索所有的，并将这些数据以 JSON 形式导出到指定文件。
+
+consul kv export：导出命令
+--http-addr：指定 Consul 地址
+''：为导出的键值对参数，默认为导出所有
+consul_kv_$(date +%Y%m%d%H%M%S).json：导出的文件名，可以自定义
+
+```
+$ consul kv export --http-addr=http://192.168.6.128:8500 '' > consul_kv_$(date +%Y%m%d%H%M%S).json
+```
+
+导出之后会看到一个文件 consul_kv_20191205002739.json
+
+```
+$ cat consul_kv_20191205002739.json
+```
+```json
+[
+    {
+        "key": "config/consul-service,dev/user",
+        "flags": 0,
+        "value": "ZGVzY3JpcHRpb246IHNkc2QKc3R1ZGVudDoKICBuYW1lOiBKYWNrCiAgYWdlOiAxOAp0ZWFjaDoKICBuYW1lOiBUZWFjaCBMaQogIGNvdXJzZTogSmF2YQ=="
+    },
+    {
+        "key": "develop/user",
+        "flags": 0,
+        "value": "eyJuYW1lIjoiSmFjayIsImFnZSI6MTh9"
+    }
+]
+```
+
+键值对 value 的值为 base64 编码，base64 -d 命令可看到原始的 value 值
+
+```
+$ echo "eyJuYW1lIjoiSmFjayIsImFnZSI6MTh9" | base64 -d
+{"name":"Jack","age":18}
+```
+
+### KV 导入
+
+consul kv import 命令用于导入 consul kv export 命令导出的 JSON 文件，使用很简单，如下所示：
+
+```
+$ sudo consul kv import --http-addr=http://192.168.6.128:8500 @consul_kv_20191205010844.json
+```
+
+### KV 备份与恢复
+
+snapshot 命令具有保存、恢复、检查 Consul 服务器状态，该版本在 Consul 0.7.1 及更高版本中可用。
+
+**保存**
+
+```
+$ consul snapshot save --http-addr=http://192.168.6.128:8500 backup_$(date +%Y%m%d%H%M%S).snap
+```
+
+**检查**
+
+```
+$ consul snapshot inspect backup_20191205034901.snap 
+```
+
+**恢复**
+
+```
+$ consul snapshot restore --http-addr=http://192.168.6.128:8500 backup_20191205034901.snap
+```
+
+**开始保存快照守护进程**
+
+consul snapshot agent --http-addr=http://192.168.6.128:8500
+
+运行保存快照的守护进程，定期保存 Consul 服务器状态的快照
+
+## ACL
+
+### 所有 Consul 服务器上启用 ACL
+
+enabled：是否启用 ACL
+default_policy：默认值是 allow，即能够执行任何操作，设置为 deny 默认 API 写行为都会被阻止
+down_policy：中断期间将忽略令牌 TTL
+
+```json
+{
+    "acl": {
+        "enabled": true,
+        "default_policy": "deny",
+        "down_policy": "extend-cache",
+        "tokens": {
+            "master": "consul_admin"
+        }
+    }
+}
+```
+
+// ACL TODO:
 
 ## 客户端集成
 
