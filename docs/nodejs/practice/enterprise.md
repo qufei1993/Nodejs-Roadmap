@@ -1,25 +1,35 @@
-# Node.js 企业实践
+# Node.js 在企业中的应用实践
+
+在和一些 Nodeer 童鞋的分享交流过程中，也会听到一些声音：“Node.js 在企业中是如何应用的？有哪些大厂在实践？”，于是公众号 “Nodejs技术栈” 自 19 年 8 月开始陆陆续续开始给大家分享一些 Node.js 在企业中的应用实践，希望给正在学习、使用 Node.js 的童鞋一些参考。 
 
 ## 阿里
 
+* [基于 Node.js 的 Serverless 架构实践](https://mp.weixin.qq.com/s/oKcQXj3CWt1Ts_tOtw7QTg)
 * [独家解读：淘宝使用 Node.js 的 TypeScript 多场景开发和实践](https://mp.weixin.qq.com/s/f5xIN9d7s011_gXej84MJw)
 * [基于阿里云的 Node.js 稳定性实践](https://mp.weixin.qq.com/s/ghciI1dj9dve6Bsrf8Yj1w)
 * [蚂蚁金服 Node.js 开荒史 - 摸爬滚打才不负功名尘土](https://mp.weixin.qq.com/s/wIYlSPSJSK2eHbk48SFQLw)
+* [浅谈阿里 Node 框架 Midway 在企业产品中的应用实践](https://mp.weixin.qq.com/s/W_XuZGYCQMbfeEQEPAkTTg)
 
 ## 腾讯
 
 * [腾讯视频 Node.js 服务是如何支撑国庆阅兵直播高并发的？](https://mp.weixin.qq.com/s/7lA2-mCM9GR3BekWH6hB2Q)
 * [Node.js 部署和运维工作量降低 80%，腾讯 NOW 直播是怎么做到的？](https://mp.weixin.qq.com/s/GGrb7Oex7SqtwzIKAXSFVg)
 
+## 携程
+
+* [浅谈 Node.js 在携程的应用](https://mp.weixin.qq.com/s/yuK3MvgMlYE5thEx6e8rtQ)
+* [携程机票 Node.js 开发实践](https://mp.weixin.qq.com/s/NU7Hm96-cngvUCOF2LOpMA)
+* [Node.js 在携程的落地和最佳实践](https://mp.weixin.qq.com/s/ndPlZJWM9pxusGMY8C0eyA)
+
 ## 转转
 
 * [Node.js 在转转的微服务实践（一）](https://mp.weixin.qq.com/s/1rjvoOySe-dcxn8fWE8BMQ)
 * [Node.js 在转转的微服务实践（二）](https://mp.weixin.qq.com/s/HyoCCOD0SqcGA7Ajt7GWuA)
 
-## 携程
+## 宋小菜
 
-* [浅谈 Node.js 在携程的应用](https://mp.weixin.qq.com/s/yuK3MvgMlYE5thEx6e8rtQ)
-* [携程机票 Node.js 开发实践](https://mp.weixin.qq.com/s/NU7Hm96-cngvUCOF2LOpMA)
+* [框架设计：如何基于 Egg 设计 Node 的服务框架](https://mp.weixin.qq.com/s/HCKWKhnlDwAGo5s797W7jA)
+* 为什么 Node 是小菜前端团队的核心技术栈
 
 ## 苏宁
 
@@ -49,6 +59,8 @@
 
 * [Node.js 在微医的应用场景及实践](https://mp.weixin.qq.com/s/OeZyo7MZhadGjKV83LZnhA)
 
-## 贝壳
+## 贝壳找房
 
 * [2019大前端秘籍：贝壳找房多端提效和性能质量优化实践](https://mp.weixin.qq.com/s/umr-SZXflTy9XQoRRf56Rg)
+
+如果您正在实践 Node.js，很期待能收到您的分享，可以关注公众号 “Nodejs技术栈” 在后台向我投稿，后期都会进行整理放在 Github: []() 以供大家学习和实践参考。
