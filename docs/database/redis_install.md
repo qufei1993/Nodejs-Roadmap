@@ -1,4 +1,6 @@
-#  Redis安装
+#  Redis 安装
+
+Redis 支持 Mac 或者 Linux 系统上安装，对于 Windows 的同学，可以安装一个虚拟机进行学习。
 
 **下载和编译**
 
@@ -32,7 +34,7 @@ src/redis-cli -p 6380
 src/redis-cli -h localhost -p 6380
 ```
 
-**配置**
+**常用配置**
 
 查看所有配置 ```config get *```，以下列举一些常用配置信息：
 
