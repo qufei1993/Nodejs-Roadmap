@@ -29,7 +29,11 @@
 ## 宋小菜
 
 * [框架设计：如何基于 Egg 设计 Node 的服务框架](https://mp.weixin.qq.com/s/HCKWKhnlDwAGo5s797W7jA)
-* 为什么 Node 是小菜前端团队的核心技术栈
+* [为什么 Node 是小菜前端团队的核心技术栈](https://mp.weixin.qq.com/s/j4tAMFzlGQ5O9q768KE9Cg)
+
+## 百度
+
+* [商业化场景下，百度如何实践 Node.js 架构？](https://mp.weixin.qq.com/s/2ZnBR2Ki7VJCLmtVT4oOsw)
 
 ## 苏宁
 
