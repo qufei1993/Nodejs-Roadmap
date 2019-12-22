@@ -48,11 +48,12 @@ async function getUserById(id) {
 
 **布隆过滤器**
 
-> todo://
+[Redis 布隆过滤器实战「缓存击穿、雪崩效应」](https://juejin.im/post/5c9442ae5188252d77392241)
 
 ## 缓存雪崩
 
 保证服务高可用
+
 * Redis Cluster、Redis Snetinel
 
 ## 无底洞现象
