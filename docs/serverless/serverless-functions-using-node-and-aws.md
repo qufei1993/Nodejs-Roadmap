@@ -191,7 +191,7 @@ resources: 12
 api keys:
   None
 endpoints:
-  GET - https://lg7en8vkt2.execute-api.us-east-1.amazonaws.com/dev/hello-world
+  GET - https://******.execute-api.us-east-1.amazonaws.com/dev/hello-world
 functions:
   helloWorld: aws-hello-nodejs-function-dev-helloWorld
 layers:
@@ -202,12 +202,12 @@ Serverless: Run the "serverless" command to setup monitoring, troubleshooting an
 以上日志中的 endpoints 展示了访问的接口地址，现在你可以通过接口来调用，或者 postman、curl 访问。
 
 ```
-$ curl https://lg7en8vkt2.execute-api.us-east-1.amazonaws.com/dev/hello-world
+$ curl https://******.execute-api.us-east-1.amazonaws.com/dev/hello-world
 ```
 
-## 本地测试 ServerLess-Online
+## 本地测试 ServerLess-Offline
 
-使用这个 serverless-online 插件可以在本地启动一个 HTTP 服务器模拟  AWS λ 和 API Gateway。
+使用这个 serverless-offline 插件可以在本地启动一个 HTTP 服务器模拟  AWS λ 和 API Gateway。
 
 ## 安装插件
 
@@ -257,7 +257,7 @@ https://q-angelo.github.io/project-training/serverless/movies/aws-hello-nodejs-f
 
 ## 总结
 
-通过本节入门指南，希望你能掌握如何去开启第一个 ServerLess 应用程序以及如何部署、在本地进行开发调试，因为这只是一个开始，下一节我将在这个基础之上使用 ServerLess、Node.js 和 MongoDB Atlas cloud 构建一个 REST API，敬请关注公众号 “Nodejs技术栈” 获取最新信息。
+通过本节入门指南，希望你能掌握如何去开启一个 ServerLess 应用程序以及如何部署、在本地进行开发调试，这只是一个开始，下一节我将在这个基础之上使用 ServerLess、Node.js 和 MongoDB Atlas cloud 构建一个 REST API，敬请关注公众号 “Nodejs技术栈” 获取最新信息。
 
 ## Reference
 
