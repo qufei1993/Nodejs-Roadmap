@@ -63,6 +63,9 @@
     - [Index 索引](/database/mongodb-indexes.md)
     - [操作符](/database/mongodb-operator.md)
 
+- ServerLess
+    - [Node.js 快速开启 ServerLess Functions：入门实践指南](/serverless/serverless-functions-using-node-and-aws.md)
+
 - Microservice
     - [服务注册与发现 Consul](microservice/consul.md)
     - [数据通信方式 RPC、HTTP、消息队列](/microservice/data-communication.md)
