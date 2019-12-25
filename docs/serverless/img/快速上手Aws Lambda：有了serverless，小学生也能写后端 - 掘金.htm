@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<!-- saved from url=(0057)https://juejin.im/post/5d16f3c96fb9a07ed84256ad#heading-7 -->
+<html lang="zh-Hans"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,viewport-fit=cover"><meta name="google-site-verification" content="cCHsgG9ktuCTgWgYfqCJql8AeR4gAne4DTZqztPoirE"><meta name="apple-itunes-app" content="app-id=987739104"><meta name="baidu-site-verification" content="qiK2a1kcFc"><meta name="360-site-verification" content="4c3c7d57d59f0e1a308462fbc7fd7e51"><meta name="sogou_site_verification" content="c49WUDZczQ"><style>body {
+        font-size: 16px;
+        line-height: 2;
+      }
+      a, button, input {
+        margin: 1rem 1.5rem;
+      }
+      img {
+        width: 0;
+        height: 0;
+      }
+      #juejin {
+        overflow-x: hidden;
+      }</style><title data-vue-meta="true">快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金</title><link rel="apple-touch-icon" sizes="180x180" href="https://b-gold-cdn.xitu.io/favicons/v2/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="https://b-gold-cdn.xitu.io/favicons/v2/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="https://b-gold-cdn.xitu.io/favicons/v2/favicon-16x16.png"><link rel="manifest" href="https://b-gold-cdn.xitu.io/favicons/v2/manifest.json"><link rel="mask-icon" href="https://b-gold-cdn.xitu.io/favicons/v2/safari-pinned-tab.svg" color="#5bbad5"><link rel="shortcut icon" href="https://b-gold-cdn.xitu.io/favicons/v2/favicon.ico"><meta name="msapplication-config" content="https://b-gold-cdn.xitu.io/favicons/v2/browserconfig.xml"><meta name="theme-color" content="#ffffff"><link rel="search" title="掘金" href="https://b-gold-cdn.xitu.io/conf/search.xml" type="application/opensearchdescription+xml"><link rel="stylesheet" href="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/ionicons.min.css"><link rel="stylesheet" href="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/iconfont.css"><link href="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/0.65fe8638158e8259158f.css" rel="stylesheet"><script async="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/hm.js"></script><script async="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/analytics.js"></script><script type="text/javascript" async="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/collect-v.3.2.14.js"></script><script type="text/javascript" async="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/vds.js"></script><script charset="utf-8" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/4.ac8a188a6a3e850f8d38.js"></script><meta data-vmid="keywords" name="keywords" content="Serverless" data-vue-meta="true"><meta data-vmid="description" name="description" content="Serverless¿ 我们近一两年来每天在各种公众号、前端大会上听见这个词。一听到什么serverless，什么微服务，总感觉自己像是一个外星科技的观光客，外星人的东西再好，我们单位没有这种基础设施我该怎么用呢？我一个小小的切图仔，难道还要我造一堆serve" data-vue-meta="true"></head><body><div id="juejin" data-v-5cbcd4ce=""><div class="global-component-box" data-v-5cbcd4ce=""><!----><div data-v-20d51c69="" data-v-5cbcd4ce="" class="alert-list alert-list"></div><div data-v-4c09243d="" data-v-5cbcd4ce="" class="suspension-panel suspension-panel"><button data-v-4c09243d="" title="回到顶部" class="btn to-top-btn" style=""><i data-v-4c09243d="" class="ion-android-arrow-dropup"></i></button><button data-v-4c09243d="" title="建议反馈" class="btn meiqia-btn" style=""><i data-v-4c09243d="" class="ion-chatbubble-working"></i></button></div><!----><!----><div class="emoji-barrage" data-v-9a89c020="" data-v-5cbcd4ce=""><!----></div><div class="book-new-user-award-popup" style="display:none;" data-v-d5d29aea="" data-v-5cbcd4ce=""><div class="content-box" style="display:;" data-v-d5d29aea=""><div class="close ion-close-round" data-v-d5d29aea=""></div><div class="header" data-v-d5d29aea=""><div class="icon" data-v-d5d29aea=""><img src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/icon.a87e5ae.svg" data-v-d5d29aea=""></div><div class="txt" data-v-d5d29aea="">新人专享好礼</div></div><div class="desc" data-v-d5d29aea="">凡未购买过小册的用户，均可领取三张 5 折新人专享券，购买小册时自动使用专享券，最高可节省 45 元。</div><div class="tickets" data-v-d5d29aea=""><div class="ticket" data-v-d5d29aea=""><div class="ticket__inner" data-v-d5d29aea=""><div class="enjoy" data-v-d5d29aea=""><span class="new-title" data-v-d5d29aea="">小册新人 5 折券</span></div><div class="sale" data-v-d5d29aea="">最高可省 15 元</div></div></div><div class="ticket" data-v-d5d29aea=""><div class="ticket__inner" data-v-d5d29aea=""><div class="enjoy" data-v-d5d29aea=""><span class="new-title" data-v-d5d29aea="">小册新人 5 折券</span></div><div class="sale" data-v-d5d29aea="">最高可省 15 元</div></div></div><div class="ticket" data-v-d5d29aea=""><div class="ticket__inner" data-v-d5d29aea=""><div class="enjoy" data-v-d5d29aea=""><span class="new-title" data-v-d5d29aea="">小册新人 5 折券</span></div><div class="sale" data-v-d5d29aea="">最高可省 15 元</div></div></div></div><div class="remark" data-v-d5d29aea="">注：专享券的使用期限在领券的七天内。</div><div class="submit-btn" data-v-d5d29aea="">一键领取</div></div><div class="model success" style="display:none;" data-v-d5d29aea=""><div class="heading" data-v-d5d29aea="">领取成功</div><div class="content-text" data-v-d5d29aea="">购买小册时自动使用专享券</div><div class="btn-success-footer" data-v-d5d29aea=""><div class="btn-ok" data-v-d5d29aea="">知道了</div><div class="btn-ok btn-link" data-v-d5d29aea="">前往小册首页</div></div></div><div class="model fail" style="display:none;" data-v-d5d29aea=""><div class="heading" data-v-d5d29aea="">领取失败</div><div class="content-text" data-v-d5d29aea="">本活动仅适用于小册新用户</div><div class="btn-ok" data-v-d5d29aea="">知道了</div></div></div><!----><!----><div class="bind-phone-number-modal-box" data-v-0e342ad4="" data-v-5cbcd4ce=""><div st:block="bindPhoneNumberModal" class="modal-mask" style="display:none;" data-v-0e342ad4=""></div><form class="bind-phone-number-form" style="display:none;" data-v-0e342ad4=""><i title="关闭" class="close-btn ion-close-round" data-v-0e342ad4=""></i><h1 class="title" data-v-0e342ad4="">提示</h1><h2 class="hint" data-v-0e342ad4="">根据我国<a href="http://www.cac.gov.cn/2017-08/25/c_1121541842.htm" target="_blank" style="color:#007fff">《互联网跟帖评论服务管理规定》</a>，您需要绑定手机号后才可在掘金社区内发布内容。</h2><div class="input-group" data-v-0e342ad4=""><div class="input-box" data-v-0e342ad4=""><input maxlength="64" placeholder="请输入要绑定的手机号码" value="" class="input" data-v-0e342ad4=""></div><!----><!----></div><button st:name="bindBtn" class="btn" data-v-0e342ad4="">绑定手机</button></form></div></div><!----><div data-v-0f685764="" data-v-78f25c42="" data-v-5cbcd4ce="" class="view-container"><div data-v-0f685764="" class="main-header-box"><header data-v-62c99c92="" data-v-0f685764="" class="main-header main-header"><div data-v-62c99c92="" class="container"><a data-v-62c99c92="" href="https://juejin.im/" class="logo"><img data-v-62c99c92="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/logo.a7995ad.svg" alt="掘金" class="logo-img"><img data-v-62c99c92="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/simplify-logo.3e3c253.svg" alt="掘金" class="mobile"></a><nav data-v-62c99c92="" role="navigation" class="main-nav"><ul data-v-62c99c92="" class="nav-list"><li data-v-62c99c92="" class="main-nav-list"><div data-v-62c99c92="" class="phone-show-menu"><span data-v-62c99c92="">首页</span><div data-v-62c99c92="" class="icon ion-arrow-down-b"></div></div><ul data-v-62c99c92="" class="phone-hide"><li data-v-62c99c92="" class="nav-item link-item route-active"><a data-v-62c99c92="" href="https://juejin.im/">首页</a></li><li data-v-62c99c92="" class="nav-item link-item activities"><a data-v-62c99c92="" href="https://juejin.im/pins">沸点</a></li><li data-v-62c99c92="" class="nav-item link-item"><a data-v-62c99c92="" href="https://juejin.im/topics">话题</a></li><li data-v-62c99c92="" class="nav-item link-item book"><a data-v-62c99c92="" href="https://juejin.im/books">小册</a></li><li data-v-62c99c92="" class="nav-item link-item"><a data-v-62c99c92="" href="https://juejin.im/events/all">活动</a></li></ul></li><li data-v-62c99c92="" class="nav-item search"><form data-v-62c99c92="" role="search" class="search-form"><input data-v-62c99c92="" type="search" maxlength="32" placeholder="搜索掘金" class="search-input"><img data-v-62c99c92="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/juejin-search-icon.6f8ba1b.svg" alt="搜索" class="search-icon"></form></li><li data-v-62c99c92="" class="nav-item add"><div data-v-62c99c92="" class="add-group"><button data-v-62c99c92="" class="add-btn">写文章</button><div data-v-62c99c92="" class="more"><i data-v-62c99c92="" class="more-icon ion-android-arrow-dropdown"></i></div><ul data-v-62c99c92="" class="more-list"><li data-v-62c99c92="" class="item">发布沸点</li><li data-v-62c99c92="" class="item">分享链接</li><!----></ul></div><!----></li><li data-v-62c99c92="" class="nav-item notification"><a data-v-62c99c92="" class="app-link" href="https://juejin.im/notification" target="_blank"><i data-v-62c99c92="" class="icon ion-android-notifications"></i><!----></a></li><li data-v-62c99c92="" class="nav-item menu"><div data-v-126b87aa="" data-v-155c09bf="" data-v-62c99c92="" data-src="https://user-gold-cdn.xitu.io/2019/10/19/16de2a8e5240463d?imageView2/1/w/100/h/100/q/85/format/webp/interlace/1" class="lazy avatar avatar loaded immediate" style="background-image: url(&quot;https://user-gold-cdn.xitu.io/2019/10/19/16de2a8e5240463d?imageView2/1/w/100/h/100/q/85/format/webp/interlace/1&quot;);"></div><!----><ul data-v-62c99c92="" class="nav-menu user-dropdown-list" style="display: none;"><div data-v-62c99c92="" class="nav-menu-item-group"><li data-v-62c99c92="" class="nav-menu-item"><a data-v-62c99c92=""><i data-v-62c99c92="" class="fengwei fw-write"></i><span data-v-62c99c92="">写文章</span></a></li><!----><li data-v-62c99c92="" class="nav-menu-item"><a data-v-62c99c92=""><i data-v-62c99c92="" class="fengwei fw-draft"></i><span data-v-62c99c92="">草稿</span></a></li></div><div data-v-62c99c92="" class="nav-menu-item-group"><li data-v-62c99c92="" class="nav-menu-item"><a data-v-62c99c92="" href="https://juejin.im/user/5ae4348f6fb9a07aac2436f1" class="link-icon"><i data-v-62c99c92="" class="fengwei fw-person"></i><span data-v-62c99c92="">我的主页</span><!----></a></li><li data-v-62c99c92="" class="nav-menu-item"><a data-v-62c99c92="" href="https://juejin.im/user/5ae4348f6fb9a07aac2436f1/likes"><img data-v-62c99c92="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/zan.e9d7698.svg" class="zan"><span data-v-62c99c92="">我赞过的</span></a></li><!----><li data-v-62c99c92="" class="nav-menu-item"><a data-v-62c99c92="" href="https://juejin.im/user/5ae4348f6fb9a07aac2436f1/collections"><img data-v-62c99c92="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/collect.02e2979.svg" class="collect"><span data-v-62c99c92="">我的收藏集</span></a></li><li data-v-62c99c92="" class="nav-menu-item"><a data-v-62c99c92="" href="https://juejin.im/user/5ae4348f6fb9a07aac2436f1/books?type=bought"><i data-v-62c99c92="" class="fengwei fw-bought"></i><span data-v-62c99c92="">已购</span></a></li><li data-v-62c99c92="" class="nav-menu-item"><a data-v-62c99c92="" href="https://juejin.im/subscribe"><i data-v-62c99c92="" class="fengwei fw-tag"></i><span data-v-62c99c92="">标签管理</span></a></li></div><div data-v-62c99c92="" class="nav-menu-item-group"><li data-v-62c99c92="" class="nav-menu-item"><a data-v-62c99c92="" href="https://juejin.im/user/settings"><i data-v-62c99c92="" class="fengwei fw-setting"></i><span data-v-62c99c92="">设置</span></a></li><li data-v-62c99c92="" class="nav-menu-item more"><a data-v-62c99c92=""><i data-v-62c99c92="" class="fengwei fw-info"></i><span data-v-62c99c92="">关于</span><i data-v-62c99c92="" class="ion-chevron-right more-icon"></i></a><ul data-v-62c99c92="" class="nav-menu more-dropdown-list"><div data-v-62c99c92="" class="nav-menu-item-group"><li data-v-62c99c92="" class="nav-menu-item"><a data-v-62c99c92="" href="https://juejin.im/app" target="_blank">下载应用</a></li><li data-v-62c99c92="" class="nav-menu-item"><a data-v-62c99c92="" href="https://juejin.im/about" target="_blank">关于</a></li><li data-v-62c99c92="" class="nav-menu-item"><a data-v-62c99c92="" href="https://xitu.io/jobs" target="_blank">加入我们</a></li><li data-v-62c99c92="" class="nav-menu-item"><a data-v-62c99c92="" href="https://github.com/xitu/gold-miner" rel="nofollow noopener noreferrer" target="_blank">翻译计划</a></li><li data-v-62c99c92="" class="nav-menu-item"><a data-v-62c99c92="" href="https://bd.juejin.im/?utm_campaign=bd&amp;utm_source=web&amp;utm_medium=nav" target="_blank">合作伙伴</a></li></div></ul></li></div><div data-v-62c99c92="" class="nav-menu-item-group"><li data-v-62c99c92="" class="nav-menu-item"><a data-v-62c99c92=""><i data-v-62c99c92="" class="fengwei fw-logout"></i><span data-v-62c99c92="">登出</span></a></li></div></ul></li><!----><!----></ul></nav></div></header></div><main data-v-0f685764="" class="container main-container"><div data-v-78f25c42="" data-v-0f685764="" class="view column-view"><div data-v-78f25c42="" data-v-0f685764="" class="main-area article-area shadow"><article data-v-78f25c42="" itemscope="itemscope" itemtype="http://schema.org/Article" class="article" data-v-0f685764=""><meta itemprop="url" content="https://juejin.im/post/5d16f3c96fb9a07ed84256ad"><meta itemprop="headline" content="快速上手Aws Lambda：有了serverless，小学生也能写后端"><meta itemprop="keywords" content="Serverless"><meta itemprop="datePublished" content="2019-07-03T06:22:28.962Z"><meta itemprop="image" content="https://user-gold-cdn.xitu.io/2019/7/3/16bb67f23ff566ea?w=750&amp;h=311&amp;f=jpeg&amp;s=65730"><div itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person"><meta itemprop="name" content="yuanfux"><meta itemprop="url" content="https://juejin.im/user/5a8f8a3bf265da4e9016c02e"></div><div itemprop="publisher" itemscope="itemscope" itemtype="http://schema.org/Organization"><meta itemprop="name" content="掘金"><div itemprop="logo" itemscope="itemscope" itemtype="https://schema.org/ImageObject"><meta itemprop="url" content="https://b-gold-cdn.xitu.io/icon/icon-white-180.png"><meta itemprop="width" content="180"><meta itemprop="height" content="180"></div></div><div data-v-78f25c42="" class="author-info-block"><a data-v-78f25c42="" href="https://juejin.im/user/5a8f8a3bf265da4e9016c02e" target="_blank" rel="" class="avatar-link"><div data-v-126b87aa="" data-v-155c09bf="" data-v-78f25c42="" data-src="https://mirror-gold-cdn.xitu.io/168e08e11316db52dad?imageView2/1/w/100/h/100/q/85/format/webp/interlace/1" class="lazy avatar avatar" style="background-image: none;"></div></a><div data-v-78f25c42="" class="author-info-box"><a data-v-88bf2650="" data-v-78f25c42="" href="https://juejin.im/user/5a8f8a3bf265da4e9016c02e" target="_blank" rel="" class="username username ellipsis">yuanfux<a data-v-0aeee531="" data-v-88bf2650="" href="https://juejin.im/book/5c90640c5188252d7941f5bb/section/5c9065385188252da6320022" target="_blank" rel="" class="rank"><img data-v-0aeee531="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/lv-2.f597b88.svg" alt="lv-2"></a></a><div data-v-78f25c42="" class="meta-box"><time data-v-78f25c42="" datetime="2019-07-03T06:22:28.962Z" title="Wed Jul 03 2019 14:22:28 GMT+0800 (中国标准时间)" class="time">2019年07月03日</time><span data-v-78f25c42="" class="views-count">阅读 923</span><!----></div></div><button data-v-7df90795="" data-v-78f25c42="" class="follow-button follow">关注</button></div><div data-v-126b87aa="" data-v-005099d8="" data-v-78f25c42="" data-src="https://user-gold-cdn.xitu.io/2019/7/3/16bb67f23ff566ea?imageView2/1/w/1304/h/734/q/85/format/webp/interlace/1" class="lazy thumb article-hero" style="background-image: none; background-size: cover;"></div><h1 data-v-78f25c42="" class="article-title">快速上手Aws Lambda：有了serverless，小学生也能写后端</h1><div data-v-78f25c42="" data-id="5d1c49a4f265da1b715310ad" itemprop="articleBody" class="article-content"><h2 class="heading" data-id="heading-0">Serverless¿</h2>
+<p>我们近一两年来每天在各种公众号、前端大会上听见这个词。一听到什么serverless，什么微服务，总感觉自己像是一个外星科技的观光客，外星人的东西再好，我们单位没有这种基础设施我该怎么用呢？我一个小小的切图仔，难道还要我造一堆serverless的设施出来？</p>
+<p>既然地球没有，那我们只能去外星偷学一波技能，正所谓“<em>师夷长技</em>”，没准哪一天地球招人的时候也需要有serverless开发经验的工程师呢。</p>
+<h2 class="heading" data-id="heading-1">什么是serverless?</h2>
+<p>晦涩的外星语言我就不在这里多做赘述了，相信大家对什么BaaS, FaaS这种词都看了不下数十遍了，用地球人的话来说就是：有了serverless，大家在写应用时再也不用去关心什么服务器、后端运维了，我们只需要专注在写业务逻辑代码就行了。下面再重述一下几条老生常谈的优势</p>
+<ol>
+<li>应用开发迅速</li>
+<li>服务弹性伸缩</li>
+<li>按用量收费</li>
+</ol>
+<p>听到这可能有些人就会想了，serverless这么厉害，是不是后端和运维同事都得下岗了呢？这个问题可以说是见仁见智的，我可以表达一个个人的想法：在大规模使用serverless架构的前提下，对于有serverless基础设施的公司来说，serverless能将后端从业务中解放出来，更加明确地划分不同工程师的职责；而对于依赖于他人serverless服务的公司来说，JS全栈工程师就已经足以胜任所有业务开发的职责了。</p>
+<h2 class="heading" data-id="heading-2">Serverless服务商选择</h2>
+<blockquote>
+<p>在真正体验之前，先来对比一下现有的几家Serverless服务商</p>
+</blockquote>
+<div style="text-align: center;">
+    <img alt="drawing" style="width: 150px;" class="lazyload inited" data-src="https://user-gold-cdn.xitu.io/2019/7/2/16bb17e98a071dc9?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" data-width="311" data-height="236" src="data:image/svg+xml;utf8,&lt;?xml version=&quot;1.0&quot;?&gt;&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; version=&quot;1.1&quot; width=&quot;311&quot; height=&quot;236&quot;&gt;&lt;/svg&gt;">
+</div>
+<ol>
+<li>Aws Lambda - 亚马逊的Lambda最早推出于2014年，是最为著名的serverless计算服务提供商，一度成为serverless的代名词。Netflix（美国爱奇艺）就是该服务较为出名的客户案例。
+<ul>
+<li>免费额度：每月<code>100万</code>次请求以及<code>400000GB-秒</code>的计算时间</li>
+<li>收费：<code>$0.00001667 / GB-秒</code></li>
+</ul>
+</li>
+</ol>
+<div style="text-align: center;">
+    <img alt="drawing" style="width: 150px;" class="lazyload inited" data-src="https://user-gold-cdn.xitu.io/2019/7/2/16bb17fe6acf162c?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" data-width="400" data-height="300" src="data:image/svg+xml;utf8,&lt;?xml version=&quot;1.0&quot;?&gt;&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; version=&quot;1.1&quot; width=&quot;400&quot; height=&quot;300&quot;&gt;&lt;/svg&gt;">
+</div>
+<ol start="2">
+<li>
+<p>Azure Functions - 微软于2016年推出了他们的serverless解决方案Azure Functions。</p>
+<ul>
+<li>免费额度：每月<code>100万</code>次请求以及<code>400000GB-秒</code>的计算时间</li>
+<li>收费：<code>$0.000016 / GB-秒</code></li>
+</ul>
+</li>
+<li>
+<p>Google Cloud Functions - 谷歌于2017年推出的解决方案，早期落后于亚马逊与微软，但是在近年来修复了不少问题，有迎头赶上的趋势。</p>
+<ul>
+<li>免费额度：每月<code>200万</code>次请求以及<code>400000GB-秒</code>的计算时间</li>
+<li>收费：<code>$0.0000004 / GB-秒</code>（额外征收<code>内存</code>与<code>CPU</code>的费用）</li>
+</ul>
+</li>
+</ol>
+<div style="text-align: center;">
+    <img alt="drawing" style="width: 150px;" class="lazyload inited" data-src="https://user-gold-cdn.xitu.io/2019/7/2/16bb1820c91f2226?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" data-width="650" data-height="341" src="data:image/svg+xml;utf8,&lt;?xml version=&quot;1.0&quot;?&gt;&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; version=&quot;1.1&quot; width=&quot;650&quot; height=&quot;341&quot;&gt;&lt;/svg&gt;">
+</div>
+<ol start="4">
+<li>IBM Cloud Functions - IBM最新推出的基于开源Serverless项目Apache OpenWhisk的解决方案。
+<ul>
+<li>免费额度：每月<code>100万</code>次请求以及<code>400000GB-秒</code>的计算时间</li>
+<li>收费：<code>$0.000017 / GB-秒</code></li>
+</ul>
+</li>
+</ol>
+<div style="text-align: center;">
+    <img alt="drawing" style="width: 130px;" class="lazyload inited loaded" data-src="https://user-gold-cdn.xitu.io/2019/7/2/16bb18428460e6ac?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" data-width="354" data-height="354" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/16bb18428460e6ac">
+</div>
+<ol start="5">
+<li>阿里云函数计算 - 阿里云最早于2017年亮相的serverless项目。
+<ul>
+<li>免费额度：每月<code>100万</code>次请求以及<code>400000GB-秒</code>的计算时间</li>
+<li>收费：<code>$0.00001617 / GB-秒</code>（按当前汇率 1 : 6.87计算）</li>
+</ul>
+</li>
+</ol>
+<p>从<code>价格</code>的角度来看，较为贵的一家是谷歌，尽管提供了<code>200万</code>次的免费请求额度，谷歌对于<code>内存</code>与<code>CPU</code>的额外收费会显著提高使用他家服务的开支。另外四家的价格都是较为接近的，其中以微软最低，IBM最高，亚马逊和阿里云处于中游。</p>
+<p>从<code>实用</code>的角度来看，亚马逊和微软的服务仍然以完善的设施（触发器种类多、支持语言多...） 和丰富的社区支持在多数评测中占据了上风，而谷歌与刚崭露头角的IBM、阿里云依然是处于跟跑的状态。这五家中Lambda可以说是体验serverless的最佳选择了。</p>
+<h2 class="heading" data-id="heading-3">Serverless应用框架</h2>
+<blockquote>
+<p>我们选择serverless框架来快速创建、部署Lambda服务。</p>
+</blockquote>
+<div style="text-align: center;">
+    <img alt="drawing" style="width: 500px;" class="lazyload inited loaded" data-src="https://user-gold-cdn.xitu.io/2019/7/2/16bb185f87b84978?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" data-width="1280" data-height="382" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/16bb185f87b84978">
+</div>
+<p>这里的<a target="_blank" href="https://github.com/serverless/serverless" rel="nofollow noopener noreferrer">serverless</a>指的是一个在GitHub上超过3万星的一个cli工具。通过serverless cli，我们可以快速生成Lambda服务模版，标准化、工程化服务的开发以及一键部署服务至多套的环境与节点，极大地缩短了服务开发至上线的时间。</p>
+<p>如果你是一个更加信赖纯净的AWS设施的人，愿意跟随着原汁原味的<a target="_blank" href="https://docs.aws.amazon.com/zh_cn/lambda/latest/dg/welcome.html" rel="nofollow noopener noreferrer">AWS Lambda开发文档</a>来开发的话，那也是极好的。只是可能我的服务今天就上线了，你的要等到后天。</p>
+<br>
+<br>
+<br>
+<br>
+<h2 class="heading" data-id="heading-4">在Lambda上搭建服务</h2>
+<h3 class="heading" data-id="heading-5">目标</h3>
+<p>接下来的两个小时，我们要在Lambda上部署一套常见的用户服务，包含以下四个接口</p>
+<ol>
+<li><code>/api/user/signup</code> - 创建一个新用户并录入数据库</li>
+<li><code>/api/user/login</code> - 登入并返回JSON Web Token来让用户访问私有接口</li>
+<li><code>/api/public</code> - 公共接口，无须登入的用户也可访问</li>
+<li><code>/api/private</code> - 私有接口，只有登入后的用户才能访问</li>
+</ol>
+<h3 class="heading" data-id="heading-6">准备材料</h3>
+<ol>
+<li>通畅的全球互联网</li>
+<li>一个可用的AWS账号</li>
+<li>根据<a target="_blank" href="https://github.com/serverless/serverless#quick-start" rel="nofollow noopener noreferrer">serverless文档</a>完成前两步
+<ul>
+<li><code>npm install -g serverless</code></li>
+<li><a target="_blank" href="https://github.com/serverless/serverless/blob/master/docs/providers/aws/guide/credentials.md" rel="nofollow noopener noreferrer"><code>设置AWS Credentials</code></a></li>
+</ul>
+</li>
+</ol>
+<h3 class="heading" data-id="heading-7">创建工程</h3>
+<blockquote>
+<p>我们选择的语言是JS，数据库是DynamoDb，从serverless的示例库中很快可以找到这样的模版<a target="_blank" href="https://github.com/serverless/examples/tree/master/aws-node-rest-api-with-dynamodb" rel="nofollow noopener noreferrer">aws-node-rest-api-with-dynamodb</a></p>
+</blockquote>
+<p>复制模版至本地作为起步工程</p>
+<pre><code class="hljs bash copyable" lang="bash">serverless install -u https://github.com/serverless/examples/tree/master/aws-node-rest-api-with-dynamodb
+<span class="copy-code-btn">复制代码</span></code></pre><p>这个工程包含了一个Todo列表的CRUD操作服务。核心文件有：</p>
+<ol>
+<li>
+<p><code>serverless.yml</code>定义了该服务所提供的<code>Lambda函数</code>、触发函数的<code>触发器</code>以及运行该函数所需要的其他<code>AWS资源</code>。</p>
+</li>
+<li>
+<p><code>package.json</code>定义了该服务所依赖的其他库。</p>
+</li>
+<li>
+<p><code>todos</code>目录下包含了所有的函数文件。我们可以看到函数都是较为直白的，每一个文件都是类似以下的结构：</p>
+<pre><code class="hljs js copyable" lang="js"><span class="hljs-keyword">const</span> AWS = <span class="hljs-built_in">require</span>(<span class="hljs-string">'aws-sdk'</span>); <span class="hljs-comment">// 引入AWS SDK</span>
+<span class="hljs-keyword">const</span> dynamoDb = <span class="hljs-keyword">new</span> AWS.DynamoDB.DocumentClient(); <span class="hljs-comment">// 建立dynamoDb实例</span>
+
+<span class="hljs-comment">// 通过 module.exports 来导出该函数</span>
+<span class="hljs-built_in">module</span>.exports.create = <span class="hljs-function">(<span class="hljs-params">event, context, callback</span>) =&gt;</span> {
+    <span class="hljs-keyword">const</span> data = <span class="hljs-built_in">JSON</span>.parse(event.body); <span class="hljs-comment">// 解析event来获得请求数据</span>
+    <span class="hljs-comment">/*
+      业务逻辑
+    */</span>
+    callback(); <span class="hljs-comment">// 用callback来返回响应数据</span>
+}
+
+<span class="copy-code-btn">复制代码</span></code></pre></li>
+</ol>
+<p>当我们运行<code>npm install</code>与<code>serverless deploy</code>将该起步工程部署到云端后，就可以通过Api地址（例：<a target="_blank" href="https://xxxxxx.execute-api.us-east-1.amazonaws.com/dev/todos" rel="nofollow noopener noreferrer">xxxxxx.execute-api.us-east-1.amazonaws.com/dev/todos</a>）来运行和访问这些函数。</p>
+<h3 class="heading" data-id="heading-8">创建与定义函数</h3>
+<p>根据这个工程原有的函数 ，创建类似的函数文件并非难事，我们在工程中创建以下4个文件：</p>
+<ul>
+<li>user/signup.js</li>
+<li>user/login.js</li>
+<li>user/public.js</li>
+<li>user/private.js</li>
+</ul>
+<p>但仅仅创建函数文件是不够的，我们需要同时在<code>serverless.yml</code>中为这几个函数添加定义。以<code>signup</code>函数为例，在<code>functions</code>中添加以下内容：</p>
+<pre><code class="hljs yml copyable" lang="yml"><span class="hljs-attr">signup:</span>
+<span class="hljs-attr">    handler:</span> <span class="hljs-string">user/signup.signup</span> <span class="hljs-comment">#定义了函数文件的路径</span>
+<span class="hljs-attr">    events:</span>
+<span class="hljs-attr">      - http:</span> <span class="hljs-comment">#定义了函数触发器种类为http (AWS API Gateway)</span>
+<span class="hljs-attr">          path:</span> <span class="hljs-string">api/user/signup</span> <span class="hljs-comment">#定义了请求路径</span>
+<span class="hljs-attr">          method:</span> <span class="hljs-string">post</span> <span class="hljs-comment">#定义了请求method种类</span>
+<span class="hljs-attr">          cors:</span> <span class="hljs-literal">true</span> <span class="hljs-comment">#开启跨域</span>
+<span class="copy-code-btn">复制代码</span></code></pre><p>这样我们就完整地定义了4个函数。接下来我们来看这四个函数具体的实现方法。</p>
+<br>
+<br>
+<h3 class="heading" data-id="heading-9">Public函数</h3>
+<blockquote>
+<p><code>GET</code></p>
+</blockquote>
+<blockquote>
+<p>返回一条无须登陆即可访问的信息</p>
+</blockquote>
+<h4 class="heading" data-id="heading-10">1. 返回消息</h4>
+<p><code>public</code>函数是4个函数中最为简易的一个，因为该函数是完全公开的，我们不需要对该函数做任何校验。如下，简单地返回一条信息便可：</p>
+<pre><code class="hljs js copyable" lang="js"><span class="hljs-comment">// user/public.js</span>
+<span class="hljs-built_in">module</span>.exports.public = <span class="hljs-function">(<span class="hljs-params">event, context, callback</span>) =&gt;</span> {
+  <span class="hljs-keyword">const</span> response = {
+    <span class="hljs-attr">statusCode</span>: <span class="hljs-number">200</span>,
+    <span class="hljs-attr">body</span>: <span class="hljs-built_in">JSON</span>.stringify({
+      <span class="hljs-attr">message</span>: <span class="hljs-string">'任何人都可以阅读此条信息。'</span>
+    })
+  }
+  <span class="hljs-keyword">return</span> callback(<span class="hljs-literal">null</span>, response);
+};
+<span class="copy-code-btn">复制代码</span></code></pre><blockquote>
+<p>注：<code>callback</code>第一个参数传入的为错误，第二个参数传入的为响应数据。</p>
+</blockquote>
+<h4 class="heading" data-id="heading-11">2. 部署及访问服务</h4>
+<ul>
+<li>执行以下命令来部署<code>public</code>函数<pre><code class="hljs bash copyable" lang="bash"><span class="hljs-comment"># 部署单个函数</span>
+serverless deploy <span class="hljs-keyword">function</span> <span class="hljs-_">-f</span> public
+<span class="copy-code-btn">复制代码</span></code></pre>或<pre><code class="hljs bash copyable" lang="bash"><span class="hljs-comment"># 部署所有函数</span>
+serverless deploy
+<span class="copy-code-btn">复制代码</span></code></pre></li>
+<li>在浏览器中直接输入API地址或用cURL工具执行以下命令来发送请求（替换成你的API地址，API地址可在运行<code>serverless deploy</code>后的log中或在<code>AWS API Gateway控制台</code> - <code>阶段（stage）</code>中找到）<pre><code class="hljs bash copyable" lang="bash">curl -X GET https://xxxxxx.execute-api.us-west-2.amazonaws.com/dev/api/public
+<span class="copy-code-btn">复制代码</span></code></pre></li>
+<li>返回数据<pre><code class="hljs json copyable" lang="json">{
+   <span class="hljs-attr">"message"</span>: <span class="hljs-string">"任何人都可以阅读此条信息。"</span>
+}
+<span class="copy-code-btn">复制代码</span></code></pre></li>
+</ul>
+<br>
+<br>
+<h3 class="heading" data-id="heading-12">Sign up函数</h3>
+<blockquote>
+<p><code>POST</code></p>
+</blockquote>
+<blockquote>
+<p>创建一个新用户并录入数据库，返回成功或失败信息</p>
+</blockquote>
+<h4 class="heading" data-id="heading-13">1. 定义资源</h4>
+<p><code>signup</code>函数的运行需要<code>DynamoDB</code>这一资源，所以第一步我们需要在<code>serverless.yml</code>文件中对<code>resources</code>进行如下修改</p>
+<pre><code class="hljs yml copyable" lang="yml"><span class="hljs-comment"># serverless.yml</span>
+<span class="hljs-attr">resources:</span>
+<span class="hljs-attr">  Resources:</span>
+<span class="hljs-attr">    UserDynamoDbTable:</span>
+<span class="hljs-attr">      Type:</span> <span class="hljs-string">'AWS::DynamoDB::Table'</span> <span class="hljs-comment">#资源种类为DynamoDB表</span>
+<span class="hljs-attr">      DeletionPolicy:</span> <span class="hljs-string">Retain</span> <span class="hljs-comment">#当删除CloudFormation Stack（serverless remove）时保留该表</span>
+<span class="hljs-attr">      Properties:</span>
+<span class="hljs-attr">        AttributeDefinitions:</span> <span class="hljs-comment">#定义表的属性</span>
+<span class="hljs-bullet">          -</span>
+<span class="hljs-attr">            AttributeName:</span> <span class="hljs-string">username</span> <span class="hljs-comment">#属性名</span>
+<span class="hljs-attr">            AttributeType:</span> <span class="hljs-string">S</span> <span class="hljs-comment">#属性类型为字符串</span>
+<span class="hljs-attr">        KeySchema:</span> <span class="hljs-comment">#描述表的主键</span>
+<span class="hljs-bullet">          -</span>
+<span class="hljs-attr">            AttributeName:</span> <span class="hljs-string">username</span> <span class="hljs-comment">#键对应的属性名</span>
+<span class="hljs-attr">            KeyType:</span> <span class="hljs-string">HASH</span> <span class="hljs-comment">#键类型为哈希</span>
+<span class="hljs-attr">        ProvisionedThroughput:</span> <span class="hljs-comment">#表的预置吞吐量</span>
+<span class="hljs-attr">          ReadCapacityUnits:</span> <span class="hljs-number">1</span> <span class="hljs-comment">#读取量为1单元</span>
+<span class="hljs-attr">          WriteCapacityUnits:</span> <span class="hljs-number">1</span> <span class="hljs-comment">#写入量为1单元</span>
+        <span class="hljs-comment">#用serverless变量来定义表名，表名为环境变量中的定义的DYNAMODB_TABLE</span>
+<span class="hljs-attr">        TableName:</span> <span class="hljs-string">${self:provider.environment.DYNAMODB_TABLE}</span>
+<span class="copy-code-btn">复制代码</span></code></pre><blockquote>
+<p><code>resources</code>一栏中填写的内容是使用<code>yaml</code>语法写的<a target="_blank" href="https://aws.amazon.com/cn/cloudformation/aws-cloudformation-templates/" rel="nofollow noopener noreferrer">AWS CloudFormation的模版</a>。</p>
+</blockquote>
+<blockquote>
+<p>DynamoDB表在CloudFormation中更为详细定义文档请参考<a target="_blank" href="https://docs.aws.amazon.com/zh_cn/AWSCloudFormation/latest/UserGuide/aws-resource-dynamodb-table.html" rel="nofollow noopener noreferrer">链接</a>。</p>
+</blockquote>
+<h4 class="heading" data-id="heading-14">2. 获取请求数据</h4>
+<p><code>signup</code>是一个方法为<code>POST</code>的接口，因此需要从触发事件的<code>body</code>中获取请求数据。</p>
+<pre><code class="hljs js copyable" lang="js"><span class="hljs-comment">// user/signup.js</span>
+<span class="hljs-built_in">module</span>.exports.signup = <span class="hljs-function">(<span class="hljs-params">event, context, callback</span>) =&gt;</span> {
+  <span class="hljs-comment">// 获取请求数据并解析JSON字符串</span>
+  <span class="hljs-keyword">const</span> data = <span class="hljs-built_in">JSON</span>.parse(event.body);
+  <span class="hljs-keyword">const</span> { username, password } = data;
+  <span class="hljs-comment">/*
+    ...
+    校验 username 与 passowrd
+  */</span>
+}
+<span class="copy-code-btn">复制代码</span></code></pre><h4 class="heading" data-id="heading-15">3. 录入用户至DynamoDB</h4>
+<p>获取完了请求数据后，我们需要构造出新用户的数据，并把数据录入DynamoDB</p>
+<pre><code class="hljs js copyable" lang="js"><span class="hljs-comment">// user/signup.js</span>
+<span class="hljs-comment">// 引入nodejs加密库</span>
+<span class="hljs-keyword">const</span> crypto = <span class="hljs-built_in">require</span>(<span class="hljs-string">'crypto'</span>);
+<span class="hljs-comment">// 创建dynamoDB实例</span>
+<span class="hljs-keyword">const</span> AWS = <span class="hljs-built_in">require</span>(<span class="hljs-string">'aws-sdk'</span>); 
+<span class="hljs-keyword">const</span> dynamoDb = <span class="hljs-keyword">new</span> AWS.DynamoDB.DocumentClient();
+
+<span class="hljs-built_in">module</span>.exports.signup = <span class="hljs-function">(<span class="hljs-params">event, context, callback</span>) =&gt;</span> {
+  <span class="hljs-comment">// ...获取并校验 username 与 password</span>
+
+  <span class="hljs-comment">// 生成新用户的数据</span>
+  
+  <span class="hljs-comment">// 生成salt来确保哈希后密码的唯一性</span>
+  <span class="hljs-keyword">const</span> salt = crypto.randomBytes(<span class="hljs-number">16</span>).toString(<span class="hljs-string">'hex'</span>);
+  <span class="hljs-comment">// 用sha512哈希函数加密，生成仅可单向验证的哈希密码</span>
+  <span class="hljs-keyword">const</span> hashedPassword = crypto.pbkdf2Sync(password, salt, <span class="hljs-number">10000</span>, <span class="hljs-number">512</span>, <span class="hljs-string">'sha512'</span>).toString(<span class="hljs-string">'hex'</span>);
+  <span class="hljs-keyword">const</span> timestamp = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>().getTime(); <span class="hljs-comment">// 生成当前时间戳</span>
+  <span class="hljs-keyword">const</span> params = {
+    <span class="hljs-attr">TableName</span>: process.env.DYNAMODB_TABLE, <span class="hljs-comment">// 从环境变量中获取DynamoDB表名</span>
+    Item: {
+      username, <span class="hljs-comment">// 用户名</span>
+      salt, <span class="hljs-comment">// 保存salt用于登陆时单向校验密码</span>
+      password: hashedPassword, <span class="hljs-comment">// 哈希密码</span>
+      createdAt: timestamp, <span class="hljs-comment">// 生成时间</span>
+      updatedAt: timestamp <span class="hljs-comment">// 更新时间</span>
+    }
+  }
+  <span class="hljs-comment">// 录入至dynamoDb</span>
+  dynamoDb.put(params, (error) =&gt; {
+    <span class="hljs-comment">// 返回失败信息</span>
+    <span class="hljs-keyword">if</span> (error) {
+      <span class="hljs-comment">// log错误信息，可在AWS CloudWatch服务中查看</span>
+      <span class="hljs-built_in">console</span>.error(error);
+      callback(<span class="hljs-literal">null</span>, {
+        <span class="hljs-attr">statusCode</span>: <span class="hljs-number">500</span>,
+        <span class="hljs-attr">body</span>: <span class="hljs-built_in">JSON</span>.stringify({
+          <span class="hljs-attr">message</span>: <span class="hljs-string">'创建用户失败！'</span>
+        })
+      });
+    } <span class="hljs-keyword">else</span> {
+      <span class="hljs-comment">// 返回成功信息</span>
+      callback(<span class="hljs-literal">null</span>, {
+        <span class="hljs-attr">statusCode</span>: <span class="hljs-number">200</span>,
+        <span class="hljs-attr">body</span>: <span class="hljs-built_in">JSON</span>.stringify({
+          <span class="hljs-attr">message</span>: <span class="hljs-string">'创建用户成功！'</span>
+        })
+      });
+    }
+}
+<span class="copy-code-btn">复制代码</span></code></pre><blockquote>
+<p>DynamoDB在Nodejs中更详细的CRUD操作文档请参考<a target="_blank" href="https://docs.aws.amazon.com/zh_cn/amazondynamodb/latest/developerguide/GettingStarted.NodeJs.03.html" rel="nofollow noopener noreferrer">链接</a></p>
+</blockquote>
+<h4 class="heading" data-id="heading-16">4. 部署及访问服务</h4>
+<ul>
+<li>执行以下命令来部署<code>signup</code>函数<pre><code class="hljs bash copyable" lang="bash"><span class="hljs-comment"># 部署单个函数</span>
+serverless deploy <span class="hljs-keyword">function</span> <span class="hljs-_">-f</span> signup
+<span class="copy-code-btn">复制代码</span></code></pre>或<pre><code class="hljs bash copyable" lang="bash"><span class="hljs-comment"># 部署所有函数</span>
+serverless deploy
+<span class="copy-code-btn">复制代码</span></code></pre></li>
+<li>用<code>cURL</code>工具执行以下命令来发送请求（替换成你的API地址，API地址可在运行<code>serverless deploy</code>后的log中或在<code>AWS API Gateway控制台</code> - <code>阶段（stage）</code>中找到）<pre><code class="hljs bash copyable" lang="bash">curl -X POST https://xxxxxx.execute-api.us-west-2.amazonaws.com/dev/api/user/signup --data <span class="hljs-string">'{ "username": "new_user", "password": "12345678" }'</span>
+<span class="copy-code-btn">复制代码</span></code></pre></li>
+<li>返回数据<pre><code class="hljs json copyable" lang="json">{
+  <span class="hljs-attr">"message"</span>: <span class="hljs-string">"success"</span>
+}
+<span class="copy-code-btn">复制代码</span></code></pre></li>
+</ul>
+<br>
+<br>
+<h3 class="heading" data-id="heading-17">Login函数</h3>
+<blockquote>
+<p><code>GET</code></p>
+</blockquote>
+<blockquote>
+<p>校验用户名密码并返回JSON Web Token来让登陆用户访问私有接口</p>
+</blockquote>
+<h4 class="heading" data-id="heading-18">1. 设置JSON Web Token</h4>
+<p>在用户调用了Login接口并通过验证后，我们需要为用户返回一个<code>JSON Web Token</code>，以供用户来调用需要权限的服务。设置JSON Web Token需要以下几步操作：</p>
+<ul>
+<li><code>npm install jsonwebtoken --save</code> 安装jsonwebtoken库并添加至项目依赖</li>
+<li>在项目中添加一个<code>secret.json</code>文件来存放密钥，这里我们采用对称加密的方式来定义一个私有密钥。<pre><code class="hljs js copyable" lang="js"><span class="hljs-comment">// secret.json</span>
+{
+    <span class="hljs-string">"secret"</span>: <span class="hljs-string">"私有密钥"</span>
+}
+<span class="copy-code-btn">复制代码</span></code></pre></li>
+<li>将私有密钥定义至环境变量，以供函数访问。在<code>serverless.yml</code>的<code>provider</code>下作如下变更<pre><code class="hljs yml copyable" lang="yml"><span class="hljs-comment"># serverless.yml</span>
+<span class="hljs-attr">provider:</span>
+<span class="hljs-attr">  environment:</span>
+    <span class="hljs-comment"># 使用serverless变量语法将文件中的密钥赋值给环境变量PRIVATE_KEY</span>
+<span class="hljs-attr">    PRIVATE_KEY:</span> <span class="hljs-string">${file(./secret.json):secret}</span>
+<span class="copy-code-btn">复制代码</span></code></pre></li>
+</ul>
+<h4 class="heading" data-id="heading-19">2. 获取请求数据</h4>
+<p><code>login</code>是一个方法为<code>GET</code>的接口，因此需要从触发事件的<code>queryStringParameters</code>中获取请求数据。</p>
+<pre><code class="hljs js copyable" lang="js"><span class="hljs-comment">// user/login.js</span>
+<span class="hljs-built_in">module</span>.exports.login = <span class="hljs-function">(<span class="hljs-params">event, context, callback</span>) =&gt;</span> {
+  <span class="hljs-comment">// 获取请求数据</span>
+  <span class="hljs-keyword">const</span> { username, password } = event.queryStringParameters;
+  <span class="hljs-comment">/*
+    ...
+    校验 username 与 passowrd
+  */</span>
+}
+
+<span class="copy-code-btn">复制代码</span></code></pre><h4 class="heading" data-id="heading-20">3. 验证账号密码并返回JSON Web Token</h4>
+<pre><code class="hljs js copyable" lang="js"><span class="hljs-comment">// user/login.js</span>
+<span class="hljs-keyword">const</span> crypto = <span class="hljs-built_in">require</span>(<span class="hljs-string">'crypto'</span>);
+<span class="hljs-keyword">const</span> jwt = <span class="hljs-built_in">require</span>(<span class="hljs-string">'jsonwebtoken'</span>);
+<span class="hljs-keyword">const</span> AWS = <span class="hljs-built_in">require</span>(<span class="hljs-string">'aws-sdk'</span>);
+<span class="hljs-keyword">const</span> dynamoDb = <span class="hljs-keyword">new</span> AWS.DynamoDB.DocumentClient();
+
+<span class="hljs-built_in">module</span>.exports.login = <span class="hljs-function">(<span class="hljs-params">event, context, callback</span>) =&gt;</span> {
+  <span class="hljs-comment">// ...获取并校验 username 与 password</span>
+  
+  <span class="hljs-comment">// 验证账号密码并返回JSON Web Token</span>
+  
+  <span class="hljs-comment">// 构造DynamoDB请求数据，根据主键username获取数据</span>
+  <span class="hljs-keyword">const</span> params = {
+    <span class="hljs-attr">TableName</span>: process.env.DYNAMODB_TABLE,
+    <span class="hljs-attr">Key</span>: {
+      username
+    }
+  };
+  <span class="hljs-comment">// 从DynamoDB中获取数据</span>
+  dynamoDb.get(params, (error, data) =&gt; {
+    <span class="hljs-keyword">if</span> (error) {
+      <span class="hljs-comment">// log错误信息，可在AWS CloudWatch服务中查看</span>
+      <span class="hljs-built_in">console</span>.error(error);
+      <span class="hljs-comment">// 返回错误信息</span>
+      callback(<span class="hljs-literal">null</span>, {
+        <span class="hljs-attr">statusCode</span>: <span class="hljs-number">500</span>,
+        <span class="hljs-attr">body</span>: <span class="hljs-built_in">JSON</span>.stringify({
+          <span class="hljs-attr">message</span>: <span class="hljs-string">'登陆失败！'</span>
+        })
+      });
+      <span class="hljs-keyword">return</span>;
+    }
+    
+    <span class="hljs-comment">// 从回调参数中获取DynamoDB返回的用户数据</span>
+    <span class="hljs-keyword">const</span> user = data.Item;
+    <span class="hljs-keyword">if</span> (
+        <span class="hljs-comment">// 确认username存在</span>
+        user &amp;&amp;
+        <span class="hljs-comment">// 确认哈希密码匹配</span>
+        user.password === crypto.pbkdf2Sync(password, user.salt, <span class="hljs-number">10000</span>, <span class="hljs-number">512</span>, <span class="hljs-string">'sha512'</span>).toString(<span class="hljs-string">'hex'</span>)
+    ) {
+      <span class="hljs-comment">// 返回登陆成功信息</span>
+      <span class="hljs-keyword">const</span> response = {
+        <span class="hljs-attr">statusCode</span>: <span class="hljs-number">200</span>,
+        <span class="hljs-attr">body</span>: <span class="hljs-built_in">JSON</span>.stringify({
+          username, <span class="hljs-comment">// 返回username</span>
+          <span class="hljs-comment">// 返回JSON Web Token</span>
+          token: jwt.sign(
+            {
+              username <span class="hljs-comment">// 嵌入username数据</span>
+            },
+            process.env.PRIVATE_KEY <span class="hljs-comment">// 使用私有密钥签发token</span>
+          )
+        })
+      };
+      callback(<span class="hljs-literal">null</span>, response);
+    } <span class="hljs-keyword">else</span> {
+      <span class="hljs-comment">// 返回错误信息</span>
+      callback(<span class="hljs-literal">null</span>, {
+        <span class="hljs-attr">statusCode</span>: <span class="hljs-number">401</span>,
+        <span class="hljs-attr">body</span>: <span class="hljs-built_in">JSON</span>.stringify({
+          <span class="hljs-attr">message</span>: <span class="hljs-string">'用户名或密码错误！'</span>
+        })
+      });
+    }
+  });
+};
+
+<span class="copy-code-btn">复制代码</span></code></pre><h4 class="heading" data-id="heading-21">4. 部署及访问服务</h4>
+<ul>
+<li>执行以下命令来部署<code>login</code>函数<pre><code class="hljs bash copyable" lang="bash"><span class="hljs-comment"># 部署单个函数</span>
+serverless deploy <span class="hljs-keyword">function</span> <span class="hljs-_">-f</span> login
+<span class="copy-code-btn">复制代码</span></code></pre>或<pre><code class="hljs bash copyable" lang="bash"><span class="hljs-comment"># 部署所有函数</span>
+serverless deploy
+<span class="copy-code-btn">复制代码</span></code></pre></li>
+<li>在浏览器中直接输入API地址或用cURL工具执行以下命令来发送请求（替换成你的API地址，API地址可在运行<code>serverless deploy</code>后的log中或在<code>AWS API Gateway控制台</code> - <code>阶段（stage）</code>中找到）<pre><code class="hljs bash copyable" lang="bash">curl -X GET <span class="hljs-string">'https://xxxxxx.execute-api.us-west-2.amazonaws.com/dev/api/user/login?username=new_user&amp;password=12345678'</span>
+<span class="copy-code-btn">复制代码</span></code></pre></li>
+<li>返回数据<pre><code class="hljs json copyable" lang="json">{
+  <span class="hljs-attr">"token"</span>: <span class="hljs-string">"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5ld191c2VyIiwiaWF0IjoxNTYxODI1NTgyfQ.Iv0ulooGayulxf_MkkpBO1xEw1gilThT62ysuz-rQE0"</span>,
+  <span class="hljs-attr">"username"</span>: <span class="hljs-string">"new_user"</span>
+}
+<span class="copy-code-btn">复制代码</span></code></pre></li>
+</ul>
+<br>
+<br>
+<h3 class="heading" data-id="heading-22">Auth函数</h3>
+<blockquote>
+<p>校验请求中所包含的JSON Web Token是否有效</p>
+</blockquote>
+<p>在编写<code>private</code>函数之前，我们需要提供另一个函数<code>auth</code>来校验用户提交请求中的JSON Web Token是否与我们所签发的一致。</p>
+<h4 class="heading" data-id="heading-23">1. 创建函数</h4>
+<ul>
+<li>在项目中添加<code>user/auth.js</code>文件</li>
+<li>在<code>serverless.yml</code>的<code>functions</code>中添加以下内容：<pre><code class="hljs yml copyable" lang="yml"><span class="hljs-attr">auth:</span>
+<span class="hljs-attr">    handler:</span> <span class="hljs-string">user/auth.auth</span>
+<span class="hljs-comment"># auth是一个仅会在服务内被调用的函数，因此没有任何触发器</span>
+<span class="copy-code-btn">复制代码</span></code></pre></li>
+</ul>
+<h4 class="heading" data-id="heading-24">2. 生成包含IAM权限策略的响应信息</h4>
+<p>为了能够让<code>AWS API Gateway</code>触发器正确地识别函数有无权限执行，我们必须在<code>auth</code>函数中返回一个含IAM （ AWS 服务与权限管控系统） 权限策略信息的响应数据，来使得有权限的函数可以通过<code>AWS API Gateway</code>成功触发。在<code>user/auth.js</code>内定义一个如下的方法：</p>
+<pre><code class="hljs js copyable" lang="js"><span class="hljs-comment">// user/auth.js</span>
+<span class="hljs-keyword">const</span> generatePolicy = <span class="hljs-function">(<span class="hljs-params">principalId, effect, resource</span>) =&gt;</span> {
+  <span class="hljs-keyword">const</span> authResponse = {};
+  authResponse.principalId = principalId; <span class="hljs-comment">// 用于标记用户身份信息</span>
+  <span class="hljs-keyword">if</span> (effect &amp;&amp; resource) {
+    <span class="hljs-keyword">const</span> policyDocument = {};
+    policyDocument.Version = <span class="hljs-string">'2012-10-17'</span>; <span class="hljs-comment">// 定义版本信息</span>
+    policyDocument.Statement = [];
+    <span class="hljs-keyword">const</span> statementOne = {};
+    statementOne.Action = <span class="hljs-string">'execute-api:Invoke'</span>; <span class="hljs-comment">// 定义操作类型，这里为API调用操作</span>
+    statementOne.Effect = effect; <span class="hljs-comment">// 可用值为ALLOW或DENY，用于指定该策略所产生的结果是允许还是拒绝</span>
+    statementOne.Resource = resource; <span class="hljs-comment">// 传入ARN（AWS资源名）来指定操作所需要的资源</span>
+    policyDocument.Statement[<span class="hljs-number">0</span>] = statementOne;
+    authResponse.policyDocument = policyDocument; <span class="hljs-comment">// 将定义完成的策略加入响应数据</span>
+  }
+  <span class="hljs-keyword">return</span> authResponse;
+};
+
+<span class="copy-code-btn">复制代码</span></code></pre><blockquote>
+<p>关于IAM策略更为详细的配置文档请查看<a target="_blank" href="https://docs.aws.amazon.com/zh_cn/IAM/latest/UserGuide/reference_policies_elements.html" rel="nofollow noopener noreferrer">链接</a></p>
+</blockquote>
+<h4 class="heading" data-id="heading-25">3. 解析并校验JSON Web Token</h4>
+<p>我们在解析JSON Web Token时默认请求遵循OAuth2.0中的Bearer Token格式。</p>
+<pre><code class="hljs js copyable" lang="js"><span class="hljs-comment">// user/auth.js</span>
+<span class="hljs-keyword">const</span> jwt = <span class="hljs-built_in">require</span>(<span class="hljs-string">'jsonwebtoken'</span>);
+
+<span class="hljs-comment">/* 
+  ...定义generatePolicy方法
+*/</span>
+
+<span class="hljs-built_in">module</span>.exports.auth = <span class="hljs-function">(<span class="hljs-params">event, context, callback</span>) =&gt;</span> {
+  <span class="hljs-comment">// 获取请求头中的Authorization</span>
+  <span class="hljs-keyword">const</span> { authorizationToken } = event;
+  <span class="hljs-keyword">if</span> (authorizationToken) {
+    <span class="hljs-comment">// 解析Authorization</span>
+    <span class="hljs-keyword">const</span> split = event.authorizationToken.split(<span class="hljs-string">' '</span>);
+    <span class="hljs-keyword">if</span> (split[<span class="hljs-number">0</span>] === <span class="hljs-string">'Bearer'</span> &amp;&amp; split.length === <span class="hljs-number">2</span>) {
+      <span class="hljs-keyword">try</span> {
+        <span class="hljs-keyword">const</span> token = split[<span class="hljs-number">1</span>];
+        <span class="hljs-comment">// 使用私有密钥校验JSON Web Token</span>
+        <span class="hljs-keyword">const</span> decoded = jwt.verify(token, process.env.PRIVATE_KEY);
+        <span class="hljs-comment">// 使用generatePolicy生成包含允许API调用的IAM权限策略的响应数据</span>
+        <span class="hljs-keyword">const</span> response = generatePolicy(decoded.username, <span class="hljs-string">'Allow'</span>, event.methodArn);
+        <span class="hljs-keyword">return</span> callback(<span class="hljs-literal">null</span>, response);
+      } <span class="hljs-keyword">catch</span> (error) {
+        <span class="hljs-comment">// JSON Web Token 校验失败，返回错误</span>
+        <span class="hljs-keyword">return</span> callback(<span class="hljs-string">'Unauthorized'</span>);
+      }
+    } <span class="hljs-keyword">else</span> {
+      <span class="hljs-comment">// Authorization 格式校验失败，返回错误</span>
+      <span class="hljs-keyword">return</span> callback(<span class="hljs-string">'Unauthorized'</span>);
+    }
+  } <span class="hljs-keyword">else</span> {
+      <span class="hljs-comment">// 请求头未含Authorzation，返回错误</span>
+      <span class="hljs-keyword">return</span> callback(<span class="hljs-string">'Unauthorized'</span>);
+  }
+};
+<span class="copy-code-btn">复制代码</span></code></pre><br>
+<br>
+<h3 class="heading" data-id="heading-26">Private函数</h3>
+<blockquote>
+<p><code>GET</code></p>
+</blockquote>
+<blockquote>
+<p>返回一条需要登陆才可访问的信息</p>
+</blockquote>
+<p><code>private</code>函数的实现与之前的<code>public</code>函数十分类似，唯一的区别就是我们需要在函数的<code>http (AWS API Gateway)</code>触发器中加入刚刚定义的<code>auth</code>作为权限校验函数。</p>
+<h4 class="heading" data-id="heading-27">1. 设置authorizer</h4>
+<p>在<code>serverless.yml</code>中对先前定义的<code>private</code>函数作如下变更：</p>
+<pre><code class="hljs yml copyable" lang="yml"><span class="hljs-comment"># serverless.yml</span>
+<span class="hljs-attr">functions:</span> 
+<span class="hljs-attr">  private:</span>
+<span class="hljs-attr">    handler:</span> <span class="hljs-string">user/private.private</span>
+<span class="hljs-attr">    events:</span>
+<span class="hljs-attr">      - http:</span>
+<span class="hljs-attr">          path:</span> <span class="hljs-string">api/private</span>
+<span class="hljs-attr">          method:</span> <span class="hljs-string">get</span>
+<span class="hljs-attr">          authorizer:</span> <span class="hljs-string">auth</span> <span class="hljs-comment">#设置authorizer为auth函数</span>
+<span class="hljs-attr">          cors:</span> <span class="hljs-literal">true</span>
+<span class="copy-code-btn">复制代码</span></code></pre><h4 class="heading" data-id="heading-28">2. 返回消息</h4>
+<pre><code class="hljs js copyable" lang="js"><span class="hljs-comment">// user/private.js</span>
+<span class="hljs-built_in">module</span>.exports.private = <span class="hljs-function">(<span class="hljs-params">event, context, callback</span>) =&gt;</span> {
+  <span class="hljs-comment">// 从触发事件中获取请求的用户信息</span>
+  <span class="hljs-keyword">const</span> username = event.requestContext.authorizer.principalId;
+  <span class="hljs-comment">// 返回消息</span>
+  <span class="hljs-keyword">const</span> response = {
+    <span class="hljs-attr">statusCode</span>: <span class="hljs-number">200</span>,
+    <span class="hljs-attr">body</span>: <span class="hljs-built_in">JSON</span>.stringify({
+      <span class="hljs-attr">message</span>: <span class="hljs-string">`你好，<span class="hljs-subst">${username}</span>！只有登陆后的用户才可以阅读此条信息。`</span>
+    })
+  }
+  <span class="hljs-keyword">return</span> callback(<span class="hljs-literal">null</span>, response);
+};
+<span class="copy-code-btn">复制代码</span></code></pre><h4 class="heading" data-id="heading-29">3. 部署及访问服务</h4>
+<ul>
+<li>执行以下命令来部署<code>private</code>函数<pre><code class="hljs bash copyable" lang="bash"><span class="hljs-comment"># 部署单个函数</span>
+serverless deploy <span class="hljs-keyword">function</span> <span class="hljs-_">-f</span> private
+<span class="copy-code-btn">复制代码</span></code></pre>或<pre><code class="hljs bash copyable" lang="bash"><span class="hljs-comment"># 部署所有函数</span>
+serverless deploy
+<span class="copy-code-btn">复制代码</span></code></pre></li>
+<li>用cURL工具执行以下命令来发送请求（替换成你的API地址，API地址可在运行<code>serverless deploy</code>后的log中或在<code>AWS API Gateway控制台</code> - <code>阶段（stage）</code>中找到）<pre><code class="hljs bash copyable" lang="bash">curl -X GET -H <span class="hljs-string">"Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5ld191c2VyIiwiaWF0IjoxNTYxODI1NTgyfQ.Iv0ulooGayulxf_MkkpBO1xEw1gilThT62ysuz-rQE0"</span> https://xxxxxx.execute-api.us-west-2.amazonaws.com/dev/api/private
+<span class="copy-code-btn">复制代码</span></code></pre></li>
+<li>返回数据<pre><code class="hljs json copyable" lang="json">{
+  <span class="hljs-attr">"message"</span>: <span class="hljs-string">"你好，new_user！只有登陆后的用户才可以阅读此条信息。"</span>
+}
+<span class="copy-code-btn">复制代码</span></code></pre></li>
+</ul>
+<br>
+<br>
+<h3 class="heading" data-id="heading-30">小结</h3>
+<h4 class="heading" data-id="heading-31">用了什么？</h4>
+<ol>
+<li>serverless cli</li>
+<li>AWS Lambda</li>
+<li>AWS API Gateway</li>
+<li>AWS CloudWatch</li>
+<li>DynamoDB</li>
+<li>OAuth2.0</li>
+</ol>
+<h4 class="heading" data-id="heading-32">做了什么？</h4>
+<ol>
+<li>开发与部署了一套API服务</li>
+<li>服务提供了用户注册、登入接口</li>
+<li>服务提供了完全开放接口与仅登陆用户可访问接口</li>
+</ol>
+<h4 class="heading" data-id="heading-33">完整工程</h4>
+<ul>
+<li>该项目完整的工程可在<a target="_blank" href="https://github.com/yuanfux/aws-lambda-user" rel="nofollow noopener noreferrer">github.com/yuanfux/aws…</a>中查看</li>
+<li>运行以下命令可以快速部署该工程并访问服务
+<ol>
+<li><code>serverless install -u https://github.com/yuanfux/aws-lambda-user</code></li>
+<li><code>cd aws-lambda-user</code></li>
+<li><code>npm install</code></li>
+<li><code>serverless deploy</code></li>
+</ol>
+</li>
+</ul>
+<br>
+<br>
+<br>
+<br>
+<h2 class="heading" data-id="heading-34">思考</h2>
+<p>我们看到了AWS Lambda的实用、便捷与低价，但我们能否看到隐藏在其背后的一些问题。</p>
+<h3 class="heading" data-id="heading-35">实用¿</h3>
+<ul>
+<li>
+<p><strong>代码维护</strong></p>
+<p>函数式的开发模式注定了代码之间的复用与共享会成为一个难题，也注定了代码量会随着服务的增多而膨胀。serverless会使得函数数量与代码量呈线性增长的关系，如下图</p>
+</li>
+</ul>
+<div style="text-align: center;">
+    <img alt="drawing" style="width: 550px;" class="lazyload inited" data-src="https://user-gold-cdn.xitu.io/2019/7/3/16bb600257a86554?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" data-width="1280" data-height="786" src="data:image/svg+xml;utf8,&lt;?xml version=&quot;1.0&quot;?&gt;&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; version=&quot;1.1&quot; width=&quot;1280&quot; height=&quot;786&quot;&gt;&lt;/svg&gt;">
+</div>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当服务达到一定数量后，维护一个无限膨胀的代码库所需要的额外人力与开支也是不可小视的。</p>
+<ul>
+<li>
+<p><strong>冷启动</strong></p>
+<p>冷启动也是一个老生常谈的话题了，用简单的话来说就是当你的函数一段时间未被运行后，系统就会回收运行你函数的容器资源。这样带来负面影响就是，当下一次调用这个函数时，就需要重新配置一个容器来运行你的函数，结果就是函数的调用会被<strong>延迟</strong>。来看一下函数调用时间间隔与冷启动概率的关系：</p>
+</li>
+</ul>
+<div style="text-align: center;">
+    <img alt="drawing" style="width: 550px;" class="lazyload inited" data-src="https://user-gold-cdn.xitu.io/2019/7/3/16bb66ea3b780dfd?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" data-width="1280" data-height="665" src="data:image/svg+xml;utf8,&lt;?xml version=&quot;1.0&quot;?&gt;&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; version=&quot;1.1&quot; width=&quot;1280&quot; height=&quot;665&quot;&gt;&lt;/svg&gt;">
+</div>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;那么具体的延迟时间是多少呢？延迟时间受许多因素的影响，比如你选择的编程语言、函数的内存配置、函数的文件大小等等。但是一个较为普遍的建议就是 Lambda 不适合用作对延迟极其敏感的服务（ &lt; 50ms）。</p>
+<h3 class="heading" data-id="heading-36">便捷¿</h3>
+<ul>
+<li>
+<p><strong>本地开发</strong></p>
+<p>运行Lambda函数依赖于许多外部的库和应用（aws-sdk, API Gateway、DynamoDB...），因此想要在一个完全本地的环境运行这样的函数是十分困难的。如果我们每次修改函数后都需要部署并依赖于 AWS CloudWatch 中输出的运行日志来调试与开发 Lambda 函数，那想必效率是极低的。幸好<code>serverless cli</code>提供了一定的插件来支持基本的本地开发（<a target="_blank" href="https://github.com/dherault/serverless-offline" rel="nofollow noopener noreferrer">serverless-offline</a>、<a target="_blank" href="https://github.com/99xt/serverless-dynamodb-local" rel="nofollow noopener noreferrer">serverless-dynamodb-local</a>...）。但不用<code>serverless cli</code>开发Lambda的用户可能就需要研读<a target="_blank" href="https://github.com/awslabs/serverless-application-model" rel="nofollow noopener noreferrer">AWS-SAM文档</a>并走过一段更为漫长的配置过程了。</p>
+</li>
+<li>
+<p><strong>迁移</strong></p>
+<p>通过开发AWS Lambda你可能已经发现了，我们所写的代码与AWS这个云服务商是具有强关联性的。尽管有<code>serverless cli</code>这种通用的serverless应用框架来帮助我们抹平不同服务商之间的代码差异，想从一个服务商迁移至另一个服务商依然是一件繁重的体力劳动，甚至包含着大量的代码重构。用serverless就像抽烟，可能一开始你享受到了烟的美妙，觉得抽几根无所谓，想戒时定然能戒。但随着你越陷越深，你会发现戒烟是一个相当痛苦的过程。</p>
+</li>
+</ul>
+<h3 class="heading" data-id="heading-37">低价¿</h3>
+<ul>
+<li>
+<p><strong>计价方式</strong></p>
+<p>AWS Lambda收费的最小单位是100ms，也就是意味着你的函数哪怕只执行了1ms也会当作100ms来计费。这种计费方式甚至会导致使用高内存的函数甚至比低内存的要便宜！我们来看下AWS Lambda的计费表:</p>
+<p></p><figure><img class="lazyload inited" data-src="https://user-gold-cdn.xitu.io/2019/7/2/16bb12e1fd5bc477?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" data-width="1280" data-height="374" src="data:image/svg+xml;utf8,&lt;?xml version=&quot;1.0&quot;?&gt;&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; version=&quot;1.1&quot; width=&quot;1280&quot; height=&quot;374&quot;&gt;&lt;/svg&gt;"><figcaption></figcaption></figure><p></p>
+<p>举一个较为极端的例子：假设我们设置了一个内存为448MB的函数，它运行时间为101ms，那么每次执行我们都需要支付0.000000729 x 2 = $0.000001458。而如果我们将这个函数的内存提高到512MB，使它的运行时间降低100ms以内，那么每次执行我们只需要支付$0.000000834。仅仅是一个设置，我们就降低了整整(1458 - 834) / 1458 ≈ <strong>42.8%</strong> 的成本！</p>
+<p>找到性价比最高的内存设置意味着额外的工作量，很难想象AWS在这个问题上居然没有为客户提供一个合理的解决方案。</p>
+</li>
+<li>
+<p><strong>捆绑消费</strong></p>
+<p>在使用AWS Lambda的时几乎所有的周边服务（API Gateway、     CloudWatch、DynamoDB...）都是需要额外收费的。其中一个很明显的特征就是<strong>捆绑消费</strong>，你可能很难想象 CloudWatch 是在使用 Lambda 时被强制使用的一个服务；而 API Gateway 也是在搭建http服务时几乎无法逃过一个收费站，其<b>$3.5/百万次请求</b>的高额价格甚至<strong>远远高于</strong>使用 Lambda 的价格。</p>
+</li>
+<li>
+<p><strong>成长型吸血鬼</strong></p>
+<p>小明刚刚迁移了他每个月花费$5搭建在某VPS商的个人博客到AWS Lambda上，他发现所有的服务都没有超过AWS的免费线，Lambda为小明每个月省下了$5。对于像小明这样的小流量、小内存服务来说，Lambda的的确确会省下一笔相当可观的成本；但对于占用大流量、大内存的服务来说，Lambda的按调用量收费反而会在无形之间累加出一笔高额费用。使用Lambda就像在住酒店，而租服务器则像租房。酒店设施齐全且便捷，偶尔住几天可能比租房还便宜，但每天每夜住咱也住不起。</p>
+</li>
+</ul>
+<div style="text-align: center;">
+    <img alt="drawing" style="width: 350px;" class="lazyload inited" data-src="https://user-gold-cdn.xitu.io/2019/7/2/16bb14fc43e42383?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" data-width="500" data-height="375" src="data:image/svg+xml;utf8,&lt;?xml version=&quot;1.0&quot;?&gt;&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; version=&quot;1.1&quot; width=&quot;500&quot; height=&quot;375&quot;&gt;&lt;/svg&gt;">
+</div>
+<h3 class="heading" data-id="heading-38">真香</h3>
+<p>虽然Lambda有以上值得权衡的问题，但它所带来对于开发效率的提高是史无前例的，它所带来对于服务开发及运维层面的成本削减也是肉眼可见的。你们可能不知道学了serverless的前端是什么概念，我们一般只会用两个字来形容这种人：全能！我经常说一句话，今天学serverless，明天就能开公司。今天看了这篇文章如果你还不能在Lambda上写serverless服务，我当场就把这个电脑屏幕吃掉。</p>
+</div></article><div data-v-78f25c42="" data-v-0f685764="" class="tag-list-box"><div data-v-78f25c42="" data-v-0f685764="" class="tag-list-title">关注下面的标签，发现更多相似文章</div><div data-v-78f25c42="" data-v-0f685764="" st:block="tagList" class="tag-list"><a data-v-78f25c42="" href="https://juejin.im/tag/Serverless" target="_blank" rel="" st:name="tag" class="item" data-v-0f685764=""><div data-v-126b87aa="" data-v-005099d8="" data-v-78f25c42="" data-src="https://user-gold-cdn.xitu.io/1531896618163098d601094bcc2d79c1d31222a1a5aca.jpg?imageView2/2/w/42/h/42/q/85/format/webp/interlace/1" class="lazy thumb tag-icon" style="background-image: none; background-size: contain;"></div><div data-v-78f25c42="" class="tag-title">Serverless</div></a></div></div><a data-v-78f25c42="" href="https://juejin.im/user/5a8f8a3bf265da4e9016c02e" target="_blank" rel="" data-v-0f685764=""><div data-v-78f25c42="" class="footer-author-block"><div data-v-7862f3fe="" data-v-78f25c42="" itemscope="itemscope" itemtype="http://schema.org/Person" class="author"><meta itemprop="url" content="https://juejin.im/user/5a8f8a3bf265da4e9016c02e"><meta itemprop="image" content="https://mirror-gold-cdn.xitu.io/168e08e11316db52dad"><meta itemprop="name" content="yuanfux"><!----><!----><div data-v-7862f3fe="" class="author-info-block"><a data-v-7862f3fe="" href="https://juejin.im/user/5a8f8a3bf265da4e9016c02e" target="_blank" rel="" class="avatar-link"><div data-v-126b87aa="" data-v-155c09bf="" data-v-7862f3fe="" data-src="https://mirror-gold-cdn.xitu.io/168e08e11316db52dad?imageView2/1/w/100/h/100/q/85/format/webp/interlace/1" class="lazy avatar avatar" style="background-image: none;"></div></a><div data-v-7862f3fe="" class="author-info-box"><div data-v-7862f3fe="" class="profile-box"><a data-v-88bf2650="" data-v-7862f3fe="" href="https://juejin.im/user/5a8f8a3bf265da4e9016c02e" target="_blank" rel="" class="username username ellipsis">yuanfux<a data-v-0aeee531="" data-v-88bf2650="" href="https://juejin.im/book/5c90640c5188252d7941f5bb/section/5c9065385188252da6320022" target="_blank" rel="" class="rank"><img data-v-0aeee531="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/lv-2.f597b88.svg" alt="lv-2"></a></a><span data-v-7862f3fe="" class="position ellipsis"></span></div><div data-v-7862f3fe="" class="meta-box"><a data-v-7862f3fe="" href="https://juejin.im/user/5a8f8a3bf265da4e9016c02e/posts" target="_blank" rel="" class="posts"><span data-v-7862f3fe="" class="count post-count">发布了 6 篇专栏 · </span></a><span data-v-7862f3fe="" class="count">获得点赞 231 · </span><span data-v-7862f3fe="" class="count">获得阅读 10,247</span></div></div><button data-v-7df90795="" data-v-7862f3fe="" class="follow-button follow">关注</button></div></div></div></a><div data-v-78f25c42="" data-v-0f685764="" st:block="banner" class="article-banner"><a data-v-78f25c42="" data-v-0f685764="" st:name="link" st:state="https://juejin.im/extension/?utm_source=juejin.im&amp;utm_medium=post&amp;utm_campaign=extension_promotion" class="banner-title" href="https://juejin.im/extension/?utm_source=juejin.im&amp;utm_medium=post&amp;utm_campaign=extension_promotion" target="_blank">安装掘金浏览器插件</a><div data-v-78f25c42="" data-v-0f685764="" class="banner-content">打开新标签页发现好内容，掘金、GitHub、Dribbble、ProductHunt 等站点内容轻松获取。快来安装掘金浏览器插件获取高质量内容吧！</div></div><!----><!----><div data-v-4cc2bdb4="" data-v-78f25c42="" class="comment-list-box" id="comment-box" data-v-0f685764=""><div data-v-4cc2bdb4="" class="title">评论</div><div data-v-e089a562="" data-v-4cc2bdb4="" class="comment-form comment-form"><div data-v-e089a562="" class="avatar-box"><div data-v-126b87aa="" data-v-155c09bf="" data-v-e089a562="" data-src="https://user-gold-cdn.xitu.io/2019/10/19/16de2a8e5240463d?imageView2/1/w/100/h/100/q/85/format/webp/interlace/1" class="lazy avatar avatar" style="background-image: none;"></div></div><div data-v-e089a562="" class="form-box"><div data-v-e089a562="" class="input-box"><div data-v-2f2bdb9b="" data-v-e089a562="" class="auth-card"><!----><div data-v-e089a562="" data-v-2f2bdb9b="" contenteditable="true" spellcheck="false" placeholder="输入评论..." class="rich-input empty"><br data-v-e089a562="" data-v-2f2bdb9b=""></div></div><!----></div><!----></div><input data-v-e089a562="" type="file" class="hidden"></div><div data-v-a0ac4b3a="" data-v-4cc2bdb4="" class="comment-list comment-list"><div data-v-d0701186="" data-v-a0ac4b3a="" class="image-viewer-box"><!----></div><div data-v-a0ac4b3a="" class="item"><div data-v-4534875e="" data-v-a0ac4b3a="" class="comment comment"><div data-v-3269e471="" data-v-4534875e="" st:block="userPopover" st:state="5d6f84a5f265da03d063bf96" class="user-popover-box popover"><!----><a data-v-4534875e="" href="https://juejin.im/user/5d6f84a5f265da03d063bf96" target="_blank" rel="" class="user-link" data-v-3269e471=""><div data-v-126b87aa="" data-v-155c09bf="" data-v-4534875e="" data-src="https://mirror-gold-cdn.xitu.io/16cfb9e2e286710b5ff?imageView2/1/w/100/h/100/q/85/format/webp/interlace/1" class="lazy avatar avatar" style="background-image: none;"></div></a></div><div data-v-4534875e="" class="content-box comment-divider-line"><div data-v-4534875e="" class="meta-box"><div data-v-3269e471="" data-v-4534875e="" st:block="userPopover" st:state="5d6f84a5f265da03d063bf96" class="user-popover-box"><!----><a data-v-88bf2650="" data-v-4534875e="" href="https://juejin.im/user/5d6f84a5f265da03d063bf96" target="_blank" rel="" class="username username ellipsis" data-v-3269e471="">fennecs<!----></a></div><div data-v-4534875e="" class="position"></div></div><div data-v-4534875e="" class="content">最后一段笑死我</div><div data-v-4534875e="" class="limit-ctl-box"><!----><!----></div><!----><div data-v-4534875e="" class="reply-stat"><time data-v-4534875e="" datetime="2019-09-04T09:33:05.976Z" title="Wed Sep 04 2019 17:33:05 GMT+0800 (中国标准时间)" class="time">3月前</time><div data-v-4534875e="" class="delete"> &nbsp;·&nbsp;删除</div><div data-v-4534875e="" class="action-box"><div data-v-4534875e="" class="like-action action"><svg data-v-4534875e="" aria-hidden="true" width="16" height="16" viewBox="0 0 20 20" class="icon like-icon"><g data-v-4534875e="" fill="none" fill-rule="evenodd"><path data-v-4534875e="" d="M0 0h20v20H0z"></path> <path data-v-4534875e="" stroke="#8A93A0" stroke-linejoin="round" d="M4.58 8.25V17h-1.4C2.53 17 2 16.382 2 15.624V9.735c0-.79.552-1.485 1.18-1.485h1.4zM11.322 2c1.011.019 1.614.833 1.823 1.235.382.735.392 1.946.13 2.724-.236.704-.785 1.629-.785 1.629h4.11c.434 0 .838.206 1.107.563.273.365.363.84.24 1.272l-1.86 6.513A1.425 1.425 0 0 1 14.724 17H6.645V7.898C8.502 7.51 9.643 4.59 9.852 3.249A1.47 1.47 0 0 1 11.322 2z"></path></g></svg><!----></div><div data-v-4534875e="" class="comment-action action"><svg data-v-4534875e="" aria-hidden="true" width="16" height="16" viewBox="0 0 20 20" class="icon comment-icon"><g data-v-4534875e="" fill="none" fill-rule="evenodd"><path data-v-4534875e="" d="M0 0h20v20H0z"></path> <path data-v-4534875e="" stroke="#8A93A0" stroke-linejoin="round" d="M10 17c-4.142 0-7.5-2.91-7.5-6.5S5.858 4 10 4c4.142 0 7.5 2.91 7.5 6.5 0 1.416-.522 2.726-1.41 3.794-.129.156.41 3.206.41 3.206l-3.265-1.134c-.998.369-2.077.634-3.235.634z"></path></g></svg> <span data-v-4534875e="" class="action-title">回复</span></div></div></div><!----><div data-v-3824749c="" data-v-4534875e="" class="sub-comment-list sub-comment-list"><!----></div></div><!----></div></div><div data-v-a0ac4b3a="" class="item"><div data-v-4534875e="" data-v-a0ac4b3a="" class="comment comment"><div data-v-3269e471="" data-v-4534875e="" st:block="userPopover" st:state="5be013ff6fb9a04a0a5ea2f9" class="user-popover-box popover"><!----><a data-v-4534875e="" href="https://juejin.im/user/5be013ff6fb9a04a0a5ea2f9" target="_blank" rel="" class="user-link" data-v-3269e471=""><div data-v-126b87aa="" data-v-155c09bf="" data-v-4534875e="" data-src="https://user-gold-cdn.xitu.io/2019/10/13/16dc49190c355f4b?imageView2/1/w/100/h/100/q/85/format/webp/interlace/1" class="lazy avatar avatar" style="background-image: none;"></div></a></div><div data-v-4534875e="" class="content-box comment-divider-line"><div data-v-4534875e="" class="meta-box"><div data-v-3269e471="" data-v-4534875e="" st:block="userPopover" st:state="5be013ff6fb9a04a0a5ea2f9" class="user-popover-box"><!----><a data-v-88bf2650="" data-v-4534875e="" href="https://juejin.im/user/5be013ff6fb9a04a0a5ea2f9" target="_blank" rel="" class="username username ellipsis" data-v-3269e471="">c_Kim<a data-v-0aeee531="" data-v-88bf2650="" href="https://juejin.im/book/5c90640c5188252d7941f5bb/section/5c9065385188252da6320022" target="_blank" rel="" class="rank"><img data-v-0aeee531="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/lv-2.f597b88.svg" alt="lv-2"></a></a></div><div data-v-4534875e="" class="position">FE实习生 @ 滴滴出行</div></div><div data-v-4534875e="" class="content">请教大佬：deploy的时候有报这个错误吗？ The AWS Access Key Id needs a subscription for the service</div><div data-v-4534875e="" class="limit-ctl-box"><!----><!----></div><!----><div data-v-4534875e="" class="reply-stat"><time data-v-4534875e="" datetime="2019-08-19T00:48:30.902Z" title="Mon Aug 19 2019 08:48:30 GMT+0800 (中国标准时间)" class="time">4月前</time><div data-v-4534875e="" class="delete"> &nbsp;·&nbsp;删除</div><div data-v-4534875e="" class="action-box"><div data-v-4534875e="" class="like-action action"><svg data-v-4534875e="" aria-hidden="true" width="16" height="16" viewBox="0 0 20 20" class="icon like-icon"><g data-v-4534875e="" fill="none" fill-rule="evenodd"><path data-v-4534875e="" d="M0 0h20v20H0z"></path> <path data-v-4534875e="" stroke="#8A93A0" stroke-linejoin="round" d="M4.58 8.25V17h-1.4C2.53 17 2 16.382 2 15.624V9.735c0-.79.552-1.485 1.18-1.485h1.4zM11.322 2c1.011.019 1.614.833 1.823 1.235.382.735.392 1.946.13 2.724-.236.704-.785 1.629-.785 1.629h4.11c.434 0 .838.206 1.107.563.273.365.363.84.24 1.272l-1.86 6.513A1.425 1.425 0 0 1 14.724 17H6.645V7.898C8.502 7.51 9.643 4.59 9.852 3.249A1.47 1.47 0 0 1 11.322 2z"></path></g></svg><!----></div><div data-v-4534875e="" class="comment-action action"><svg data-v-4534875e="" aria-hidden="true" width="16" height="16" viewBox="0 0 20 20" class="icon comment-icon"><g data-v-4534875e="" fill="none" fill-rule="evenodd"><path data-v-4534875e="" d="M0 0h20v20H0z"></path> <path data-v-4534875e="" stroke="#8A93A0" stroke-linejoin="round" d="M10 17c-4.142 0-7.5-2.91-7.5-6.5S5.858 4 10 4c4.142 0 7.5 2.91 7.5 6.5 0 1.416-.522 2.726-1.41 3.794-.129.156.41 3.206.41 3.206l-3.265-1.134c-.998.369-2.077.634-3.235.634z"></path></g></svg> <span data-v-4534875e="" class="action-title">回复</span></div></div></div><!----><div data-v-3824749c="" data-v-4534875e="" class="sub-comment-list sub-comment-list"><div data-v-3824749c="" class="item"><div data-v-af33fb3c="" data-v-3824749c="" class="sub-comment sub-comment"><div data-v-af33fb3c="" class="sub-comment-content-row"><div data-v-af33fb3c="" class="sub-comment-content-box"><div data-v-3269e471="" data-v-af33fb3c="" st:block="userPopover" st:state="5a8f8a3bf265da4e9016c02e" class="user-popover-box popover"><!----><a data-v-af33fb3c="" href="https://juejin.im/user/5a8f8a3bf265da4e9016c02e" target="_blank" rel="" class="username" data-v-3269e471=""><div data-v-126b87aa="" data-v-155c09bf="" data-v-af33fb3c="" data-src="https://mirror-gold-cdn.xitu.io/168e08e11316db52dad?imageView2/1/w/100/h/100/q/85/format/webp/interlace/1" class="lazy avatar avatar" style="background-image: none;"></div></a></div><div data-v-af33fb3c="" class="user-content-box"><div data-v-af33fb3c="" class="profie"><div data-v-3269e471="" data-v-af33fb3c="" st:block="userPopover" st:state="5a8f8a3bf265da4e9016c02e" class="user-popover-box"><!----><a data-v-88bf2650="" data-v-af33fb3c="" href="https://juejin.im/user/5a8f8a3bf265da4e9016c02e" target="_blank" rel="" class="username" data-v-3269e471="">yuanfux<a data-v-0aeee531="" data-v-88bf2650="" href="https://juejin.im/book/5c90640c5188252d7941f5bb/section/5c9065385188252da6320022" target="_blank" rel="" class="rank"><img data-v-0aeee531="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/lv-2.f597b88.svg" alt="lv-2"></a><span data-v-af33fb3c="" class="author-badge-text">(作者)</span></a></div><div data-v-af33fb3c="" class="position"></div></div><div data-v-af33fb3c="" class="content-box"><span data-v-af33fb3c=""> 回复 </span><div data-v-3269e471="" data-v-af33fb3c="" st:block="userPopover" st:state="5be013ff6fb9a04a0a5ea2f9" class="user-popover-box"><!----><a data-v-88bf2650="" data-v-af33fb3c="" href="https://juejin.im/user/5be013ff6fb9a04a0a5ea2f9" target="_blank" rel="" class="username username be-replied" data-v-3269e471="">c_Kim<a data-v-0aeee531="" data-v-88bf2650="" href="https://juejin.im/book/5c90640c5188252d7941f5bb/section/5c9065385188252da6320022" target="_blank" rel="" class="rank"><img data-v-0aeee531="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/lv-2.f597b88.svg" alt="lv-2"></a></a></div><!----><span data-v-af33fb3c="">: </span><span data-v-af33fb3c="" class="content">请确认你的AWS账号绑定了银行卡，并且银行卡里是有钱的。通常情况下，AWS会尝试扣除1美金来通过银行卡验证步骤。</span></div><!----><!----><div data-v-af33fb3c="" class="limit-all-box"><!----></div><div data-v-af33fb3c="" class="sub-comment-stat-box"><time data-v-af33fb3c="" datetime="2019-08-19T01:53:56.239Z" title="Mon Aug 19 2019 09:53:56 GMT+0800 (中国标准时间)" class="time">4月前</time><div data-v-af33fb3c="" class="delete"> &nbsp;·&nbsp;删除</div><div data-v-af33fb3c="" class="sub-comment-action-box"><div data-v-af33fb3c="" class="like-action action"><svg data-v-af33fb3c="" aria-hidden="true" width="16" height="16" viewBox="0 0 20 20" class="icon like-icon"><g data-v-af33fb3c="" fill="none" fill-rule="evenodd"><path data-v-af33fb3c="" d="M0 0h20v20H0z"></path> <path data-v-af33fb3c="" stroke="#8A93A0" stroke-linejoin="round" d="M4.58 8.25V17h-1.4C2.53 17 2 16.382 2 15.624V9.735c0-.79.552-1.485 1.18-1.485h1.4zM11.322 2c1.011.019 1.614.833 1.823 1.235.382.735.392 1.946.13 2.724-.236.704-.785 1.629-.785 1.629h4.11c.434 0 .838.206 1.107.563.273.365.363.84.24 1.272l-1.86 6.513A1.425 1.425 0 0 1 14.724 17H6.645V7.898C8.502 7.51 9.643 4.59 9.852 3.249A1.47 1.47 0 0 1 11.322 2z"></path></g></svg><!----></div><div data-v-af33fb3c="" class="comment-action action"><svg data-v-af33fb3c="" aria-hidden="true" width="16" height="16" viewBox="0 0 20 20" class="icon comment-icon"><g data-v-af33fb3c="" fill="none" fill-rule="evenodd"><path data-v-af33fb3c="" d="M0 0h20v20H0z"></path> <path data-v-af33fb3c="" stroke="#8A93A0" stroke-linejoin="round" d="M10 17c-4.142 0-7.5-2.91-7.5-6.5S5.858 4 10 4c4.142 0 7.5 2.91 7.5 6.5 0 1.416-.522 2.726-1.41 3.794-.129.156.41 3.206.41 3.206l-3.265-1.134c-.998.369-2.077.634-3.235.634z"></path></g></svg> <span data-v-af33fb3c="">回复</span></div></div></div><!----></div></div></div><!----></div></div><div data-v-3824749c="" class="item"><div data-v-af33fb3c="" data-v-3824749c="" class="sub-comment sub-comment"><div data-v-af33fb3c="" class="sub-comment-content-row"><div data-v-af33fb3c="" class="sub-comment-content-box"><div data-v-3269e471="" data-v-af33fb3c="" st:block="userPopover" st:state="5be013ff6fb9a04a0a5ea2f9" class="user-popover-box popover"><!----><a data-v-af33fb3c="" href="https://juejin.im/user/5be013ff6fb9a04a0a5ea2f9" target="_blank" rel="" class="username" data-v-3269e471=""><div data-v-126b87aa="" data-v-155c09bf="" data-v-af33fb3c="" data-src="https://user-gold-cdn.xitu.io/2019/10/13/16dc49190c355f4b?imageView2/1/w/100/h/100/q/85/format/webp/interlace/1" class="lazy avatar avatar" style="background-image: none;"></div></a></div><div data-v-af33fb3c="" class="user-content-box"><div data-v-af33fb3c="" class="profie"><div data-v-3269e471="" data-v-af33fb3c="" st:block="userPopover" st:state="5be013ff6fb9a04a0a5ea2f9" class="user-popover-box"><!----><a data-v-88bf2650="" data-v-af33fb3c="" href="https://juejin.im/user/5be013ff6fb9a04a0a5ea2f9" target="_blank" rel="" class="username" data-v-3269e471="">c_Kim<a data-v-0aeee531="" data-v-88bf2650="" href="https://juejin.im/book/5c90640c5188252d7941f5bb/section/5c9065385188252da6320022" target="_blank" rel="" class="rank"><img data-v-0aeee531="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/lv-2.f597b88.svg" alt="lv-2"></a></a></div><div data-v-af33fb3c="" class="position">FE实习生 @ 滴滴出行</div></div><div data-v-af33fb3c="" class="content-box"><span data-v-af33fb3c=""> 回复 </span><div data-v-3269e471="" data-v-af33fb3c="" st:block="userPopover" st:state="5a8f8a3bf265da4e9016c02e" class="user-popover-box"><!----><a data-v-88bf2650="" data-v-af33fb3c="" href="https://juejin.im/user/5a8f8a3bf265da4e9016c02e" target="_blank" rel="" class="username username be-replied" data-v-3269e471="">yuanfux<a data-v-0aeee531="" data-v-88bf2650="" href="https://juejin.im/book/5c90640c5188252d7941f5bb/section/5c9065385188252da6320022" target="_blank" rel="" class="rank"><img data-v-0aeee531="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/lv-2.f597b88.svg" alt="lv-2"></a></a></div><span data-v-af33fb3c="" class="author-badge-text">(作者)</span><span data-v-af33fb3c="">: </span><span data-v-af33fb3c="" class="content">那里要求要绑定信用卡，我已经绑定了并且提示客户身份验证已通过，但是在服务配额里面提示‘您的服务注册即将完成’</span></div><!----><!----><div data-v-af33fb3c="" class="limit-all-box"><!----></div><div data-v-af33fb3c="" class="sub-comment-stat-box"><time data-v-af33fb3c="" datetime="2019-08-19T02:27:51.036Z" title="Mon Aug 19 2019 10:27:51 GMT+0800 (中国标准时间)" class="time">4月前</time><div data-v-af33fb3c="" class="delete"> &nbsp;·&nbsp;删除</div><div data-v-af33fb3c="" class="sub-comment-action-box"><div data-v-af33fb3c="" class="like-action action"><svg data-v-af33fb3c="" aria-hidden="true" width="16" height="16" viewBox="0 0 20 20" class="icon like-icon"><g data-v-af33fb3c="" fill="none" fill-rule="evenodd"><path data-v-af33fb3c="" d="M0 0h20v20H0z"></path> <path data-v-af33fb3c="" stroke="#8A93A0" stroke-linejoin="round" d="M4.58 8.25V17h-1.4C2.53 17 2 16.382 2 15.624V9.735c0-.79.552-1.485 1.18-1.485h1.4zM11.322 2c1.011.019 1.614.833 1.823 1.235.382.735.392 1.946.13 2.724-.236.704-.785 1.629-.785 1.629h4.11c.434 0 .838.206 1.107.563.273.365.363.84.24 1.272l-1.86 6.513A1.425 1.425 0 0 1 14.724 17H6.645V7.898C8.502 7.51 9.643 4.59 9.852 3.249A1.47 1.47 0 0 1 11.322 2z"></path></g></svg><!----></div><div data-v-af33fb3c="" class="comment-action action"><svg data-v-af33fb3c="" aria-hidden="true" width="16" height="16" viewBox="0 0 20 20" class="icon comment-icon"><g data-v-af33fb3c="" fill="none" fill-rule="evenodd"><path data-v-af33fb3c="" d="M0 0h20v20H0z"></path> <path data-v-af33fb3c="" stroke="#8A93A0" stroke-linejoin="round" d="M10 17c-4.142 0-7.5-2.91-7.5-6.5S5.858 4 10 4c4.142 0 7.5 2.91 7.5 6.5 0 1.416-.522 2.726-1.41 3.794-.129.156.41 3.206.41 3.206l-3.265-1.134c-.998.369-2.077.634-3.235.634z"></path></g></svg> <span data-v-af33fb3c="">回复</span></div></div></div><!----></div></div></div><!----></div></div><div data-v-3824749c="" class="item fetch-more"><div data-v-3824749c="" class="fetch-more-comment">加载更多</div></div></div></div><!----></div></div></div><!----></div></div><!----><div data-v-78f25c42="" data-v-0f685764="" st:block="recommended" class="main-area recommended-area shadow"><div data-v-78f25c42="" data-v-0f685764="" class="recommended-entry-list-title">相关推荐</div><!----><ul data-v-8a4027e6="" data-v-78f25c42="" st:block="entryList" class="entry-list recommended-entry-list" data-v-0f685764=""><!----><li data-v-8a4027e6="" data-growing-container="true" data-growing-title="entryList" class="item"><div data-v-4126cd68="" data-v-8a4027e6="" class="entry-box"><div data-v-3c596ef9="" data-v-4126cd68="" st:block="entry" st:state="5dff0cebf265da33a3530df4|1" class="entry"><a data-v-3c596ef9="" href="https://juejin.im/post/5dff0cd5518825127869a519" target="_blank" rel="" st:name="link" class="entry-link"><div data-v-3c596ef9="" class="content-box"><div data-v-3c596ef9="" class="info-box"><div data-v-3c596ef9="" class="info-row meta-row"><ul data-v-3c596ef9="" class="meta-list"><!----><!----><li data-v-3c596ef9="" class="item post">专栏</li><li data-v-3c596ef9="" class="item username clickable"><div data-v-3269e471="" data-v-3c596ef9="" st:block="userPopover" st:state="583b9227ac502e006c25d1a7" class="user-popover-box"><!----><a data-v-3c596ef9="" href="https://juejin.im/user/583b9227ac502e006c25d1a7" target="_blank" rel="" st:name="user" st:state="583b9227ac502e006c25d1a7" data-v-3269e471="">yugasun</a></div></li><li data-v-3c596ef9="" class="item">2小时前</li><li data-v-3c596ef9="" class="item tag"><a data-v-3c596ef9="" href="https://juejin.im/tag/Serverless" target="_blank" rel="" st:name="tag" st:state="5b45afd3f265da65f7d27f9a" class="tag">Serverless</a></li><!----></ul></div><div data-v-3c596ef9="" class="info-row title-row"><!----><!----><a data-v-3c596ef9="" href="https://juejin.im/post/5dff0cd5518825127869a519" target="_blank" rel="" st:name="title" class="title">基于 Serverless Component 的全栈解决方案 - 续集</a></div><div data-v-3c596ef9="" class="info-row action-row"><ul data-v-3c596ef9="" class="action-list"><li data-v-3c596ef9="" st:name="likeBtn" class="item like clickable"><a data-v-3c596ef9="" class="title-box"><img data-v-3c596ef9="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/zan.e9d7698.svg" class="icon"><span data-v-3c596ef9="" class="count">4</span></a></li><li data-v-3c596ef9="" st:name="commentBtn" class="item comment clickable"><a data-v-3c596ef9="" href="https://juejin.im/post/5dff0cd5518825127869a519#comment" target="_blank" rel="" class="title-box"><img data-v-3c596ef9="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/comment.4d5744f.svg" class="icon"><span data-v-3c596ef9="" class="count">1</span></a></li><li data-v-3c596ef9="" st:name="shareBtn" title="分享" class="item share clickable hover"><img data-v-3c596ef9="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/share.1d55e69.svg" class="icon"><div data-v-3c596ef9="" class="share-panel"><div data-v-3c596ef9="" st:name="shareItem" st:state="weibo" class="share-item weibo"><img data-v-3c596ef9="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/weibo.8e2f5d6.svg" class="icon">微博</div><div data-v-3c596ef9="" st:name="shareItem" st:state="wechat" class="share-item wechat"><img data-v-3c596ef9="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/wechat.844402c.svg" class="icon">微信扫一扫<div data-v-3c596ef9="" class="qr-code-box"><img data-v-3c596ef9="" src="https://juejin.im/post/5d16f3c96fb9a07ed84256ad" class="qr-code"></div></div></div></li><li data-v-3c596ef9="" title="收藏" st:name="collectBtn" class="item collect clickable hover"><img data-v-3c596ef9="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/collect.02e2979.svg" class="icon"><!----></li><!----></ul></div></div><div data-v-126b87aa="" data-v-005099d8="" data-v-3c596ef9="" data-src="https://user-gold-cdn.xitu.io/2019/12/22/16f2c4a4046bb245?imageView2/1/w/120/h/120/q/85/format/webp/interlace/1" class="lazy thumb thumb" style="background-image: none; background-size: cover;"></div></div></a></div></div></li><li data-v-8a4027e6="" data-growing-container="true" data-growing-title="entryList" class="item"><div data-v-4126cd68="" data-v-8a4027e6="" class="entry-box"><div data-v-3c596ef9="" data-v-4126cd68="" st:block="entry" st:state="5deda0ec51882512727f1aed|2" class="entry"><a data-v-3c596ef9="" href="https://juejin.im/post/5deda052f265da33942a7631" target="_blank" rel="" st:name="link" class="entry-link"><div data-v-3c596ef9="" class="content-box"><div data-v-3c596ef9="" class="info-box"><div data-v-3c596ef9="" class="info-row meta-row"><ul data-v-3c596ef9="" class="meta-list"><!----><!----><li data-v-3c596ef9="" class="item post">专栏</li><li data-v-3c596ef9="" class="item username clickable"><div data-v-3269e471="" data-v-3c596ef9="" st:block="userPopover" st:state="5cd23730f265da03576edbf1" class="user-popover-box"><!----><a data-v-3c596ef9="" href="https://juejin.im/user/5cd23730f265da03576edbf1" target="_blank" rel="" st:name="user" st:state="5cd23730f265da03576edbf1" data-v-3269e471="">云音乐前端技术团队</a></div></li><li data-v-3c596ef9="" class="item">11天前</li><li data-v-3c596ef9="" class="item tag"><a data-v-3c596ef9="" href="https://juejin.im/tag/Serverless" target="_blank" rel="" st:name="tag" st:state="5b45afd3f265da65f7d27f9a" class="tag">Serverless</a><a data-v-3c596ef9="" href="https://juejin.im/tag/%E4%BA%91%E5%8E%9F%E7%94%9F" target="_blank" rel="" st:name="tag" st:state="5b6cffe9f265da1b969e30f2" class="tag">云原生</a></li><!----></ul></div><div data-v-3c596ef9="" class="info-row title-row"><!----><!----><a data-v-3c596ef9="" href="https://juejin.im/post/5deda052f265da33942a7631" target="_blank" rel="" st:name="title" class="title">云原生基础及调研</a></div><div data-v-3c596ef9="" class="info-row action-row"><ul data-v-3c596ef9="" class="action-list"><li data-v-3c596ef9="" st:name="likeBtn" class="item like clickable"><a data-v-3c596ef9="" class="title-box"><img data-v-3c596ef9="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/zan.e9d7698.svg" class="icon"><span data-v-3c596ef9="" class="count">61</span></a></li><li data-v-3c596ef9="" st:name="commentBtn" class="item comment clickable"><a data-v-3c596ef9="" href="https://juejin.im/post/5deda052f265da33942a7631#comment" target="_blank" rel="" class="title-box"><img data-v-3c596ef9="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/comment.4d5744f.svg" class="icon"><span data-v-3c596ef9="" class="count">9</span></a></li><li data-v-3c596ef9="" st:name="shareBtn" title="分享" class="item share clickable hover"><img data-v-3c596ef9="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/share.1d55e69.svg" class="icon"><div data-v-3c596ef9="" class="share-panel"><div data-v-3c596ef9="" st:name="shareItem" st:state="weibo" class="share-item weibo"><img data-v-3c596ef9="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/weibo.8e2f5d6.svg" class="icon">微博</div><div data-v-3c596ef9="" st:name="shareItem" st:state="wechat" class="share-item wechat"><img data-v-3c596ef9="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/wechat.844402c.svg" class="icon">微信扫一扫<div data-v-3c596ef9="" class="qr-code-box"><img data-v-3c596ef9="" src="https://juejin.im/post/5d16f3c96fb9a07ed84256ad" class="qr-code"></div></div></div></li><li data-v-3c596ef9="" title="收藏" st:name="collectBtn" class="item collect clickable hover"><img data-v-3c596ef9="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/collect.02e2979.svg" class="icon"><!----></li><!----></ul></div></div><div data-v-126b87aa="" data-v-005099d8="" data-v-3c596ef9="" data-src="https://user-gold-cdn.xitu.io/2019/12/9/16ee83b596ad923a?imageView2/1/w/120/h/120/q/85/format/webp/interlace/1" class="lazy thumb thumb" style="background-image: none; background-size: cover;"></div></div></a></div></div></li><li data-v-8a4027e6="" data-growing-container="true" data-growing-title="entryList" class="item"><div data-v-4126cd68="" data-v-8a4027e6="" class="entry-box"><div data-v-3c596ef9="" data-v-4126cd68="" st:block="entry" st:state="5dfb7161f265da33e763cced|3" class="entry"><a data-v-3c596ef9="" href="https://juejin.im/post/5dfb7124e51d45581509a7da" target="_blank" rel="" st:name="link" class="entry-link"><div data-v-3c596ef9="" class="content-box"><div data-v-3c596ef9="" class="info-box"><div data-v-3c596ef9="" class="info-row meta-row"><ul data-v-3c596ef9="" class="meta-list"><!----><!----><li data-v-3c596ef9="" class="item post">专栏</li><li data-v-3c596ef9="" class="item username clickable"><div data-v-3269e471="" data-v-3c596ef9="" st:block="userPopover" st:state="5ad01d036fb9a028d444fc82" class="user-popover-box"><!----><a data-v-3c596ef9="" href="https://juejin.im/user/5ad01d036fb9a028d444fc82" target="_blank" rel="" st:name="user" st:state="5ad01d036fb9a028d444fc82" data-v-3269e471="">阿里巴巴云原生</a></div></li><li data-v-3c596ef9="" class="item">2天前</li><li data-v-3c596ef9="" class="item tag"><a data-v-3c596ef9="" href="https://juejin.im/tag/Serverless" target="_blank" rel="" st:name="tag" st:state="5b45afd3f265da65f7d27f9a" class="tag">Serverless</a></li><!----></ul></div><div data-v-3c596ef9="" class="info-row title-row"><!----><!----><a data-v-3c596ef9="" href="https://juejin.im/post/5dfb7124e51d45581509a7da" target="_blank" rel="" st:name="title" class="title">Serverless 实战——使用 Rendertron 搭建 Headless Chrome 渲染解决方案</a></div><div data-v-3c596ef9="" class="info-row action-row"><ul data-v-3c596ef9="" class="action-list"><li data-v-3c596ef9="" st:name="likeBtn" class="item like clickable"><a data-v-3c596ef9="" class="title-box"><img data-v-3c596ef9="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/zan.e9d7698.svg" class="icon"><!----></a></li><li data-v-3c596ef9="" st:name="commentBtn" class="item comment clickable"><a data-v-3c596ef9="" href="https://juejin.im/post/5dfb7124e51d45581509a7da#comment" target="_blank" rel="" class="title-box"><img data-v-3c596ef9="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/comment.4d5744f.svg" class="icon"><span data-v-3c596ef9="" class="count">3</span></a></li><li data-v-3c596ef9="" st:name="shareBtn" title="分享" class="item share clickable hover"><img data-v-3c596ef9="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/share.1d55e69.svg" class="icon"><div data-v-3c596ef9="" class="share-panel"><div data-v-3c596ef9="" st:name="shareItem" st:state="weibo" class="share-item weibo"><img data-v-3c596ef9="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/weibo.8e2f5d6.svg" class="icon">微博</div><div data-v-3c596ef9="" st:name="shareItem" st:state="wechat" class="share-item wechat"><img data-v-3c596ef9="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/wechat.844402c.svg" class="icon">微信扫一扫<div data-v-3c596ef9="" class="qr-code-box"><img data-v-3c596ef9="" src="https://juejin.im/post/5d16f3c96fb9a07ed84256ad" class="qr-code"></div></div></div></li><li data-v-3c596ef9="" title="收藏" st:name="collectBtn" class="item collect clickable hover"><img data-v-3c596ef9="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/collect.02e2979.svg" class="icon"><!----></li><!----></ul></div></div><!----></div></a></div></div></li><!----><li data-v-8a4027e6="" data-growing-container="true" data-growing-title="entryList" class="item"><div data-v-4126cd68="" data-v-8a4027e6="" class="entry-box"><div data-v-3c596ef9="" data-v-4126cd68="" st:block="entry" st:state="5de4729c6fb9a0719476164d|4" class="entry"><a data-v-3c596ef9="" href="https://juejin.im/post/5de470a55188256e885f4fb7" target="_blank" rel="" st:name="link" class="entry-link"><div data-v-3c596ef9="" class="content-box"><div data-v-3c596ef9="" class="info-box"><div data-v-3c596ef9="" class="info-row meta-row"><ul data-v-3c596ef9="" class="meta-list"><!----><!----><li data-v-3c596ef9="" class="item post">专栏</li><li data-v-3c596ef9="" class="item username clickable"><div data-v-3269e471="" data-v-3c596ef9="" st:block="userPopover" st:state="5874526761ff4b006d4fd9a4" class="user-popover-box"><!----><a data-v-3c596ef9="" href="https://juejin.im/user/5874526761ff4b006d4fd9a4" target="_blank" rel="" st:name="user" st:state="5874526761ff4b006d4fd9a4" data-v-3269e471="">winty</a></div></li><li data-v-3c596ef9="" class="item">20天前</li><li data-v-3c596ef9="" class="item tag"><a data-v-3c596ef9="" href="https://juejin.im/tag/%E5%89%8D%E7%AB%AF" target="_blank" rel="" st:name="tag" st:state="5597a05ae4b08a686ce56f6f" class="tag">前端</a><a data-v-3c596ef9="" href="https://juejin.im/tag/Serverless" target="_blank" rel="" st:name="tag" st:state="5b45afd3f265da65f7d27f9a" class="tag">Serverless</a></li><!----></ul></div><div data-v-3c596ef9="" class="info-row title-row"><!----><!----><a data-v-3c596ef9="" href="https://juejin.im/post/5de470a55188256e885f4fb7" target="_blank" rel="" st:name="title" class="title">万字长文之 Serverless 实战指南</a></div><div data-v-3c596ef9="" class="info-row action-row"><ul data-v-3c596ef9="" class="action-list"><li data-v-3c596ef9="" st:name="likeBtn" class="item like clickable"><a data-v-3c596ef9="" class="title-box"><img data-v-3c596ef9="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/zan.e9d7698.svg" class="icon"><span data-v-3c596ef9="" class="count">117</span></a></li><li data-v-3c596ef9="" st:name="commentBtn" class="item comment clickable"><a data-v-3c596ef9="" href="https://juejin.im/post/5de470a55188256e885f4fb7#comment" target="_blank" rel="" class="title-box"><img data-v-3c596ef9="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/comment.4d5744f.svg" class="icon"><span data-v-3c596ef9="" class="count">24</span></a></li><li data-v-3c596ef9="" st:name="shareBtn" title="分享" class="item share clickable hover"><img data-v-3c596ef9="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/share.1d55e69.svg" class="icon"><div data-v-3c596ef9="" class="share-panel"><div data-v-3c596ef9="" st:name="shareItem" st:state="weibo" class="share-item weibo"><img data-v-3c596ef9="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/weibo.8e2f5d6.svg" class="icon">微博</div><div data-v-3c596ef9="" st:name="shareItem" st:state="wechat" class="share-item wechat"><img data-v-3c596ef9="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/wechat.844402c.svg" class="icon">微信扫一扫<div data-v-3c596ef9="" class="qr-code-box"><img data-v-3c596ef9="" src="https://juejin.im/post/5d16f3c96fb9a07ed84256ad" class="qr-code"></div></div></div></li><li data-v-3c596ef9="" title="收藏" st:name="collectBtn" class="item collect clickable hover"><img data-v-3c596ef9="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/collect.02e2979.svg" class="icon"><!----></li><!----></ul></div></div><div data-v-126b87aa="" data-v-005099d8="" data-v-3c596ef9="" data-src="https://user-gold-cdn.xitu.io/2019/12/2/16ec45d49d67847f?imageView2/1/w/120/h/120/q/85/format/webp/interlace/1" class="lazy thumb thumb" style="background-image: none; background-size: cover;"></div></div></a></div></div></li><li data-v-8a4027e6="" data-growing-container="true" data-growing-title="entryList" class="item"><div data-v-4126cd68="" data-v-8a4027e6="" class="entry-box"><div data-v-3c596ef9="" data-v-4126cd68="" st:block="entry" st:state="5df99106f265da33e4334e8d|5" class="entry"><a data-v-3c596ef9="" href="https://juejin.im/post/5df991066fb9a0165b4cdaef" target="_blank" rel="" st:name="link" class="entry-link"><div data-v-3c596ef9="" class="content-box"><div data-v-3c596ef9="" class="info-box"><div data-v-3c596ef9="" class="info-row meta-row"><ul data-v-3c596ef9="" class="meta-list"><!----><!----><li data-v-3c596ef9="" class="item post">专栏</li><li data-v-3c596ef9="" class="item username clickable"><div data-v-3269e471="" data-v-3c596ef9="" st:block="userPopover" st:state="5ad01d036fb9a028d444fc82" class="user-popover-box"><!----><a data-v-3c596ef9="" href="https://juejin.im/user/5ad01d036fb9a028d444fc82" target="_blank" rel="" st:name="user" st:state="5ad01d036fb9a028d444fc82" data-v-3269e471="">阿里巴巴云原生</a></div></li><li data-v-3c596ef9="" class="item">4天前</li><li data-v-3c596ef9="" class="item tag"><a data-v-3c596ef9="" href="https://juejin.im/tag/Serverless" target="_blank" rel="" st:name="tag" st:state="5b45afd3f265da65f7d27f9a" class="tag">Serverless</a></li><!----></ul></div><div data-v-3c596ef9="" class="info-row title-row"><!----><!----><a data-v-3c596ef9="" href="https://juejin.im/post/5df991066fb9a0165b4cdaef" target="_blank" rel="" st:name="title" class="title">函数计算: 让小程序开发进入 Serverless 时代</a></div><div data-v-3c596ef9="" class="info-row action-row"><ul data-v-3c596ef9="" class="action-list"><li data-v-3c596ef9="" st:name="likeBtn" class="item like clickable"><a data-v-3c596ef9="" class="title-box"><img data-v-3c596ef9="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/zan.e9d7698.svg" class="icon"><span data-v-3c596ef9="" class="count">2</span></a></li><li data-v-3c596ef9="" st:name="commentBtn" class="item comment clickable"><a data-v-3c596ef9="" href="https://juejin.im/post/5df991066fb9a0165b4cdaef#comment" target="_blank" rel="" class="title-box"><img data-v-3c596ef9="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/comment.4d5744f.svg" class="icon"><!----></a></li><li data-v-3c596ef9="" st:name="shareBtn" title="分享" class="item share clickable hover"><img data-v-3c596ef9="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/share.1d55e69.svg" class="icon"><div data-v-3c596ef9="" class="share-panel"><div data-v-3c596ef9="" st:name="shareItem" st:state="weibo" class="share-item weibo"><img data-v-3c596ef9="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/weibo.8e2f5d6.svg" class="icon">微博</div><div data-v-3c596ef9="" st:name="shareItem" st:state="wechat" class="share-item wechat"><img data-v-3c596ef9="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/wechat.844402c.svg" class="icon">微信扫一扫<div data-v-3c596ef9="" class="qr-code-box"><img data-v-3c596ef9="" src="https://juejin.im/post/5d16f3c96fb9a07ed84256ad" class="qr-code"></div></div></div></li><li data-v-3c596ef9="" title="收藏" st:name="collectBtn" class="item collect clickable hover"><img data-v-3c596ef9="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/collect.02e2979.svg" class="icon"><!----></li><!----></ul></div></div><!----></div></a></div></div></li><!----><!----><li data-v-8a4027e6="" data-growing-container="true" data-growing-title="entryList" class="item"><div data-v-4126cd68="" data-v-8a4027e6="" class="entry-box"><div data-v-3c596ef9="" data-v-4126cd68="" st:block="entry" st:state="5df881bef265da33d7442a3c|4" class="entry"><a data-v-3c596ef9="" href="https://juejin.im/post/5df881be5188251257286fca" target="_blank" rel="" st:name="link" class="entry-link"><div data-v-3c596ef9="" class="content-box"><div data-v-3c596ef9="" class="info-box"><div data-v-3c596ef9="" class="info-row meta-row"><ul data-v-3c596ef9="" class="meta-list"><!----><!----><li data-v-3c596ef9="" class="item post">专栏</li><li data-v-3c596ef9="" class="item username clickable"><div data-v-3269e471="" data-v-3c596ef9="" st:block="userPopover" st:state="5ad01d036fb9a028d444fc82" class="user-popover-box"><!----><a data-v-3c596ef9="" href="https://juejin.im/user/5ad01d036fb9a028d444fc82" target="_blank" rel="" st:name="user" st:state="5ad01d036fb9a028d444fc82" data-v-3269e471="">阿里巴巴云原生</a></div></li><li data-v-3c596ef9="" class="item">5天前</li><li data-v-3c596ef9="" class="item tag"><a data-v-3c596ef9="" href="https://juejin.im/tag/Serverless" target="_blank" rel="" st:name="tag" st:state="5b45afd3f265da65f7d27f9a" class="tag">Serverless</a></li><!----></ul></div><div data-v-3c596ef9="" class="info-row title-row"><!----><!----><a data-v-3c596ef9="" href="https://juejin.im/post/5df881be5188251257286fca" target="_blank" rel="" st:name="title" class="title">一元建站-基于函数计算 + wordpress 构建  serverless 网站</a></div><div data-v-3c596ef9="" class="info-row action-row"><ul data-v-3c596ef9="" class="action-list"><li data-v-3c596ef9="" st:name="likeBtn" class="item like clickable"><a data-v-3c596ef9="" class="title-box"><img data-v-3c596ef9="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/zan.e9d7698.svg" class="icon"><!----></a></li><li data-v-3c596ef9="" st:name="commentBtn" class="item comment clickable"><a data-v-3c596ef9="" href="https://juejin.im/post/5df881be5188251257286fca#comment" target="_blank" rel="" class="title-box"><img data-v-3c596ef9="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/comment.4d5744f.svg" class="icon"><span data-v-3c596ef9="" class="count">1</span></a></li><li data-v-3c596ef9="" st:name="shareBtn" title="分享" class="item share clickable hover"><img data-v-3c596ef9="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/share.1d55e69.svg" class="icon"><div data-v-3c596ef9="" class="share-panel"><div data-v-3c596ef9="" st:name="shareItem" st:state="weibo" class="share-item weibo"><img data-v-3c596ef9="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/weibo.8e2f5d6.svg" class="icon">微博</div><div data-v-3c596ef9="" st:name="shareItem" st:state="wechat" class="share-item wechat"><img data-v-3c596ef9="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/wechat.844402c.svg" class="icon">微信扫一扫<div data-v-3c596ef9="" class="qr-code-box"><img data-v-3c596ef9="" src="https://juejin.im/post/5d16f3c96fb9a07ed84256ad" class="qr-code"></div></div></div></li><li data-v-3c596ef9="" title="收藏" st:name="collectBtn" class="item collect clickable hover"><img data-v-3c596ef9="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/collect.02e2979.svg" class="icon"><!----></li><!----></ul></div></div><!----></div></a></div></div></li><li data-v-8a4027e6="" data-growing-container="true" data-growing-title="entryList" class="item"><div data-v-4126cd68="" data-v-8a4027e6="" class="entry-box"><div data-v-3c596ef9="" data-v-4126cd68="" st:block="entry" st:state="5df253936fb9a0163c53c038|5" class="entry"><a data-v-3c596ef9="" href="https://juejin.im/post/5df253926fb9a016164358d8" target="_blank" rel="" st:name="link" class="entry-link"><div data-v-3c596ef9="" class="content-box"><div data-v-3c596ef9="" class="info-box"><div data-v-3c596ef9="" class="info-row meta-row"><ul data-v-3c596ef9="" class="meta-list"><li data-v-3c596ef9="" class="item recommended">荐</li><!----><li data-v-3c596ef9="" class="item post">专栏</li><li data-v-3c596ef9="" class="item username clickable"><div data-v-3269e471="" data-v-3c596ef9="" st:block="userPopover" st:state="5ad01d036fb9a028d444fc82" class="user-popover-box"><!----><a data-v-3c596ef9="" href="https://juejin.im/user/5ad01d036fb9a028d444fc82" target="_blank" rel="" st:name="user" st:state="5ad01d036fb9a028d444fc82" data-v-3269e471="">阿里巴巴云原生</a></div></li><li data-v-3c596ef9="" class="item">9天前</li><li data-v-3c596ef9="" class="item tag"><a data-v-3c596ef9="" href="https://juejin.im/tag/Serverless" target="_blank" rel="" st:name="tag" st:state="5b45afd3f265da65f7d27f9a" class="tag">Serverless</a></li><!----></ul></div><div data-v-3c596ef9="" class="info-row title-row"><!----><!----><a data-v-3c596ef9="" href="https://juejin.im/post/5df253926fb9a016164358d8" target="_blank" rel="" st:name="title" class="title">快速搭建 Serverless 在线图片处理应用</a></div><div data-v-3c596ef9="" class="info-row action-row"><ul data-v-3c596ef9="" class="action-list"><li data-v-3c596ef9="" st:name="likeBtn" class="item like clickable"><a data-v-3c596ef9="" class="title-box"><img data-v-3c596ef9="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/zan.e9d7698.svg" class="icon"><span data-v-3c596ef9="" class="count">12</span></a></li><li data-v-3c596ef9="" st:name="commentBtn" class="item comment clickable"><a data-v-3c596ef9="" href="https://juejin.im/post/5df253926fb9a016164358d8#comment" target="_blank" rel="" class="title-box"><img data-v-3c596ef9="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/comment.4d5744f.svg" class="icon"><span data-v-3c596ef9="" class="count">3</span></a></li><li data-v-3c596ef9="" st:name="shareBtn" title="分享" class="item share clickable hover"><img data-v-3c596ef9="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/share.1d55e69.svg" class="icon"><div data-v-3c596ef9="" class="share-panel"><div data-v-3c596ef9="" st:name="shareItem" st:state="weibo" class="share-item weibo"><img data-v-3c596ef9="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/weibo.8e2f5d6.svg" class="icon">微博</div><div data-v-3c596ef9="" st:name="shareItem" st:state="wechat" class="share-item wechat"><img data-v-3c596ef9="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/wechat.844402c.svg" class="icon">微信扫一扫<div data-v-3c596ef9="" class="qr-code-box"><img data-v-3c596ef9="" src="https://juejin.im/post/5d16f3c96fb9a07ed84256ad" class="qr-code"></div></div></div></li><li data-v-3c596ef9="" title="收藏" st:name="collectBtn" class="item collect clickable hover"><img data-v-3c596ef9="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/collect.02e2979.svg" class="icon"><!----></li><!----></ul></div></div><!----></div></a></div></div></li><li data-v-8a4027e6="" data-growing-container="true" data-growing-title="entryList" class="item"><div data-v-4126cd68="" data-v-8a4027e6="" class="entry-box"><div data-v-3c596ef9="" data-v-4126cd68="" st:block="entry" st:state="5d9d20106fb9a04e065d68eb|6" class="entry"><a data-v-3c596ef9="" href="https://juejin.im/post/5d9c47dce51d4578045a3569" target="_blank" rel="" st:name="link" class="entry-link"><div data-v-3c596ef9="" class="content-box"><div data-v-3c596ef9="" class="info-box"><div data-v-3c596ef9="" class="info-row meta-row"><ul data-v-3c596ef9="" class="meta-list"><!----><!----><li data-v-3c596ef9="" class="item post">专栏</li><li data-v-3c596ef9="" class="item username clickable"><div data-v-3269e471="" data-v-3c596ef9="" st:block="userPopover" st:state="5d5366df6fb9a06b2a203553" class="user-popover-box"><!----><a data-v-3c596ef9="" href="https://juejin.im/user/5d5366df6fb9a06b2a203553" target="_blank" rel="" st:name="user" st:state="5d5366df6fb9a06b2a203553" data-v-3269e471="">政采云前端团队</a></div></li><li data-v-3c596ef9="" class="item">2月前</li><li data-v-3c596ef9="" class="item tag"><a data-v-3c596ef9="" href="https://juejin.im/tag/%E5%89%8D%E7%AB%AF" target="_blank" rel="" st:name="tag" st:state="5597a05ae4b08a686ce56f6f" class="tag">前端</a><a data-v-3c596ef9="" href="https://juejin.im/tag/Serverless" target="_blank" rel="" st:name="tag" st:state="5b45afd3f265da65f7d27f9a" class="tag">Serverless</a></li><!----></ul></div><div data-v-3c596ef9="" class="info-row title-row"><!----><!----><a data-v-3c596ef9="" href="https://juejin.im/post/5d9c47dce51d4578045a3569" target="_blank" rel="" st:name="title" class="title">写给前端工程师的 Serverless 入门</a></div><div data-v-3c596ef9="" class="info-row action-row"><ul data-v-3c596ef9="" class="action-list"><li data-v-3c596ef9="" st:name="likeBtn" class="item like clickable"><a data-v-3c596ef9="" class="title-box"><img data-v-3c596ef9="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/zan.e9d7698.svg" class="icon"><span data-v-3c596ef9="" class="count">225</span></a></li><li data-v-3c596ef9="" st:name="commentBtn" class="item comment clickable"><a data-v-3c596ef9="" href="https://juejin.im/post/5d9c47dce51d4578045a3569#comment" target="_blank" rel="" class="title-box"><img data-v-3c596ef9="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/comment.4d5744f.svg" class="icon"><span data-v-3c596ef9="" class="count">18</span></a></li><li data-v-3c596ef9="" st:name="shareBtn" title="分享" class="item share clickable hover"><img data-v-3c596ef9="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/share.1d55e69.svg" class="icon"><div data-v-3c596ef9="" class="share-panel"><div data-v-3c596ef9="" st:name="shareItem" st:state="weibo" class="share-item weibo"><img data-v-3c596ef9="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/weibo.8e2f5d6.svg" class="icon">微博</div><div data-v-3c596ef9="" st:name="shareItem" st:state="wechat" class="share-item wechat"><img data-v-3c596ef9="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/wechat.844402c.svg" class="icon">微信扫一扫<div data-v-3c596ef9="" class="qr-code-box"><img data-v-3c596ef9="" src="https://juejin.im/post/5d16f3c96fb9a07ed84256ad" class="qr-code"></div></div></div></li><li data-v-3c596ef9="" title="收藏" st:name="collectBtn" class="item collect clickable hover"><img data-v-3c596ef9="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/collect.02e2979.svg" class="icon"><!----></li><!----></ul></div></div><div data-v-126b87aa="" data-v-005099d8="" data-v-3c596ef9="" data-src="https://user-gold-cdn.xitu.io/2019/10/8/16daaa4cc9f22c97?imageView2/1/w/120/h/120/q/85/format/webp/interlace/1" class="lazy thumb thumb" style="background-image: none; background-size: cover;"></div></div></a></div></div></li><li data-v-8a4027e6="" data-growing-container="true" data-growing-title="entryList" class="item"><div data-v-4126cd68="" data-v-8a4027e6="" class="entry-box"><div data-v-3c596ef9="" data-v-4126cd68="" st:block="entry" st:state="5df1c2adf265da33f718b08d|7" class="entry"><a data-v-3c596ef9="" href="https://juejin.im/post/5df1c1e26fb9a016153de01c" target="_blank" rel="" st:name="link" class="entry-link"><div data-v-3c596ef9="" class="content-box"><div data-v-3c596ef9="" class="info-box"><div data-v-3c596ef9="" class="info-row meta-row"><ul data-v-3c596ef9="" class="meta-list"><!----><!----><li data-v-3c596ef9="" class="item post">专栏</li><li data-v-3c596ef9="" class="item username clickable"><div data-v-3269e471="" data-v-3c596ef9="" st:block="userPopover" st:state="583b9227ac502e006c25d1a7" class="user-popover-box"><!----><a data-v-3c596ef9="" href="https://juejin.im/user/583b9227ac502e006c25d1a7" target="_blank" rel="" st:name="user" st:state="583b9227ac502e006c25d1a7" data-v-3269e471="">yugasun</a></div></li><li data-v-3c596ef9="" class="item">10天前</li><li data-v-3c596ef9="" class="item tag"><a data-v-3c596ef9="" href="https://juejin.im/tag/Serverless" target="_blank" rel="" st:name="tag" st:state="5b45afd3f265da65f7d27f9a" class="tag">Serverless</a></li><!----></ul></div><div data-v-3c596ef9="" class="info-row title-row"><!----><!----><a data-v-3c596ef9="" href="https://juejin.im/post/5df1c1e26fb9a016153de01c" target="_blank" rel="" st:name="title" class="title">如何开发自己的第一个 Serverless Component</a></div><div data-v-3c596ef9="" class="info-row action-row"><ul data-v-3c596ef9="" class="action-list"><li data-v-3c596ef9="" st:name="likeBtn" class="item like clickable"><a data-v-3c596ef9="" class="title-box"><img data-v-3c596ef9="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/zan.e9d7698.svg" class="icon"><span data-v-3c596ef9="" class="count">7</span></a></li><li data-v-3c596ef9="" st:name="commentBtn" class="item comment clickable"><a data-v-3c596ef9="" href="https://juejin.im/post/5df1c1e26fb9a016153de01c#comment" target="_blank" rel="" class="title-box"><img data-v-3c596ef9="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/comment.4d5744f.svg" class="icon"><span data-v-3c596ef9="" class="count">2</span></a></li><li data-v-3c596ef9="" st:name="shareBtn" title="分享" class="item share clickable hover"><img data-v-3c596ef9="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/share.1d55e69.svg" class="icon"><div data-v-3c596ef9="" class="share-panel"><div data-v-3c596ef9="" st:name="shareItem" st:state="weibo" class="share-item weibo"><img data-v-3c596ef9="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/weibo.8e2f5d6.svg" class="icon">微博</div><div data-v-3c596ef9="" st:name="shareItem" st:state="wechat" class="share-item wechat"><img data-v-3c596ef9="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/wechat.844402c.svg" class="icon">微信扫一扫<div data-v-3c596ef9="" class="qr-code-box"><img data-v-3c596ef9="" src="https://juejin.im/post/5d16f3c96fb9a07ed84256ad" class="qr-code"></div></div></div></li><li data-v-3c596ef9="" title="收藏" st:name="collectBtn" class="item collect clickable hover"><img data-v-3c596ef9="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/collect.02e2979.svg" class="icon"><!----></li><!----></ul></div></div><div data-v-126b87aa="" data-v-005099d8="" data-v-3c596ef9="" data-src="https://user-gold-cdn.xitu.io/2019/12/12/16ef85f25ee1af09?imageView2/1/w/120/h/120/q/85/format/webp/interlace/1" class="lazy thumb thumb" style="background-image: none; background-size: cover;"></div></div></a></div></div></li><li data-v-8a4027e6="" data-growing-container="true" data-growing-title="entryList" class="item"><div data-v-4126cd68="" data-v-8a4027e6="" class="entry-box"><div data-v-3c596ef9="" data-v-4126cd68="" st:block="entry" st:state="5dce7170f265da0bdf22176b|8" class="entry"><a data-v-3c596ef9="" href="https://juejin.im/post/5dce7140f265da0bf80b5246" target="_blank" rel="" st:name="link" class="entry-link"><div data-v-3c596ef9="" class="content-box"><div data-v-3c596ef9="" class="info-box"><div data-v-3c596ef9="" class="info-row meta-row"><ul data-v-3c596ef9="" class="meta-list"><!----><!----><li data-v-3c596ef9="" class="item post">专栏</li><li data-v-3c596ef9="" class="item username clickable"><div data-v-3269e471="" data-v-3c596ef9="" st:block="userPopover" st:state="5a9f77666fb9a028c14a01eb" class="user-popover-box"><!----><a data-v-3c596ef9="" href="https://juejin.im/user/5a9f77666fb9a028c14a01eb" target="_blank" rel="" st:name="user" st:state="5a9f77666fb9a028c14a01eb" data-v-3269e471="">腾讯IVWEB团队</a></div></li><li data-v-3c596ef9="" class="item">1月前</li><li data-v-3c596ef9="" class="item tag"><a data-v-3c596ef9="" href="https://juejin.im/tag/%E5%90%8E%E7%AB%AF" target="_blank" rel="" st:name="tag" st:state="5597a063e4b08a686ce57030" class="tag">后端</a><a data-v-3c596ef9="" href="https://juejin.im/tag/Serverless" target="_blank" rel="" st:name="tag" st:state="5b45afd3f265da65f7d27f9a" class="tag">Serverless</a></li><!----></ul></div><div data-v-3c596ef9="" class="info-row title-row"><!----><!----><a data-v-3c596ef9="" href="https://juejin.im/post/5dce7140f265da0bf80b5246" target="_blank" rel="" st:name="title" class="title">「NGW」前端新技术赛场：Serverless SSR 技术内幕</a></div><div data-v-3c596ef9="" class="info-row action-row"><ul data-v-3c596ef9="" class="action-list"><li data-v-3c596ef9="" st:name="likeBtn" class="item like clickable"><a data-v-3c596ef9="" class="title-box"><img data-v-3c596ef9="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/zan.e9d7698.svg" class="icon"><span data-v-3c596ef9="" class="count">57</span></a></li><li data-v-3c596ef9="" st:name="commentBtn" class="item comment clickable"><a data-v-3c596ef9="" href="https://juejin.im/post/5dce7140f265da0bf80b5246#comment" target="_blank" rel="" class="title-box"><img data-v-3c596ef9="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/comment.4d5744f.svg" class="icon"><span data-v-3c596ef9="" class="count">4</span></a></li><li data-v-3c596ef9="" st:name="shareBtn" title="分享" class="item share clickable hover"><img data-v-3c596ef9="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/share.1d55e69.svg" class="icon"><div data-v-3c596ef9="" class="share-panel"><div data-v-3c596ef9="" st:name="shareItem" st:state="weibo" class="share-item weibo"><img data-v-3c596ef9="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/weibo.8e2f5d6.svg" class="icon">微博</div><div data-v-3c596ef9="" st:name="shareItem" st:state="wechat" class="share-item wechat"><img data-v-3c596ef9="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/wechat.844402c.svg" class="icon">微信扫一扫<div data-v-3c596ef9="" class="qr-code-box"><img data-v-3c596ef9="" src="https://juejin.im/post/5d16f3c96fb9a07ed84256ad" class="qr-code"></div></div></div></li><li data-v-3c596ef9="" title="收藏" st:name="collectBtn" class="item collect clickable hover"><img data-v-3c596ef9="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/collect.02e2979.svg" class="icon"><!----></li><!----></ul></div></div><!----></div></a></div></div></li><li data-v-8a4027e6="" class="item"><!----></li><!----></ul></div><div data-v-acac809e="" data-v-78f25c42="" st:block="sidebar" class="sidebar sidebar top sticky" data-v-0f685764=""><div data-v-1b4d186b="" data-v-31e50c97="" data-v-acac809e="" class="sidebar-block author-block shadow"><div data-v-1b4d186b="" class="block-title">关于作者</div><div data-v-1b4d186b="" class="block-body"><a data-v-31e50c97="" href="https://juejin.im/user/5a8f8a3bf265da4e9016c02e" target="_blank" rel="" class="user-item item" data-v-1b4d186b=""><div data-v-126b87aa="" data-v-155c09bf="" data-v-31e50c97="" data-src="https://mirror-gold-cdn.xitu.io/168e08e11316db52dad?imageView2/1/w/100/h/100/q/85/format/webp/interlace/1" class="lazy avatar avatar" style="background-image: none;"></div><div data-v-31e50c97="" class="info-box"><a data-v-88bf2650="" data-v-31e50c97="" href="https://juejin.im/user/5a8f8a3bf265da4e9016c02e" target="_blank" rel="" class="username">yuanfux<a data-v-0aeee531="" data-v-88bf2650="" href="https://juejin.im/book/5c90640c5188252d7941f5bb/section/5c9065385188252da6320022" target="_blank" rel="" class="rank"><img data-v-0aeee531="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/lv-2.f597b88.svg" alt="lv-2"></a></a><!----></div></a><div data-v-31e50c97="" data-v-1b4d186b="" class="stat-item item"><svg data-v-31e50c97="" data-v-1b4d186b="" xmlns="http://www.w3.org/2000/svg" width="25" height="26" viewBox="0 0 25 26" class="zan"><g data-v-31e50c97="" data-v-1b4d186b="" fill="none" fill-rule="evenodd" transform="translate(0 .57)"><ellipse data-v-31e50c97="" data-v-1b4d186b="" cx="12.5" cy="12.57" fill="#E1EFFF" rx="12.5" ry="12.57"></ellipse> <path data-v-31e50c97="" data-v-1b4d186b="" fill="#7BB9FF" d="M8.596 11.238V19H7.033C6.463 19 6 18.465 6 17.807v-5.282c0-.685.483-1.287 1.033-1.287h1.563zm4.275-4.156A1.284 1.284 0 0 1 14.156 6c.885.016 1.412.722 1.595 1.07.334.638.343 1.687.114 2.361-.207.61-.687 1.412-.687 1.412h3.596c.38 0 .733.178.969.488.239.317.318.728.21 1.102l-1.628 5.645a1.245 1.245 0 0 1-1.192.922h-7.068v-7.889c1.624-.336 2.623-2.866 2.806-4.029z"></path></g></svg> <span data-v-31e50c97="" data-v-1b4d186b="" class="content">获得点赞<span data-v-31e50c97="" data-v-1b4d186b="" class="count">231</span></span></div><div data-v-31e50c97="" data-v-1b4d186b="" class="stat-item item"><svg data-v-31e50c97="" data-v-1b4d186b="" width="25" height="25" viewBox="0 0 25 25" class="icon stat-view-icon"><g data-v-31e50c97="" data-v-1b4d186b="" fill="none" fill-rule="evenodd"><circle data-v-31e50c97="" data-v-1b4d186b="" cx="12.5" cy="12.5" r="12.5" fill="#E1EFFF"></circle> <path data-v-31e50c97="" data-v-1b4d186b="" fill="#7BB9FF" d="M4 12.5S6.917 7 12.75 7s8.75 5.5 8.75 5.5-2.917 5.5-8.75 5.5S4 12.5 4 12.5zm8.75 2.292c1.208 0 2.188-1.026 2.188-2.292 0-1.266-.98-2.292-2.188-2.292-1.208 0-2.188 1.026-2.188 2.292 0 1.266.98 2.292 2.188 2.292z"></path></g></svg> <span data-v-31e50c97="" data-v-1b4d186b="" class="content">文章被阅读<span data-v-31e50c97="" data-v-1b4d186b="" class="count">10,247</span></span></div><!----></div></div><!----><div data-v-23a9966c="" data-v-5fda8d35="" data-v-acac809e="" class="index-book-collect" place="post" category="5562b415e4b00c57d9b94ac8"><div data-v-23a9966c="" class="header"><div data-v-23a9966c="" class="title">掘金小册</div><div data-v-23a9966c="" class="controllers"><div data-v-23a9966c="" class="arrow icon ion-chevron-left"></div><div data-v-23a9966c="" class="arrow icon ion-chevron-right"></div></div></div><div data-v-23a9966c="" class="slide-book transition--next"><div data-v-fcc8db92="" data-v-23a9966c="" class="slide-book-list item"><a data-v-fcc8db92="" href="https://juejin.im/book/5da96626e51d4524ba0fd237" class="item"><div data-v-fcc8db92="" class="poster"><div data-v-126b87aa="" data-v-005099d8="" data-v-fcc8db92="" data-src="https://user-gold-cdn.xitu.io/2019/12/13/16efe7ec78b36ff7?imageView2/1/w/104/h/144/q/95/format/webp/interlace/1" class="lazy thumb poster-img" style="background-image: none; background-size: cover;"></div></div><div data-v-fcc8db92="" class="content-text"><div data-v-fcc8db92="" class="title">React Hooks 与 Immutable 数据流实战</div><div data-v-fcc8db92="" class="price"><div data-v-fcc8db92="" class="new">新人价 ￥4.95</div><div data-v-fcc8db92="" class="delete">￥9.9</div></div></div></a><a data-v-fcc8db92="" href="https://juejin.im/book/59e17a7ff265da430629cc4e" class="item"><div data-v-fcc8db92="" class="poster"><div data-v-126b87aa="" data-v-005099d8="" data-v-fcc8db92="" data-src="https://user-gold-cdn.xitu.io/2017/11/20/15fd7933f4f4ed03?imageView2/1/w/104/h/144/q/95/format/webp/interlace/1" class="lazy thumb poster-img" style="background-image: none; background-size: cover;"></div></div><div data-v-fcc8db92="" class="content-text"><div data-v-fcc8db92="" class="title">程序员职业小白书 —— 如何规划和经营你的职业</div><div data-v-fcc8db92="" class="price"><div data-v-fcc8db92="" class="new">新人价 ￥14.95</div><div data-v-fcc8db92="" class="delete">￥29.9</div></div></div></a></div></div><div data-v-23a9966c="" class="book-newuser"><div data-v-23a9966c="" class="newuser-title"><span data-v-23a9966c="">新人专享好礼</span></div><div data-v-23a9966c="" class="giftbag"><img data-v-23a9966c="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/45.b99ea03.svg"><div data-v-23a9966c="" class="content-text"><div data-v-23a9966c="" class="title">送你<span data-v-23a9966c="" class="highlight">45元</span>买小册</div><div data-v-23a9966c="" class="btn-box"><div data-v-23a9966c="" class="btn-giftbag">立即领取</div></div></div></div></div></div><div data-v-1b4d186b="" data-v-823e28c2="" data-v-acac809e="" class="sidebar-block app-download-sidebar-block shadow"><!----><div data-v-1b4d186b="" class="block-body"><a data-v-823e28c2="" data-v-1b4d186b="" class="app-link" href="https://juejin.im/app" target="_blank"><img data-v-823e28c2="" data-v-1b4d186b="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/post.7cb7332.png" class="qr-img"><div data-v-823e28c2="" data-v-1b4d186b="" class="content-box"><div data-v-823e28c2="" data-v-1b4d186b="" class="headline">下载掘金客户端</div><div data-v-823e28c2="" data-v-1b4d186b="" class="desc">一个帮助开发者成长的社区</div></div><div data-v-823e28c2="" data-v-1b4d186b="" title="关闭" class="close-btn ion-close-round"></div></a></div></div><div data-v-1b4d186b="" data-v-07d0e144="" data-v-acac809e="" class="sidebar-block wechat-sidebar-block pure"><div data-v-2d64c697="" data-v-07d0e144="" class="wechat-banner" data-v-1b4d186b=""><img data-v-2d64c697="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/frontend.1dae74a.png" class="wechat-img"></div><div data-v-07d0e144="" data-v-1b4d186b="" title="关闭" class="close-btn ion-close-round"></div></div><div data-v-1b4d186b="" data-v-90d4700e="" data-v-acac809e="" class="sidebar-block related-entry-sidebar-block shadow" st:block="relatedEntrySidebarBlock"><div data-v-1b4d186b="" class="block-title">相关文章</div><div data-v-1b4d186b="" class="block-body"><div data-v-90d4700e="" data-v-1b4d186b="" class="entry-list"><a data-v-90d4700e="" href="https://juejin.im/post/5ae05bd66fb9a07aa631724b" target="_blank" rel="" st:name="link" class="item" data-v-1b4d186b=""><div data-v-90d4700e="" class="entry-title">虚拟滚动的轮子是如何造成的？</div><div data-v-90d4700e="" class="entry-meta-box"><div data-v-90d4700e="" class="entry-meta"><img data-v-90d4700e="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/zan.e9d7698.svg" class="icon"><span data-v-90d4700e="" class="count">90</span></div><div data-v-90d4700e="" class="entry-meta"><img data-v-90d4700e="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/comment.a7c8341.svg" class="icon"><span data-v-90d4700e="" class="count">11</span></div></div></a><a data-v-90d4700e="" href="https://juejin.im/post/5b87a6e26fb9a019b953ee8b" target="_blank" rel="" st:name="link" class="item" data-v-1b4d186b=""><div data-v-90d4700e="" class="entry-title">零宽度字符：和谐？屏蔽？不存在的</div><div data-v-90d4700e="" class="entry-meta-box"><div data-v-90d4700e="" class="entry-meta"><img data-v-90d4700e="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/zan.e9d7698.svg" class="icon"><span data-v-90d4700e="" class="count">51</span></div><div data-v-90d4700e="" class="entry-meta"><img data-v-90d4700e="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/comment.a7c8341.svg" class="icon"><span data-v-90d4700e="" class="count">7</span></div></div></a><a data-v-90d4700e="" href="https://juejin.im/post/5ba5ab8ce51d450e7762cca5" target="_blank" rel="" st:name="link" class="item" data-v-1b4d186b=""><div data-v-90d4700e="" class="entry-title">还原一个 Windows 10 Metro 布局</div><div data-v-90d4700e="" class="entry-meta-box"><div data-v-90d4700e="" class="entry-meta"><img data-v-90d4700e="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/zan.e9d7698.svg" class="icon"><span data-v-90d4700e="" class="count">67</span></div><div data-v-90d4700e="" class="entry-meta"><img data-v-90d4700e="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/comment.a7c8341.svg" class="icon"><span data-v-90d4700e="" class="count">14</span></div></div></a><a data-v-90d4700e="" href="https://juejin.im/post/5c789f8c6fb9a049db73d442" target="_blank" rel="" st:name="link" class="item" data-v-1b4d186b=""><div data-v-90d4700e="" class="entry-title">震惊！Expo全家桶居然能这样了</div><div data-v-90d4700e="" class="entry-meta-box"><div data-v-90d4700e="" class="entry-meta"><img data-v-90d4700e="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/zan.e9d7698.svg" class="icon"><span data-v-90d4700e="" class="count">4</span></div><div data-v-90d4700e="" class="entry-meta"><img data-v-90d4700e="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/comment.a7c8341.svg" class="icon"><span data-v-90d4700e="" class="count">0</span></div></div></a><a data-v-90d4700e="" href="https://juejin.im/post/5c7383e4f265da2d864b4274" target="_blank" rel="" st:name="link" class="item" data-v-1b4d186b=""><div data-v-90d4700e="" class="entry-title">React Native组件开发指南</div><div data-v-90d4700e="" class="entry-meta-box"><div data-v-90d4700e="" class="entry-meta"><img data-v-90d4700e="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/zan.e9d7698.svg" class="icon"><span data-v-90d4700e="" class="count">0</span></div><div data-v-90d4700e="" class="entry-meta"><img data-v-90d4700e="" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/comment.a7c8341.svg" class="icon"><span data-v-90d4700e="" class="count">0</span></div></div></a></div></div></div><div data-v-acac809e="" class="sticky-block-box"><div data-v-1b4d186b="" data-v-52a202ec="" data-v-acac809e="" class="sidebar-block catalog-block pure"><nav data-v-3299604e="" data-v-52a202ec="" class="article-catalog" data-v-1b4d186b="" style=""><div data-v-3299604e="" class="catalog-title">目录</div><div data-v-3299604e="" class="catalog-body"><ul data-v-3299604e="" class="catalog-list" style="margin-top: 0px;"><li data-v-3299604e="" class="item d1"><a href="https://juejin.im/post/5d16f3c96fb9a07ed84256ad#heading-0" title="Serverless¿">Serverless¿</a><!----></li><li data-v-3299604e="" class="item d1"><a href="https://juejin.im/post/5d16f3c96fb9a07ed84256ad#heading-1" title="什么是serverless?">什么是serverless?</a><!----></li><li data-v-3299604e="" class="item d1"><a href="https://juejin.im/post/5d16f3c96fb9a07ed84256ad#heading-2" title="Serverless服务商选择">Serverless服务商选择</a><!----></li><li data-v-3299604e="" class="item d1 active"><a href="https://juejin.im/post/5d16f3c96fb9a07ed84256ad#heading-3" title="Serverless应用框架">Serverless应用框架</a><!----></li><li data-v-3299604e="" class="item d1"><a href="https://juejin.im/post/5d16f3c96fb9a07ed84256ad#heading-4" title="在Lambda上搭建服务">在Lambda上搭建服务</a><ul class="sub-list"><li class="item d2"><a href="https://juejin.im/post/5d16f3c96fb9a07ed84256ad#heading-5" title="目标">目标</a><!----></li><li class="item d2"><a href="https://juejin.im/post/5d16f3c96fb9a07ed84256ad#heading-6" title="准备材料">准备材料</a><!----></li><li class="item d2"><a href="https://juejin.im/post/5d16f3c96fb9a07ed84256ad#heading-7" title="创建工程">创建工程</a><!----></li><li class="item d2"><a href="https://juejin.im/post/5d16f3c96fb9a07ed84256ad#heading-8" title="创建与定义函数">创建与定义函数</a><!----></li><li class="item d2"><a href="https://juejin.im/post/5d16f3c96fb9a07ed84256ad#heading-9" title="Public函数">Public函数</a><ul class="sub-list"><li class="item d3"><a href="https://juejin.im/post/5d16f3c96fb9a07ed84256ad#heading-10" title="1. 返回消息">1. 返回消息</a><!----></li><li class="item d3"><a href="https://juejin.im/post/5d16f3c96fb9a07ed84256ad#heading-11" title="2. 部署及访问服务">2. 部署及访问服务</a><!----></li></ul></li><li class="item d2"><a href="https://juejin.im/post/5d16f3c96fb9a07ed84256ad#heading-12" title="Sign up函数">Sign up函数</a><ul class="sub-list"><li class="item d3"><a href="https://juejin.im/post/5d16f3c96fb9a07ed84256ad#heading-13" title="1. 定义资源">1. 定义资源</a><!----></li><li class="item d3"><a href="https://juejin.im/post/5d16f3c96fb9a07ed84256ad#heading-14" title="2. 获取请求数据">2. 获取请求数据</a><!----></li><li class="item d3"><a href="https://juejin.im/post/5d16f3c96fb9a07ed84256ad#heading-15" title="3. 录入用户至DynamoDB">3. 录入用户至DynamoDB</a><!----></li><li class="item d3"><a href="https://juejin.im/post/5d16f3c96fb9a07ed84256ad#heading-16" title="4. 部署及访问服务">4. 部署及访问服务</a><!----></li></ul></li><li class="item d2"><a href="https://juejin.im/post/5d16f3c96fb9a07ed84256ad#heading-17" title="Login函数">Login函数</a><ul class="sub-list"><li class="item d3"><a href="https://juejin.im/post/5d16f3c96fb9a07ed84256ad#heading-18" title="1. 设置JSON Web Token">1. 设置JSON Web Token</a><!----></li><li class="item d3"><a href="https://juejin.im/post/5d16f3c96fb9a07ed84256ad#heading-19" title="2. 获取请求数据">2. 获取请求数据</a><!----></li><li class="item d3"><a href="https://juejin.im/post/5d16f3c96fb9a07ed84256ad#heading-20" title="3. 验证账号密码并返回JSON Web Token">3. 验证账号密码并返回JSON Web Token</a><!----></li><li class="item d3"><a href="https://juejin.im/post/5d16f3c96fb9a07ed84256ad#heading-21" title="4. 部署及访问服务">4. 部署及访问服务</a><!----></li></ul></li><li class="item d2"><a href="https://juejin.im/post/5d16f3c96fb9a07ed84256ad#heading-22" title="Auth函数">Auth函数</a><ul class="sub-list"><li class="item d3"><a href="https://juejin.im/post/5d16f3c96fb9a07ed84256ad#heading-23" title="1. 创建函数">1. 创建函数</a><!----></li><li class="item d3"><a href="https://juejin.im/post/5d16f3c96fb9a07ed84256ad#heading-24" title="2. 生成包含IAM权限策略的响应信息">2. 生成包含IAM权限策略的响应信息</a><!----></li><li class="item d3"><a href="https://juejin.im/post/5d16f3c96fb9a07ed84256ad#heading-25" title="3. 解析并校验JSON Web Token">3. 解析并校验JSON Web Token</a><!----></li></ul></li><li class="item d2"><a href="https://juejin.im/post/5d16f3c96fb9a07ed84256ad#heading-26" title="Private函数">Private函数</a><ul class="sub-list"><li class="item d3"><a href="https://juejin.im/post/5d16f3c96fb9a07ed84256ad#heading-27" title="1. 设置authorizer">1. 设置authorizer</a><!----></li><li class="item d3"><a href="https://juejin.im/post/5d16f3c96fb9a07ed84256ad#heading-28" title="2. 返回消息">2. 返回消息</a><!----></li><li class="item d3"><a href="https://juejin.im/post/5d16f3c96fb9a07ed84256ad#heading-29" title="3. 部署及访问服务">3. 部署及访问服务</a><!----></li></ul></li><li class="item d2"><a href="https://juejin.im/post/5d16f3c96fb9a07ed84256ad#heading-30" title="小结">小结</a><ul class="sub-list"><li class="item d3"><a href="https://juejin.im/post/5d16f3c96fb9a07ed84256ad#heading-31" title="用了什么？">用了什么？</a><!----></li><li class="item d3"><a href="https://juejin.im/post/5d16f3c96fb9a07ed84256ad#heading-32" title="做了什么？">做了什么？</a><!----></li><li class="item d3"><a href="https://juejin.im/post/5d16f3c96fb9a07ed84256ad#heading-33" title="完整工程">完整工程</a><!----></li></ul></li></ul></li><li data-v-3299604e="" class="item d1"><a href="https://juejin.im/post/5d16f3c96fb9a07ed84256ad#heading-34" title="思考">思考</a><ul class="sub-list"><li class="item d2"><a href="https://juejin.im/post/5d16f3c96fb9a07ed84256ad#heading-35" title="实用¿">实用¿</a><!----></li><li class="item d2"><a href="https://juejin.im/post/5d16f3c96fb9a07ed84256ad#heading-36" title="便捷¿">便捷¿</a><!----></li><li class="item d2"><a href="https://juejin.im/post/5d16f3c96fb9a07ed84256ad#heading-37" title="低价¿">低价¿</a><!----></li><li class="item d2"><a href="https://juejin.im/post/5d16f3c96fb9a07ed84256ad#heading-38" title="真香">真香</a><!----></li></ul></li></ul></div></nav></div></div></div><div data-v-524d9f96="" data-v-78f25c42="" class="article-suspended-panel article-suspended-panel" data-v-0f685764=""><div data-v-524d9f96="" class="like-btn panel-btn like-adjust with-badge" badge="19"></div><div data-v-524d9f96="" class="comment-btn panel-btn comment-adjust with-badge" badge="5"></div><div data-v-524d9f96="" class="collect-btn panel-btn"><!----></div><div data-v-524d9f96="" class="share-title">分享</div><div data-v-524d9f96="" class="weibo-btn share-btn panel-btn"></div><div data-v-524d9f96="" class="qq-btn share-btn panel-btn"></div><div data-v-524d9f96="" class="wechat-btn share-btn panel-btn"><img data-v-524d9f96="" src="https://juejin.im/post/5d16f3c96fb9a07ed84256ad" class="wechat-qr-code-img shadow" style="display: none;"></div></div><div data-v-d0701186="" data-v-78f25c42="" class="image-viewer-box" data-v-0f685764=""><!----></div><!----></div></main></div><!----></div>
+      
+      
+      <script type="text/javascript" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/runtime.eedcca284b2e0befc8f7.js"></script><script type="text/javascript" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/0.3ed156e3e9ae8f75c44a.js"></script><script type="text/javascript" src="./快速上手Aws Lambda：有了serverless，小学生也能写后端 - 掘金_files/1.87e5c6f63ea426c4abae.js"></script>
+    </body></html>

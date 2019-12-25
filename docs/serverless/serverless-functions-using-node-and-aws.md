@@ -252,7 +252,7 @@ serverless-offline 提供了很多选项是可以让你自定义的，例如修�
 本节 Github 源码地址如下：
 
 ```
-https://q-angelo.github.io/project-training/serverless/movies/aws-hello-nodejs-function
+https://github.com/Q-Angelo/project-training/tree/master/serverless/aws-hello-nodejs-function
 ```
 
 ## 总结
