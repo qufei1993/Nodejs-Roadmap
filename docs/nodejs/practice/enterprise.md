@@ -4,11 +4,10 @@
 
 ## 阿里
 
-* [基于 Node.js 的 Serverless 架构实践](https://mp.weixin.qq.com/s/oKcQXj3CWt1Ts_tOtw7QTg)
 * [独家解读：淘宝使用 Node.js 的 TypeScript 多场景开发和实践](https://mp.weixin.qq.com/s/f5xIN9d7s011_gXej84MJw)
 * [基于阿里云的 Node.js 稳定性实践](https://mp.weixin.qq.com/s/ghciI1dj9dve6Bsrf8Yj1w)
 * [蚂蚁金服 Node.js 开荒史 - 摸爬滚打才不负功名尘土](https://mp.weixin.qq.com/s/wIYlSPSJSK2eHbk48SFQLw)
-* [浅谈阿里 Node 框架 Midway 在企业产品中的应用实践](https://mp.weixin.qq.com/s/W_XuZGYCQMbfeEQEPAkTTg)
+* [基于 Node.js 的 Serverless 架构实践](https://mp.weixin.qq.com/s/oKcQXj3CWt1Ts_tOtw7QTg)
 
 ## 腾讯
 
