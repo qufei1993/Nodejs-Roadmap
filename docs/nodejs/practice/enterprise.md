@@ -66,4 +66,4 @@
 
 * [2019大前端秘籍：贝壳找房多端提效和性能质量优化实践](https://mp.weixin.qq.com/s/umr-SZXflTy9XQoRRf56Rg)
 
-如果您正在实践 Node.js，很期待能收到您的分享，可以关注公众号 “Nodejs技术栈” 在后台向我投稿，后期都会进行整理放在 Github: []() 以供大家学习和实践参考。
+如果您正在实践 Node.js，很期待能收到您的分享，可以关注公众号 “Nodejs技术栈” 在后台向我投稿，后期都会进行整理放在 [https://www.nodejs.red](https://www.nodejs.red) 以供大家学习和实践参考。
