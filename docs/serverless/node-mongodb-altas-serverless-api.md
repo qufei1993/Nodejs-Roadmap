@@ -2,7 +2,9 @@
 
 MongoDB Atlas 是一个在云端的数据库，免去了数据库的搭建、维护，通过其提供的 Web UI 能够让你在 5 分钟之内快速搭建一个 Clusters。Node.js 是一个 JavaScript 的运行时，在 JavaScript 中函数做为一等公民，享有着很高的待遇，通常使用 Node.js 我们可以快速的搭建一个服务，而 ServerLess 是一种 “无服务器架构”，从技术角度来讲是 FaaS 和 BaaS 的结合，FaaS（Function as a Service）是一些运行函数的平台。
 
-那么通过这些可以做些什么呢？本篇文章中我们将使用 ServerLess、MongoDB Atlas cloud 与 Node.js 的结合来快速构建一个 REST API，对于前端开发工程只要你掌握了 JavaScript 也可以完成。 
+那么通过这些可以做些什么呢？本篇文章中我们将使用 ServerLess、MongoDB Atlas cloud 与 Node.js 的结合来快速构建一个 REST API，无论你是前端工程师还是后端工程师，只要你掌握一些 JavaScript 基础语法就可以完成。
+
+**作者简介**：五月君，Nodejs Developer，慕课网认证作者，热爱技术、喜欢分享的 90 后青年，欢迎关注公众号[「Nodejs技术栈」](https://nodejsred.oss-cn-shanghai.aliyuncs.com/node_roadmap_wx.jpg?x-oss-process=style/may)和 Github 开源项目 [https://www.nodejs.red](https://www.nodejs.red)  
 
 ## MongoDB Atlas cloud
 
@@ -49,7 +51,7 @@ $ npm i serverless-offline --save-dev
 
 ### 2. 项目根目录下创建 db.js 文件
 
-数据库链接字符串就是上面 MongoDB Atlas cloud 链接集群中所讲的，注意替换你的用户名和密码，initialize 函数接收两个参数 dbName、dbCollectionName 用来初始化一个 connection。
+数据库链接字符串就是上面 MongoDB Atlas cloud 链接集群中所讲的，注意替换你的用户名和密码，以下代码中 initialize 函数接收两个参数 dbName、dbCollectionName 用来初始化一个 connection。
 
 ```js
 // db.js
@@ -138,15 +140,15 @@ Error: querySrv ENODATA _mongodb._tcp.cluster0-on1ek.mongodb.net
 
 ### 两个问题
 
+以上例子虽然已经简单的完成了一个方法，但是它其实是糟糕的，从而引发以下两个问题：
+
 **1. 业务逻辑与 FaaS、BaaS 严重的耦合不利于单元测试、平台迁移**：上面这个例子是不好的，业务逻辑完全的写在了 handler.js 文件的 find 函数中，一方面 find 函数的 event、context 对象是由 FaaS 平台提供的，另一方面 db 属于后端服务，这就造成了业务逻辑与 FaaS、BaaS 严重的耦合。
 
 **2. 不利于上下文重用**：传动程序启动之后常驻内存，不存在冷启动问题，而 ServerLess 是基于事件驱动的，第一次请求来了之后会下载代码、启动容器、启动运行环境、执行代码，这个过程称为冷启动，但是以 AWS Lambda 为例，函数调用之后执行上下文会被冻结一段时间，在我们上面的例子中每次函数执行都会初始化数据库链接，这是一个很消时的操作，我们可以将这段逻辑放在函数之外，利用上下文重用，在开发层面可以做进一步优化。
 
-带着这些问题下面将对这个业务逻辑重构，开发一个 REST API 最佳实践。
-
 ## Serverless REST API 开发最佳实践
 
-
+带着上面提出的几点问题，本节将对这个业务逻辑进行重构，开发一个 REST API 最佳实践。
 
 ### REST API 规划
 
@@ -161,13 +163,15 @@ Error: querySrv ENODATA _mongodb._tcp.cluster0-on1ek.mongodb.net
 
 ### 目录规划
 
-```
+一个好的项目离不开一个好的目录规划，当然你也可以按照自己思路来做
+
+```sh
 mongodb-serverless-node-rest-api
 ├── package.json
 ├── .env
 ├── serverless.yml
 ├── app
-|   ├── handler.js
+|   ├── handler.js 
 │   ├── controller
 │   |   └── books.js
 │   └── model
@@ -443,4 +447,4 @@ https://github.com/Q-Angelo/project-training/tree/master/serverless/mongodb-serv
 
 ## 总结
 
-ServerLess 是一种全新的技术体系，降低了服务端研发成本，而 Node.js 使用起来很轻量级，对前端开发者也很友好，但是前端开发者对服务端运维还是相对陌生的，使用 ServerLess 可以帮助开发者能够隔离服务器的运维、环境搭建等一系列操作，可以把更多时间聚焦在业务开发中。
+ServerLess 是一种全新的技术体系，降低了服务端研发成本，而 Node.js 使用起来很轻量级，对前端开发者也很友好，但是前端开发者对服务端运维还是相对陌生的，使用了 ServerLess 可以帮助开发者隔离服务器的运维、环境搭建等一系列操作，把更多时间聚焦在业务开发中。本文中在数据存储方面结合了 MongoDB Alats Cloud 免去了数据库的搭建、维护工作，现在只要你掌握一些 JavaScript 基础语法通过本文的讲解就可轻松的完成一个 REST API，这是多么 Nice 的事情呀，快来实践下吧！
