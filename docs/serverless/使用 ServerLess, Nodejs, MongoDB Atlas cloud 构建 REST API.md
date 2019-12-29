@@ -4,8 +4,6 @@ MongoDB Atlas 是一个在云端的数据库，免去了数据库的搭建、维
 
 那么通过这些可以做些什么呢？本篇文章中我们将使用 ServerLess、MongoDB Atlas cloud 与 Node.js 的结合来快速构建一个 REST API，无论你是前端工程师还是后端工程师，只要你掌握一些 JavaScript 基础语法就可以完成。
 
-**作者简介**：五月君，Nodejs Developer，慕课网认证作者，热爱技术、喜欢分享的 90 后青年，欢迎关注公众号[「Nodejs技术栈」](https://nodejsred.oss-cn-shanghai.aliyuncs.com/node_roadmap_wx.jpg?x-oss-process=style/may)和 Github 开源项目 [https://www.nodejs.red](https://www.nodejs.red)  
-
 ## MongoDB Atlas cloud
 
 为什么选择 MongoDB Atlas cloud？这是一个运行在云端的数据库，无需安装、配置，也无需在我们的机器上安装 Mongo 服务，只需要一个 URL 即可访问数据库，还提供了非常酷的 UI 界面，易于使用。最重要的一点对于我们初学者来说它提供了免费使用，最大限制为 512 MB，这对于小型项目是足够的。
@@ -448,3 +446,5 @@ https://github.com/Q-Angelo/project-training/tree/master/serverless/mongodb-serv
 ## 总结
 
 ServerLess 是一种全新的技术体系，降低了服务端研发成本，而 Node.js 使用起来很轻量级，对前端开发者也很友好，但是前端开发者对服务端运维还是相对陌生的，使用了 ServerLess 可以帮助开发者隔离服务器的运维、环境搭建等一系列操作，把更多时间聚焦在业务开发中。本文中在数据存储方面结合了 MongoDB Alats Cloud 免去了数据库的搭建、维护工作，现在只要你掌握一些 JavaScript 基础语法通过本文的讲解就可轻松的完成一个 REST API，这是多么 Nice 的事情呀，快来实践下吧！
+
+**作者简介**：五月君，Nodejs Developer，慕课网认证作者，热爱技术、喜欢分享的 90 后青年，欢迎关注公众号[「Nodejs技术栈」](https://nodejsred.oss-cn-shanghai.aliyuncs.com/node_roadmap_wx.jpg?x-oss-process=style/may)和 Github 开源项目 [https://www.nodejs.red](https://www.nodejs.red)  
