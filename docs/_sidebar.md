@@ -46,6 +46,8 @@
 
 - DataBase | Redis
     - [基础总结](/database/redis.md)
+    - [Redis 五种数据结构](/database/redis-typeof-data.md)
+    - [Redis 高级特性](/database/redis-advanced-feature.md)
     - [主从复制](/database/redis-master-slave.md)
     - [数据持久化](/database/redis-persistence.md)
     - [哨兵高可用](/database/redis-sentinel.md)
