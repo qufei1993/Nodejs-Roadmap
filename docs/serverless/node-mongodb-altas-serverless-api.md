@@ -4,13 +4,19 @@ MongoDB Atlas 是一个在云端的数据库，免去了数据库的搭建、维
 
 那么通过这些可以做些什么呢？本篇文章中我们将使用 ServerLess、MongoDB Atlas cloud 与 Node.js 的结合来快速构建一个 REST API，无论你是前端工程师还是后端工程师，只要你掌握一些 JavaScript 基础语法就可以完成。
 
-**作者简介**：五月君，Nodejs Developer，慕课网认证作者，热爱技术、喜欢分享的 90 后青年，欢迎关注公众号[「Nodejs技术栈」](https://nodejsred.oss-cn-shanghai.aliyuncs.com/node_roadmap_wx.jpg?x-oss-process=style/may)和 Github 开源项目 [https://www.nodejs.red](https://www.nodejs.red)  
+## 通过本文你能学到什么？
+
+![](./img/node-mongodb-altas-serverless-api-roadmap.png)
 
 ## MongoDB Atlas cloud
 
-为什么选择 MongoDB Atlas cloud？这是一个运行在云端的数据库，无需安装、配置，也无需在我们的机器上安装 Mongo 服务，只需要一个 URL 即可访问数据库，还提供了非常酷的 UI 界面，易于使用。最重要的一点对于我们初学者来说它提供了免费使用，最大限制为 512 MB，这对于小型项目是足够的。
+### 什么是 MongoDB Atlas cloud？
+
+让我们先解决这一疑问， MongoDB Atlas cloud 是一个运行在云端的数据库，无需安装、配置，也无需在我们的机器上安装 Mongo 服务，只需要一个 URL 即可访问数据库，还提供了非常酷的 UI 界面，易于使用。最重要的一点对于我们初学者来说它提供了免费使用，最大限制为 512 MB，这对于小型项目是足够的。
 
 ### 集群创建
+
+现在，开始跟随我的脚步，让我们在 5 分钟之内快速创建一个 MongoDB Cluster 已不再是难事了。
 
 1. 注册：https://www.mongodb.com/cloud/atlas/register?v=2
 2. 注册成功进入个人中心出现以下页面，选择 Build a Cluster 按钮 创建 Cluster
@@ -27,6 +33,8 @@ MongoDB Atlas 是一个在云端的数据库，免去了数据库的搭建、维
 
 ### 链接到集群
 
+集群创建好之后如何选择一个集群链接字符串？跟随以下 3 个步骤即可完成。
+
 1. 链接到集群，第一步将您的 IP 地址加入白名单，第二步创建一个 MongoDB 用户，完成这两步操作之后，选择 “Choose a connection method” 进入下一步
 ![](./img/mongo-alats-connection-a-cluster.jpeg)
 
@@ -38,9 +46,22 @@ MongoDB Atlas 是一个在云端的数据库，免去了数据库的搭建、维
 
 ## 开启一个 Serverless Function 链接到 DB
 
+### 什么是 Serverless？
+
+Serverless 意为 “无服务器架构”，但是这并不意味着真的就无需服务器了，这些服务器的管理由云计算平台提供，对于用户侧无须关注服务器配置、监控、资源状态等，可以将重点放在业务逻辑上。
+
+下图，将 Microservices 进一步细分为 Function as a Service（FaaS）函数即服务，相比微服务颗粒度更小。
+
+![](https://stackify.com/wp-content/uploads/2019/07/image-1.png)
+
+图片来源：[stackify](https://stackify.com/wp-content/uploads/2019/07/image-1.png)
+
+关于 ServerLess 的基础入门，可参考我之前的另一片入门实践文章 [使用 Node.js 快速开启 ServerLess Functions：入门实践指南](https://mp.weixin.qq.com/s/h8RsdDvkqqyI_WuD1vKcEw)
+
+
 ### 1. 项目创建、插件安装
 
-创建项目，安装 mongodb、serverless-offline 插件，这些都是基础内容，如果你是 ServerLess 初学者可以先去学习下这篇文章 [使用 Node.js 快速开启 ServerLess Functions：入门实践指南](https://mp.weixin.qq.com/s/h8RsdDvkqqyI_WuD1vKcEw)
+创建项目，安装 mongodb、serverless-offline 插件。
 
 ```
 $ serverless create --template hello-world --path mongodb-serverless-conn-test
@@ -149,6 +170,14 @@ Error: querySrv ENODATA _mongodb._tcp.cluster0-on1ek.mongodb.net
 ## Serverless REST API 开发最佳实践
 
 带着上面提出的几点问题，本节将对这个业务逻辑进行重构，开发一个 REST API 最佳实践。
+
+### 什么是 REST API？
+
+API 的设计要保证职责单一、清晰合理、便于他人快速理解使用等原则，而 REST 也是 API 设计的一种准则，同时它也是一种架构思想，用于客户端与服务端资源传递与交互。
+
+本节中我们将用到的是 GET、POST、PUT、DELETE 四个表示操作方式的动词，分别对应用于获取资源、新建资源、更新资源、删除资源。
+
+关于 RESTful 架构的更多理解，可参考阮一峰老师的博客 “理解RESTful架构” [www.ruanyifeng.com/blog/2011/09/restful.html](http://www.ruanyifeng.com/blog/2011/09/restful.html)
 
 ### REST API 规划
 
@@ -448,3 +477,5 @@ https://github.com/Q-Angelo/project-training/tree/master/serverless/mongodb-serv
 ## 总结
 
 ServerLess 是一种全新的技术体系，降低了服务端研发成本，而 Node.js 使用起来很轻量级，对前端开发者也很友好，但是前端开发者对服务端运维还是相对陌生的，使用了 ServerLess 可以帮助开发者隔离服务器的运维、环境搭建等一系列操作，把更多时间聚焦在业务开发中。本文中在数据存储方面结合了 MongoDB Alats Cloud 免去了数据库的搭建、维护工作，现在只要你掌握一些 JavaScript 基础语法通过本文的讲解就可轻松的完成一个 REST API，这是多么 Nice 的事情呀，快来实践下吧！
+
+**作者简介**：五月君，Nodejs Developer，慕课网认证作者，热爱技术、喜欢分享的 90 后青年，欢迎关注公众号[「Nodejs技术栈」](https://nodejsred.oss-cn-shanghai.aliyuncs.com/node_roadmap_wx.jpg?x-oss-process=style/may)和 Github 开源项目 [https://www.nodejs.red](https://www.nodejs.red)
