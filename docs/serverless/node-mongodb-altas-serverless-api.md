@@ -1,6 +1,6 @@
 # 使用 ServerLess, Nodejs, MongoDB Atlas cloud 构建 REST API
 
-**本文还未正式发表，请勿随意转载发表！！！**
+**注意：本文已授权给 MongoDB，目前还未正式发表，请勿随意转载发表！！！否则将追究责任**
 
 MongoDB Atlas 是一个在云端的数据库，免去了数据库的搭建、维护，通过其提供的 Web UI 能够让你在 5 分钟之内快速搭建一个 Clusters。Node.js 是一个 JavaScript 的运行时，在 JavaScript 中函数做为一等公民，享有着很高的待遇，通常使用 Node.js 我们可以快速的搭建一个服务，而 ServerLess 是一种 “无服务器架构”，从技术角度来讲是 FaaS 和 BaaS 的结合，FaaS（Function as a Service）是一些运行函数的平台。
 
