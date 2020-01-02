@@ -1,0 +1,153 @@
+@charset 'utf-8';
+.disabled{background:#999}.del{text-decoration:line-through}.clear{clear:both;width:0;height:0;overflow: hidden;}.clearfix{clear:both}.clearfix:after{display:block;content:'';clear:both}.Left,.fl{float:left}.Right,.fr{float:right}.tl{text-align:left}.tc{text-align:center}.tr{text-align:right}.fb{font-weight:700}.bluebg{background:#00baf2}.blue{color:#00baf2}.redbg{background:#ff4a56}.red{color:#ff4a56}.red:hover{color:#950b11}
+.blue {color: #4285f4;}
+.Page {width: 1200px;margin: 0 auto;}
+.Page.Max {width: 90%;min-width: 1000px;}
+.Page.M764 {width: 764px;}
+.white-open {width:100%;height:100%;position:fixed;background: #fff;top:0px;left:0px;opacity: 0;z-index:10;display: none;}
+.blue-btn {color: #fff;background: #4285f4;border: 1px solid #4285f4;cursor: pointer;}
+.blue-btn:hover {color: #fff;background: #3477e6;border: 1px solid #3477e6;}
+.gray-btn {color: #333;background: #fff;border: 1px solid #ccc;cursor: pointer;}
+.gray-btn:hover {background: #e6e6e6;}
+.Header {background: #FFF;border-bottom:1px solid #DDD;height: 60px;position: relative;z-index: 21;min-width: 1000px;}
+  .Header .Logo {width: 150px;background: url(/edu/blog/images/logonew2.0.1.png) no-repeat center;height: 60px;float: left;}
+    .Header .Logo a {display: block;height: 100%;text-indent: -9999px;overflow: hidden;}
+  .Header .Navigates  {display: inline-block;list-style: none;}
+    .Header .Navigates li {height: 61px;position: relative;}
+      .Header .Navigates li>a  {line-height: 61px;height: 58px;display: block;}
+      .Header .Navigates li>div {position: absolute;top:61px;left:-30px;right: -15px;line-height: 28px;padding: 10px;text-align: center;background: #FFF;border:1px solid #DDD;border-top: 0;display: none;}
+      .Header .Navigates li:hover>div {display: block;}
+        .Header .Navigates li>div a {display: block;font-size: 12px;position: relative;}
+        .Header .Navigates li>div a:hover {background: #ededed;color: #4285f4;}
+      .Header .Navigates li.maps>div  {right: 0;left: -15px;min-width:70px;}
+    .Header .Navigates li.more  {padding-right: 15px;background: url(/edu/blog/images/icon/38.png) no-repeat right center;position: relative;}
+    .Header .Navigates li.more:hover  {background-image: url(/edu/blog/images/icon/38s.png);}
+      .Header .Navigates li i.arrow  {width: 14px;height: 8px;position: absolute;top:-8px;left: 50%;margin-left: -7px;background:url(/edu/blog/images/icon/03.png) no-repeat;}
+    .Header .Navigates.fl li {float: left;margin-left: 32px;font-size: 16px;}
+      .Header .Navigates.fl li.cur>a,.Header .Navigates.fl li:hover>a  {color: #4285f4;}
+    .Header .Navigates.fr li {float: right;margin-right: 26px;font-size: 12px;}
+    .Header .Navigates.fr li.login  {margin-right: 10px;background: url(/edu/blog/images/top-line.png) no-repeat right center;padding-right: 10px;}
+    .Header .Navigates.fr li.maps {margin-right: 0;}
+      .Header .Navigates.fr li>div  {left: -10px;right: -10px;}
+      .Header .Navigates.fr li>a {color:#666;}
+      .Header .Navigates.fr li>a.cur,.Header .Navigates.fr li>a:hover  {color:#4285f4;}
+      .Header .Navigates.fr li.user {padding-left: 40px;}
+        .Header .Navigates.fr li.user img {width: 32px;height: 32px;border-radius: 100%;position: absolute;left: 0;top:16px;}
+        .Header .Navigates.fr li.user>div {left: -10px;right: 5px;min-width: 75px;}
+        .Header .Navigates.fr li.user>a {max-width: 60px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;font-size: 14px;}
+        .Header .Navigates.fr i.dot {background:#ff3600;width: 5px;height: 5px;border-radius: 5px;position: absolute;right: 8px;top:18px;}
+        .Header .Navigates.fr li>div a i.dot {right: 0px;top:6px;}
+        .Header .Navigates.fr li.write a {padding-left: 22px;background:url(/edu/blog/images/icon/32.png) no-repeat left center;}
+        .Header .Navigates.fr li.write a:hover  {background-image:url(/edu/blog/images/icon/32s.png)}
+        .Header .Navigates.fr li.search a {font-size: 14px;padding-left: 20px;background:url(/edu/blog/images/icon/33.png) no-repeat left center;/*color: #4285f4;*/}
+        .Header .Navigates.fr li.search a:hover  {background-image:url(/edu/blog/images/icon/33s.png);color: #4285f4;}
+        .Header .Navigates.fr li.mRead a {padding-left: 20px;background:url(/edu/blog/images/icon/34.png) no-repeat left center;}
+        .Header .Navigates.fr li.mRead a:hover  {background-image:url(/edu/blog/images/icon/34s.png)}
+        .Header .Navigates.fr li.mRead div  {width: 120px;color:#999;font-size: 12px;line-height: 1;left:50%;margin-left: -71px;right: 0;box-sizing: content-box;}
+          .Header .Navigates.fr li.mRead div img  {display: block;width: 120px;margin-bottom: 10px;}
+        .msg-follow-bg {position: relative;z-index: -1;}
+        .msg-follow-max {display: block;position: absolute;top: 61px;right: 0;font-size: 12px;color: #999;background: #f1f1f1;padding: 0 10px;line-height: 30px;width: 190px;width: auto;padding-right:25px;z-index: -1;}
+        .msg-follow {display: block;position: absolute;top: 61px;right: 10px;font-size: 12px;color: #999;background: #f1f1f1;padding: 0 10px;line-height: 30px;width: auto;padding-right: 30px;}
+        .msg-follow a, .msg-follow-max a {display: inline-block;font-size: 12px;color: #4285f4;}
+        .msg-follow span, .msg-follow-max span {position: absolute;right: 10px;top: 9px;width: 12px;height: 12px;background: url(/edu/blog/images/icon/cls_1.png) no-repeat;cursor: pointer;}
+.Content  {padding-top: 20px; position: relative;z-index: 10;}
+.Footer {padding: 40px 0;overflow: hidden;font-size: 12px;color:#999;background:#eaeaeb;margin-top: 20px;}
+  .Footer dl  {margin-right: 40px;font-size: 14px;}
+    .Footer dl dt {font-size: 16px;margin-bottom: 10px;color:#333;}
+    .Footer dl td {padding-right: 35px;height: 28px;}
+      .Footer dl td a {color:#999;}
+      .Footer dl td a:hover {color:#4285f4;}
+    .Footer dl img  {margin-right: 20px;}
+  .Footer .links  {overflow: hidden;margin-top: 20px;margin-bottom: 22px;}
+    .Footer .links a  {color:#999;float: right;text-align: center;width: 75px;padding-top: 35px;background: url(/edu/blog/images/footer_icon.png) no-repeat;}
+    .Footer .links a.move {background-position: -198px 0px;}
+    .Footer .links a.qq {background-position: -122px 0px;}
+    .Footer .links a.qqq {background-position: -52px 0px;}
+    .Footer .links a.sina {background-position: 21px 0px;}
+    .Footer .links a:hover  {color:#333;}
+    .Footer .links a:hover.move {background-position: -198px -59px;}
+    .Footer .links a:hover.qq {background-position: -122px -59px;}
+    .Footer .links a:hover.qqq {background-position: -52px -59px;}
+    .Footer .links a:hover.sina {background-position: 21px -59px;}
+  .Footer .copy a {color:#999;}
+  .Footer .copy a:hover {color: #333;}
+  /*分页*/
+.pagination  {margin: 30px auto;text-align: center;font-size: 12px;}
+.pagination li  {display:inline-block;line-height: 1;overflow: hidden;}
+.pagination li  {*display:inline;}
+.pagination li.disabled, .pagination li.disabled:hover {font-size: 14px;color: #333;padding:0px 5px;cursor: default;}
+.pagination li:last-child.last.disabled {font-size: 12px;color: #999;}
+.pagination li a {display: block;width: 24px;padding: 0px 5px;text-align: center;line-height: 1;color: #999;}
+.pagination li.active a, .pagination li a:hover {font-size: 14px;color: #333;}
+.pagination li.prev a, .pagination li.next a, .pagination li.first_page a, .pagination li.last_page a, .pagination li.last a, .pagination li.first a {width: 50px;text-align: center;}
+.pagination li.prev:hover a, .pagination li.next:hover a {font-size: 12px;/*color: #999;*/}
+.pagination li:last-child.last.noLink {border-color:transparent;margin: 0;background: none;}
+/*下拉框*/
+.pulldown {position: relative;background: #fff;border: 1px solid #ccc;z-index: 2;}
+.pulldown p {padding: 0 20px 0 10px;height: 34px;line-height: 34px;color: #555;margin-right: 10px;background: #fff url(/edu/blog/images/icon/08.png) no-repeat right center;border-radius: 2px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}
+.pulldown.on .pulldown-list {display: block;}
+.pulldown-list {position: absolute;left: 0;top: 33px;width: 94%;background: #fff;padding: 3%;margin-left: -1px;border: 1px solid #ccc;border-radius: 2px;display: none;cursor: pointer;}
+.pulldown-list li {height: 30px;line-height: 30px;color: #333;padding: 0 10px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}
+.pulldown li:hover {color: #1e90ff;background: #e0e0e0;}
+.pulldown.on p {background: #fff url(/edu/blog/images/icon/08s.png) no-repeat right center;}
+/*nolist*/
+.noList {text-align: center;margin: 100px auto;}
+.noList p {font-size: 16px;color: #999;line-height: 3;}
+/*vip*/
+.is-vip-img {}
+.is-vip-bg, .is-vip-bg-6, .is-vip-bg-2, .is-vip-bg-3, .is-vip-bg-4, .is-vip-bg-5, .is-vip-bg-7 {position: relative;height: 100%;}
+.is-vip-bg-6 i {right: 5px;}
+.vip-icon {position: absolute;right: -5px;bottom: 0;display: inline-block;}
+.vip-icon-1 {width: 32px;height: 32px;background: url(/edu/blog/images/vip/vip.png) no-repeat left 0;right: 8px;bottom: 6px;}
+.vip-icon-2 {width: 22px;height: 22px;background: url(/edu/blog/images/vip/vip.png) no-repeat left -64px;}
+.vip-icon-3 {width: 20px;height: 20px;background: url(/edu/blog/images/vip/vip.png) no-repeat left -108px;}
+.vip-icon-4 {width: 18px;height: 18px;background: url(/edu/blog/images/vip/vip.png) no-repeat left -152px;}
+.vip-icon-5 {position: absolute;left: 20px;bottom: 11px;width: 18px;height: 18px;background: url(/edu/blog/images/vip/vip.png) no-repeat left -152px;}
+.vip-icon-1.on {background: url(/edu/blog/images/vip/vip.png) no-repeat right 0;}
+.vip-icon-2.on {background: url(/edu/blog/images/vip/vip.png) no-repeat right -64px;}
+.vip-icon-3.on {background: url(/edu/blog/images/vip/vip.png) no-repeat right -108px;}
+.vip-icon-4.on {background: url(/edu/blog/images/vip/vip.png) no-repeat right -152px;}
+.vip-icon-5.on {background: url(/edu/blog/images/vip/vip.png) no-repeat right -152px;}
+.is-vip-bg-7 .vip-icon-4 {position: absolute;right: 0;bottom: 0;width: 28px;height: 28px;background: url(/edu/blog/images/vip/vip.png) no-repeat left bottom;}
+.is-vip-bg-7 .vip-icon-4.on {background: url(/edu/blog/images/vip/vip.png) no-repeat right bottom;}
+.is-vip-bg-3 i {right: 12px;bottom: 0;}
+.is-vip-bg-4 i {right: 0px;bottom: 0;}
+.is-vip-bg, .is-vip-bg-6, .is-vip-bg-2, .is-vip-bg-3, .is-vip-bg-4, .is-vip-bg-5, .is-vip-bg-7 {position: relative;height: 100%;}
+.is-vip-bg-6 i {right: 5px;}
+.vip-icon {position: absolute;right: -5px;bottom: 0;display: inline-block;}
+.vip-icon-1 {width: 32px;height: 32px;background: url(/edu/blog/images/vip/vip.png) no-repeat left 0;right: 8px;bottom: 6px;}
+.vip-icon-2 {width: 22px;height: 22px;background: url(/edu/blog/images/vip/vip.png) no-repeat left -64px;}
+.vip-icon-3 {width: 20px;height: 20px;background: url(/edu/blog/images/vip/vip.png) no-repeat left -108px;}
+.vip-icon-4 {width: 18px;height: 18px;background: url(/edu/blog/images/vip/vip.png) no-repeat left -152px;}
+.vip-icon-5 {position: absolute;left: 20px;bottom: 11px;width: 18px;height: 18px;background: url(/edu/blog/images/vip/vip.png) no-repeat left -152px;}
+.vip-icon-1.on {background: url(/edu/blog/images/vip/vip.png) no-repeat right 0;}
+.vip-icon-2.on {background: url(/edu/blog/images/vip/vip.png) no-repeat right -64px;}
+.vip-icon-3.on {background: url(/edu/blog/images/vip/vip.png) no-repeat right -108px;}
+.vip-icon-4.on {background: url(/edu/blog/images/vip/vip.png) no-repeat right -152px;}
+.vip-icon-5.on {background: url(/edu/blog/images/vip/vip.png) no-repeat right -152px;}
+.is-vip-bg-6 {position: relative;}
+.is-vip-bg-7 .vip-icon-4 {position: absolute;right: 0;bottom: 0;width: 28px;height: 28px;background: url(/edu/blog/images/vip/vip.png) no-repeat left bottom;}
+.is-vip-bg-7 .vip-icon-4.on {background: url(/edu/blog/images/vip/vip.png) no-repeat right bottom;}
+.is-vip-bg-3 i {right: 12px;bottom: 0;}
+.is-vip-bg-4 i {right: 0px;bottom: 0;}
+.center-bg .vip-icon {right: 0;bottom: 6px;}
+.comment-creat .is-vip-bg-6 i {right: -2px;bottom: -2px;}
+
+.column-stress {position: relative;color: rgb(255, 147, 0);}
+.Navigates .column-stress:after, .Header .Navigates.fl li.cur>a.column-stress, .Header .Navigates.fl li:hover>a.column-stress {color: rgb(255, 147, 0);}
+.column-stress b {position: absolute;right: -30px;top: 8px;width: 30px;height: 15px;background: url(/edu/blog/images/new.png);}
+.Header .Navigates li.newyear-li{
+	width: 100px;
+	height: 36px;
+	color: #fd5c61;
+   margin-top: 10px;
+}
+.Header .Navigates li.newyear-li img{
+	width:100% ;
+		cursor: pointer;
+}
+.Header .Navigates li.newyear-li>a{
+	line-height: 22px;
+	text-align: center;
+
+}

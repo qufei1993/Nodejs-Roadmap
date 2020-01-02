@@ -1,35 +1,47 @@
 # MongoDB
 
-## 快速导航
-- [Mac 系统安装 MongoDB](#Mac系统下安装MongoDB)
-- [DBRef 数据引用](#dbref数据引用)
-- [Nodejs 客户端链接 MongoDB](#Nodejs客户端链接MongoDB)
+## MongoDB 安装
 
-## Mac系统下安装MongoDB
+[https://www.mongodb.com/download-center/community](https://www.mongodb.com/download-center/community) 这是 MongoDB 的下载中心，选择需要下载的版本和操作系统。注意，MongoDB 的稳定版本都是偶数的。
 
-> Mac 系统可通过 Homebrew 安装 MongoDB 还是相对较简单的
+### Mac 系统下安装
 
-- **更新 Homebrew 数据包**
+Mac 系统可通过 Homebrew 安装 MongoDB 还是相对较简单的
 
 ```
-brew update
+$ brew update # 更新 Homebrew 数据包
+$ brew install mongodb # 安装 MongoDB
 ```
 
-- **安装 MongoDB**
+### Linux 系统安装
 
 ```
-brew install mongodb
+$ wget https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu1604-4.2.2.tgz 
+$ tar -xvf mongodb-linux-x86_64-ubuntu1604-4.2.2.tgz
+$ mv mongodb-linux-x86_64-ubuntu1604-4.2.2 mongodb-4.2.2
+$ export PATH=$PATH:/data/soft/mongodb-4.2.2/bin
 ```
 
-- **启动 MongoDB**
+### 安装校验
+
+查看 MongoDB 版本，校验是否安装成功，出现以下信息则安装成功
+
+```
+$ mongo --version
+MongoDB shell version v4.2.2
+```
+
+## 开启 MongoDB 实例
+
+**启动 MongoDB**
 
 通过 ```--dbpath``` 参数自定义目录路径，若省略 ```--dbpath``` 参数，将会使用系统默认的数据目录 (```/data/db```) 
 
 ```
-mongod --dbpath <自定义的目录路径>
+$ mongod --dbpath <自定义的目录路径>
 ```
 
-- **检查是否成功启动**
+**检查是否成功启动**
 
 > 出现以下信息链接成功，默认端口为 27017
 
@@ -41,12 +53,12 @@ mongod --dbpath <自定义的目录路径>
 2018-01-28T21:20:50.980+0800 I NETWORK  [initandlisten] waiting for connections on port 27017
 ```
 
-- **打开 mongodb 客户端**
+**打开 mongodb 客户端**
 
 打开本地控制台输入命令 mongo 连接到 mongodb 服务器
 
 ```
-mongo
+$ mongo
 ```
 
 看到以下信息链接成功，会显示 mongodb 的版本号、链接地址，默认端口号为 27017
@@ -70,7 +82,8 @@ Server has startup warnings:
 2018-01-28T20:26:16.102+0800 I CONTROL  [initandlisten] 
 2018-01-28T20:26:16.102+0800 I CONTROL  [initandlisten] ** WARNING: soft rlimits too low. Number of files is 256, should be at least 1000
 ```
-- **显示所有数据库**
+
+**展示所有数据库**
 
 ```r
 > show dbs
@@ -79,21 +92,21 @@ config  0.000GB
 local   0.000GB
 ```
 
-- **查看当前所连接的数据库**
+**查看当前所连接的数据库**
 
 ```r
 > db
 test
 ```
 
-- **查看当前数据库下的所有集合(数据表)**
+**查看当前数据库下的所有集合(数据表)**
 
 ```r
 > show collections
 demo_admin
 ```
 
-- **切换/创建数据库**
+**切换/创建数据库**
 
 切换数据库，使用use之前我们不需要对数据库进行额外的创建，在mongo中会在需要的时候自己创建。
 
@@ -102,16 +115,9 @@ demo_admin
 switched to db demo
 ```
 
+## Nodejs 客户端链接 MongoDB
 
-
-
-
-
-
-
-## Nodejs客户端链接MongoDB
-
-```javascript
+```js
 const MongoClient = require('mongodb').MongoClient;
 const mongodbUrl = "mongodb://localhost:27017/demo";
 const DB = {};
@@ -136,8 +142,12 @@ const init = () => {
 }
 ```
 
-#### 问题汇总
+## 问题汇总
 
-- ```db.collection is not a function```
+1. **db.collection is not a function**
 
-是因为mongodb版本是3.0以上版本，将mongodb版本指定安装为2.2.34即可解决，npm安装 ``` npm install mongodb@^2.2.34 --save ```
+是因为 mongodb 版本是 3.0 以上版本，将 mongodb 版本指定安装为 2.2.34 即可解决，npm 安装 
+
+```
+npm install mongodb@^2.2.34 --save
+```
