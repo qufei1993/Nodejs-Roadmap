@@ -70,6 +70,7 @@
 
 - ServerLess
     - [Node.js 快速开启 ServerLess Functions：入门实践指南](/serverless/serverless-functions-using-node-and-aws.md)
+    - [使用 ServerLess, Nodejs, MongoDB Atlas cloud 构建 REST API](/serverless/node-mongodb-altas-serverless-api.md)
 
 - Microservice
     - [服务注册与发现 Consul](microservice/consul.md)
