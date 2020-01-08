@@ -6,7 +6,7 @@ MongoDB Atlas 是一个在云端的数据库，免去了数据库的搭建、维
 
 ## 通过本文你能学到什么？
 
-![](./img/node-mongodb-altas-serverless-api-roadmap.png)
+![](https://img.mukewang.com/5e15a3d300015e3420961170.png)
 
 ## MongoDB Atlas cloud
 
@@ -21,28 +21,35 @@ MongoDB Atlas 是一个在云端的数据库，免去了数据库的搭建、维
 1. 注册：https://www.mongodb.com/cloud/atlas/register?v=2
 2. 注册成功进入个人中心出现以下页面，选择 Build a Cluster 按钮 创建 Cluster
 
-![](./img/mongo-alats-build-a-cluster.jpeg)
+![图片描述](https://img.mukewang.com/5e084fbb000143e416000656.jpg)
 3. 以下提供了多种选择方案，对于初学者选择左侧免费版创建
-![](./img/mongo-alats-select-a-free-cluster.jpeg)
+
+![图片描述](https://img.mukewang.com/5e084fdd0001194320261414.jpg)
 4. 可以看到免费的集群给我们提供了 512MB 存储、共享的 RAM，这对我们初学者是绰绰有余的，还有一些其它选项可以自主选择，使用默认值也可。
-![](./img/mongo-alats-create-a-starter-cluster.jpeg)
+
+![图片描述](https://img.mukewang.com/5e0850180001b50118901064.jpg)
 5. 点击下面的 Create Cluster 按钮，开始集群创建，大概需要等待几分钟
-![](./img/mongo-alats-free-cluster-create.jpeg)
+
+![图片描述](https://img.mukewang.com/5e08509e0001c26d18640204.jpg)
 6. 创建成功如下所示
-![](./img/mongo-alats-cluster-create-success.jpeg)
+
+![图片描述](https://img.mukewang.com/5e0850b2000128d521741002.jpg)
 
 ### 链接到集群
 
 集群创建好之后如何选择一个集群链接字符串？跟随以下 3 个步骤即可完成。
 
 1. 链接到集群，第一步将您的 IP 地址加入白名单，第二步创建一个 MongoDB 用户，完成这两步操作之后，选择 “Choose a connection method” 进入下一步
-![](./img/mongo-alats-connection-a-cluster.jpeg)
+
+![图片描述](https://img.mukewang.com/5e0850e400014b7624241428.jpg)
 
 2. 选择第二个选项 “connect your application”
-![](./img/mongo-alats-connect-your-app.jpeg)
+
+![图片描述](https://img.mukewang.com/5e0850fc0001b19618981124.jpg)
 
 3. 驱动版本使用默认值 Node.js 3.0 or later，复制这个链接字符串，接下来的项目中会使用到
 ![](./img/mongo-alats-copy-connect-string.jpeg)
+![图片描述](https://img.mukewang.com/5e0851160001705d20981134.jpg)
 
 ## 开启一个 Serverless Function 链接到 DB
 
