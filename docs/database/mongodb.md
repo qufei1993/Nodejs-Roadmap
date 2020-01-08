@@ -115,7 +115,19 @@ demo_admin
 switched to db demo
 ```
 
-## Nodejs 客户端链接 MongoDB
+## MongoDB Nodejs 客户端驱动
+
+官方提供的 Node.js 客户端驱动支持 Callback 和 Promise 两种方式与 MongoDB 交互，API 文档参考 [https://mongodb.github.io/node-mongodb-native/](https://mongodb.github.io/node-mongodb-native/)
+
+### 安装驱动程序依赖
+
+下载 MongoDB 驱动程序，并将在 package.json 文件里添加一个依赖
+
+```
+npm install mongodb --save
+```
+
+### 初始化 MongoDB 链接
 
 ```js
 const MongoClient = require('mongodb').MongoClient;
@@ -142,11 +154,11 @@ const init = () => {
 }
 ```
 
-## 问题汇总
+### 问题汇总
 
 1. **db.collection is not a function**
 
-是因为 mongodb 版本是 3.0 以上版本，将 mongodb 版本指定安装为 2.2.34 即可解决，npm 安装 
+是因为 mongodb 版本是 3.0 以上版本，将 mongodb 客户端驱动版本指定安装为 2.2.34 即可解决，npm 安装 
 
 ```
 npm install mongodb@^2.2.34 --save
