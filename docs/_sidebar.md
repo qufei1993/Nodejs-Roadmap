@@ -8,6 +8,8 @@
     * [对象](/javascript/object.md)
     * [原型](/javascript/prototype.md)
     * [正则](/javascript/regexp.md)
+    * [浮点数之谜：0.1 + 0.2 为什么不等于 0.3？](/javascript/floating-point-number-0.1-0.2.md)
+
 * ECMAScript6
     * [let&const 变量声明](/es6/readme.md#新增声明变量)
     * [对象&数组解构赋值](/es6/readme.md#解构赋值)
