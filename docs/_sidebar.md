@@ -9,7 +9,7 @@
     * [原型](/javascript/prototype.md)
     * [正则](/javascript/regexp.md)
     * [浮点数之谜：0.1 + 0.2 为什么不等于 0.3？](/javascript/floating-point-number-0.1-0.2.md)
-    * [JavaScript 浮点数之迷：大数危机？](/javascript/floating-point-number-0.1-0.2.md)
+    * [浮点数之迷：大数危机？](/javascript/floating-point-number-0.1-0.2.md)
 
 * ECMAScript6
     * [let&const 变量声明](/es6/readme.md#新增声明变量)
