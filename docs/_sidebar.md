@@ -50,7 +50,8 @@
 
 - Node.js 翻译
     - [你需要了解的有关 Node.js 的所有信息](/nodejs/practice/everything-you-need-to-know-about-node-js-lnc.md)
-
+    - [不容错过的 Node.js 项目架构](bulletproof-node.js-project-architecture.md)
+    
 - Node.js 实践
     - [Node.js 企业实践](/nodejs/practice/enterprise.md)
 

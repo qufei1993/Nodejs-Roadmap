@@ -1,5 +1,9 @@
 # 不容错过的 Node.js 项目架构
 
+> 原文地址：[https://softwareontheroad.com/ideal-nodejs-project-structure/](https://softwareontheroad.com/ideal-nodejs-project-structure/)
+> 原文作者：Sam Quinn
+> 译者：[五月君](https://github.com/Q-Angelo)，公众号 “Nodejs技术栈” 作者
+
 Express.js 是用于开发 Node.js REST API 的优秀框架，但是它并没有为您提供有关如何组织 Node.js 项目的任何线索。
 
 虽然听起来很傻，但这确实是个问题。
@@ -632,9 +636,3 @@ export default async (): Promise<any> => {
 * 进行依赖注入，让您高枕无忧。
 * 切勿泄漏您的密码、机密和 API 密钥，请使用配置管理器。
 * 将您的 Node.js 服务器配置拆分为可以独立加载的小模块。
-
-
-> 原文：https://softwareontheroad.com/ideal-nodejs-project-structure/
-> 作者：Sam Quinn
-> 译者：五月君
-> 更多优质文章：关注公众号 “[Nodejs技术栈](https://nodejsred.oss-cn-shanghai.aliyuncs.com/node_roadmap_wx.jpg?x-oss-process=style/may)”，开源项目 “https://www.nodejs.red/”
