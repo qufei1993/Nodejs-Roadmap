@@ -25,6 +25,7 @@
     - [Node.js 版本知多少？又该如何选择？](/nodejs/base/release.md)
     - [“3N 兄弟” 助您完成 Node.js 环境搭建](/nodejs/base/install.md)
     - [Node.js 包管理器 NPM](/nodejs/base/npm.md)
+
 * Node.js 模块
     - [Module 模块机制](/nodejs/module.md)
     - [Events 事件触发器](/nodejs/events.md)
@@ -46,6 +47,9 @@
     - [Framework Web 开发框架选型](/nodejs/framework.md#框架)
     - [ORM 对象关系映射](/nodejs/orm.md#ORM)
     - [Middleware 常用 Web 框架&中间件汇总](/nodejs/middleware.md)
+
+- Node.js 翻译
+    - [你需要了解的有关 Node.js 的所有信息](/nodejs/practice/everything-you-need-to-know-about-node-js-lnc.md)
 
 - Node.js 实践
     - [Node.js 企业实践](/nodejs/practice/enterprise.md)
