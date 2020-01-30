@@ -1,4 +1,4 @@
-# MongoDB 复制集
+# MongoDB 复制集 —— 理论篇
 
 MongoDB 的复制集是从传统的 Master-Slave 架构演变而来，由一组相同数据集的 Mongod 实例构成，这一组 Mongod 实例分为 1 个 Primary（主）节点和多个 Secondary（副）节点构成，与传统主从模式不同的是，其还有故障自动转移过程，一旦集群内主节点发生故障，内部会进行选举将其中一个从节点晋升为主节点，例如，Redis 中主从模式需要借助 Sentinel 功能实现自动切换。
 

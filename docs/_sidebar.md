@@ -75,6 +75,8 @@
     - [CURD 操作](/database/mongodb-curd.md)
     - [Index 索引](/database/mongodb-indexes.md)
     - [操作符](/database/mongodb-operator.md)
+    - [MongoDB 复制集 | 理论篇](/database/mongodb-replication.md)
+    - [MongoDB 复制集 | 实践篇](/database/mongodb-replication-pratice.md)
 
 - ServerLess
     - [Node.js 快速开启 ServerLess Functions：入门实践指南](/serverless/serverless-functions-using-node-and-aws.md)
