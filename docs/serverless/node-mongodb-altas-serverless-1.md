@@ -48,7 +48,7 @@ MongoDB Atlas 是一个在云端的数据库，免去了数据库的搭建、维
 ![图片描述](https://img.mukewang.com/5e0850fc0001b19618981124.jpg)
 
 3. 驱动版本使用默认值 Node.js 3.0 or later，复制这个链接字符串，接下来的项目中会使用到
-![](./img/mongo-alats-copy-connect-string.jpeg)
+
 ![图片描述](https://img.mukewang.com/5e0851160001705d20981134.jpg)
 
 ## 开启一个 Serverless Function 链接到 DB
