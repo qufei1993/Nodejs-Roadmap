@@ -118,6 +118,7 @@
     - [Queue 队列](/algorithm/queue.md)
     - [Stack 栈](/algorithm/stack.md)
     - [Linear List 线性表](/algorithm/linear-list.md)
+    - [BST 二叉搜索树](/algorithm/bst.md)
 
 * 资料
     - [书籍推荐](/materials/book.md)
