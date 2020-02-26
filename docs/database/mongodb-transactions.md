@@ -8,7 +8,7 @@ MongoDB 单文档原生支持原子性，也具有事务的特性，但是我们
 
 * 一致性（Consistency）：事务在完成时，必须使所有的数据都保持一致状态。
 
-* 隔离型（Isolation）：由并发事务所做的修改必须与任何其他并发事务所作的修改隔离（简而言之：一个事务执行过程中不应受其它事务影响）。
+* 隔离性（Isolation）：由并发事务所做的修改必须与任何其他并发事务所作的修改隔离（简而言之：一个事务执行过程中不应受其它事务影响）。
 
 * 持久性（Durability）：事务完成之后，对于系统的影响是永久性的。
 
@@ -128,7 +128,7 @@ db.user.find().readConcern("majority")
 
 MongoDB 的 readConcern 默认情况下是脏读，例如，用户在主节点读取一条数据之后，该节点未将数据同步至其它从节点，就因为异常挂掉了，待主节点恢复之后，将未同步至其它节点的数据进行回滚，就出现了脏读。
 
-readConcern 级别的 majority 可以保证读到的数据已经落入到大多数节点。所以说保证了事务的隔离型，所谓隔离型也是指事务内的操作，事务外是看不见的。
+readConcern 级别的 majority 可以保证读到的数据已经落入到大多数节点。所以说保证了事务的隔离性，所谓隔离性也是指事务内的操作，事务外是看不见的。
 
 #### readConcern 参考
 
@@ -166,6 +166,8 @@ db.order.insert({"id": "123456789"}, {writeConern: {w: "majority"}})
 // 读取时保证这条数据已在大多数节点存在
 db.order.find({"id": "123456789"}).readPref("secondaryPreferred").readConcern("majority")
 ```
+
+本文是对 MogoDB 事务的一个初步了解，Read Concern/Write Concern/Read Preference 这些在后续事务实践中都会应用，希望大家可以事先进行一个了解，在接下来的一篇文章中，我会介绍 MongoDB 的事务应该如何应用，同时结合 Node.js 进行实践说明，欢迎关注！
 
 ## Reference
 
