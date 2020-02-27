@@ -18,6 +18,7 @@
 * minNodeValue()：最小节点值
 * maxNodeValue()：最大节点值
 * removeNode(value)：移除节点
+* destory()：销毁节点
 
 **注意**：在实现二叉树搜索🌲的很多方法中我们将使用大量的递归操作，如果对它不了解的，可以自行查阅资料学习。
 
@@ -290,6 +291,42 @@ postOrderTraverse(cb) {
 ![](img/bst_post_order_traverse.png)
 
 后序遍历一个应用场景适合对目录进行遍历计算，还适合做析构函数，从后序节点开始删除。
+
+## 二叉树搜索销毁
+
+在上面最后讲解了二叉搜索树的后序遍历，这里讲下它的实际应用，在 C++ 等面向对象编程语言中可以定义析构函数使得某个对象的所有引用都被删除或者当对象被显式销毁时执行，做一些善后工作。
+
+例如，我们本次实现的二叉搜索树，可以利用后序遍历的方式，逐渐将每个节点进行释放。
+
+定义一个 destroy 方法，以便在树的实例上能够调用。
+
+```js
+/**
+ * 二叉树销毁，可以利用后续遍历特性实现
+ */
+destroy(){
+    this.root = this[DESTORY_RECUSIVE](this.root);
+}
+```
+
+定义一个 DESTORY_RECUSIVE 方法递归调用，本质也是一个后序遍历。
+
+```js
+/**
+ * 销毁二叉搜索树递归调用
+ * @param { Object } node 
+ */
+[DESTORY_RECUSIVE](node) {
+    if (node !== null) {
+        this[DESTORY_RECUSIVE](node.left);
+        this[DESTORY_RECUSIVE](node.right);
+
+        node = null;
+        this.count--;
+        return node;
+    }
+}
+```
 
 ## 最大最小节点
 
