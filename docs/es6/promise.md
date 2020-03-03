@@ -297,6 +297,208 @@ Promise.all([
 
 **```总结：```** 不论是Promise还是async/await在写法上解决了异步回调的问题，但是任何写法都不会改变JS单线程、异步的本质，除非js执行引擎发生变化。
 
+```js
+/**
+ * 封装一个自己的 Promise
+ */
+class MayJunPromise {
+	constructor(fn) {
+		// {1} 初始化一些默认值
+		this.status = 'pending'; // 一个 promise 有且只有一个状态 (pending | fulfilled | rejected)
+		this.value = undefined; // 一个 JavaScript 合法值（包括 undefined，thenable，promise）
+		this.reason = undefined; // 是一个表明 promise 失败的原因的值
+		this.onResolvedCallbacks = []; // {2}
+		this.onRejectedCallbacks = []; // {3}
+
+		// {4} 成功回调
+		let resolve = value => {
+			if (this.status === 'pending') {
+				this.status = 'fulfilled'; // 终态
+				this.value = value; // 终值
+				this.onResolvedCallbacks.forEach(itemFn => {
+					itemFn()
+				});
+			}
+		}
+
+		// {5} 失败回调
+		let reject = reason => {
+			if (this.status === 'pending') { // 状态不可逆，例如 resolve(1);reject('err'); 第二个 reject 就无法覆盖
+				this.status = 'rejected'; // 终态
+				this.reason = reason; // 终值
+				this.onRejectedCallbacks.forEach(itemFn => itemFn());
+			}
+		}
+		
+		try {
+      // {6} 自执行
+			fn(resolve, reject);
+		} catch(err) {
+			reject(err); // {7} 失败时捕获
+		}
+	}
+
+	/**
+	 * 一个 promise 必须提供一个 then 方法以访问其当前值、终值和据因
+	 * @param { Function } onFulfilled 可选，如果是一个函数一定是在状态为 fulfilled 后调用，并接受一个参数 value
+	 * @param { Function } onRejected 可选，如果是一个函数一定是在状态为 rejected 后调用，并接受一个参数 reason
+	 * @returns { Promise } 返回值必须为 Promise
+	 */
+	then(onFulfilled, onRejected) {
+		// {8} 值穿透，把 then 的默认值向后传递，因为标准规定 onFulfilled、onRejected 是可选参数
+		// 场景：new Promise(resolve => resolve(1)).then().then(value => console.log(value));
+		onFulfilled = Object.prototype.toString.call(onFulfilled) === '[object Function]' ? onFulfilled : function(value) {return value};
+		onRejected = Object.prototype.toString.call(onRejected) === '[object Function]' ? onRejected : function(reason) {throw reason};
+
+    // {9} then 方法必须返回一个 promise 对象
+		const promise2 = new MayJunPromise((resolve, reject) => {
+      // {10}
+			if (this.status === 'fulfilled') { // 这里的 this 会继承外层上下文绑定的 this
+				// {10.1} Promise/A+ 规定：确保 onFulfilled、onRejected 在下一轮事件循环中被调用
+				// 可以使用宏任务 (setTimeout、setImmediate) 或微任务（MutationObsever、process.nextTick）
+				setImmediate(() => {
+          try {
+						// {10.2} Promise/A+ 标准规定：如果 onFulfilled 或 onRejected 返回的是一个 x，那么它会以 [[Resolve]](promise2, x) 处理解析
+						const x = onFulfilled(this.value);
+						// 这里定义解析 x 的函数为 resolveMayJunPromise
+						resolveMayJunPromise(promise2, x, resolve, reject);
+          } catch (e) {
+            reject(e);
+          }
+				});
+			}
+	
+      // {11}
+			if (this.status === 'rejected') {
+				setImmediate(() => {
+					try {
+						const x = onRejected(this.reason)
+						resolveMayJunPromise(promise2, x, resolve, reject);
+					} catch (e) {
+            reject(e);
+          }
+				});
+			}
+
+      // {12}
+			// 有些情况无法及时获取到状态，初始值仍是 pending，例如：
+			// return new Promise(resolve => { setTimeout(function() { resolve(1) }, 5000) })
+			//	.then(result => { console.log(result) })
+			if (this.status === 'pending') {
+				this.onResolvedCallbacks.push(() => {
+					setImmediate(() => {
+						try {
+							const x = onFulfilled(this.value);
+							resolveMayJunPromise(promise2, x, resolve, reject);
+						} catch (e) {
+							reject(e);
+						}
+					});
+				});
+	
+				this.onRejectedCallbacks.push(() => {
+					setImmediate(() => {
+						try {
+							const x = onRejected(this.reason)
+							resolveMayJunPromise(promise2, x, resolve, reject);
+						} catch (e) {
+							reject(e);
+						}
+					});
+				});
+			}
+		});
+
+		return promise2;
+	}
+}
+
+/**
+ * Promise 解决过程
+ * @param { Promise } promise2 
+ * @param { any } x 
+ * @param { Function } resolve 
+ * @param { Function } reject 
+ */
+function resolveMayJunPromise(promise2, x, resolve, reject){
+	// [2.3.1] promise 和 x 不能指向同一对象，以 TypeError 为据因拒绝执行 promise，例如：
+	// let p = new MayJunPromise(resolve => resolve(1))
+	// let p2 = p.then(() => p2); // 如果不做判断，这样将会陷入死循环
+	if (promise2 === x) {
+		return reject(new TypeError('Chaining cycle detected for promise'));
+	}
+  
+  // [2.3.2] 判断 x 是一个 Promise 实例，可以能使来自系统的 Promise 实例，要兼容，例如：
+	// new MayJunPromise(resolve => resolve(1))
+	//		.then(() => new Promise( resolve => resolve(2)))
+	// 这一块发现也无需，因为 [2.3.3] 已经包含了
+	// if (x instanceof Promise) {
+	// 	// [2.3.2.1] 如果 x 是 pending 状态，那么保留它（递归执行这个 resolveMayJunPromise 处理程序）
+	// 	// 直到 pending 状态转为 fulfilled 或 rejected 状态
+	// 	if (x.status === 'pending') {
+	// 		x.then(y => {
+	// 			resolveMayJunPromise(promise2, y, resolve, reject);
+	// 		}, reject)
+	// 	} else if (x.status === 'fulfilled') { // [2.3.2.2] 如果 x 处于执行态，resolve 它
+	// 		x.then(resolve); 
+	// 	} else if (x.status === 'rejected') { // [2.3.2.3] 如果 x 处于拒绝态，reject 它
+	// 		x.then(reject);
+	// 	}
+	// 	return;
+	// }
+
+	// [2.3.3] x 为对象或函数，这里可以兼容系统的 Promise
+	// new MayJunPromise(resolve => resolve(1))
+	//		.then(() => new Promise( resolve => resolve(2)))
+	if (x != null && (x instanceof Promise || typeof x === 'object' || typeof x === 'function')) {
+		let called = false;
+		try {
+			// [2.3.3.1] 把 x.then 赋值给 then
+			// 存储了一个指向 x.then 的引用，以避免多次访问 x.then 属性，这种预防措施确保了该属性的一致性，因为其值可能在检索调用时被改变。
+			const then = x.then;
+
+			// [2.3.3.3] 如果 then 是函数（默认为是一个 promise），将 x 作为函数的作用域 this 调用之。
+			// 传递两个回调函数作为参数，第一个参数叫做 resolvePromise (成功回调) ，第二个参数叫做 rejectPromise（失败回调）
+			if (typeof then === 'function') {
+
+				// then.call(x, resolvePromise, rejectPromise) 等价于 x.then(resolvePromise, rejectPromise)，笔者理解此时会调用到 x 即 MayJunPromise 我们自己封装的 then 方法上
+				then.call(x, y => { // [2.3.3.3.1] 如果 resolvePromise 以值 y 为参数被调用，则运行 [[Resolve]](promise, y)
+						if (called) return;
+						called = true;
+						resolveMayJunPromise(promise2, y, resolve, reject);
+				}, e => { // [2.3.3.3.2] 如果 rejectPromise 以据因 r 为参数被调用，则以据因 r 拒绝 promise
+					if (called) return;
+					called = true;
+
+					reject(e);
+				});
+			} else {
+				// [2.3.3.4 ] 如果 then 不是函数，以 x 为参数执行 promise
+				resolve(x)
+			}
+		} catch(e) { // [2.3.3.2] 如果取 x.then 的值时抛出错误 e ，则以 e 为据因拒绝 promise
+			if (called) return;
+			called = true;
+
+			reject(e);
+		}
+	} else {
+		resolve(x);
+	}
+}
+
+MayJunPromise.defer = MayJunPromise.deferred = function () {
+  let dfd = {}
+  dfd.promise = new MayJunPromise((resolve,reject)=>{
+    dfd.resolve = resolve;
+    dfd.reject = reject;
+  });
+  return dfd;
+}
+
+module.exports = MayJunPromise;
+```
+
 #### 资料推荐
 
 Promise/A+规范参考[http://www.ituring.com.cn/article/66566](http://www.ituring.com.cn/article/66566)
