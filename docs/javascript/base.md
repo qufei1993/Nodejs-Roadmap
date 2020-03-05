@@ -122,7 +122,7 @@ console.log(a.b); // Uncaught TypeError: Cannot read property 'b' of null
 
 ```js
 let a = 2;
-a(); // Uncaught TypeError: Cannot read property 'b' of null
+a(); // TypeError: a is not a function
 ```
 
 ## 数组去重的三种实现方式
