@@ -40,7 +40,9 @@ console.log('obj',obj); / /obj Object {abc: 345, c: 456, Symbol(abc): "123"}
 ```
 
 - **for of**
+
 > 使用for of不能遍历出Symbol定义的变量
+
 ```js
 for(let [key,value] of Object.entries(obj)){
   console.log('let of',key,value);
@@ -50,7 +52,9 @@ for(let [key,value] of Object.entries(obj)){
 ```
 
 - **getOwnPropertySymbols()**
+
 > getOwnPropertySymbols()只获取Symbol定义的值
+
 ```js
 Object.getOwnPropertySymbols(obj).forEach(function(item){
   console.log(obj[item]); //123
@@ -58,7 +62,9 @@ Object.getOwnPropertySymbols(obj).forEach(function(item){
 ```
 
 - **ownKeys**
+
 > 遍历出所有的值
+
 ```js
 Reflect.ownKeys(obj).forEach(function(item){
   console.log('ownkeys',item,obj[item]);
@@ -71,6 +77,7 @@ Reflect.ownKeys(obj).forEach(function(item){
 ```
 
 ## iterator
+
 > for-of 语句，它首先调用被遍历集合对象的Symbol.iterator() 方法，该方法返回一个迭代器对象，迭代器对象可以是拥有 .next 方法的任何对象；然后，在 for-of 的每次循环中，都将调用该迭代器对象上的 .next 方法。
 
 ```javascript
@@ -128,5 +135,4 @@ Reflect.ownKeys(obj).forEach(function(item){
     console.log('value',value);
   }
 }
-
 ```
