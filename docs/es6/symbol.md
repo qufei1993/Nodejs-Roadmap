@@ -36,7 +36,7 @@ let obj={
     'c':456
 };
 
-console.log('obj',obj); / /obj Object {abc: 345, c: 456, Symbol(abc): "123"}
+console.log('obj',obj); // obj Object {abc: 345, c: 456, Symbol(abc): "123"}
 ```
 
 - **for of**
