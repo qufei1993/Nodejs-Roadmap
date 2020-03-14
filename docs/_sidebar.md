@@ -35,6 +35,7 @@
     - [Console 日志模块](/nodejs/console.md)
     - [Net 网络模块](/nodejs/net.md)
     - [DNS 域名解析](/nodejs/dns.md)
+    - [Cluster 集群模块](nodejs/cluster-base.md)
     
 * Node.js 进阶
     - [Egg-Logger 模块实践](/nodejs/logger.md)
