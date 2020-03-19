@@ -7,7 +7,7 @@
 
 你可能在哪里见过 “0.1 + 0.2 = 0.30000000000000004” 但是知道这背后真正的原理吗？是只有 JavaScript 中存在吗？带着这些疑问本文将重点梳理这背后的原理及浮点数在计算机中的存储机制。
 
-**注意:** 发现对于 Markdown 公式不支持，也可以在微信 [Github](https://github.com/Q-Angelo/Nodejs-Roadmap/blob/master/docs/javascript/floating-point-number-0.1-0.2.md) 阅读
+**注意:** 发现对于 Markdown 公式不支持，可以在 [微信端链接打开阅读](https://mp.weixin.qq.com/s/EnXEdK8F8GWpKbeGOUGqqQ)
 
 ## 通过本文你能学到什么？
 
