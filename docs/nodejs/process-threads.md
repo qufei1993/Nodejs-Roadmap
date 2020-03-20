@@ -798,3 +798,5 @@ console.log(process.cwd()); // 获取当前进程目录
 如果子进程退出之后，父进程没有调用 wait/waitpid 来获取子进程状态，那么保留的进程号将会一直被占用，且占用系统资源，称为僵死进程或僵尸进程。
 
 元凶不是僵尸进程而是其父进程，所以我们把元凶给杀掉之后，僵尸进程会变为孤儿进程被系统的 init 进程 pid = 1 的进程所收养，init 进程会对这些孤儿进程进行管理（调用 wait/waitpid）释放掉其占用的资源。
+
+参考 [www.cnblogs.com/Anker/p/3271773.html](https://www.cnblogs.com/Anker/p/3271773.html)
