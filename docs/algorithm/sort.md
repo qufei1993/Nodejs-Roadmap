@@ -96,3 +96,52 @@ function _partition(arr, l, r) {
 	return j;
 };
 ```
+
+## 归并排序
+
+归并排序是分而治之算法的经典应用，将数据一分为二，进行归并操作，时间复杂度为 O(nlogn)。
+
+```js
+/**
+ * 归并排序，自上而下方式
+ * @param { Array } arr 
+ */
+function mergeSort(arr) {
+  const len = arr.length;
+
+  if (len <=1 ) return arr;
+
+  const mid = Math.floor(len/2);
+  const leftArr = arr.slice(0, mid);
+  const rightArr = arr.slice(mid);
+
+  return merge(mergeSort(leftArr), mergeSort(rightArr));
+}
+
+function merge(leftArr, rightArr) {
+  const res = [];
+
+  while(leftArr.length && rightArr.length) {
+    leftArr[0] < rightArr[0] ? res.push(leftArr.shift()) : res.push(rightArr.shift());
+  }
+
+  while(leftArr.length) {
+    res.push(leftArr.shift());
+  }
+
+  while(rightArr.length) {
+    res.push(rightArr.shift());
+  }
+
+  return res;
+}
+const arr = [11,5,2,7,4,9,10];
+console.log(mergeSort(arr))
+
+const a=[2,5,11], b=[4,7,9,10];
+console.log(merge(mergeSort(a), mergeSort(b)));
+```
+
+## 参考
+
+* [github.com/hustcc/JS-Sorting-Algorithm](https://github.com/hustcc/JS-Sorting-Algorithm)
