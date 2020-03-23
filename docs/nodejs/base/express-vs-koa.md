@@ -121,7 +121,7 @@ function compose(ctx, middlewares) {
         
         try {
           // {7} 这里一定要 bind 下，不要立即执行
-          return Promise.resolve(ctx, fn(dispatch.bind(null, (i + 1))));
+          return Promise.resolve(fn(ctx, dispatch.bind(null, (i + 1))));
         } catch (err) {
           // {8} 返回错误
           return Promise.reject(err);
@@ -133,7 +133,7 @@ function compose(ctx, middlewares) {
   }
 }
 
-const fn = compose(middlewares);
+const fn = compose(ctx, middlewares);
 
 fn();
 ```
