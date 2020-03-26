@@ -124,11 +124,20 @@ enableMajorityReadConcern=true
 db.user.find().readConcern("majority")
 ```
 
+#### 事务的四个隔离级别
+
+* 未提交读（Read uncommitted）
+* 提交读（Read committed）
+* 可重复读（Repeatable reads）
+* 可序列化（Serializable）
+
+详细内容可参考 [深入分析事务的隔离级别](http://www.hollischuang.com/archives/943)
+
 #### readConcern 总结
 
-MongoDB 的 readConcern 默认情况下是脏读，例如，用户在主节点读取一条数据之后，该节点未将数据同步至其它从节点，就因为异常挂掉了，待主节点恢复之后，将未同步至其它节点的数据进行回滚，就出现了脏读。
+MongoDB 的 **readConcern 默认情况下是脏读（readConcer=local）**，例如，用户在主节点读取一条数据之后，该节点未将数据同步至其它从节点，就因为异常挂掉了，待主节点恢复之后，将未同步至其它节点的数据进行回滚，就出现了脏读。
 
-readConcern 级别的 majority 可以保证读到的数据已经落入到大多数节点。所以说保证了事务的隔离性，所谓隔离性也是指事务内的操作，事务外是看不见的。
+readConcern 级别的 majority 可以保证读到的数据已经落入到大多数节点。所以说保证了事务的隔离性的提交读，所谓隔离性也是指事务内的操作，事务外是看不见的，在**事务隔离级别中为提交读（readConcer=majority）**。
 
 #### readConcern 参考
 
