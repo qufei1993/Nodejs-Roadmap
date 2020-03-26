@@ -1,5 +1,38 @@
 # 十大经典排序算法
 
+## 冒泡排序
+
+每一轮只把一个元素冒泡到数列的一端，依次循环遍历，直到所有元素循环一遍。
+
+* 平均时间复杂度：O(n^2)
+* 最好情况：O(n)
+* 最坏情况：O(n^2)
+
+```js
+/**
+ * 冒泡排序
+ * @param { Array } arr 
+ */
+function bubbleSort(arr) {
+	const length = arr.length;
+
+	for (let i=0; i<length-1; i++) {
+		for (let j=0; j<length-i-1; j++) {
+			if (arr[j] > arr[j+1]) { // 元素两两比较大的值放在右边
+				const temp = arr[j];
+				arr[j] = arr[j + 1];
+				arr[j + 1] = temp;
+			}
+		}
+	}
+
+	return arr;
+}
+
+const arr = [2, 5, 1, 7, 4, 9, 6];
+console.log(bubbleSort(arr)); // [ 1, 2, 4, 5, 6, 7, 9]
+```
+
 ## 选择排序
 
 ```js
@@ -68,34 +101,89 @@ function insertSort(arr) {
 
 ## 快速排序
 
+基于冒泡排序，不同的是冒泡排序每一轮只把一个元素冒泡的数据的另一端，在**快速排序中每轮选中设置一个基准值，小于基准值的放到左边，大于基准值的放到右边**，之后在基准值的左边、右边再次递归操作，这种方法称为**分治法**。
+
+重点在于基准值的设置和排序实现，定义分区方法 partition 使用指针交换算法实现，具体做以下几步：
+
+* 设置开始、结束两个指针
+* 如果指针重合结束，否则以下三步继续轮询
+	1. 右边指针大于基准值位置左移，否则停止
+	2. 左边指针小于基准值位置右移，否则停止
+	3. 左右指针位置元素交换，继续轮询直到指针重合
+* 指针重合位置元素与最开始设置的基准值交换位置，当前分区排序完成，返回当前基准值的位置
+
+
 ```js
+/**
+ * 快速排序 
+ * @param { Array } arr 
+ */
 function quickSort(arr) {
-	_quickSort(arr, 0, arr.length-1);
+	return _quickSort(arr, 0, arr.length - 1);
 }
 
-function _quickSort(arr, l, r) {
-	if (l >= r) return;
+/**
+ * 快速排序递归调用函数
+ * @param { Array } arr 
+ * @param { Number } left 
+ * @param { Number } right 
+ */
+function _quickSort(arr, left, right) {
+	if (left > right) return;
 
-	const p = _partition(arr, l, r);
-	_quickSort(arr, l, p-1);
-	_quickSort(arr, p+1, r);
+	const p = partition(arr, left, right); // 分区，最后返回基准值
+	_quickSort(arr, left, p - 1); // 基准值左侧递归
+	_quickSort(arr, p + 1, right) // 基准值右侧递归
 }
 
-function _partition(arr, l, r) {
-	const v = arr[l];
-	let j = l;
+/**
+ * 分区，通过指针交换法算法实现
+ * 设置开始、结束两个指针
+ * 如果指针重合结束，否则以下三步继续轮询：
+ * 1. 右边指针大于基准值位置左移，否则停止
+ * 2. 左边指针小于基准值位置右移，否则停止
+ * 3. 左右指针位置元素交换，继续轮询直到指针重合
+ * 指针重合位置元素与最开始设置的基准值交换位置，当前分区排序完成，返回当前基准值的位置
+ * @param { Array } arr 
+ * @param { Number } left 
+ * @param { Number } right 
+ */
+function partition(arr, left, right) {
+	const pivot = arr[left]; // 基准值
+	let startIndex = left;
+	let endIndex = right;
 
-	for (let i=l+1; i<=r; i++) {
-		if (arr[i] < v) {
-			swap(arr, j+1, i);
-			j++;
+	while (startIndex !== endIndex) {
+		if (startIndex < endIndex && arr[endIndex] > pivot) {
+			endIndex--;
+		}
+
+		if (startIndex < endIndex && arr[startIndex] <= pivot) {
+			startIndex++;
+		}
+
+		if (startIndex < endIndex) {
+			swap(arr, startIndex, endIndex);
 		}
 	}
 
-	swap(arr, l, j);
-	return j;
-};
+	// 指针重合位置元素与最开始设置的基准值交换位置，当前分区排序完成左侧小于基准值，右侧大于基准值
+	swap(arr, startIndex, left);
+
+	return startIndex; // 返回基准值所处位置
+}
+
+function swap(arr, a, b) {
+	const temp = arr[a];
+	arr[a] = arr[b];
+	arr[b] = temp;
+}
+const arr = [3, 2, 5, 1, 0];
+quickSort(arr);
+console.log(arr);
 ```
+
+参考 [漫画：什么是快速排序？（完整版）](https://mp.weixin.qq.com/s/PQLC7qFjb74kt6PdExP8mw)
 
 ## 归并排序
 
