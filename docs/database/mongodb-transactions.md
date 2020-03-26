@@ -12,6 +12,16 @@ MongoDB 单文档原生支持原子性，也具有事务的特性，但是我们
 
 * 持久性（Durability）：事务完成之后，对于系统的影响是永久性的。
 
+## MongoDB 对事务四大特性的支持
+
+原子性：MongoDB 单表、单文档原生支持，但是我们说事务通常是指多文档下的实践，MongoDB 4.0 支持复制集多表、多行，MongoDB 4.2 支持了分片集群多表、多行。
+
+一致性：可使用 writeConcern、readConcern 的结合来完用，下文有示例介绍。
+
+隔离性：MongoDB readConcern 支持隔离性的各级别。
+
+持久性：Journal 和 Replication，Journal 是指先把数据写入日志文件，再提交至数据文件，当服务器宕机时可在日志文件进行恢复，在这基础之上 MongoDB 会将数据写入其它节点，持久性相比其它数据库更高级些。
+
 ## Read Concern/Write Concern/Read Preference
 
 在事务操作中会分别使用到 readConcern、writeConcern、readPreference 这几个选项，用于控制 Session 的行为，下面分别予以介绍。
@@ -94,6 +104,7 @@ MongoDB 3.2 引入了 readConcern 来决定读取的策略，但是与 readPrefe
 * local：仅读取当前分片的数据。
 * majority：读取在大多数节点上提交完成的数据。
 * snapshot：读取最近快照中的数据。
+* linearizable：线性读，比 majority 更安全但是性能也更消耗，可能会非常慢，建议配合 maxTimeMS 使用
 
 #### 更新配置项
 
@@ -122,6 +133,9 @@ enableMajorityReadConcern=true
 
 ```js
 db.user.find().readConcern("majority")
+
+// maxTimeMS 确保操作不会无限期地阻塞
+db.user.find().readConcern("linearizable").maxTimeMS(10000) 
 ```
 
 #### 事务的四个隔离级别
@@ -138,6 +152,21 @@ db.user.find().readConcern("majority")
 MongoDB 的 **readConcern 默认情况下是脏读（readConcer=local）**，例如，用户在主节点读取一条数据之后，该节点未将数据同步至其它从节点，就因为异常挂掉了，待主节点恢复之后，将未同步至其它节点的数据进行回滚，就出现了脏读。
 
 readConcern 级别的 majority 可以保证读到的数据已经落入到大多数节点。所以说保证了事务的隔离性的提交读，所谓隔离性也是指事务内的操作，事务外是看不见的，在**事务隔离级别中为提交读（readConcer=majority）**。
+
+readConcern 的 **snapshot 属性对应事务隔离级别的可重复读**，例如，当开启事务先读取一条数据，之后在事务外对该数据进行修改，如果此时事务内在查询一次该数据可保证重复读，也就是不会读取到事务外修改的数据，例如下例琐事
+
+```js
+var session = db.getMongo().startSession();
+session.startTransaction({readConcern: { level: 'snapshot' },writeConcern: { w: 'majority' }});
+
+var coll = session.getDatabase('test').getCollection('user');
+coll.find({name: 'Jack'}) // { age: 12 } 事务内
+db.coll.update({name: 'Jack'}, {$set: {age: 18}}) // 事务外操作
+db.coll.find({name: 'Jack'}) // { age: 18 } 事务外操作
+coll.find({name: 'Jack'}) // { age: 12 } 事务内
+```
+
+**readConcern 的 snapshot 是事务隔离级别中的最高级别，可以保证不会出现脏读、不可重复读、幻读，仅在多文档事务中生效**。
 
 #### readConcern 参考
 
