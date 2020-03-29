@@ -1,4 +1,4 @@
-# 十大经典排序算法
+# 经典排序算法
 
 ## 冒泡排序
 
@@ -35,10 +35,12 @@ console.log(bubbleSort(arr)); // [ 1, 2, 4, 5, 6, 7, 9]
 
 ## 选择排序
 
+核心算法是在未排序数据中找到最小/大值，存放到排序序列开始位置
+
 ```js
 /**
  * 选择排序 O(n^2)
- * 核心算法是在未排序数据中找到最小值，存放到排序序列开始位置
+ * 核心算法是在未排序数据中找到最小/大值，存放到排序序列开始位置
  * @param { Array } arr 
  * @returns { Array } 
  */
@@ -63,6 +65,12 @@ function selectSort(arr) {
 
 ## 插入排序
 
+核心实现：提前终止内层循环，使用赋值，避免 swap 交换，当元素是有序时，插入算法将会是一个 O(n) 级别的
+* 将一个元素当作有序序列，之后从二个元素到最后一个元素当作未排序序列，依次循环未排序序列 (最外层 i 循环，行 {1})
+* 每一层循环（最外层）比如 i = 2，2 之前的称为内存循环（行 {2}）
+* 内层循环元素如果比当前的元素 e 大，元素后移
+* 内层循环元素如果比当前的元素 e 小，直接 Break 跳出循环，将 e 插入适当位置
+
 ```js
 /**
  * 插入排序 O(n^2)
@@ -75,11 +83,11 @@ function selectSort(arr) {
 function insertSort(arr) {
 	const length = arr.length;
 
-	for (let i=1; i<length; i++) {
+	for (let i=1; i<length; i++) { // {1}
 		let j;
 		let e=arr[i];
 
-		// for (j=i; j>0; j--) {
+		// for (j=i; j>0; j--) { // {2}
 		// 	if (arr[j-1] > e) {
 		// 		arr[j] = arr[j-1];
 		// 	} else {
@@ -88,7 +96,7 @@ function insertSort(arr) {
 		// }
 
 		// 上面注释部份的一种精简写法
-		for (j=i; j>0 && arr[j-1] > e; j--) {
+		for (j=i; j>0 && arr[j-1] > e; j--) { // {2}
 			arr[j] = arr[j-1];
 		}
 
@@ -154,11 +162,11 @@ function partition(arr, left, right) {
 	let endIndex = right;
 
 	while (startIndex !== endIndex) {
-		if (startIndex < endIndex && arr[endIndex] > pivot) {
+		while (startIndex < endIndex && arr[endIndex] > pivot) {
 			endIndex--;
 		}
 
-		if (startIndex < endIndex && arr[startIndex] <= pivot) {
+		while (startIndex < endIndex && arr[startIndex] <= pivot) {
 			startIndex++;
 		}
 
@@ -178,7 +186,9 @@ function swap(arr, a, b) {
 	arr[a] = arr[b];
 	arr[b] = temp;
 }
-const arr = [3, 2, 5, 1, 0];
+
+let arr = [18, 9, 3, 2, 1, 0];
+arr = [4, 7, 6, 5, 3, 2, 8, 1]
 quickSort(arr);
 console.log(arr);
 ```
