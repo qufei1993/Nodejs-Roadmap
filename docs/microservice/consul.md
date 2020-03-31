@@ -268,7 +268,7 @@ Consul Template是Consul的一个UI扩展工具，方便的在Web页面进行操
 这是最简单快速的启动方式，在启动consul时直接启动webui界面，跟上-ui参数参考以下示例，端口默认为8500，如果使用阿里云请注意安全组是否开启。
 
 ```
-consul agent -server -bootstrap -ui -data-dir=/data/soft/consul_1.4/consul-data -bind=0.0.0.0 -client=0.0.0.0  -node=120.27.239.212
+consul agent -server -bootstrap -ui -data-dir=/data/soft/consul_1.4/consul-data -bind=0.0.0.0 -client=0.0.0.0  -node=127.0.0.1
 ```
 
 ## 集群搭建
@@ -1141,7 +1141,7 @@ consul_1  192.168.6.128:8301  alive   server  1.4.0  2         consul_cluster  <
 这是最简单快速的启动方式，在启动consul时直接启动webui界面，跟上-ui参数参考以下示例，端口默认为8500
 
 ```
-consul agent -server -bootstrap -ui -data-dir=/data/soft/consul_1.4/consul-data -bind=0.0.0.0 -client=0.0.0.0  -node=120.27.239.212
+consul agent -server -bootstrap -ui -data-dir=/data/soft/consul_1.4/consul-data -bind=0.0.0.0 -client=0.0.0.0  -node=127.0.0.1
 ```
 
 如果阿里云或其他云厂商服务器，在开启了Web 可视化界面之后，但是浏览器输入 http://127.0.0.1:8500/ui 无法访问，可能是链接被拒等情况，如果使用阿里云请注意安全组是否开启。
