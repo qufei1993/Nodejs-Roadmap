@@ -90,7 +90,8 @@
     - [数据通信方式 RPC、HTTP、消息队列](/microservice/data-communication.md)
     - [RabbitMQ：入门篇](/microservice/rabbitmq-base.md)
     - [RabbitMQ：交换机消息投递机制](/microservice/rabbitmq-exchange.md)
-    - [RabbitMQ：死信队列+TTL 实现定时任务](/microservice/rabbitmq-schedule.md)
+    - [RabbitMQ：DLX（死信队列）+ TTL 实现延迟队列](/microservice/rabbitmq-schedule.md)
+    - [RabbitMQ：Delayed Message 插件实现延迟队列](/microservice/rabbitmq-delayed-message-exchange.md)
     - [RabbitMQ：高并发下消费端限流实践](/microservice/rabbitmq-prefetch.md)
     - [RabbitMQ：服务异常重连](/microservice/rabbitmq-reconnecting.md)
     

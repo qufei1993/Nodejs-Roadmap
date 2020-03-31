@@ -135,11 +135,17 @@ vim /usr/lib/rabbitmq/lib/rabbitmq_server-3.6.5/ebin/rabbit.app
 #### 运行与启动
 
 - **开启 rabbitmq**
+
+& 表示后台方式启动
+
 ```
-rabbitmqctl start_app
+rabbitmq-server start &
 ```
 
 - **开启管理插件**
+
+使用 rabbitmq-plugins list 命令，可查看 RabbitMQ 自带的插件
+
 ```
 rabbitmq-plugins enable rabbitmq_management
 ``` 
