@@ -177,7 +177,7 @@ Node.js 中的进程 Process 是一个全局对象，无需 require 直接使用
 * process.cwd()：获取当前进程工作目录
 * process.platform：获取当前进程运行的操作系统平台
 * process.uptime()：当前进程已运行时间，例如：pm2 守护进程的 uptime 值
-* 进程事件：process.on('uncaughtException', cb) 捕获异常信息、process.on('exit', cb）进程推出监听
+* 进程事件：process.on('uncaughtException', cb) 捕获异常信息、process.on('exit', cb）进程退出监听
 * 三个标准流：process.stdout 标准输出、process.stdin 标准输入、process.stderr 标准错误输出
 
 以上仅列举了部分常用到功能点，除了 Process 之外 Node.js 还提供了 child_process 模块用来对子进程进行操作，在下文 [Nodejs进程创建一节](#Nodejs进程创建) 会讲述。
