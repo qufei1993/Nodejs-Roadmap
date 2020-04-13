@@ -1,4 +1,4 @@
-# Node.js 工具模块 promisify 实现原理解析
+# Node.js 源码解析 util.promisify 如何将 Callback 转为 Promise
 
 Nodejs util 模块提供了很多工具函数。为了解决回调地狱问题，Nodejs v8.0.0 提供了 promisify 方法可以将 Callback 转为 Promise 对象。
 
