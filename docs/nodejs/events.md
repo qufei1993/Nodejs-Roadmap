@@ -1,4 +1,4 @@
-# Node.js 知名框架 Express Koa 都在使用的  Events 模块你了解吗？
+# Node.js Events 模块
 
 在 Node.js 中一个很重要的模块 Events（EventEmitter 事件触发器），也称为发布/订阅模式，为什么说它重要，因为在 Node.js 中绝大多数模块都依赖于此，例如 Net、HTTP、FS、Stream 等，除了这些系统模块比较知名的 Express、Koa 框架中也能看到 EventEmitter 的踪迹。
 
