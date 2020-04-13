@@ -10,6 +10,7 @@
 - [Promise并行执行 Promise.all()](#promise并行执行)
 - [Promise率先执行 Promise.race()](#promise率先执行)
 - [错误捕获](#错误捕获)
+- [手写 Promise 代码](#手写-Promise-代码)
 
 ## 面试指南  
 - ```Promise 中 .then 的第二参数与 .catch 有什么区别?```，参考：[错误捕获](#错误捕获)
