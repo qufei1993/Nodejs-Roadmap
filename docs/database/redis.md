@@ -70,6 +70,16 @@ CAS 参考 [www.w3cschool.cn/architectroad/architectroad-solve-data-consistency-
 
 Redis 支持 Mac 或者 Linux 系统上安装，对于 Windows 的同学，可以安装一个虚拟机进行学习。
 
+> **Question**：
+“为啥 windows 没法用 redis 需要安装虚拟机啊”
+> **Answer**: 
+> 为啥没有 Windows，可以直接去官网 https://redis.io/download 看下，Redis 官网没有提供，Windows 下安装虚拟机是为了模拟 Linux 环境。
+> 
+> Github 上有一个微软提供的 Windows 版 Redis https://github.com/MicrosoftArchive/redis 且目前说明不再积极维护 “This project is no longer being actively maintained.”，如果你真的需要 Windows 版的 Redis 推荐 https://www.memurai.com/。
+> 
+> 最后，如果是 Windows 建议还是装个虚拟机吧，开发学习必备，省去很多烦恼。
+
+
 **下载和编译**
 
 ```bash
