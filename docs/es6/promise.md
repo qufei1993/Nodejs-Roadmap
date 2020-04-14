@@ -450,6 +450,7 @@ class MayJunPromise {
 ```
 
 ### 3. Promise 解决过程
+
 声明函数 resolveMayJunPromise()，**Promise 解决过程**是一个抽象的操作，在这里可以做到与系统的 Promise 或一些遵循 Promise/A+ 规范的 Promise 实现相互交互，以下代码建议跟随 Promise/A+ 规范进行阅读，规范上面也写的很清楚。<br />
 <br />注意：在实际编码测试过程中规范 [2.3.2] 样写还是有点问题，你要根据其它的 Promise 的状态值进行判断，此处注释掉了，建议使用  [2.3.3] 也是可以兼容的 。<br />
 
@@ -620,11 +621,95 @@ MayJunPromise.race = function(arr) {
 }
 ```
 
-### 6. Promise 的两个问题
-真正理解了 Promise 源码，以下两个问题你应该理解了
+### 6. 并发请求控制
 
-- .then() 的第二个参数与 .catch() 的区别？
-- 为什么 const p = new Promise(resolve => resolve(1)) 是同步的，而 p.then 方法里是异步的？
+Promise.all 同时将请求发出，假设我现在有上万条请求，势必会造成服务器的压力，如果我想限制在最大并发 100 该怎么做？例如，在 Chrome 浏览器中就有这样的限制，Chrome 中每次最大并发链接为 6 个，其余的链接需要等待其中任一个完成，才能得到执行，下面定义 allByLimit 方法实现类似功能。
+
+```javascript
+/**
+ * 并发请求限制
+ * @param { Array } arr 并发请求的数组
+ * @param { Number } limit 并发限制数
+ */
+MayJunPromise.allByLimit = function(arr, limit) {
+  const length = arr.length;
+  const requestQueue = [];
+  const results = [];
+  let index = 0;
+
+  return new MayJunPromise((resolve, reject) => {
+    const requestHandler = function() {	
+      console.log('Request start ', index);
+      const request = arr[index].then(res => res, err => {
+        console.log('Error', err);
+
+        return err;
+      }).then(res => {
+        console.log('Number of concurrent requests', requestQueue.length)
+        const count = results.push(res); // 保存所有的结果
+
+        requestQueue.shift(); // 每完成一个就从请求队列里剔除一个
+
+        if (count === length) { // 所有请求结束，返回结果
+          resolve(results);
+        } else if (count < length && index < length - 1) {
+          ++index;
+          requestHandler(); // 继续下一个请求
+        }
+      });
+
+      if (requestQueue.push(request) < limit) {
+        ++index;
+        requestHandler();
+      }
+    };
+
+    requestHandler()
+  });
+}
+```
+
+测试，定义一个 sleep 睡眠函数，模拟延迟执行
+
+```javascript
+/**
+ * 睡眠函数
+ * @param { Number } ms 延迟时间|毫秒
+ * @param { Boolean } flag 默认 false，若为 true 返回 reject 测试失败情况
+ */
+const sleep = (ms=0, flag=false) => new Promise((resolve, reject) => setTimeout(() => {
+  if (flag) {
+    reject('Reject ' + ms);
+  } else {
+    resolve(ms);
+  }
+}, ms));
+
+MayJunPromise.allByLimit([
+  sleep(1000),
+  sleep(1000),
+  sleep(1000),
+  sleep(5000, true),
+  sleep(10000),
+], 3).then(res => {
+  console.log(res);
+})
+
+// 以下为运行结果
+
+Request start  0
+Request start  1
+Request start  2
+Number of concurrent requests 3
+Request start  3
+Number of concurrent requests 3
+Request start  4
+Number of concurrent requests 3
+Error Reject 5000
+Number of concurrent requests 2
+Number of concurrent requests 1
+[ 1000, 1000, 1000, 'Reject 5000', 10000 ]
+```
 
 ### 7. Promise reference
 
