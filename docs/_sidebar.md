@@ -114,6 +114,7 @@
     - [Docker系列三：Node.js 进程的优雅退出](/devops/docker-build-nodejs-smooth-program.md)
 
 * 工具
+    - [Nodejs 项目开发中应用 ESLint 代码规范](/tools/eslint.md)
     - [Git 常用命令及日常问题集锦](/tools/git.md)
     - [SEO 网站优化 title 置与快速排名](/tools/seo.md)
     - [Docsify 快速搭建个人博客](/tools/docsify.md)
