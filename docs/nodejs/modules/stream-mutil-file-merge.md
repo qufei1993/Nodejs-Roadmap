@@ -65,6 +65,7 @@ l-wx------ 1 root root 64 Apr 10 15:47 19 -> /root/study/test2.txt
 
 - streamMerge 函数为入口函数
 - streamMergeRecursive 函数递归调用合并文件
+
 ```javascript
 const fs = require('fs');
 const path = require('path');
