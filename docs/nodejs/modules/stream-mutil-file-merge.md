@@ -59,8 +59,9 @@ setInterval(function(){}, 5000) // 让程序不中断，进程不退出
 l-wx------ 1 root root 64 Apr 10 15:47 19 -> /root/study/test2.txt
 ...
 ```
-<a name="7zStj"></a>
+
 ## 多个文件通过 Stream 合并为一个文件
+
 上面讲了 Stream 的基本使用，最后提到一点设置可读流的 **end 为 false 可保持写入流一直处于打开状态。如何将多个文件通过 Stream 合并为一个文件，也是通过这种方式，一开始可写流处于打开状态，直到所有的可读流结束，我们再将可写流给关闭。**
 
 - streamMerge 函数为入口函数
