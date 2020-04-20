@@ -1,11 +1,14 @@
 # Node.js 在企业中的应用实践
 
+![](./img/nodejs_interprise_practice.jpg)
+
 在和一些 Nodeer 童鞋的分享交流过程中，也会听到一些声音：“Node.js 在企业中是如何应用的？有哪些大厂在实践？”，于是公众号 “Nodejs技术栈” 自 19 年 8 月开始陆陆续续开始给大家分享一些 Node.js 在企业中的应用实践，希望给正在学习、使用 Node.js 的童鞋一些参考。 
 
 同步于 Github: [https://github.com/Q-Angelo/Nodejs-Roadmap/blob/master/docs/nodejs/practice/enterprise.md](https://github.com/Q-Angelo/Nodejs-Roadmap/blob/master/docs/nodejs/practice/enterprise.md) Nodejs 生态的建设需要大家共同努力，如有企业实践的欢迎补充！谢谢大家！
 
 ## 阿里
 
+* 看优酷 Nodejs 重构之路 Serverless SSR 未来可期]()
 * [“云”端的语雀：用 JavaScript 全栈打造商业级应用](https://zhuanlan.zhihu.com/p/101917567)
 * [独家解读：淘宝使用 Node.js 的 TypeScript 多场景开发和实践](https://mp.weixin.qq.com/s/f5xIN9d7s011_gXej84MJw)
 * [基于阿里云的 Node.js 稳定性实践](https://mp.weixin.qq.com/s/ghciI1dj9dve6Bsrf8Yj1w)
@@ -13,8 +16,8 @@
 * [基于 Node.js 的 Serverless 架构实践](https://mp.weixin.qq.com/s/oKcQXj3CWt1Ts_tOtw7QTg)
 * [用 Node.js 构建海量页面渲染服务](https://www.yuque.com/preview/yuque/0/2020/pdf/84135/1578575086211-802410a9-a833-47ce-b612-b6f6108285e6.pdf)
 * [Node.js Web 框架研发与实践](https://www.yuque.com/preview/yuque/0/2020/pdf/84135/1578577070295-d62924f6-a34c-463f-a6b5-ea657cfd038d.pdf)
-* [天猫双11前端分享系列（四）：大规模 Node.js 应用](https://github.com/tmallfe/tmallfe.github.io/issues/28)（看完让人热血澎湃）
-* [天猫双11前端分享系列（六）：大规模 Node.js 应用（续）](https://github.com/tmallfe/tmallfe.github.io/issues/30)
+* [天猫双11前端分享系列（四）：大规模 Node.js 应用](https://github.com/tmallfe/tmallfe.github.io/issues/28)（上）
+* [天猫双11前端分享系列（六）：大规模 Node.js 应用（续）](https://github.com/tmallfe/tmallfe.github.io/issues/30)（下）
 
 ## 腾讯
 
