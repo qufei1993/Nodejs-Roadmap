@@ -8,7 +8,7 @@
 
 ## 阿里
 
-* 看优酷 Nodejs 重构之路 Serverless SSR 未来可期]()
+* [看优酷 Nodejs 重构之路 Serverless SSR 未来可期](https://mp.weixin.qq.com/s/63Lv9qwsoXocCE3sIhsIPA)
 * [“云”端的语雀：用 JavaScript 全栈打造商业级应用](https://zhuanlan.zhihu.com/p/101917567)
 * [独家解读：淘宝使用 Node.js 的 TypeScript 多场景开发和实践](https://mp.weixin.qq.com/s/f5xIN9d7s011_gXej84MJw)
 * [基于阿里云的 Node.js 稳定性实践](https://mp.weixin.qq.com/s/ghciI1dj9dve6Bsrf8Yj1w)
