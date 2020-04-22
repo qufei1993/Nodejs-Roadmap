@@ -36,7 +36,9 @@
     - [Net 网络模块](/nodejs/net.md)
     - [DNS 域名解析](/nodejs/dns.md)
     - [Cluster 集群模块](nodejs/cluster-base.md)
-    - [Stream 多文件合并实现](nodejs/modules/stream-mutil-file-merge.md)
+    - [Stream - 多文件合并实现](nodejs/modules/stream-mutil-file-merge.md)
+    - [Stream - pipe 基本使用与实现分析](nodejs/modules/stream-pipe.md)
+    - [Stream - internal/stremas/egacy.js 文件分析](nodejs/modules/stream-lib-internal-stremas-legacy.md)
     - [Util 工具模块 - promisify 实现原理](nodejs/modules/util-promisify.md)
     
 * Node.js 进阶
