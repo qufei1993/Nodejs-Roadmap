@@ -18,7 +18,7 @@
 * ```弱类型：```变量没有类型, 变量持有的值有类型
 * ```(typeof null === 'object') = true```，正确的返回值应该是```null```，但是这个```bug```由来已久。 ```(undefined == null) = true```
 * ```indexOf```为```ECMAScript5```新方法，```IE8```及以下不支持
--  ```setTimeout(callback, 100)```，```setTimeout```只接受一个函数或者变量做为参数不接受闭包，因为闭包会自执行，最小延迟```4ms```
+*  ```setTimeout(callback, 100)```，```setTimeout```只接受一个函数做为参数不接受闭包，因为闭包会自执行，Nodejs 下最小延迟 ```1ms``` 参见 [v12.x timers.js#L167](https://github.com/nodejs/node/blob/v12.x/lib/internal/timers.js#L167)
 
 ## undefined与undeclared的区别
 
@@ -34,9 +34,9 @@
 
 ```js
 function test(str, b){
-	eval(str);
+    eval(str);
 
-	console.log(a, b);
+    console.log(a, b);
 }
 
 var a = 1;
@@ -53,17 +53,17 @@ console.log(a); // 1
 ```js
 {
 function withObj(obj){
-	with(obj){
-		a = 2
-	}
+    with(obj){
+        a = 2
+    }
 }
 
 let o1 = {
-	a: 1,
+    a: 1,
 }
 
 let o2 = {
-	b: 1,
+    b: 1,
 }
 
 withObj(o1);
@@ -213,23 +213,23 @@ console.log(arr); // [222, 333, 444, 55, 66, 77, 11]
 
 ```js
 function reduceDimension(arr){
-	let ret = [];
+    let ret = [];
 
-	let toArr = function(arr){
-		arr.forEach(function(item){
-			item instanceof Array ? toArr(item) : ret.push(item);
-		});
-	}
+    let toArr = function(arr){
+        arr.forEach(function(item){
+            item instanceof Array ? toArr(item) : ret.push(item);
+        });
+    }
 
-	toArr(arr);
+    toArr(arr);
 
-	return ret;
+    return ret;
 }
 
 let arr = [[12], 4, [333, [4444, 5555]], [9, [111, 222]]];
 
 for(let i = 0; i < 100000; i++){
-	arr.push(i);
+    arr.push(i);
 }
 
 let start = new Date().getTime();
