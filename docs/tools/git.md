@@ -35,6 +35,7 @@
 * 切换分支 ``` git checkout dev ```
 * 删除本地分支 ```git branch -d dev```
 * 同步删除远程分支 ```git push origin :dev```
+* 本地分支重命名 ```git branch -m oldBranch newBranch```
 
 ## 修改远程仓库地址
 
