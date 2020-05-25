@@ -94,8 +94,9 @@
     - [MongoDB 事务 | 多文档事务实践篇](/database/mongodb-transactions-pratice.md)
 
 - ServerLess
-    - [Node.js 快速开启 ServerLess Functions：入门实践指南](/serverless/serverless-functions-using-node-and-aws.md)
-    - [使用 ServerLess, Nodejs, MongoDB Atlas cloud 构建 REST API](/serverless/node-mongodb-altas-serverless-api.md)
+    - [Node.js 快速开启 Serverless Functions：入门实践指南](/serverless/serverless-functions-using-node-and-aws.md)
+    - [TypeScript + Serverless 开发 REST API 实战](https://github.com/Q-Angelo/aws-node-rest-api-typescript/blob/master/docs/intro-zh.md)
+    - [使用 Serverless, Nodejs, MongoDB Atlas cloud 构建 REST API](/serverless/node-mongodb-altas-serverless-api.md)
 
 - Microservice
     - [服务注册与发现 Consul](microservice/consul.md)
