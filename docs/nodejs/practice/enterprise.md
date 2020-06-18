@@ -2,7 +2,7 @@
 
 ![](./img/nodejs_interprise_practice.jpg)
 
-在和一些 Nodeer 童鞋的分享交流过程中，也会听到一些声音：“Node.js 在企业中是如何应用的？有哪些大厂在实践？”，于是公众号 “Nodejs技术栈” 自 19 年 8 月开始陆陆续续开始给大家分享一些 Node.js 在企业中的应用实践，希望给正在学习、使用 Node.js 的童鞋一些参考。 
+在和一些 Nodeer 童鞋的分享交流过程中，也会听到一些声音：“Node.js 在企业中是如何应用的？有哪些大厂在实践？”，于是公众号 “Nodejs技术栈” 自 19 年 8 月开始陆陆续续给大家分享一些 Node.js 在企业中的应用实践，希望给正在学习、使用 Node.js 的童鞋一些参考。 
 
 Nodejs 生态的建设需要大家共同努力，如有企业实践的欢迎补充！谢谢大家！
 
@@ -80,6 +80,12 @@ Nodejs 生态的建设需要大家共同努力，如有企业实践的欢迎补�
 
 * [NodeX Component - 滴滴集团 Node.js 生态组件体系](https://mp.weixin.qq.com/s/IsnQCEC8oehDmdmpbXWKwQ)
 
+## 58 同城
+
+* [基于 SFF 一站式 Nodejs 服务管理平台实践](https://mp.weixin.qq.com/s/wfMl-2wFXSpx8QjTckJxCw)
+
 ---
 
 如果您正在实践 Node.js，很期待能收到您的分享，可以关注公众号 “Nodejs技术栈” 在后台向我投稿，后期都会进行整理放在 [Github](https://github.com/Q-Angelo/Nodejs-Roadmap/blob/master/docs/nodejs/practice/enterprise.md) 以供大家学习和实践参考。
+
+**作者简介**：五月君，软件设计师，[慕课网认证作者](https://www.imooc.com/u/2667395)，公众号 “[Nodejs技术栈](https://nodejsred.oss-cn-shanghai.aliyuncs.com/node_roadmap_wx.jpg?x-oss-process=style/may)” 作者，热爱技术、喜欢分享的 90 后青年，欢迎关注 Github 开源项目 [https://www.nodejs.red](https://www.nodejs.red)
