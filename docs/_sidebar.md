@@ -60,6 +60,7 @@
     - [ORM 对象关系映射](/nodejs/orm.md#ORM)
     - [Middleware 常用 Web 框架&中间件汇总](/nodejs/middleware.md)
     - [深入 Nodejs 源码探究 CPU 信息的获取与实时计算](nodejs/modules/os-cpu-usage.md)
+    - [Node.js 中出现未捕获异常如何处理？](nodejs/advanced/uncaugh-exception.md)
 
 - Node.js 翻译
     - [你需要了解的有关 Node.js 的所有信息](/nodejs/translate/everything-you-need-to-know-about-node-js-lnc.md)
