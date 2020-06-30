@@ -1,10 +1,10 @@
-# Node.js 在企业中的应用实践
+# Node.js 在企业中的应用实践集锦 - 2020 年中汇总
 
-![](./img/nodejs_interprise_practice.jpg)
+![](https://img.mukewang.com/5efb49100001bcac09000383.png)
 
 在和一些 Nodeer 童鞋的分享交流过程中，也会听到一些声音：“Node.js 在企业中是如何应用的？有哪些大厂在实践？”，于是公众号 “Nodejs技术栈” 自 19 年 8 月开始陆陆续续给大家分享一些 Node.js 在企业中的应用实践，希望给正在学习、使用 Node.js 的童鞋一些参考。 
 
-Nodejs 生态的建设需要大家共同努力，如有企业实践的欢迎补充！谢谢大家！
+**Nodejs 生态的建设需要大家共同努力，如有企业实践的欢迎补充让更多朋友能够看到**！谢谢大家！
 
 ## 阿里
 
@@ -76,6 +76,10 @@ Nodejs 生态的建设需要大家共同努力，如有企业实践的欢迎补�
 
 * [2019大前端秘籍：贝壳找房多端提效和性能质量优化实践](https://mp.weixin.qq.com/s/umr-SZXflTy9XQoRRf56Rg)
 
+## 途牛
+
+* [Node.js 微应用在途牛的实践](https://mp.weixin.qq.com/s/TI8VgCpToFQDrITLyac3Rg)
+
 ## 滴滴
 
 * [NodeX Component - 滴滴集团 Node.js 生态组件体系](https://mp.weixin.qq.com/s/IsnQCEC8oehDmdmpbXWKwQ)
@@ -83,6 +87,14 @@ Nodejs 生态的建设需要大家共同努力，如有企业实践的欢迎补�
 ## 58 同城
 
 * [基于 SFF 一站式 Nodejs 服务管理平台实践](https://mp.weixin.qq.com/s/wfMl-2wFXSpx8QjTckJxCw)
+
+## 网易
+
+* [网易智慧企业 Node.js 实践（1）| Node 应用架构设计和 React 同构](https://zhuanlan.zhihu.com/p/138925672)
+* [网易智慧企业 Node.js 实践（2）| 平滑发布和前端代码](https://zhuanlan.zhihu.com/p/142547821)
+* [网易智慧企业 Node.js 实践（3）| 灰度环境和应用监控](https://zhuanlan.zhihu.com/p/142551285)
+
+## 
 
 ---
 
