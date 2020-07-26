@@ -299,17 +299,17 @@ console.log('NaN',Number.isNaN(NaN)); //true
 console.log('0',Number.isNaN(0)); //false
 ```
 - **Number.isNaN()**
-> 判断是否为一个数
+> 判断一个值是否为NaN
 ```js
 console.log('NaN',Number.isNaN(NaN)); //true
 console.log('0',Number.isNaN(0)); //false
 ```
 
 - **Number.MAX_SAFE_INTEGER**
-> 一个数的最大上限 
+> 数的最大上限 
 
 - **Number.MIN_SAFE_INTEGER**
-> 一个数的最小下限  
+> 数的最小下限  
 
 - **Number.isSafeInteger()**
 > 判断给的这个数是否在有效范围内
@@ -430,11 +430,11 @@ console.log('0',Number.isNaN(0)); //false
 }
 ```
 
-- **find()**
-> 查找符合的元素，直返会一个  
+- **find(fn)**
+> 查找符合条件的第一个元素,查找不到时返回undefined 
 
-- **findIndex()**
-> 查找符合元素的下标
+- **findIndex(fn)**
+> 查找符合条件的第一个元素的下标值，查找不到时返回-1
 
 ```js
 {
