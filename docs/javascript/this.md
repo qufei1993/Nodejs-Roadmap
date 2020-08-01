@@ -217,7 +217,7 @@ var fruitCall = fruit.call(apple);
 fruitCall.call(banana); // 苹果
 ```
 
-## This 在使用中的几个坑
+## This 使用常见问题
 
 ### 通过函数和原型链模拟类
 
