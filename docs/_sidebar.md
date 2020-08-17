@@ -95,6 +95,7 @@
     - [MongoDB 复制集 | 实践篇](/database/mongodb-replication-pratice.md)
     - [MongoDB 事务 | 基础篇](/database/mongodb-transactions.md)
     - [MongoDB 事务 | 多文档事务实践篇](/database/mongodb-transactions-pratice.md)
+    - [Mongoose 关联查询和踩坑记录](/database/mongoose-populate.md)
 
 - ServerLess
     - [Node.js 快速开启 Serverless Functions：入门实践指南](/serverless/serverless-functions-using-node-and-aws.md)
