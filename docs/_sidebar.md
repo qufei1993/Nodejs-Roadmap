@@ -47,7 +47,7 @@
     - [Stream - pipe 基本使用与实现分析](nodejs/modules/stream-pipe.md)
     - [Stream - internal/stremas/egacy.js 文件分析](nodejs/modules/stream-lib-internal-stremas-legacy.md)
     - [Util 工具模块 - promisify 实现原理](nodejs/modules/util-promisify.md)
-    - [ES Modules 入门使用](/nodejs/esm.md)
+    - [ES Modules 入门使用](/nodejs/modules/esm.md)
     
 * Node.js 进阶
     - [Egg-Logger 模块实践](/nodejs/logger.md)
