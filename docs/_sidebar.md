@@ -48,7 +48,7 @@
     - [Stream - internal/stremas/egacy.js 文件分析](nodejs/modules/stream-lib-internal-stremas-legacy.md)
     - [Util 工具模块 - promisify 实现原理](nodejs/modules/util-promisify.md)
     - [ESModules 入门基础](/nodejs/modules/esm.md)
-    
+    - [FS 如何在 Node.js 中判断一个文件/文件夹是否存在？](/nodejs/modules/fs-file-exists-check.md)
 * Node.js 进阶
     - [Egg-Logger 模块实践](/nodejs/logger.md)
     - [I/O 模型浅谈](/nodejs/IO.md)
