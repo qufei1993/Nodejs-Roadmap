@@ -69,7 +69,7 @@ alert(box1.prototype);
 ```
 这个属性是一个指针指向prototype原型对象
 ```js
- alert(box1._proto_);
+ alert(box1.__proto__);
 ```
 构造属性可以获取构造函数本身，作用是被原型指针定位，然后得到构造函数本身，其实就是对象实例对应的原型对象的作用
 
