@@ -17,6 +17,7 @@
     - [数据类型功能扩展系列](/es6/readme.md#解构赋值)
     - [Set、Map 数据结构](/es6/set-map.md#解构赋值)
     - [Promise](/es6/promise.md)
+    - [Iterator](/es6/iterator.md)
     - [Decorators](/es6/decorators.md)
     - [Symbol](/es6/symbol.md)
     - [Generator](/es6/generator.md)
