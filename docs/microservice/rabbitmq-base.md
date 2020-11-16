@@ -46,7 +46,7 @@ RabbitMQ 是一套开源（MPL）的消息队列服务软件，是由 LShift 提
 
 ## 安装指南
 
-### Mac版安装
+### Mac 安装
 
 直接通过 ```HomeBrew``` 安装，执行以下命令
 
@@ -76,34 +76,41 @@ apt-get install build-essential openssl openssl-devel unixODBC unixODBC-devel ma
 
 #### 获取安装包
 
-rabbitmq和erlang安装包一定要对应，具体可以查看对应关系，官网有说明[RabbitMQ Erlang Version Requirements](http://www.rabbitmq.com/which-erlang.html)
+**rabbitmq 和 erlang 安装包一定要对应**，具体可以查看对应关系，官网有说明 [RabbitMQ Erlang Version Requirements](http://www.rabbitmq.com/which-erlang.html)
 
-- ***获取erlang安装包***
+- 获取 erlang 安装包
 
 ```
 sudo wget http://www.rabbitmq.com/releases/erlang/erlang-18.3-1.el6.x86_64.rpm
 ```
 
-- ***获取socat安装包***
+- 获取 socat 安装包
 
-socat支持多协议，用于协议处理、端口转发，rabbitmq依赖于此。
+socat 支持多协议，用于协议处理、端口转发，rabbitmq 依赖于此。
 
 ```
 sudo wget http://repo.iotti.biz/CentOS/7/x86_64/socat-1.7.3.2-5.el7.lux.x86_64.rpm
 ```
 
-- ***获取rabbitmq-server安装包***
-rabbitmq-server [```安装包列表```](http://www.rabbitmq.com/releases/rabbitmq-server/)
+- 获取 rabbitmq-server 安装包
+
+rabbitmq-server [安装包列表](http://www.rabbitmq.com/releases/rabbitmq-server/)
 
 ```
 sudo wget http://www.rabbitmq.com/releases/rabbitmq-server/v3.6.5/rabbitmq-server-3.6.5-1.noarch.rpm
 ```
 
-#### 开始安装
+#### centos 系统 rpm 方式一键安装
 
-- **Centos rpm 一键安装**
+```
+rpm -ivh erlang-18.3-1.el6.x86_64.rpm
+rpm -ivh socat-1.7.3.2-5.el7.lux.x86_64.rpm
+rpm -ivh rabbitmq-server-3.6.5-1.noarch.rpm
+```
 
-这里采用rpm一键安装，centos 执行命令 ```rpm -ivh erlang-18.3-1.el6.x86_64.rpm```，在 ```ubuntu``` 中不支持此命令 ```rpm```，使用 ```rpm``` 提示如下信息：
+#### ubuntu 系统安装
+
+在 ```ubuntu``` 中不支持 ```rpm``` 命令，会提示如下信息：
 
 ```
 rpm: RPM should not be used directly install RPM packages, use Alien instead!
@@ -111,19 +118,14 @@ rpm: However assuming you know what you are doing...
 error: Failed dependencies:
 ```
 
-- **```ubuntu``` 系统 rpm 一键安装解决方案**
-  1. 安装 ```alien```，执行命令 ```sudo apt-get install alien```
-  2. 转换 ```rpm``` 包为 ```.deb``` 格式，执行命令 ```sudo alien package.rpm``` 其中 ```package.rpm``` 为你的包名
-  3. 通过dpkg安装，```sudo dpkg -i package.deb```
+```ubuntu``` 系统 rpm 一键安装解决方案
 
-- **以下顺序安装（以下是基于 CentOS 系统安装）**
-```
-rpm -ivh erlang-18.3-1.el6.x86_64.rpm
-rpm -ivh socat-1.7.3.2-5.el7.lux.x86_64.rpm
-rpm -ivh rabbitmq-server-3.6.5-1.noarch.rpm
-```
+1. 安装 ```alien```，执行命令 ```sudo apt-get install alien```
+2. 转换 ```rpm``` 包为 ```.deb``` 格式，执行命令 ```sudo alien package.rpm``` 其中 ```package.rpm``` 为你的包名
+3. 通过dpkg安装，```sudo dpkg -i package.deb```
 
-- **修改配置文件**
+#### 修改配置文件
+
 ```
 vim /usr/lib/rabbitmq/lib/rabbitmq_server-3.6.5/ebin/rabbit.app
 ```
