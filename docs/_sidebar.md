@@ -50,6 +50,7 @@
     - [Util 工具模块 - promisify 实现原理](nodejs/modules/util-promisify.md)
     - [ESModules 入门基础](/nodejs/modules/esm.md)
     - [FS 如何在 Node.js 中判断一个文件/文件夹是否存在？](/nodejs/modules/fs-file-exists-check.md)
+
 * Node.js 进阶
     - [Egg-Logger 模块实践](/nodejs/logger.md)
     - [I/O 模型浅谈](/nodejs/IO.md)
@@ -63,6 +64,7 @@
     - [Middleware 常用 Web 框架&中间件汇总](/nodejs/middleware.md)
     - [深入 Nodejs 源码探究 CPU 信息的获取与实时计算](nodejs/modules/os-cpu-usage.md)
     - [Node.js 中出现未捕获异常如何处理？](nodejs/advanced/uncaugh-exception.md)
+    - [探索异步迭代器在 Node.js 中的使用](nodejs/advanced/asynciterator-in-nodejs.md)
 
 - Node.js 翻译
     - [你需要了解的有关 Node.js 的所有信息](/nodejs/translate/everything-you-need-to-know-about-node-js-lnc.md)
