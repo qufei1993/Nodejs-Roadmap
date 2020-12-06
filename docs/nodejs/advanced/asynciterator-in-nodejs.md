@@ -1,5 +1,7 @@
 # 探索异步迭代器在 Node.js 中的使用
 
+![](./img/asynciterator-in-nodejs.png)
+
 上一节讲解了迭代器的使用，如果对迭代器还不够了解的可以在回顾下[《从理解到实现轻松掌握 ES6 中的迭代器》](https://mp.weixin.qq.com/s/UI3r3u50vYkrUTVe2DS86A)，目前在 JavaScript 中还没有被默认设定 ```[Symbol.asyncIterator]``` 属性的内建对象，但是在 Node.js 中已有部分核心模块（Stream、Events）和一些第三方 NPM 模块（mongodb）已支持 Symbol.asyncIterator 属性。本文也是探索异步迭代器在 Node.js 中的都有哪些使用场景，欢迎留言探讨。
 
 ## 目录
@@ -191,6 +193,7 @@ const iterator = ObjectSetPrototypeOf({
   ...
 }
 ```
+
 ## 在 Stream 中使用 asyncIterator
 
 Node.js Stream 模块的可读流对象在 v10.0.0 版本试验性的支持了 ```[Symbol.asyncIterator]``` 属性，可以使用 ```for await...of``` 语句遍历可读流对象，在 v11.14.0 版本以上已 LTS 支持。
@@ -584,5 +587,6 @@ await pipeline(
 
 ## Reference
 
-- [https://blog.risingstack.com/async-iterators-in-node-js/](https://blog.risingstack.com/async-iterators-in-node-js/)
+- [https://nodejs.org/dist/latest-v14.x/docs/api/stream.html#stream_readable_symbol_asynciterator](https://nodejs.org/dist/latest-v14.x/docs/api/stream.html#stream_readable_symbol_asynciterator)
+- [https://nodejs.org/dist/latest-v14.x/docs/api/events.html#events_events_on_emitter_eventname](https://nodejs.org/dist/latest-v14.x/docs/api/events.html#events_events_on_emitter_eventname)
 - [https://docs.mongodb.com/manual/tutorial/iterate-a-cursor/index.html](https://docs.mongodb.com/manual/tutorial/iterate-a-cursor/index.html)
