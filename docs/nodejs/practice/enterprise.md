@@ -83,18 +83,11 @@
 ## 滴滴
 
 * [NodeX Component - 滴滴集团 Node.js 生态组件体系](https://mp.weixin.qq.com/s/IsnQCEC8oehDmdmpbXWKwQ)
+* [滴滴 NodeX 生态](
 
 ## 58 同城
 
 * [基于 SFF 一站式 Nodejs 服务管理平台实践](https://mp.weixin.qq.com/s/wfMl-2wFXSpx8QjTckJxCw)
-
-## 网易
-
-* [网易智慧企业 Node.js 实践（1）| Node 应用架构设计和 React 同构](https://zhuanlan.zhihu.com/p/138925672)
-* [网易智慧企业 Node.js 实践（2）| 平滑发布和前端代码](https://zhuanlan.zhihu.com/p/142547821)
-* [网易智慧企业 Node.js 实践（3）| 灰度环境和应用监控](https://zhuanlan.zhihu.com/p/142551285)
-
-## 
 
 ---
 
