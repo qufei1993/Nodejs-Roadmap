@@ -140,7 +140,7 @@ function on(emitter, event) {
   return iterator;
               
   function eventHandler(...args) { // {6}
-    const promise =  .shift();
+    const promise = unconsumedPromises.shift();
     if (promise) {
       // 以下等价于 promise.resolve({ value: args, done: false });
       PromiseResolve(createIterResult(args, false));
