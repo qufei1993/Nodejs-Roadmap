@@ -33,6 +33,7 @@
     - [Node.js 包管理器 NPM](/nodejs/base/npm.md)
     - [多维度分析 Express、Koa 之间的区别](/nodejs/base/express-vs-koa.md)
     - [Node.js + Socket.io 实现一对一即时聊天](/nodejs/base/private-chat-socketio.md)
+    - [使用 Chrome Devtools 来调试你的 Node.js 程序](/nodejs/base/debug-nodejs-with-chrome-devtools.md)
 
 * Node.js 模块
     - [Module 模块机制](/nodejs/module.md)
