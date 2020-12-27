@@ -89,6 +89,10 @@
 
 * [基于 SFF 一站式 Nodejs 服务管理平台实践](https://mp.weixin.qq.com/s/wfMl-2wFXSpx8QjTckJxCw)
 
+## 网易
+
+* [网易智慧企业 Node.js 实践一 : Node 应用架构设计和 React 同构](https://mp.weixin.qq.com/s/MyiR0NakRPT_16zXymj36g)
+
 ---
 
 如果您正在实践 Node.js，很期待能收到您的分享，可以关注公众号 “Nodejs技术栈” 在后台向我投稿，后期都会进行整理放在 [Github](https://github.com/Q-Angelo/Nodejs-Roadmap/blob/master/docs/nodejs/practice/enterprise.md) 以供大家学习和实践参考。
