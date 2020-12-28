@@ -91,7 +91,8 @@
 
 ## 网易
 
-* [网易智慧企业 Node.js 实践一 : Node 应用架构设计和 React 同构](https://mp.weixin.qq.com/s/MyiR0NakRPT_16zXymj36g)
+* [网易智慧企业 Node.js 实践一: Node 应用架构设计和 React 同构](https://mp.weixin.qq.com/s/MyiR0NakRPT_16zXymj36g)
+* [网易智慧企业 Node.js 实践二: 平滑发布和前端代码](https://mp.weixin.qq.com/s/j3rA3GnBgk3O--2RAkryRQ)
 
 ---
 
