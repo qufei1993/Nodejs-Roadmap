@@ -99,4 +99,4 @@
 
 如果您正在实践 Node.js，很期待能收到您的分享，可以关注公众号 “Nodejs技术栈” 在后台向我投稿，后期都会进行整理放在 [Github](https://github.com/Q-Angelo/Nodejs-Roadmap/blob/master/docs/nodejs/practice/enterprise.md) 以供大家学习和实践参考。
 
-**作者简介**：五月君，软件设计师，[慕课网认证作者](https://www.imooc.com/u/2667395)，公众号 “[Nodejs技术栈](https://nodejsred.oss-cn-shanghai.aliyuncs.com/node_roadmap_wx.jpg?x-oss-process=style/may)” 作者，热爱技术、喜欢分享的 90 后青年，欢迎关注 Github 开源项目 [https://www.nodejs.red](https://www.nodejs.red)
+**作者简介**：五月君，Software Designer，公众号「[Nodejs技术栈](https://nodejsred.oss-cn-shanghai.aliyuncs.com/node_roadmap_wx.jpg?x-oss-process=style/may)」作者，热爱技术、喜欢分享的 90 后青年，欢迎关注 Github 开源项目 [https://www.nodejs.red](https://www.nodejs.red)
