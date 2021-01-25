@@ -51,7 +51,9 @@
     - [Util 工具模块 - promisify 实现原理](nodejs/modules/util-promisify.md)
     - [ESModules 入门基础](/nodejs/modules/esm.md)
     - [FS 如何在 Node.js 中判断一个文件/文件夹是否存在？](/nodejs/modules/fs-file-exists-check.md)
-
+    - [Report 在 Node.js 中使用诊断报告快速追踪问题](/nodejs/modules/report.md)
+    - [Async-Hooks 使用 Node.js 的 Async Hooks 模块追踪异步资源](/nodejs/modules/async-hooks.md)
+    
 * Node.js 进阶
     - [Egg-Logger 模块实践](/nodejs/logger.md)
     - [I/O 模型浅谈](/nodejs/IO.md)
