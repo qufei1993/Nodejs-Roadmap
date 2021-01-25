@@ -84,6 +84,7 @@
 
 * [NodeX Component - 滴滴集团 Node.js 生态组件体系](https://mp.weixin.qq.com/s/IsnQCEC8oehDmdmpbXWKwQ)
 * [滴滴 NodeX 生态](https://mp.weixin.qq.com/s/x62tkL5bUgbBaRyNwRgxNw)
+* [使用 Node.js 的 Async Hooks 模块追踪异步资源](https://mp.weixin.qq.com/s/84fog_u1sOksajqclA5kZQ)
 
 ## 58 同城
 
