@@ -78,7 +78,7 @@
     - [框架实践](/nodejs/practice/frame.md)
 
 - Node.js 版本
-    - [一起来看看 Node.js v14.x LTS 中的这些新功能](/nodejs/version/node-v14-fetaure.md)
+    - [一起来看看 Node.js v14.x LTS 中的这些新功能](/nodejs/version/node-v14-feature.md)
     - [Node.js v14.15.0 已发布进入 LTS 长期支持](/nodejs/version/node-v14.15.0-lts-intro.md)
 
 - DataBase | Redis

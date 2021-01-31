@@ -1,6 +1,6 @@
 # 一起来看看 Node.js v14.x LTS 中的这些新功能
 
-![](https://cdn.nlark.com/yuque/0/2021/png/335268/1612083036565-194100b8-d2fe-4032-b6d6-8288f391da58.png#align=left&display=inline&height=383&margin=%5Bobject%20Object%5D&name=%E9%BB%98%E8%AE%A4%E6%96%87%E4%BB%B61612081754183.png&originHeight=383&originWidth=900&size=143201&status=done&style=none&width=900)
+![](./img/node-v14-feature.png)
 
 **作者简介**：五月君，Software Designer，公众号「Nodejs技术栈」作者。
 
