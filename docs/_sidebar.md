@@ -152,7 +152,7 @@
     - [Linear List 线性表](/algorithm/linear-list.md)
     - [BST 二叉搜索树](/algorithm/bst.md)
 
-* 资料
-    - [书籍推荐](/materials/book.md)
-    - [Blog推荐](/materials/blog.md)
-    - [文章推荐](/materials/article.md)
+* 其它
+    - [关于 Node.js 技术栈](/other/about-us.md)
+    - [转载&投稿合作](/other/collaboration.md)
+    - [Blog 推荐](/other/blog.md)
