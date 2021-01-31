@@ -77,6 +77,9 @@
     - [企业实践](/nodejs/practice/enterprise.md)
     - [框架实践](/nodejs/practice/frame.md)
 
+- Node.js 版本
+    - [一起来看看 Node.js v14.x LTS 中的这些新功能](/nodejs/version/node-v14-fetaure.md)
+
 - DataBase | Redis
     - [基础总结](/database/redis.md)
     - [五种数据结构](/database/redis-typeof-data.md)
