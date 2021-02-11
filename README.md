@@ -175,7 +175,8 @@
     - [关于 Node.js 技术栈](/docs/other/about-us.md)
     - [转载&投稿合作](/docs/other/collaboration.md)
     - [Blog 推荐](/docs/other/blog.md)
-
+    - [2020 Node.js 技术栈精选原创文章合辑](/docs/other/2020-noderoadmap-original-compilation.md)
+    - [五月君 2020 年度回顾 — 缘起「Nodejs技术栈」](/docs/other/_sidebar.md)
 ## 转载分享
 
 建立本开源项目的初衷是基于个人学习与工作中对 Node.js 相关技术栈的总结记录，在这里也希望能帮助一些在学习 Node.js 过程中遇到问题的小伙伴，欢迎分享给身边需要的朋友。
