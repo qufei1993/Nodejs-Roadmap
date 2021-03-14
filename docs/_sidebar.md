@@ -81,6 +81,10 @@
     - [一起来看看 Node.js v14.x LTS 中的这些新功能](/nodejs/version/node-v14-feature.md)
     - [Node.js v14.15.0 已发布进入 LTS 长期支持](/nodejs/version/node-v14.15.0-lts-intro.md)
 
+- Node.js 小知识
+    - [如何实现线程睡眠？](/nodejs/tips/sleep.md)
+    - [实现图片上传写入磁盘的接口](/nodejs/tips/upload-picture.md)
+
 - DataBase | Redis
     - [基础总结](/database/redis.md)
     - [五种数据结构](/database/redis-typeof-data.md)
