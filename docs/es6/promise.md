@@ -240,12 +240,10 @@ const ajax = function(){
 ajax()
   .then(function(){
     console.log('then1');
-
     return Promise.resolve();
   })
   .then(function(){
     console.log('then2');
-
     return Promise.reject(`There's a then mistake`);
   })
   .catch(err => {
@@ -254,7 +252,7 @@ ajax()
 
 // 输出
 // promise开始执行
-// catch里面捕获的err:  There's a then mistake
+// catch里面捕获的err:  There's a mistake
 ```
 
 不论是 Promise 还是 async/await 在写法上解决了异步回调 Callback 的问题，但是任何写法都不会改变 JavaScript 单线程、异步的本质，除非 JavaScript 执行引擎发生变化。
