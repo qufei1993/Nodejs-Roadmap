@@ -88,11 +88,11 @@ Node.js 避免了由于需要等待输入或者输出（数据库、文件系统
 Node.js 的优势主要在于事件循环，非阻塞异步 I/O，只开一个线程，不会每个请求过来我都去创建一个线程，从而产生资源开销。
 
 
-- **ResutFul API**
+- **RESTful API**
 
 通常我们可以使用 Node.js 来做为中间层，负责组装数据提供 API 接口给到前端调用，这些数据源可能来自第三方接口或者数据库，例如，以前可能我们通过后端 Java、PHP 等其它语言来做，现在我们前端工程师通过 Node.js 即可完成，后端则可以更专注于业务开发。
 
-既然提到了 ResultFul API，顺便推荐一个去哪儿开源的 API 管理工具 YAPI：[https://github.com/YMFE/yapi](https://github.com/YMFE/yapi) 使用的 Node.js 进行开发的（声明下这里不是打广告，只是这个用起来真的很赞！忍不住向给大家推荐！）。
+既然提到了 RESTful API，顺便推荐一个去哪儿开源的 API 管理工具 YAPI：[https://github.com/YMFE/yapi](https://github.com/YMFE/yapi) 使用的 Node.js 进行开发的（声明下这里不是打广告，只是这个用起来真的很赞！忍不住向给大家推荐！）。
 
 - **RPC 服务**
 
