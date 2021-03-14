@@ -1,56 +1,33 @@
 # Promise
 
-> 在JavaScript的世界中，所有代码都是单线程执行的。为了使程序不阻塞执行有了异步（I/O操作、事件操作），但是异步也有其不好之处，例如：异步回调callback回调地狱的问题，伴随着这些问题有了解决方案Promise。
+在 JavaScript 的世界中，所有代码都是单线程执行的。为了使程序不阻塞执行有了异步（I/O操作、事件操作），但是异步也有其不好之处，例如：异步回调callback 回调地狱的问题，伴随着这些问题有了解决方案 Promise。
+## Callback 方式书写
 
-## 快速导航
-- [Promise的基本使用和原理](#promise的基本使用和原理)
-- [Callback方式书写](#callback方式书写)
-- [Promise方式书写](#promise方式书写)
-- [Promise.finally()](#finally)
-- [Promise并行执行 Promise.all()](#promise并行执行)
-- [Promise率先执行 Promise.race()](#promise率先执行)
-- [错误捕获](#错误捕获)
-- [手写 Promise 代码](#手写-Promise-代码)
-
-## 面试指南  
-- ```Promise 中 .then 的第二参数与 .catch 有什么区别?```，参考：[错误捕获](#错误捕获)
-- ```怎么让一个函数无论promise对象成功和失败都能被调用？```，参考：[finally](#finally)
-
-## promise的基本使用和原理
-
-1. 如何异常捕获（Error、reject）通过catch捕获
-2. 多个串联-链式执行的好处
-3. Promise.all和Promise.race
-4. Promise标准-状态变化（Pending —— Fulfilled/Rejected）
-5. then函数，不明文指定返回实例，返回本身的promise实例，否则返回指定的promise实例
-
-## callback方式书写
-
-> 回调函数方式书写，如果异步请求多了，将会很难维护，程序看着很乱，最终会导致回调地狱。
+回调函数方式书写，如果异步请求多了，将会很难维护，程序看着很乱，也很容易导致回调地狱。
 
 ```js
-{
-  let ajax = function(callback){
-    console.log('执行');
-    setTimeout(function(){
-      callback && callback()
-    });
-  }
-
-  ajax(function(){
-    console.log('执行 ajax方法');
-  })
+const ajax = function(callback){
+  console.log('执行');
+  setTimeout(function(){
+    callback && callback()
+  });
 }
+
+ajax(function(){
+  console.log('执行 ajax方法');
+})
 ```
 
-## promise方式书写
+## Promise 方式书写
 
-- **```resove```**：执行下一步操作
-- **```reject```**：中断当前操作
-- **```then```**：是```Promise```返回的对象，执行下一个，如果有两个函数，第一个表示```resolved```(已成功),第二个表示```rejected```(已失败)
+Promise 标准-状态变化（Pending —— Fulfilled/Rejected），then 函数不明文指定返回实例，返回本身的 Promise 实例，否则返回指定的 Promise 实例。
+
+- **resove**：执行下一步操作
+- **reject**：中断当前操作
+- **then**：是 ```Promise``` 返回的对象，执行下一个，如果有两个函数，第一个表示成功 ```resolved```，第二个表示失败 ```rejected```。
 
 ```javascript
-let ajax = function(){
+const ajax = function(){
   console.log('promise','执行');
   return new Promise(function(resolve,reject){
     setTimeout(function(){
@@ -64,70 +41,65 @@ ajax().then(function(){
 });
 ```
 
-- **执行两个Promise的效果**
+- **执行两个 Promise 的效果**
 
 ```javascript
-{
-  let ajax = function(){
-    console.log('promise','执行');
+const ajax = function(){
+  console.log('promise','执行');
+  return new Promise(function(resolve,reject){
+    setTimeout(function(){
+      resolve()
+    },1000);
+  });
+};
+ajax()
+  .then(function(){
     return new Promise(function(resolve,reject){
       setTimeout(function(){
-        resolve()
+        resolve();
       },1000);
     });
-  }
-  ajax()
-    .then(function(){
-      return new Promise(function(resolve,reject){
-        setTimeout(function(){
-          resolve();
-        },1000);
-      });
-    })
-    .then(function(){
-      console.log('promise3','执行3');
-    })
-}
+  })
+  .then(function(){
+    console.log('promise3','执行3');
+  })
 ```
 
-- **多个Promise实例实现串行操作**
+- **多个 Promise 实例实现串行操作**
 
-> 执行a b c d 如果中间出了错误使用catch来捕获
+执行 a b c d 如果中间出了错误使用 catch 来捕获
 
 ```javascript
-{
-  let ajax = function(num){
-    console.log('执行4');
-    return new Promise(function(resolve,reject){
-      if (num > 5) {
-        resolve();
-      }else{
-        throw new Error('出错了')
-      }
-    });
-  }
-  ajax(6).then(function(){
-    console.log('log','6');
-  }).catch(function(err){
-    console.log('catch',err);
+let ajax = function(num){
+  console.log('执行4');
+  return new Promise(function(resolve,reject){
+    if (num > 5) {
+      resolve();
+    }else{
+      throw new Error('出错了')
+    }
   });
-  ajax(3).then(function(){
-    console.log('log','3');
-  }).catch(function(err){
-    console.log('catch','err');
-  });
-  // 输出：
-  // 执行4
-  // 执行4
-  // log 6
-  // catch err
 }
+ajax(6).then(function(){
+  console.log('log','6');
+}).catch(function(err){
+  console.log('catch',err);
+});
+ajax(3).then(function(){
+  console.log('log','3');
+}).catch(function(err){
+  console.log('catch','err');
+});
+// 输出：
+// 执行4
+// 执行4
+// log 6
+// catch err
 ```
-
 
 ## finally
 
-> finally() 方法返回一个Promise，在promise执行结束时，无论结果是fulfilled或者是rejected，在执行then()和catch()后，都会执行finally指定的回调函数。这为指定执行完promise后，无论结果是fulfilled还是rejected都需要执行的代码提供了一种方式，避免同样的语句需要在then()和catch()中各写一次的情况。
+Promise 执行结束后无论结果是 fulfilled 或 rejected 都会触发 finally 指定的回调函数。避免了同样的代码在 then()、catch() 重复书写。
 
 ```js
 Promise.resolve('success').then(result => {
@@ -147,12 +119,12 @@ Promise.resolve('success').then(result => {
 // Promise {<resolved>: "success"}
 ```
 
-## promise并行执行
-## Promise.all()
+## Promise.all() 并行执行
 
-> **Promise.all**是将多个Promise实例当成一个Promise实例，all方法里是一个数组，数组传进来多个Promise实例，当多个Promise实例状态发生改变的时候，这个新的Promise实例才会发生变化。
+**Promise.all** 以数组的形式接收多个 Promise 实例，内部好比一个 for 循环同步的执行传入的多个 Promise 实例，一旦其中某个 Promise 实例发生 reject 就会触发 Promise.all() 的 catch() 函数。
+
 ```javascript
-//所有图片加载完在添加到页面上
+// 所有图片加载完在添加到页面上
 function loadImg(src){
   return new Promise((resolve,reject) => {
     let img = document.createElement('img');
@@ -172,7 +144,6 @@ function showImgs(imgs){
   })
 }
 
-// 每个loadImg()方法都是一个Promise实例只有当三个都发生该变化，才会执行新的Promise实例既Promise.all()
 Promise.all([
   loadImg('http://www.qzfweb.com/uploads/20170512190539489.jpeg'),
   loadImg('http://www.qzfweb.com/uploads/20170225143135972.jpg'),
@@ -180,128 +151,124 @@ Promise.all([
 ]).then(showImgs)
 ```
 
-## promise率先执行
-## Promise.race()
+## Promise.race() 率先执行
 
-> **Promise.race**只要其中一个实例率先发生改变，**Promise.race**实例也将发生改变，其他的将不在响应。
+**Promise.race()** 只要其中一个 Promise 实例率先发生改变，`Promise.race()` 实例也将发生改变，其他的将不在响应。
 
 ```js
-{
-  // 有一个图片加载完就添加到页面上
-  function loadImg(src){
-    return new Promise((resolve,reject) => {
-      let img = document.createElement('img');
-      img.src = src;
-      img.onload = () => {
-        resolve(img);
-      }
-      img.onerror = (err) => {
-        reject(err)
-      }
-    })
-  }
-
-  function showImgs(img){
-    let p = document.createElement('p');
-    p.appendChild(img);
-    document.body.appendChild(p);
-  }
-
-  Promise.race([
-    loadImg('http://www.qzfweb.com/uploads/20170512190539489.jpeg'),
-    loadImg('http://www.qzfweb.com/uploads/20170225143135972.jpg'),
-    loadImg('http://www.qzfweb.com/uploads/20170217225453679.jpg')
-  ]).then(showImgs)
+// 有一个图片加载完就添加到页面上
+function loadImg(src){
+  return new Promise((resolve,reject) => {
+    let img = document.createElement('img');
+    img.src = src;
+    img.onload = () => {
+      resolve(img);
+    }
+    img.onerror = (err) => {
+      reject(err)
+    }
+  })
 }
 
+function showImgs(img){
+  let p = document.createElement('p');
+  p.appendChild(img);
+  document.body.appendChild(p);
+}
+
+Promise.race([
+  loadImg('http://www.qzfweb.com/uploads/20170512190539489.jpeg'),
+  loadImg('http://www.qzfweb.com/uploads/20170225143135972.jpg'),
+  loadImg('http://www.qzfweb.com/uploads/20170217225453679.jpg')
+]).then(showImgs)
 ```
 
 ## 错误捕获
 
-> **Promise.then第二个参数与catch捕获错误的区别?**
+Promise 实例提供了两种错误捕获的方式，一种是 Promise.then() 方法的第二个参数，另一种是 Promise 实例的 catch() 函数。
 
-- **.then第二参数捕获错误**
+### **.then 第二参数捕获错误**
 
-> .then第二个回调参数捕获错误具有就近的原则，不会影响后续then的进行。
+`.then()` 第二个回调参数捕获错误具有就近的原则，不会影响后续 then 的进行。
 
 ```js
-{
-  const ajax = function(){
-    console.log('promise开始执行');
-    return new Promise(function(resolve,reject){
-      setTimeout(function(){
-        reject(`There's a mistake`);
-      },1000);
-    });
-  }
-
-  ajax()
-    .then(function(){
-      console.log('then1');
-
-      return Promise.resolve();
-    }, err => {
-      console.log('then1里面捕获的err: ', err);
-    })
-    .then(function(){
-      console.log('then2');
-
-      return Promise.reject(`There's a then mistake`);
-    })
-    .catch(err => {
-      console.log('catch里面捕获的err: ', err);
-    })
-
-  // 输出
-  // promise开始执行
-  // then1里面捕获的err:  There's a mistake
-  // then2
-  // catch里面捕获的err:  There's a then mistake
+const ajax = function(){
+  console.log('promise开始执行');
+  return new Promise(function(resolve,reject){
+    setTimeout(function(){
+      reject(`There's a mistake`);
+    },1000);
+  });
 }
+
+ajax()
+  .then(function(){
+    console.log('then1');
+    return Promise.resolve();
+  }, err => {
+    console.log('then1里面捕获的err: ', err);
+  })
+  .then(function(){
+    console.log('then2');
+    return Promise.reject(`There's a then mistake`);
+  })
+  .catch(err => {
+    console.log('catch里面捕获的err: ', err);
+  });
+
+// 输出
+// promise开始执行
+// then1里面捕获的err:  There's a mistake
+// then2
+// catch里面捕获的err:  There's a then mistake
 ```
 
-- **catch捕获错误**
+### **catch() 捕获错误**
 
-> Promise抛错具有冒泡机制，能够不断传递，可以使用catch统一处理，下面代码中不会输出then1 then2会跳过，直接执行catch处理错误
+Promise 抛错具有冒泡机制，能够不断传递，可以使用 catch() 统一处理，下面代码中不会输出 then1、then2，直接执行 catch() 处理错误。
 
 ```javascript
-{
-  const ajax = function(){
-    console.log('promise开始执行');
-    return new Promise(function(resolve,reject){
-      setTimeout(function(){
-        reject(`There's a mistake`);
-      },1000);
-    });
-  }
-
-  ajax()
-    .then(function(){
-      console.log('then1');
-
-      return Promise.resolve();
-    })
-    .then(function(){
-      console.log('then2');
-
-      return Promise.reject(`There's a then mistake`);
-    })
-    .catch(err => {
-      console.log('catch里面捕获的err: ', err);
-    })
-
-  // 输出
-  // promise开始执行
-  // catch里面捕获的err:  There's a then mistake
+const ajax = function(){
+  console.log('promise开始执行');
+  return new Promise(function(resolve,reject){
+    setTimeout(function(){
+      reject(`There's a mistake`);
+    },1000);
+  });
 }
+
+ajax()
+  .then(function(){
+    console.log('then1');
+
+    return Promise.resolve();
+  })
+  .then(function(){
+    console.log('then2');
+
+    return Promise.reject(`There's a then mistake`);
+  })
+  .catch(err => {
+    console.log('catch里面捕获的err: ', err);
+  })
+
+// 输出
+// promise开始执行
+// catch里面捕获的err:  There's a then mistake
 ```
 
-**```总结：```** 不论是Promise还是async/await在写法上解决了异步回调的问题，但是任何写法都不会改变JS单线程、异步的本质，除非js执行引擎发生变化。
+不论是 Promise 还是 async/await 在写法上解决了异步回调 Callback 的问题，但是任何写法都不会改变 JavaScript 单线程、异步的本质，除非 JavaScript 执行引擎发生变化。
 
 ## 手写 Promise 代码
 
-<br />这是一个经典的面试问题了，我将它放了最后，不废话直接上代码，共分为 5 部份完成，实现思路如下，理清了 Promise 的实现原理，很多问题自然就迎刃而解了。
-<a name="V9ySt"></a>
+这是一个经典的面试问题了，我将它放了最后，理清了 Promise 的实现原理，很多问题自然就迎刃而解了，不废话直接上代码，共分为 5 部份完成，实现思路如下：
+
+1. 声明 MayJunPromise 类
+2. Then 方法
+3. Promise 解决过程
+4. 验证你的 Promise 是否正确
+5. catch、resolve、reject、all、race 方法实现
+6. 并发请求控制
 
 ### 1. 声明 MayJunPromise 类
 
@@ -640,7 +607,7 @@ MayJunPromise.allByLimit = function(arr, limit) {
   return new MayJunPromise((resolve, reject) => {
     const requestHandler = function() {	
       console.log('Request start ', index);
-      const request = arr[index].then(res => res, err => {
+      const request = arr[index]().then(res => res, err => {
         console.log('Error', err);
 
         return err;
@@ -686,17 +653,16 @@ const sleep = (ms=0, flag=false) => new Promise((resolve, reject) => setTimeout(
 }, ms));
 
 MayJunPromise.allByLimit([
-  sleep(1000),
-  sleep(1000),
-  sleep(1000),
-  sleep(5000, true),
-  sleep(10000),
+  () => sleep(5000, true),
+  () => sleep(1000),
+  () => sleep(1000),
+  () => sleep(4000),
+  () => sleep(10000),
 ], 3).then(res => {
   console.log(res);
-})
+});
 
 // 以下为运行结果
-
 Request start  0
 Request start  1
 Request start  2
@@ -704,11 +670,11 @@ Number of concurrent requests 3
 Request start  3
 Number of concurrent requests 3
 Request start  4
-Number of concurrent requests 3
 Error Reject 5000
+Number of concurrent requests 3
 Number of concurrent requests 2
 Number of concurrent requests 1
-[ 1000, 1000, 1000, 'Reject 5000', 10000 ]
+[ 1000, 1000, 'Reject 5000', 4000, 10000 ]
 ```
 
 ### 7. Promise reference
