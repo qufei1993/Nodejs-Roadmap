@@ -1,14 +1,18 @@
-# Nodejs Stream pipe 的使用与实现原理分析
+# Node.js Stream 模块 pipe 方法使用与实现原理分析
 
-通过流我们可以将一大块数据拆分为一小部分一点一点的流动起来，而无需一次性全部读入，在 Linux 下我们可以通过 | 符号实现，类似的在 Nodejs 的 Stream 模块中同样也为我们提供了 pipe() 方法来实现。
+![](https://imgkr2.cn-bj.ufileos.com/7da04e2f-6127-4686-96e9-295d5e9c4ba5.png?UCloudPublicKey=TOKEN_8d8b72be-579a-4e83-bfd0-5f6ce1546f13&Signature=KDwx9gUx5WUc8sb1SrSGM3KNTD0%253D&Expires=1614600665)
 
-## 1. Nodejs Stream pipe 基本示例
+**作者简介**：五月君，Software Designer，公众号「Nodejs技术栈」作者。
+
+通过流我们可以将一大块数据拆分为一小部分一点一点的流动起来，而无需一次性全部读入，在 Linux 下我们可以通过 `|` 符号实现，类似的在 Nodejs 的 Stream 模块中同样也为我们提供了 `pipe()` 方法来实现。
+
+## 1. Stream pipe 基本示例
 
 选择 Koa 来实现这个简单的 Demo，因为之前有人在 “Nodejs技术栈” 交流群问过一个问题，怎么在 Koa 中返回一个 Stream，顺便在下文借此机会提下。
 
 ### 1.1 未使用 Stream pipe 情况
 
-在 Nodejs 中 I/O 操作都是异步的，先用 util 模块的 promisify 方法将 fs.readFile 的 callback 形式转为 Promise 形式，这块代码看似没问题，但是它的体验不是很好，因为它是将数据一次性读入内存再进行的返回，当数据文件很大的时候也是对内存的一种消耗，因此不推荐它。
+在 Nodejs 中 I/O 操作都是异步的，先用 util 模块的 promisify 方法将 fs.readFile 的 callback 形式转为 Promise 形式，这块代码看似没问题，但是它的体验不是很好，因为它是将数据一次性读入内存再进行的返回，当数据文件很大的时候也是对内存的一种消耗，类似内存泄漏这种问题也很容易出现，因此不推荐它。
 
 ```js
 const Koa = require('koa');
@@ -41,7 +45,7 @@ app.use(async ctx => {
 });
 ```
 
-以上在 Koa 中直接创建一个可读流赋值给 ctx.body 就可以了，你可能疑惑了为什么没有 pipe 方法，因为框架给你封装好了，不要被表象所迷惑了，看下相关源码：
+以上在 **Koa 中直接创建一个可读流赋值给 ctx.body 就可以了**，你可能疑惑了为什么没有 pipe 方法，因为框架给你封装好了，不要被表象所迷惑了，看下相关源码：
 
 ```js
 // https://github.com/koajs/koa/blob/master/lib/application.js#L256
@@ -63,9 +67,9 @@ function respond(ctx) {
 
 看到一个图片，不得不说画的实在太萌了，来源 https://www.cnblogs.com/vajoy/p/6349817.html
 
-## 2 pipe 的调用过程与实现原理分析
+## 2. pipe 的调用过程与实现原理
 
-以上最后以流的方式响应数据最核心的实现就是使用 pipe 方法来实现的输入、输出，本节的重点也是研究 pipe 的实现，最好的打开方式通过阅读源码实现吧。
+以上最后以流的方式响应数据最核心的实现就是使用 pipe 方法来实现的输入、输出，本节的重点也是研究 pipe 的实现，最好的打开方式通过阅读源码一起来看看吧。
 
 ### 2.1 顺藤摸瓜
 
@@ -239,7 +243,9 @@ function Readable(options) {
 * **dest.write(chunk)**：接收 chunk 写入数据，如果内部的缓冲小于创建流时配置的 highWaterMark，则返回 true，否则**返回 false 时应该停止向流写入数据，直到 'drain' 事件被触发**。
 * **src.pause()**：可读流会停止 data 事件，意味着此时暂停数据写入了。
 
-之所以**调用 src.pause() 是为了防止读入数据过快来不及写入**，什么时候知道来不及写入呢，要看 dest.write(chunk) 什么时候返回 false，是根据创建流时传的 highWaterMark 属性，默认为 16384 (16kb)，对象模式的流默认为 16。
+之所以**调用 src.pause() 是为了防止读入数据过快来不及写入**，什么时候知道来不及写入呢，要看 dest.write(chunk) 什么时候返回 false，是根据创建流时传的 highWaterMark 属性，默认为 16384 (16KB)，对象模式的流默认为 16。
+
+注意：**是 16KB 不是 16Kb**，也是之前犯的一个错误，大写的 B 和小写的 b 在这里是有区别的。计算机中所有数据都以 0 和 1 表示，其中 0 或 1 称作一个位（bit），用小写的 b 表示。大写的 B 表示字节（byte），`1byte = 8bit`，大写 K 表示千，所以是千个位（Kb）和千个字节（KB），**一般都是使用 KB 表示一个文件的大小**。
 
 ```js
 Readable.prototype.pipe = function(dest, options) {
