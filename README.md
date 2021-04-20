@@ -132,7 +132,7 @@
     - [使用 Serverless, Nodejs, MongoDB Atlas cloud 构建 REST API](/docs/serverless/node-mongodb-altas-serverless-api.md)
 
 - Microservice
-    - [服务注册与发现 Consul](/docs/microservice/microservice/consul.md)
+    - [服务注册与发现 Consul](/docs/microservice/consul.md)
     - [数据通信方式 RPC、HTTP、消息队列](/docs/microservice/data-communication.md)
     - [RabbitMQ：入门篇](/docs/microservice/rabbitmq-base.md)
     - [RabbitMQ：交换机消息投递机制](/docs/microservice/rabbitmq-exchange.md)
