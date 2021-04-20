@@ -128,11 +128,11 @@
 
 - ServerLess
     - [Node.js 快速开启 Serverless Functions：入门实践指南](/docs/serverless/serverless-functions-using-node-and-aws.md)
-    - [TypeScript + Serverless 开发 REST API 实战](https://github.com/Q-Angelo/aws-node-rest-api-typescript/blob/master/docs/intro-zh.md)
+    - [TypeScript + Serverless 开发 REST API 实战](https://github.com/qufei1993/aws-node-rest-api-typescript/blob/master/docs/intro-zh.md)
     - [使用 Serverless, Nodejs, MongoDB Atlas cloud 构建 REST API](/docs/serverless/node-mongodb-altas-serverless-api.md)
 
 - Microservice
-    - [服务注册与发现 Consul](microservice/consul.md)
+    - [服务注册与发现 Consul](/docs/microservice/microservice/consul.md)
     - [数据通信方式 RPC、HTTP、消息队列](/docs/microservice/data-communication.md)
     - [RabbitMQ：入门篇](/docs/microservice/rabbitmq-base.md)
     - [RabbitMQ：交换机消息投递机制](/docs/microservice/rabbitmq-exchange.md)
@@ -142,15 +142,15 @@
     - [RabbitMQ：服务异常重连](/docs/microservice/rabbitmq-reconnecting.md)
     
 * HTTP
-    * [理论加实践搞懂浏览器缓存策略](https://github.com/Q-Angelo/http-protocol/blob/master/docs/http-cache.md)
-    * [Nginx 代理服务配置缓存实践](https://github.com/Q-Angelo/http-protocol/blob/master/docs/nginx-cache.md)
-    * [HTTP 长链接 — HTTP1.1 与 HTTP2 下的对比](https://github.com/Q-Angelo/http-protocol/blob/master/docs/http-keepalive.md)
-    * [跨域（CORS）产生的原因分析与解决方案](https://github.com/Q-Angelo/http-protocol/blob/master/docs/cors.md)
-    * [Socket hang up 是什么？什么情况下会发生？](https://github.com/Q-Angelo/http-protocol/blob/master/docs/socket-hang-up.md)
-    * [DNS 域名解析过程？](https://github.com/Q-Angelo/http-protocol/blob/master/docs/dns-process.md)
-    * [内容安全策略（CSP）](https://github.com/Q-Angelo/http-protocol/blob/master/docs/csp.md)
-    * [URI/URL/URN](https://github.com/Q-Angelo/http-protocol/blob/master/docs/uri-url-urn.md)
-    * [Cookie 和 Session](https://github.com/Q-Angelo/http-protocol/blob/master/docs/cooike-and-session.md)
+    * [理论加实践搞懂浏览器缓存策略](https://github.com/qufei1993/http-protocol/blob/master/docs/http-cache.md)
+    * [Nginx 代理服务配置缓存实践](https://github.com/qufei1993/http-protocol/blob/master/docs/nginx-cache.md)
+    * [HTTP 长链接 — HTTP1.1 与 HTTP2 下的对比](https://github.com/qufei1993/http-protocol/blob/master/docs/http-keepalive.md)
+    * [跨域（CORS）产生的原因分析与解决方案](https://github.com/qufei1993/http-protocol/blob/master/docs/cors.md)
+    * [Socket hang up 是什么？什么情况下会发生？](https://github.com/qufei1993/http-protocol/blob/master/docs/socket-hang-up.md)
+    * [DNS 域名解析过程？](https://github.com/qufei1993/http-protocol/blob/master/docs/dns-process.md)
+    * [内容安全策略（CSP）](https://github.com/qufei1993/http-protocol/blob/master/docs/csp.md)
+    * [URI/URL/URN](https://github.com/qufei1993/http-protocol/blob/master/docs/uri-url-urn.md)
+    * [Cookie 和 Session](https://github.com/qufei1993/http-protocol/blob/master/docs/cooike-and-session.md)
 
 * DevOps
     - [Node.js 生产环境完整部署指南](/docs/devops/node-deploy.md)
@@ -173,7 +173,7 @@
 
 * 其他
     - [关于 Node.js 技术栈](/docs/other/about-us.md)
-    - [转载&投稿合作](/docs/other/collaboration.md)
+    - [转载&投稿合作](/docs/other/reprint-contribution-collaboration.md)
     - [Blog 推荐](/docs/other/blog.md)
     - [2020 Node.js 技术栈精选原创文章合辑](/docs/other/2020-noderoadmap-original-compilation.md)
     - [五月君 2020 年度回顾 — 缘起「Nodejs技术栈」](/docs/other/may-2020-review.md)
