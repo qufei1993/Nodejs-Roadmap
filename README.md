@@ -53,11 +53,11 @@
     - [`[FileSystem]` 如何在 Node.js 中判断一个文件/文件夹是否存在？](/docs/nodejs/modules/fs-file-exists-check.md)
     - [`[Report]` 在 Node.js 中使用诊断报告快速追踪问题](/docs/nodejs/modules/report.md)
     - [`[AsyncHooks]` 使用 Async Hooks 模块追踪异步资源](/docs/nodejs/modules/async-hooks.md)
+    - [`[HTTP]` HTTP 请求与响应如何设置 Cookie 信息](/nodejs/modules/http-set-cookies.md)
 
 - NPM 模块
-    - [在 Node.js 中如何处理一个大型 JSON 文件？]()
-    - [Node.js + Socket.io 实现一对一即时聊天](/docs/nodejs/base/private-chat-socketio.md)
-    - [request 已废弃 - 推荐 Node.js HTTP Client undici]()
+    - [Node.js + Socket.io 实现一对一即时聊天](/nodejs/npm/private-chat-socketio.md)
+    - [request 已废弃 - 推荐 Node.js HTTP Client undici](/nodejs/npm/undici.md)
 
 - 高级进阶
     - [Egg-Logger 模块实践](/docs/nodejs/logger.md)

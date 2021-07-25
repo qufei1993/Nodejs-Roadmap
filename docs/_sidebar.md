@@ -26,11 +26,11 @@
     - [`[FileSystem]` 如何在 Node.js 中判断一个文件/文件夹是否存在？](/nodejs/modules/fs-file-exists-check.md)
     - [`[Report]` 在 Node.js 中使用诊断报告快速追踪问题](/nodejs/modules/report.md)
     - [`[AsyncHooks]` 使用 Async Hooks 模块追踪异步资源](/nodejs/modules/async-hooks.md)
+    - [`[HTTP]` HTTP 请求与响应如何设置 Cookie 信息](/nodejs/modules/http-set-cookies.md)
 
 - NPM 模块
-    - [在 Node.js 中如何处理一个大型 JSON 文件？]()
-    - [Node.js + Socket.io 实现一对一即时聊天](/nodejs/base/private-chat-socketio.md)
-    - [request 已废弃 - 推荐 Node.js HTTP Client undici]()
+    - [Node.js + Socket.io 实现一对一即时聊天](/nodejs/npm/private-chat-socketio.md)
+    - [request 已废弃 - 推荐 Node.js HTTP Client undici](/nodejs/npm/undici.md)
 
 - 高级进阶
     - [Egg-Logger 模块实践](/nodejs/logger.md)
@@ -47,6 +47,7 @@
     - [Node.js 中出现未捕获异常如何处理？](/nodejs/advanced/uncaugh-exception.md)
     - [探索异步迭代器在 Node.js 中的使用](/nodejs/advanced/asynciterator-in-nodejs.md)
     - [多维度分析 Express、Koa 之间的区别](/nodejs/base/express-vs-koa.md)
+    - [在 Node.js 中如何处理一个大型 JSON 文件？](/nodejs/advanced/json-stream.md)
 
 - 好文翻译
     - [你需要了解的有关 Node.js 的所有信息](/nodejs/translate/everything-you-need-to-know-about-node-js-lnc.md)
