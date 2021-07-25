@@ -214,4 +214,4 @@ docs/_navbar.md
 
 ## 总结
 
-看完本篇文章，如果你还没有用过 Docsify，希望你能亲自实践下，可以用 Docsify 来建立自己的个人博客，我在写作[《Node.js 技术栈》](https://github.com/Q-Angelo/Nodejs-Roadmap)过程中，当内容多了之后，对于文档的在线预览功能最终也选择了 Docsify，因为它用起来给我的感觉真的很简洁，方便。
+看完本篇文章，如果你还没有用过 Docsify，希望你能亲自实践下，可以用 Docsify 来建立自己的个人博客，我在写作[《Node.js 技术栈》](https://github.com/qufei1993/Nodejs-Roadmap)过程中，当内容多了之后，对于文档的在线预览功能最终也选择了 Docsify，因为它用起来给我的感觉真的很简洁，方便。

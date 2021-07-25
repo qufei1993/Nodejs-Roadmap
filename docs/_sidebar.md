@@ -98,7 +98,7 @@
     - [`[Deploy]` Node.js 生产环境完整部署指南](/devops/node-deploy.md)
 
 * 其他
-    - [关于 Node.js 技术栈](/other/about-us.md)
+
     - [2020 Nodejs技术栈原创文章合辑](/other/2020-noderoadmap-original-compilation.md)
     - [2020 年度回顾 — 缘起「Nodejs技术栈」](/other/may-2020-review.md)
     - [Blog 推荐](/other/blog.md)

@@ -2,13 +2,15 @@
 
 [![stars](https://badgen.net/github/stars/qufei1993/Nodejs-Roadmap?icon=github&color=4ab8a1)](https://github.com/qufei1993/Nodejs-Roadmap) [![forks](https://badgen.net/github/forks/qufei1993/Nodejs-Roadmap?icon=github&color=4ab8a1)](https://github.com/qufei1993/Nodejs-Roadmap) [<img src="https://img.shields.io/static/v1.svg?label=%E6%85%95%E8%AF%BE&message=7k%20stars&color=ef151f">](https://www.imooc.com/u/2667395) [<img src="https://img.shields.io/badge/%E5%BE%AE%E4%BF%A1-%E5%85%AC%E4%BC%97%E5%8F%B7-brightgreen">](https://nodejsred.oss-cn-shanghai.aliyuncs.com/node_roadmap_wx.jpg?x-oss-process=style/may)
 
-本文档是作者 **@五月君** 从事 Node.js 开发以来的学习历程，希望这些分享能帮助到正在学习、使用 Node.js 的朋友们，也真诚的希望能聚集所有 Node.js 爱好者，共建互帮互助的「Nodejs技术栈」交流平台。
+> 你若要喜爱你自己的价值，你就得给世界创造价值。——歌德
+
+“Nodejs技术栈” 是作者 **@五月君** 从事 Node.js 开发以来的学习历程，希望这些分享能帮助到正在学习、使用 Node.js 的朋友们，也真诚的希望能聚集所有 Node.js 爱好者，共建互帮互助的「Nodejs技术栈」交流平台。
 
 如果本文能为您得到帮助，请给予支持！
 
 **如何支持：**
 - 关注公众号 👉 [**Nodejs技术栈**](https://nodejsred.oss-cn-shanghai.aliyuncs.com/node_roadmap_wx.jpg?x-oss-process=style/may)
-- 点击**右上角 Star :star: 给予关注，勿 fork**
+- 关注 Github: https://github.com/qufei1993/Nodejs-Roadmap 点击**右上角 Star :star: 给予关注，勿 fork**
 - 分享给您身边更多的小伙伴
 
 **作者简介**：
@@ -53,6 +55,12 @@
 2. 对于文中我没有涉及到知识点，欢迎提交 PR。
 3. 如果您有文章推荐请以 markdown 格式到邮箱 `qzfweb@gmail.com`，[中文技术文档的写作规范指南](https://github.com/ruanyf/document-style-guide)。
 
+## 官方网址
+
+项目开源于 Github，为了更好的阅读体验，于 2019 年 5 月 20 日注册了域名 www.nodejs.red，正如域名后缀 red 的寓意 “红红火火”，也希望 Nodejs 未来的发展也如此域名寓意一样，未来越来越好！
+
+Nodejs技术栈官方网址：[https://www.nodejs.red](https://www.nodejs.red)
+
 ## 联系我
 
 - **加入群聊**
@@ -67,7 +75,7 @@ Node.js 开发者聚集地，聚集所有 Node.js 爱好者，共建互帮互助
 五月君的个人专属公众号，分享 Node.js 之外的更多精彩内容！
 <img src="https://qufei1993.oss-cn-beijing.aliyuncs.com/codingmay/wx/account" width="180" height="180"/>
 
-## 关注「Nodejs技术栈」
+## 维护平台
 
 由于精力有限目前所有文章主要维护在 Github，同时首发于微信公众号，在微信公众号也按照 “话题标签” 分类做了整理，便于大家在手机端查看。
 
