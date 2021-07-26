@@ -48,6 +48,7 @@
     - [探索异步迭代器在 Node.js 中的使用](/nodejs/advanced/asynciterator-in-nodejs.md)
     - [多维度分析 Express、Koa 之间的区别](/nodejs/base/express-vs-koa.md)
     - [在 Node.js 中如何处理一个大型 JSON 文件？](/nodejs/advanced/json-stream.md)
+    - [Node.js 中遇到大数处理精度丢失如何解决？前端也适用！](/nodejs/advanced/floating-point-number-float-bigint-question.md)
 
 - 好文翻译
     - [你需要了解的有关 Node.js 的所有信息](/nodejs/translate/everything-you-need-to-know-about-node-js-lnc.md)
