@@ -77,6 +77,7 @@
     - [在 Node.js 中如何处理一个大型 JSON 文件？](/docs/nodejs/advanced/json-stream.md)
     - [Node.js 中遇到大数处理精度丢失如何解决？前端也适用！](/docs/nodejs/advanced/floating-point-number-float-bigint-question.md)
     - [Stream 的两种模式](/docs/nodejs/advanced/stream-object-mode-and-flow-mode.md)
+    - [Stream 的背压问题 — 消费端数据积压来不及处理会怎么样？](/docs/nodejs/advanced/stream-back-pressure.md)
 
 - 好文翻译
     - [你需要了解的有关 Node.js 的所有信息](/docs/nodejs/translate/everything-you-need-to-know-about-node-js-lnc.md)
