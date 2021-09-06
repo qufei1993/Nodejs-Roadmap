@@ -51,6 +51,7 @@
     - [Node.js 中遇到大数处理精度丢失如何解决？前端也适用！](/nodejs/advanced/floating-point-number-float-bigint-question.md)
     - [Stream 的两种模式](/nodejs/advanced/stream-object-mode-and-flow-mode.md)
     - [Stream 的背压问题 — 消费端数据积压来不及处理会怎么样？](/nodejs/advanced/stream-back-pressure.md)
+    - [结合异步迭代器实现 Node.js 流式数据复制](/nodejs/advanced/stream-copy.md)
 
 - 好文翻译
     - [你需要了解的有关 Node.js 的所有信息](/nodejs/translate/everything-you-need-to-know-about-node-js-lnc.md)
