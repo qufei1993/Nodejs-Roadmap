@@ -173,7 +173,7 @@ module.exports.Logger = Logger;
 无特殊说明，日志都是默认打印到控制台，在一些代码调试中也是用的最多的。
 
 ```js
-const logger = reuqire('logger');
+const logger = require('logger');
 
 logger.log('hello world') // 普通日志打印
 logger.info('hello world') // 等同于logger.log
