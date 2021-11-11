@@ -84,6 +84,7 @@
     - [实现图片上传写入磁盘的接口](/nodejs/tips/upload-picture.md)
 
 - Node.js News
+    - [一起来看看 Node.js v14.x LTS 中的这些新功能](/nodejs/version/node-v14-feature.md)
     - [Node.js v15.x 新特性 — 控制器对象 AbortController]()
     - [Node.js 16 来了，14 将支持到 2023 年]()
     - [一起来看看 Node.js v14.x LTS 中的这些新功能](/nodejs/version/node-v14-feature.md)
