@@ -19,7 +19,7 @@
 设置为taobao源
 
 ```bash
-  npm config set registry=https://registry.npm.taobao.org
+  npm config set registry=https://registry.npmmirror.com
 ```
 
 在npm publish的时候 需要切换回npm源

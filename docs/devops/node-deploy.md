@@ -258,11 +258,11 @@ nvm安装成功，控制台 nvm 找不到命令，解决办法 [`[issue]`](https
 
 查看node版本 ``` node -v ```
 
-配置npm源为国内的淘宝源 ``` npm --registry=https://registry.npm.taobao.org install -g npm ```
+配置npm源为国内的淘宝源 ``` npm --registry=https://registry.npmmirror.com install -g npm ```
 
 增加一个系统的文件监控树 ``` echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p  ```
 
-为了保障更快更稳定的速度，此处采用cnpm来替代npm ``` npm --registry=https://registry.npm.taobao.org install -g cnpm ```
+为了保障更快更稳定的速度，此处采用cnpm来替代npm ``` npm --registry=https://registry.npmmirror.com install -g cnpm ```
 
 查看cnpm版本 ``` cnpm -v ```
 
