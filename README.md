@@ -53,11 +53,11 @@
     - [`[FileSystem]` 如何在 Node.js 中判断一个文件/文件夹是否存在？](/docs/nodejs/modules/fs-file-exists-check.md)
     - [`[Report]` 在 Node.js 中使用诊断报告快速追踪问题](/docs/nodejs/modules/report.md)
     - [`[AsyncHooks]` 使用 Async Hooks 模块追踪异步资源](/docs/nodejs/modules/async-hooks.md)
-    - [`[HTTP]` HTTP 请求与响应如何设置 Cookie 信息](/nodejs/modules/http-set-cookies.md)
+    - [`[HTTP]` HTTP 请求与响应如何设置 Cookie 信息](/docs/nodejs/modules/http-set-cookies.md)
 
 - NPM 模块
-    - [Node.js + Socket.io 实现一对一即时聊天](/nodejs/npm/private-chat-socketio.md)
-    - [request 已废弃 - 推荐 Node.js HTTP Client undici](/nodejs/npm/undici.md)
+    - [Node.js + Socket.io 实现一对一即时聊天](/docs/nodejs/npm/private-chat-socketio.md)
+    - [request 已废弃 - 推荐 Node.js HTTP Client undici](/docs/nodejs/npm/undici.md)
 
 - 高级进阶
     - [Egg-Logger 模块实践](/docs/nodejs/logger.md)
@@ -70,7 +70,7 @@
     - [Framework Web 开发框架选型](/docs/nodejs/framework.md#框架)
     - [ORM 对象关系映射](/docs/nodejs/orm.md#ORM)
     - [Middleware 常用 Web 框架&中间件汇总](/docs/nodejs/middleware.md)
-    - [深入 Nodejs 源码探究 CPU 信息的获取与实时计算](nodejs/modules/os-cpu-usage.md)
+    - [深入 Nodejs 源码探究 CPU 信息的获取与实时计算](/docs/nodejs/modules/os-cpu-usage.md)
     - [Node.js 中出现未捕获异常如何处理？](/docs/nodejs/advanced/uncaugh-exception.md)
     - [探索异步迭代器在 Node.js 中的使用](/docs/nodejs/advanced/asynciterator-in-nodejs.md)
     - [多维度分析 Express、Koa 之间的区别](/docs/nodejs/base/express-vs-koa.md)
