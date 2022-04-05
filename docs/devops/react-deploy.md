@@ -81,7 +81,7 @@ git pull
 
 # npm install
 echo -e "=================npm install================="
-npm install --registry=https://registry.npm.taobao.org
+npm install --registry=https://registry.npmmirror.com
 
 # npm run build
 echo -e "=================npm run build================="

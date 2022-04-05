@@ -103,7 +103,7 @@ $ npm -v
 ## 淘宝 NPM 镜像启用新域名
 
 
-**注意：淘宝 NPM 镜像已启用新域名，由原先的 **[**http://registry.npm.taobao.org**](http://registry.npm.taobao.org)** 改为了 **[**https://registry.npmmirror.com**](https://registry.npmmirror.com)**，目前对老的 NPM 镜像地址做了 301 跳转，但老的 **[**http://npm.taobao.org**](http://npm.taobao.org)** 和 **[**http://registry.npm.taobao.org**](http://registry.npm.taobao.org)** 域名将于 2022 年 05 月 31  日零时起停止服务，如果使用老域名的开发者可以开始替换了。**
+**注意：淘宝 NPM 镜像已启用新域名，由原先的 **[**https://registry.npmmirror.com**](https://registry.npmmirror.com)** 改为了 **[**https://registry.npmmirror.com**](https://registry.npmmirror.com)**，目前对老的 NPM 镜像地址做了 301 跳转，但老的 **[**http://npm.taobao.org**](http://npm.taobao.org)** 和 **[**https://registry.npmmirror.com**](https://registry.npmmirror.com)** 域名将于 2022 年 05 月 31  日零时起停止服务，如果使用老域名的开发者可以开始替换了。**
 **​**
 
 **参考 **[https://zhuanlan.zhihu.com/p/430580607](https://zhuanlan.zhihu.com/p/430580607)
