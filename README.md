@@ -155,10 +155,6 @@
 Node.js 开发者聚集地，聚集所有 Node.js 爱好者，共建互帮互助的「**Nodejs技术栈**」交流平台。分享 Node.js 在前端、后端等领域下应用实践，通过 Node.js 祝您早日成为一名全栈开发工程师。 如果大家感兴趣可以给予关注支持！
 <img src="https://nodejsred.oss-cn-shanghai.aliyuncs.com/node_roadmap_wx.jpg?x-oss-process=style/may" width="180" height="180"/>
 
-- **公众号「五月君」**
-五月君的个人专属公众号，分享 Node.js 之外的更多精彩内容！
-<img src="https://qufei1993.oss-cn-beijing.aliyuncs.com/codingmay/wx/account" width="180" height="180"/>
-
 ## 关注「Nodejs技术栈」
 
 由于精力有限目前所有文章主要维护在 Github，同时首发于微信公众号，在微信公众号也按照 “话题标签” 分类做了整理，便于大家在手机端查看。
